@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -1293,8 +1294,8 @@
 //    "Site URL" and "Redirect URLs" so email links work
 // 10. Push this file to GitHub Pages and you're live
 const SUPABASE_CONFIG = {
-  url: 'https://ajccvuldhjynxegtlgxj.supabase.co' , 
-  anonKey:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFqY2N2dWxkaGp5bnhlZ3RsZ3hqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxNTg1MjEsImV4cCI6MjA5MzczNDUyMX0.jVz9tLC7kwhwvhR_HOuAZWkCyqUGHoP_adQoykcxJA8 ,
+  url: 'https://ajccvuldhjynxegtlgxj.supabase.co'
+  anonKey:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFqY2N2dWxkaGp5bnhlZ3RsZ3hqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxNTg1MjEsImV4cCI6MjA5MzczNDUyMX0.jVz9tLC7kwhwvhR_HOuAZWkCyqUGHoP_adQoykcxJA8
 };
 
 // Initialize the Supabase client only if config is filled in. Otherwise,
