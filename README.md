@@ -1293,8 +1293,8 @@
 //    "Site URL" and "Redirect URLs" so email links work
 // 10. Push this file to GitHub Pages and you're live
 const SUPABASE_CONFIG = {
-  url: 'https://ajccvuldhjynxegtlgxj.supabase.co',
-  anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFqY2N2dWxkaGp5bnhlZ3RsZ3hqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxNTg1MjEsImV4cCI6MjA5MzczNDUyMX0.jVz9tLC7kwhwvhR_HOuAZWkCyqUGHoP_adQoykcxJA8',
+  url: '',     // e.g. 'https://abcdefgh.supabase.co'
+  anonKey: '', // e.g. 'eyJhbGciOi...' (the long public anon key)
 };
 
 // Initialize the Supabase client only if config is filled in. Otherwise,
@@ -2915,51 +2915,46 @@ function playerProfile(name) {
   return PLAYER_ROLES[role];
 }
 
-// Render a flag chip representing the country of the club. The badge is a circular
-// crop of the country's flag SVG. Sized to scale across match cards, news rows,
-// and slip legs by passing a px size. League hint is optional — when omitted, the
-// function looks up the team in REAL_FIXTURES to find its league.
-//
-// Why flags instead of crests: actual club crests are trademarked artwork. Country
-// flags are public symbols, work offline, and visually associate the team with its
-// league of nationality (which is also the league flag in the header).
-function teamLeagueId(name) {
-  // Look the team up in the active fixtures so we know which flag to use.
-  // Falls back to scanning the static TEAMS map for any out-of-fixture references.
-  const fx = REAL_FIXTURES.find(f => f.home === name || f.away === name);
-  if (fx) return fx.league;
-  for (const lgId of Object.keys(TEAMS)) {
-    if (TEAMS[lgId].includes(name)) return lgId;
-  }
-  return null;
+// Generate a 2-3 letter abbreviation from a club name.
+// Single-word names ("Arsenal", "Liverpool") → first 2 letters ("AR", "LI")
+// Multi-word names ("Manchester Utd", "Real Madrid") → initials ("MU", "RM")
+function crestText(name) {
+  const cleaned = name.replace(/[^A-Za-zÀ-ÿ ]/g, '').trim();
+  const words = cleaned.split(/\s+/).filter(Boolean);
+  if (words.length === 1) return words[0].slice(0, 2).toUpperCase();
+  return words.map(w => w[0]).join('').slice(0, 3).toUpperCase();
 }
 
+// Render a colored monogram badge representing the club. Uses each club's
+// brand color as the badge background and a contrasting color for the letters.
+// The TEAM_COLORS map (keyed by club name) supplies these. Falls back to a
+// neutral graphite circle for any unknown team, so layouts never break.
+//
+// Size defaults to 32px for match cards but can be overridden for inline use
+// (slip legs at ~14px, news rows at ~18px, etc.). Letters scale with size.
+//
+// `leagueHint` parameter is preserved for backward compatibility with call sites
+// that pass it; the colored-badge implementation doesn't need it.
 function crest(name, size, leagueHint) {
+  const text = crestText(name);
+  const colors = TEAM_COLORS[name];
+  const bg = colors ? colors.bg : 'var(--bg-3)';
+  const ink = colors ? colors.ink : 'var(--ink)';
+  const border = colors ? 'rgba(255,255,255,.08)' : 'var(--line)';
   const px = size || 32;
-  const lg = leagueHint || teamLeagueId(name);
-  const flagKey = teamFlagKey(name, lg);
-  const flagSvg = flagKey ? FLAGS[flagKey] : null;
-  // The flag SVG fills a circular wrapper. Background + border give it the same
-  // visual weight as the previous monogram badge so layouts don't shift.
-  if (flagSvg) {
-    return `<span class="crest-badge" style="
-      width:${px}px; height:${px}px;
-      border-radius:50%;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.08);
-      display:inline-flex; align-items:center; justify-content:center;
-      flex-shrink:0;
-      background:#000;
-    "><span style="width:${Math.round(px * 1.5)}px; height:${px}px; display:inline-flex;">${flagSvg}</span></span>`;
-  }
-  // Fallback for unknown teams — neutral graphite circle, no text.
+  const fontPx = Math.max(9, Math.round(px * 0.36));
+  // Small badges show 2 letters max for legibility; larger ones show full mark.
+  const display = px < 24 ? text.slice(0, 2) : text;
   return `<span class="crest-badge" style="
     width:${px}px; height:${px}px;
-    background:var(--bg-3);
-    border:1px solid var(--line);
+    background:${bg}; color:${ink};
+    border:1px solid ${border};
     border-radius:50%;
+    display:inline-flex; align-items:center; justify-content:center;
+    font-family:var(--display); font-size:${fontPx}px; font-weight:700;
+    letter-spacing:.02em; line-height:1;
     flex-shrink:0;
-  "></span>`;
+  ">${display}</span>`;
 }
 
 // generate random matches per league
@@ -4816,110 +4811,110 @@ function computeRecord() {
 // timestamps shift naturally as the page sits open and reads as a true feed.
 // On refresh, news items are slightly reordered/jittered to mimic a live wire.
 const NEWS_SEED = [
+  { league:'epl', tag:'form', team:'Arsenal',
+    title:'Arsenal reach Champions League final after 20 years — Saka the difference',
+    body:'A first-half Bukayo Saka rebound finish was enough to beat Atlético Madrid 1-0 at the Emirates on Tuesday, sending Mikel Arteta\'s side through 2-1 on aggregate and into the Champions League final on May 30 in Budapest. It is Arsenal\'s first European Cup final since 2006. They will face PSG.',
+    impact:'up', moveText:'Arsenal to win UCL shortened 5.50 → 3.30',
+    minutesAgo: 22 },
   { league:'ligue1', tag:'form', team:'Paris Saint-Germain',
-    title:'Bonkers night in Paris: PSG 5-4 Bayern in UCL semi first leg',
-    body:'Khvicha Kvaratskhelia (24\', 56\') and Ousmane Dembélé (45+5\' pen, 58\') both scored braces in the highest-scoring Champions League semi-final first leg ever. João Neves was also on target. Harry Kane (17\' pen), Olise (41\'), Upamecano (65\') and Luis Díaz (68\') replied for Bayern. Second leg in Munich on May 5.',
-    impact:'up', moveText:'PSG to win UCL shortened 2.40 → 1.95',
-    minutesAgo: 14 },
-  { league:'epl', tag:'injury', team:'Liverpool',
-    title:'Salah forced off vs Palace — Slot can\'t commit to him returning',
-    body:'Mohamed Salah pulled up just before the hour mark in Liverpool\'s 3-1 home win over Crystal Palace on April 25. Arne Slot said the season "is over in four weeks" and offered no timeline. Liverpool sit fifth, fighting for top-five and Champions League qualification. Already without Hugo Ekitiké (Achilles surgery — out 9-12 months); Florian Wirtz had a recent back issue, Conor Bradley out for the season, Mamardashvili leg.',
-    impact:'down', moveText:'Liverpool top-5 firmed 1.18 → 1.09',
-    minutesAgo: 47 },
-  { league:'laliga', tag:'injury', team:'Real Madrid',
-    title:'Mbappé hamstring tear — out for Espanyol, doubt for El Clásico',
-    body:'Real Madrid confirmed Kylian Mbappé suffered a semitendinosus muscle injury in his left leg during the 1-1 draw at Real Betis on April 24. He misses the trip to Espanyol on May 3 and is racing the clock for El Clásico on May 10. Trent Alexander-Arnold has struggled at right-back; Madrid trail Barcelona by nine points with five to play.',
-    impact:'down', moveText:'Madrid -0.5 vs Espanyol drifted 1.55 → 1.78',
-    minutesAgo: 95 },
-  { league:'laliga', tag:'injury', team:'Barcelona',
-    title:'Lamine Yamal ruled out for season — Grade 2 hamstring',
-    body:'Barça confirmed the 18-year-old\'s biceps femoris injury sustained while scoring the winning penalty against Celta Vigo on April 22. Hansi Flick\'s side leads Real Madrid by nine points and could clinch in El Clásico on May 10. Yamal expected fit for Spain\'s World Cup opener vs Cape Verde on June 15.',
-    impact:'down', moveText:'Barcelona -1.5 AH vs Osasuna drifted 1.95 → 2.18',
-    minutesAgo: 132 },
-  { league:'bundes', tag:'form', team:'Bayern Munich',
-    title:'Champions confirmed — Bayern Munich claim 35th Bundesliga title',
-    body:'Harry Kane scored his 32nd league goal of the campaign as Bayern beat Stuttgart 4-2 on April 19 to wrap up Vincent Kompany\'s first Meisterschale with four games to spare. Kane has 52 goals across all competitions and is the leading Champions League Golden Boot contender. Bayern broke the Bundesliga single-season scoring record this season.',
-    impact:'up', moveText:'Kane Bundesliga top scorer locked at 1.02',
-    minutesAgo: 178 },
+    title:'PSG survive late Kane goal to reach back-to-back UCL finals',
+    body:'Ousmane Dembélé struck inside three minutes at the Allianz Arena and PSG held on through a 1-1 draw to advance 6-5 on aggregate over Bayern Munich. Harry Kane equalised in the seventh minute of stoppage time, his 55th goal in all competitions this season, but the comeback came too late. The defending champions face Arsenal in Budapest on May 30.',
+    impact:'up', moveText:'PSG to retain UCL firmed 2.10 → 1.85',
+    minutesAgo: 38 },
   { league:'seriea', tag:'form', team:'Inter Milan',
-    title:'Chivu four points from Scudetto — Coppa Italia final May 13',
-    body:'Cristian Chivu, in his first season as Inter manager after replacing Simone Inzaghi, has the Nerazzurri on 79 points — nine clear of Napoli with four to play. Lautaro Martínez (16 league goals) returned from a February injury and scored twice in the 5-2 win over Roma. Coppa Italia final vs Lazio on May 13 at the Olimpico still to come.',
-    impact:'up', moveText:'Inter to win Serie A locked at 1.02',
-    minutesAgo: 215 },
-  { league:'epl', tag:'tactics', team:'Manchester City',
-    title:'Pep into FA Cup final after edging Southampton — Rodri still being managed',
-    body:'City beat Championship side Southampton 2-1 at Wembley on April 25 with late goals from Doku and Nico González. They face Chelsea in the FA Cup final on May 16, becoming the first English side to reach four consecutive finals. Pep continues to protect Rodri (groin); Dias (hamstring) and Gvardiol (long-term) remain out. City top the Premier League by a hair from Arsenal.',
-    impact:'up', moveText:'City to win EPL shortened 2.05 → 1.85',
-    minutesAgo: 244 },
-  { league:'epl', tag:'tactics', team:'Arsenal',
-    title:'Arsenal at Atlético Madrid — UCL semi second leg tonight',
-    body:'Arsenal travel to the Riyadh Air Metropolitano with the tie on the line. Arteta confirmed Saliba is fit; Havertz and Eze passed late tests after the recent Newcastle win. Viktor Gyökeres leads the line. Title race with City has tightened. UCL final is in Budapest in May.',
-    impact:'up', moveText:'Arsenal to win UCL drifted 4.20 → 3.50',
-    minutesAgo: 287 },
-  { league:'ligue1', tag:'transfer', team:'AS Monaco',
-    title:'Pocognoli\'s Monaco surge — seven straight wins, top-3 in sight',
-    body:'Belgian Sébastien Pocognoli, appointed October 11, 2025 after Adi Hütter was sacked, has Monaco level on points with the top three. Folarin Balogun has scored in eight consecutive Ligue 1 games. Paul Pogba edging closer to his first competitive minutes since 2023; Ansu Fati on loan from Barcelona has impressed with five goals.',
-    impact:'up', moveText:'Monaco top-3 finish shortened 1.85 → 1.55',
-    minutesAgo: 326 },
-  { league:'seriea', tag:'form', team:'Napoli',
-    title:'Conte\'s Napoli chase second — Højlund hits eight for the campaign',
-    body:'Rasmus Højlund, on loan from Manchester United, has eight Serie A goals since arriving. Conte\'s side beat Cremonese 2-0 with Scott McTominay also on the scoresheet. Napoli sit second in Serie A, fighting Milan and Juventus for Champions League places. Inter are out of reach.',
-    impact:'up', moveText:'Napoli top-4 to qualify firmed 1.40 → 1.28',
-    minutesAgo: 372 },
-  { league:'ligue1', tag:'tactics', team:'Marseille',
-    title:'Beye under pressure as Marseille slip — De Zerbi gone in February',
-    body:'Habib Beye replaced Roberto De Zerbi in February after the 5-0 Le Classique mauling at PSG. Marseille sit fourth (Mason Greenwood has 15 league goals, second only to Esteban Lepaul). De Zerbi went to Tottenham on March 31 on a five-year deal. Sporting director Mehdi Benatia recently criticised the squad publicly after a 2-0 home loss to Lorient.',
-    impact:'down', moveText:'OM top-3 finish drifted 2.10 → 2.65',
-    minutesAgo: 418 },
-  { league:'epl', tag:'tactics', team:'Tottenham',
-    title:'De Zerbi era at Spurs — relegation odds at 56% per supercomputer',
-    body:'Roberto De Zerbi confirmed as Tottenham head coach on March 31 after Igor Tudor\'s departure by mutual consent. Spurs have not won a league match in 2026 and sit 17th. Wolves and Burnley already relegated; Spurs hold the third drop spot.',
-    impact:'down', moveText:'Spurs to be relegated firmed 2.30 → 1.62',
-    minutesAgo: 455 },
-  { league:'bundes', tag:'transfer', team:'Bayer Leverkusen',
-    title:'Hjulmand stabilises Leverkusen — Europa qualification in their hands',
-    body:'Eight months after losing Florian Wirtz (£100m) and Jeremie Frimpong (£29.5m) to Liverpool, plus Xabi Alonso to Real Madrid, Kasper Hjulmand has Leverkusen in fifth, one point off the Champions League places. Patrik Schick fit again after a calf issue; Arthur returning from a muscle problem.',
-    impact:'up', moveText:'Leverkusen top-4 firmed 1.85 → 1.55',
-    minutesAgo: 502 },
-  { league:'laliga', tag:'lineup', team:'Real Madrid',
-    title:'Courtois back as Madrid season unravels under Arbeloa',
-    body:'Thibaut Courtois returns from a thigh issue. Álvaro Arbeloa, promoted from Castilla on January 12 after Xabi Alonso was sacked following the 3-2 Supercopa loss to Barcelona, oversaw Madrid\'s UCL quarter exit to Bayern (6-4 agg). With Mbappé doubtful, Rodrygo (ACL) gone, and Güler/Militão also out, Madrid are dangerously thin.',
+    title:'Inter clinch 21st Scudetto — Thuram and Mkhitaryan sink Parma',
+    body:'A 2-0 home win over Parma on May 3 wrapped up the Serie A title for Inter with three rounds to spare. Marcus Thuram opened the scoring in first-half stoppage time and Henrikh Mkhitaryan added the second late on. The result, combined with Napoli\'s 0-0 draw at Como the previous day, gave Cristian Chivu\'s side an unassailable 12-point cushion. Coppa Italia final vs Lazio still to come on May 13.',
+    impact:'up', moveText:'Inter Coppa Italia firmed 1.55 → 1.42',
+    minutesAgo: 64 },
+  { league:'epl', tag:'form', team:'Manchester City',
+    title:'City rescue late draw at Everton — Haaland and Doku salvage point',
+    body:'Manchester City trailed 3-1 at Goodison with eight minutes left before goals from Erling Haaland and Jérémy Doku snatched a 3-3 draw. The point keeps City five behind Arsenal in the title race with one game in hand. The two sides cannot meet again, so City need to win out and hope Arsenal slip at West Ham, Burnley, or Crystal Palace.',
+    impact:'down', moveText:'Arsenal to win EPL drifted 1.30 → 1.42',
+    minutesAgo: 92 },
+  { league:'laliga', tag:'form', team:'Real Madrid',
+    title:'Vinícius brace at Espanyol keeps Madrid title hopes formally alive',
+    body:'Vinícius Jr scored twice in 11 minutes to give Real Madrid a 2-0 win at Espanyol on May 3, with Mbappé, Güler, Courtois and Militão all absent. The result trims Barcelona\'s lead to 11 points heading into the El Clásico at Camp Nou on May 10 — but a Barcelona win there would settle the title. Álvaro Arbeloa\'s interim spell continues to be tested.',
     impact:'down', moveText:'Real Madrid to win La Liga out at 25.00',
-    minutesAgo: 588 },
+    minutesAgo: 118 },
+  { league:'laliga', tag:'tactics', team:'Barcelona',
+    title:'Barcelona within touching distance of title — Clásico looms',
+    body:'A 2-1 win at Osasuna on May 2 left Barcelona 11 points clear with four matches remaining. Hansi Flick\'s side travel to Mallorca next then host Real Madrid on May 10 in a Clásico that could mathematically clinch the title. Robert Lewandowski and Raphinha continue to lead the line with Lamine Yamal sidelined for the season.',
+    impact:'up', moveText:'Barcelona to win La Liga locked at 1.01',
+    minutesAgo: 145 },
+  { league:'epl', tag:'injury', team:'Liverpool',
+    title:'Salah\'s season effectively over with hamstring injury',
+    body:'Mohamed Salah pulled up against Crystal Palace on April 25 and Arne Slot has all but ruled him out for the rest of the campaign. Liverpool, fifth in the table, are also without Hugo Ekitiké (Achilles, 9-12 months) and Conor Bradley. Cody Gakpo and Florian Wirtz are expected to lead the line as Liverpool fight to lock down a top-five Champions League place.',
+    impact:'down', moveText:'Liverpool top-5 firmed 1.18 → 1.09',
+    minutesAgo: 178 },
+  { league:'laliga', tag:'injury', team:'Real Madrid',
+    title:'Mbappé still racing the clock for El Clásico',
+    body:'Kylian Mbappé\'s left semitendinosus tear suffered at Real Betis on April 24 has already cost him the Espanyol trip. Madrid medical staff are working on a return for the May 10 Clásico but will not commit. Without him, Vinícius and Bellingham have shouldered the goal threat. Rodrygo remains out with his ACL recovery.',
+    impact:'down', moveText:'Mbappé to score vs Barça out at 4.50',
+    minutesAgo: 205 },
+  { league:'laliga', tag:'injury', team:'Barcelona',
+    title:'Yamal confirmed out for season — biceps femoris recovery ongoing',
+    body:'Lamine Yamal, who tore his hamstring scoring a winning penalty against Celta on April 22, will not return for Barcelona this campaign. The 18-year-old is expected to be fit for Spain\'s World Cup opener on June 15 against Cape Verde. Hansi Flick has rotated Raphinha, Ferran Torres and Dani Olmo into the wide attacking spots in his absence.',
+    impact:'down', moveText:'Yamal anytime scorer Clásico off the board',
+    minutesAgo: 244 },
+  { league:'bundes', tag:'form', team:'Bayern Munich',
+    title:'Bayern bow out of Europe but Kane finishes second leg with 55-goal haul',
+    body:'Vincent Kompany\'s side lost the semi-final tie to PSG despite Harry Kane\'s late equaliser in Munich. Kane has now scored in every competitive match Bayern have played this season and sits on 55 goals across all competitions including the German Supercup. Bayern wrapped up the Bundesliga in mid-April; focus shifts to the DFB-Pokal final.',
+    impact:'down', moveText:'Bayern to retain UCL eliminated',
+    minutesAgo: 280 },
+  { league:'epl', tag:'form', team:'Liverpool',
+    title:'Manchester United host Liverpool with both clubs needing points',
+    body:'Sunday\'s fixture at Old Trafford carries weight on both sides. Liverpool need wins to lock up their top-five spot; United, under Carrick since January, are still drifting in the lower half. Bryan Mbeumo and Benjamin Šeško have led the United attack since the Salah hamstring; Salah is now ruled out, meaning Gakpo and Wirtz lead the away threat.',
+    impact:'up', moveText:'Liverpool to win drifted 2.05 → 2.30',
+    minutesAgo: 312 },
+  { league:'seriea', tag:'tactics', team:'Inter Milan',
+    title:'Coppa Italia final preview — Inter chase domestic double vs Lazio',
+    body:'With the Scudetto in the bag, Inter turn to the Coppa Italia final at the Stadio Olimpico on May 13 against Lazio. A win would complete a domestic double for Cristian Chivu in his debut campaign. Lautaro Martínez has 16 league goals on his return from a February injury; Marcus Thuram and Mkhitaryan are in form following the Parma decider.',
+    impact:'up', moveText:'Inter to lift Coppa firmed 1.55 → 1.42',
+    minutesAgo: 360 },
+  { league:'epl', tag:'tactics', team:'Manchester City',
+    title:'FA Cup final May 16 — City face Chelsea at Wembley',
+    body:'After Pep Guardiola\'s side eliminated Southampton 2-1 in the semi-final, City face Rosenior\'s Chelsea in the FA Cup final. With the league title slipping toward Arsenal, the Cup gives City a chance to salvage silverware. Chelsea, who have struggled in the league since the Maresca dismissal, will be the underdog at Wembley but have nothing to lose.',
+    impact:'up', moveText:'City to win FA Cup firmed 1.50 → 1.40',
+    minutesAgo: 405 },
+  { league:'ligue1', tag:'form', team:'Marseille',
+    title:'Marseille hold on to Champions League spot under Beye',
+    body:'Mehdi Beye, who took over from Roberto De Zerbi after the 5-0 Classique loss in February, has stabilised Marseille in second place. Mason Greenwood (15 league goals) and a returning Pierre-Emerick Aubameyang have led the attack. With PSG already crowned, Marseille\'s remaining games are about cementing automatic Champions League qualification.',
+    impact:'up', moveText:'Marseille top-2 finish firmed 1.40 → 1.25',
+    minutesAgo: 458 },
 ];
 
 // Each mover carries a 12-point price history (one reading every 30 minutes for the
 // last 6 hours) so we can render a sparkline showing the line's trajectory.
 // The history ends with the current price (last entry == `to`).
 const MOVERS_SEED = [
-  { match:'Atletico v Arsenal',      market:'Arsenal to advance UCL', from:1.95, to:1.78, dir:'up',
-    history:[1.95, 1.95, 1.92, 1.90, 1.88, 1.85, 1.84, 1.82, 1.81, 1.80, 1.79, 1.78] },
-  { match:'Bayern v PSG (May 6)',    market:'PSG to advance UCL',     from:1.42, to:1.30, dir:'up',
-    history:[1.42, 1.42, 1.40, 1.38, 1.36, 1.35, 1.34, 1.33, 1.32, 1.31, 1.30, 1.30] },
-  { match:'Espanyol v Real Madrid',  market:'Real Madrid -0.5 AH',    from:1.55, to:1.78, dir:'down',
-    history:[1.55, 1.56, 1.58, 1.62, 1.65, 1.68, 1.70, 1.72, 1.74, 1.76, 1.77, 1.78] },
-  { match:'Osasuna v Barcelona',     market:'Barcelona to win',       from:1.20, to:1.15, dir:'up',
-    history:[1.20, 1.20, 1.19, 1.18, 1.18, 1.17, 1.17, 1.16, 1.16, 1.15, 1.15, 1.15] },
-  { match:'Inter v Parma',           market:'Inter to win',           from:1.18, to:1.14, dir:'up',
-    history:[1.18, 1.18, 1.17, 1.17, 1.16, 1.16, 1.15, 1.15, 1.15, 1.14, 1.14, 1.14] },
-  { match:'Man Utd v Liverpool',     market:'Over 2.5 goals',         from:1.92, to:1.78, dir:'up',
-    history:[1.92, 1.91, 1.89, 1.87, 1.85, 1.84, 1.83, 1.82, 1.80, 1.79, 1.79, 1.78] },
+  { match:'Barcelona v Real Madrid',  market:'Barcelona to win El Clásico', from:1.95, to:1.72, dir:'up',
+    history:[1.95, 1.94, 1.92, 1.90, 1.86, 1.83, 1.80, 1.78, 1.76, 1.74, 1.73, 1.72] },
+  { match:'Arsenal v PSG (UCL Final)', market:'Arsenal to win UCL',         from:3.50, to:3.30, dir:'up',
+    history:[3.50, 3.50, 3.45, 3.42, 3.40, 3.38, 3.36, 3.34, 3.33, 3.31, 3.30, 3.30] },
+  { match:'Liverpool v Arsenal',      market:'Over 2.5 goals',              from:1.78, to:1.92, dir:'down',
+    history:[1.78, 1.79, 1.81, 1.83, 1.85, 1.87, 1.88, 1.89, 1.90, 1.91, 1.92, 1.92] },
+  { match:'Inter v Lazio (Coppa)',    market:'Inter to lift Coppa Italia',  from:1.55, to:1.42, dir:'up',
+    history:[1.55, 1.54, 1.52, 1.50, 1.48, 1.46, 1.45, 1.44, 1.43, 1.42, 1.42, 1.42] },
+  { match:'Marseille v PSG',          market:'PSG to win Le Classique',     from:1.65, to:1.78, dir:'down',
+    history:[1.65, 1.66, 1.68, 1.70, 1.72, 1.73, 1.74, 1.75, 1.76, 1.77, 1.78, 1.78] },
+  { match:'Man City v Chelsea (FAC)', market:'City to win FA Cup',          from:1.50, to:1.40, dir:'up',
+    history:[1.50, 1.50, 1.48, 1.47, 1.46, 1.45, 1.44, 1.43, 1.42, 1.41, 1.40, 1.40] },
 ];
 const SUSPENSIONS_SEED = [
+  { player:'Mohamed Salah',         team:'Liverpool',  games:99, reason:'Hamstring — ruled out for season' },
   { player:'Hugo Ekitiké',          team:'Liverpool',  games:99, reason:'Achilles surgery — out 9-12 months' },
   { player:'Conor Bradley',         team:'Liverpool',  games:99, reason:'Knee surgery — out for season' },
   { player:'Lamine Yamal',          team:'Barcelona',  games:99, reason:'Hamstring — out for season' },
+  { player:'Kylian Mbappé',         team:'Real Madrid',games:0,  reason:'Hamstring — Clásico fitness race' },
   { player:'Rodrygo',               team:'Real Madrid',games:99, reason:'ACL — out for season' },
-  { player:'Christian Pulisic',     team:'AC Milan',   games:0,  reason:'4 yellows — one away from ban' },
-  { player:'Eduardo Camavinga',     team:'Real Madrid',games:1,  reason:'Red card vs Bayern (UCL)' },
   { player:'Serge Gnabry',          team:'Bayern',     games:99, reason:'Adductor tear — out for season' },
 ];
 const WEATHER_SEED = [
-  { match:'Atletico v Arsenal',         cond:'Clear · 17°C · Light breeze',    impact:'Neutral' },
-  { match:'Man Utd v Liverpool',        cond:'Light rain · 11°C · Wind 22 kph',impact:'Under 2.5 +3%' },
-  { match:'Mgladbach v Dortmund',       cond:'Overcast · 13°C · Calm',         impact:'Neutral' },
-  { match:'Inter v Parma',              cond:'Clear · 19°C · Calm',            impact:'Goals Over +1%' },
-  { match:'Alaves v Athletic Bilbao',   cond:'Light rain · 13°C · Wind 16 kph',impact:'Cards Over +2%' },
+  { match:'Liverpool v Arsenal',          cond:'Light rain · 13°C · Wind 18 kph', impact:'Under 2.5 +3%' },
+  { match:'Barcelona v Real Madrid',      cond:'Clear · 22°C · Calm',             impact:'Neutral' },
+  { match:'Marseille v PSG',              cond:'Sunny · 24°C · Light breeze',     impact:'Neutral' },
+  { match:'Arsenal v PSG (Budapest)',     cond:'Clear · 19°C · Calm',             impact:'Goals Over +1%' },
+  { match:'Inter v Lazio (Olimpico)',     cond:'Partly cloudy · 21°C · Calm',     impact:'Neutral' },
 ];
 
 // Working state — gets replaced on each refresh so we can simulate live updates
