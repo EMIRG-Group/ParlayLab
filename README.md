@@ -3525,8 +3525,27 @@ window.signIn = async function () {
 
 window.signOut = async function () {
   if (!authClient) return;
-  await authClient.auth.signOut();
-  // onAuthStateChange handles state cleanup; close the modal explicitly
+  // Show a loading state on the sign-out button so the user sees something is happening
+  // even on a slow network. The modal will close as soon as we get either a result or an error.
+  authState.loading = true;
+  renderAuthModal();
+  try {
+    const { error } = await authClient.auth.signOut();
+    if (error) throw error;
+  } catch (e) {
+    // Even if the server-side sign-out fails, force a local sign-out so the user
+    // isn't stuck. We clear our own auth state and let the UI reflect that.
+    console.warn('Sign-out network call failed; forcing local sign-out:', e);
+    authState.user = null;
+    state.savedSlips = [];
+    if (state.tab === 'my') renderMySlips();
+  }
+  // Reset the modal view so the next time it opens, it shows the login form, not stale profile.
+  authState.view = 'login';
+  authState.loading = false;
+  authState.errorMsg = '';
+  authState.infoMsg = '';
+  refreshAuthButton();
   closeAuthModal();
 };
 
