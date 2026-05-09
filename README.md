@@ -3392,7 +3392,7 @@ function renderAuthModal() {
         <span class="v">${state.savedSlips.length} ${state.savedSlips.length === 1 ? t('ana.legSing') : t('ana.legPlur')}</span>
       </div>
       <div class="auth-divider"></div>
-      <button class="auth-submit" style="background:transparent; color:var(--ink); border:1px solid var(--line);" onclick="signOut()">
+      <button type="button" class="auth-submit" style="background:transparent; color:var(--ink); border:1px solid var(--line);" onclick="signOut()">
         ${t('auth.signOut')}
       </button>
     `;
@@ -3525,28 +3525,26 @@ window.signIn = async function () {
 
 window.signOut = async function () {
   if (!authClient) return;
-  // Show a loading state on the sign-out button so the user sees something is happening
-  // even on a slow network. The modal will close as soon as we get either a result or an error.
-  authState.loading = true;
-  renderAuthModal();
-  try {
-    const { error } = await authClient.auth.signOut();
-    if (error) throw error;
-  } catch (e) {
-    // Even if the server-side sign-out fails, force a local sign-out so the user
-    // isn't stuck. We clear our own auth state and let the UI reflect that.
-    console.warn('Sign-out network call failed; forcing local sign-out:', e);
-    authState.user = null;
-    state.savedSlips = [];
-    if (state.tab === 'my') renderMySlips();
-  }
-  // Reset the modal view so the next time it opens, it shows the login form, not stale profile.
+  // Do the entire local sign-out SYNCHRONOUSLY first, before any await. This way
+  // the UI updates immediately on click — no waiting on the network for visible feedback.
+  // We then fire the server-side sign-out call in the background; if it fails, the user
+  // is already locally signed out, which is what they asked for.
+  authState.user = null;
   authState.view = 'login';
   authState.loading = false;
   authState.errorMsg = '';
   authState.infoMsg = '';
+  state.savedSlips = [];
   refreshAuthButton();
   closeAuthModal();
+  if (state.tab === 'my') renderMySlips();
+  // Now tell Supabase to invalidate the session on its end. Fire-and-forget — if it
+  // throws, log it but don't bother the user, since they're already signed out locally.
+  try {
+    await authClient.auth.signOut();
+  } catch (e) {
+    console.warn('Server-side sign-out failed (local sign-out completed):', e);
+  }
 };
 
 window.resetPassword = async function () {
