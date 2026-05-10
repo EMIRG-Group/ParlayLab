@@ -3489,9 +3489,18 @@ window.signUp = async function () {
   authState.errorMsg = '';
   renderAuthModal();
   try {
+    // Tell Supabase exactly where to redirect after email verification. Without this,
+    // Supabase falls back to the Site URL alone, which for project-subpath deployments
+    // (like GitHub Pages at /repo-name/) lands the user at the bare domain root — a 404.
+    // The window.location.origin + pathname combination always points to the current
+    // deployment, whether that's GitHub Pages, a custom domain, or local dev.
+    const redirectTo = window.location.origin + window.location.pathname;
     const { data, error } = await authClient.auth.signUp({
       email, password,
-      options: { data: { name } }, // stores name in user_metadata
+      options: {
+        data: { name },               // stores name in user_metadata
+        emailRedirectTo: redirectTo,  // verification link returns user here
+      },
     });
     if (error) throw error;
     authState.infoMsg = t('auth.signupSent');
@@ -3554,8 +3563,11 @@ window.resetPassword = async function () {
   authState.errorMsg = '';
   renderAuthModal();
   try {
+    // Use origin + pathname so the redirect URL stays clean (no slip-share fragment,
+    // no query string). Matches what we pass to signUp so both flows route the same way.
+    const redirectTo = window.location.origin + window.location.pathname;
     const { error } = await authClient.auth.resetPasswordForEmail(email, {
-      redirectTo: window.location.href,
+      redirectTo,
     });
     if (error) throw error;
     authState.infoMsg = t('auth.resetSent');
