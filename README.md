@@ -316,6 +316,197 @@
     100% { transform: translateY(0); }
   }
 
+  /* ============== TABLET PORTRAIT (≤640px) ============== */
+  @media (max-width: 640px) {
+    /* Top bar: pack tighter and let the right-side controls wrap below the brand
+       if they need to. Tabs row stays inline but with reduced padding. */
+    .top-inner {
+      padding: 10px 14px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .brand .logo { font-size: 22px; }
+    .brand .tag { display: none; } /* tagline hides on tablet — saves a row */
+    nav.tabs {
+      order: 3; /* drop below brand + right controls */
+      width: 100%;
+      justify-content: space-between;
+    }
+    nav.tabs button { padding: 7px 12px; font-size: 10px; }
+    .top-right { gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+    .live-dot { display: none; } /* save space; the live timestamp is in the hero */
+    .lang-select, .auth-btn { font-size: 10px; padding: 6px 8px; }
+
+    /* Main padding tightens */
+    main { padding: 16px 14px 90px; }
+
+    /* Hero scales down — the huge h1 is the worst offender on small screens */
+    .hero { padding: 20px 18px; margin-bottom: 18px; }
+    .hero h1 { font-size: 30px; line-height: 1.1; }
+    .hero .sub { font-size: 14px; margin-top: 10px; }
+    .hero-meta { gap: 16px; margin-top: 18px; flex-wrap: wrap; }
+    .hero-meta b { font-size: 14px; }
+    .hero::before { font-size: 140px; bottom: -20px; right: -10px; }
+
+    /* Match cards: looser line-height for two-row team display */
+    .team-name { font-size: 15px; }
+    .vs { font-size: 10px; }
+    .match-head { font-size: 11px; }
+  }
+
+  /* ============== PHONE PORTRAIT (≤480px) ============== */
+  @media (max-width: 480px) {
+    /* Even tighter padding and stacked top bar */
+    main { padding: 12px 10px 100px; }
+    .top-inner { padding: 8px 12px; }
+    .brand .logo { font-size: 19px; }
+    nav.tabs { padding: 2px; }
+    nav.tabs button { padding: 6px 9px; font-size: 9.5px; letter-spacing: .06em; }
+    .top-right { gap: 6px; width: 100%; justify-content: space-between; order: 4; }
+    .lang-select, .auth-btn { font-size: 10px; padding: 5px 7px; }
+    .auth-btn span { display: inline; } /* keep label visible */
+
+    /* Hero gets compact */
+    .hero { padding: 16px 14px; }
+    .hero h1 { font-size: 24px; }
+    .hero .sub { font-size: 13px; }
+    .hero-meta {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px 18px;
+    }
+    .hero-meta div { font-size: 9px; }
+    .hero-meta b { font-size: 13px; }
+    .hero::before { font-size: 100px; }
+
+    /* League pills — make them a horizontal scrollable strip so all 5 always fit */
+    .leagues {
+      display: flex; flex-wrap: nowrap;
+      overflow-x: auto; gap: 6px;
+      margin: 0 -10px 14px; padding: 0 10px 4px;
+      scrollbar-width: none;
+    }
+    .leagues::-webkit-scrollbar { display: none; }
+    .league-pill { flex-shrink: 0; padding: 8px 12px 8px 8px; font-size: 10px; }
+    .league-pill .flag { width: 18px; height: 13px; }
+
+    /* Fixture filter pills too */
+    .fixture-filter { gap: 4px; }
+    .fixture-filter-btn { padding: 5px 9px; font-size: 9px; letter-spacing: .08em; }
+
+    /* News category tabs scroll horizontally if they overflow */
+    .news-cat-tabs {
+      flex-wrap: nowrap; overflow-x: auto;
+      scrollbar-width: none;
+      margin: 0 -10px 14px; padding: 0 10px 10px;
+    }
+    .news-cat-tabs::-webkit-scrollbar { display: none; }
+    .news-cat-tab { flex-shrink: 0; padding: 5px 9px; font-size: 9px; }
+
+    /* Match cards: stack teams + crests with consistent gaps. The crests
+       and stars need touch-friendly tap targets even when compact. */
+    .match { padding: 14px; }
+    .match-head { font-size: 10px; flex-wrap: wrap; gap: 4px; }
+    .match-teams { gap: 8px; }
+    .team-name { font-size: 14px; }
+    .vs { font-size: 9px; padding: 0 4px; }
+    .fav-star { font-size: 18px; padding: 6px; min-width: 32px; min-height: 32px; }
+
+    /* Odds buttons — force 3 per row on phones via flex-basis math (the original
+       layout uses flex-wrap with auto-widths, which on narrow screens results in
+       inconsistent button widths). Setting basis to ~33% with subtraction for the
+       gap gives a clean 3-up grid. */
+    .odds-row { gap: 4px !important; }
+    .odd { flex: 1 1 calc(33.333% - 4px) !important; padding: 8px 6px !important; }
+    .odd-meta { font-size: 9px !important; }
+    .odd-name { font-size: 10px !important; }
+    .odd-book { font-size: 8px !important; }
+    .book-tag { padding: 1px 4px !important; font-size: 8px !important; }
+    .odd-val { font-size: 12px !important; }
+    .odd-american { font-size: 9px !important; }
+    .market-label { font-size: 10px !important; padding: 8px 12px !important; }
+
+    /* Slip drawer takes more vertical room on phones */
+    .slip-col .slip { max-height: 85vh; }
+    .slip-head h3 { font-size: 16px; }
+    .slip-leg { padding: 10px; }
+    .leg-match { font-size: 9px; }
+    .leg-pick { font-size: 13px; }
+    .leg-market { font-size: 9px; }
+    .leg-odds { font-size: 13px; }
+    .calc-row { font-size: 11px; padding: 7px 0; }
+    .stake-row { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .stake-input label { font-size: 9px; }
+    .stake-input input, .stake-input output { font-size: 14px; padding: 8px 10px; }
+    .place-btn { font-size: 16px; padding: 12px; }
+    .share-btn { font-size: 10px; padding: 9px; }
+
+    /* Bankroll input row inside slip — keep number input readable */
+    #bankroll-in { font-size: 12px !important; padding: 6px 8px !important; }
+
+    /* Auth modal: fill the screen on mobile rather than floating */
+    .auth-overlay { padding: 0; }
+    .auth-modal {
+      max-width: none;
+      width: 100%;
+      min-height: 100vh;
+      border-radius: 0;
+      padding: 24px 18px;
+      animation: none;
+    }
+    .auth-close { top: 16px; right: 16px; font-size: 28px; padding: 8px 12px; }
+    .auth-modal h2 { font-size: 22px; }
+    .auth-modal .auth-sub { margin-bottom: 18px; }
+    .auth-field input { font-size: 16px; padding: 12px; } /* 16px prevents iOS auto-zoom */
+    .auth-submit { font-size: 15px; padding: 14px; min-height: 48px; }
+
+    /* News items: tighter padding, smaller body text */
+    .news-item { padding: 14px; }
+    .news-title { font-size: 14px; line-height: 1.3; }
+    .news-body { font-size: 12px; line-height: 1.5; }
+    .news-meta { font-size: 9px; gap: 8px; flex-wrap: wrap; }
+    .news-controls { padding: 8px 12px; }
+    .news-controls .lastsync { font-size: 9px; }
+    .refresh-btn { padding: 6px 10px; font-size: 9px; }
+
+    /* Sidebar tickers: ensure sparklines don't push values off-screen */
+    .ticker-row { padding: 10px 12px; gap: 8px; }
+    .ticker-row .lbl div:first-child { font-size: 11px; }
+    .ticker-row .val { font-size: 11px; }
+
+    /* Match preview cards stack and shrink */
+    .match-preview { gap: 12px; padding: 12px 0 4px; }
+    .preview-block { padding: 12px; }
+    .preview-block h5 { font-size: 9px; margin-bottom: 8px; }
+    .form-dot { width: 16px; height: 16px; font-size: 9px; }
+    .h2h-row { grid-template-columns: 60px 1fr auto; font-size: 9px; gap: 6px; }
+    .splits-grid { font-size: 10px; gap: 6px 10px; }
+
+    /* Saved scenarios — let the metrics grid breathe */
+    #my-slips > div { padding: 16px !important; }
+
+    /* Buttons in saved-slip headers wrap rather than overflow */
+    #my-slips button { font-size: 9px !important; padding: 5px 8px !important; }
+
+    /* Section headings get pulled in */
+    .sec-head h2 { font-size: 28px; }
+    .sec-head .sub { font-size: 11px; }
+
+    /* Footer disclaimer */
+    footer { padding: 24px 14px; font-size: 10px; }
+  }
+
+  /* ============== TOUCH-FRIENDLY TARGETS (any width with coarse pointer) ============== */
+  /* On any device with a coarse pointer (touchscreen), nudge interactive elements
+     up to at least 36px tall so they're easy to tap. This complements the breakpoint
+     rules above — a tablet in landscape still benefits from this even though it
+     doesn't hit the 480px breakpoint. */
+  @media (pointer: coarse) {
+    .odd { min-height: 44px; }
+    .fav-star { min-width: 32px; min-height: 32px; }
+    .league-pill, .fixture-filter-btn, .news-cat-tab { min-height: 32px; }
+    .leg-remove { min-width: 32px; min-height: 32px; font-size: 18px; }
+    nav.tabs button { min-height: 36px; }
+  }
+
   /* ============== HERO STRIP ============== */
   .hero {
     border: 1px solid var(--line);
