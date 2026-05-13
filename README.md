@@ -301,6 +301,17 @@
     .slip-col.open {
       transform: translateX(-50%) translateY(0);
     }
+    /* Desktop pop animation needs to keep translateX(-50%) so the drawer
+       doesn't visually jump from centered to left-aligned during the nudge. */
+    .slip-col.pop {
+      animation: slipPopDesktop .55s cubic-bezier(.4, 0, .2, 1);
+    }
+  }
+  /* Desktop variant of the nudge animation — preserves centered positioning. */
+  @keyframes slipPopDesktop {
+    0%   { transform: translateX(-50%) translateY(calc(100% - 56px)); }
+    40%  { transform: translateX(-50%) translateY(calc(100% - 64px)); }
+    100% { transform: translateX(-50%) translateY(calc(100% - 56px)); }
   }
   .slip-col.open { transform: translateY(0); }
   .slip-col.pop { animation: slipPop .55s cubic-bezier(.4, 0, .2, 1); }
@@ -314,12 +325,13 @@
   .slip-head { cursor: pointer; }
   /* Leave space below for the collapsed drawer header. */
   main { padding-bottom: 90px; }
+  /* Pop animation — used only as a brief tactile confirmation when a leg is added.
+     Nudges the collapsed drawer header up by 8px and back, like a button press.
+     Does NOT expand the drawer; for that the user explicitly taps the header. */
   @keyframes slipPop {
     0%   { transform: translateY(calc(100% - 56px)); }
-    25%  { transform: translateY(0); }
-    50%  { transform: translateY(-12px); }
-    75%  { transform: translateY(0); }
-    100% { transform: translateY(0); }
+    40%  { transform: translateY(calc(100% - 64px)); }
+    100% { transform: translateY(calc(100% - 56px)); }
   }
 
   /* ============== TABLET PORTRAIT (≤640px) ============== */
@@ -5354,14 +5366,17 @@ function renderMatches() {
 // ============= SLIP =============
 // Universal slip drawer — the slip is always a fixed-position bottom drawer at
 // every width since it now lives outside any tab. It starts collapsed to a 56px
-// header strip, pops open when a leg is added, and can be toggled by tapping
-// the header. It stays open until the user collapses it or saves/clears the slip.
+// header strip and STAYS collapsed when legs are added. The user explicitly taps
+// the header to expand it. The leg count badge ticks up visibly to confirm each
+// add, and a brief pulse animation plays on the collapsed header for tactile
+// feedback — but the drawer itself does not auto-expand.
 function isMobileSlip() { return window.innerWidth <= 1100; }
 function popSlipDrawer() {
+  // Visual feedback only — pulse the collapsed header without expanding the drawer.
+  // The user will see the slip count badge increment in the header and a brief
+  // animation, but the drawer stays collapsed until they tap to open it.
   const col = document.getElementById('slip-col');
   if (!col) return;
-  col.classList.add('open');
-  // re-trigger pop animation
   col.classList.remove('pop');
   // force reflow so the animation restarts on subsequent adds
   void col.offsetWidth;
