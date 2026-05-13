@@ -271,43 +271,49 @@
 
   /* ============== LAYOUT ============== */
   main { padding: 24px 28px 80px; max-width: 1600px; margin: 0 auto; }
-  .grid-builder {
-    display: grid;
-    grid-template-columns: 1fr 380px;
-    gap: 24px;
-    align-items: start;
+  /* No more 2-column grid — the slip is now a persistent floating drawer
+     across all tabs, so the matches list takes the full content width. */
+  .grid-builder { display: block; }
+
+  /* ============== PERSISTENT SLIP DRAWER ==============
+     Universal floating drawer that lives outside any tab. Fixed to the bottom
+     at all widths, collapsed to a 56px header strip when not in use, and
+     popped open whenever a selection is added on ANY tab (builder or WC).
+     This guarantees the slip is visible regardless of which tab the user is on. */
+  .slip-col {
+    position: fixed;
+    left: 0; right: 0; bottom: 0; top: auto;
+    z-index: 200;
+    padding: 0;
+    box-shadow: 0 -20px 40px rgba(0,0,0,.5);
+    transform: translateY(calc(100% - 56px));
+    transition: transform .35s cubic-bezier(.4, 0, .2, 1);
   }
-  @media (max-width: 1100px) {
-    .grid-builder { grid-template-columns: 1fr; }
-    /* On narrower screens, the slip becomes a fixed bottom drawer that
-       pops up when a leg is added and can be collapsed by tapping the head. */
+  /* On wider screens, anchor the drawer to a centered max-width column so the
+     slip aligns visually with the content rather than spanning edge to edge. */
+  @media (min-width: 1101px) {
     .slip-col {
-      position: fixed !important;
-      left: 0; right: 0; bottom: 0; top: auto !important;
-      z-index: 200;
-      padding: 0;
-      box-shadow: 0 -20px 40px rgba(0,0,0,.5);
-      transform: translateY(calc(100% - 56px));
-      transition: transform .35s cubic-bezier(.4, 0, .2, 1);
+      left: 50%;
+      transform: translateX(-50%) translateY(calc(100% - 56px));
+      width: 100%;
+      max-width: 720px;
     }
     .slip-col.open {
-      transform: translateY(0);
+      transform: translateX(-50%) translateY(0);
     }
-    .slip-col.pop {
-      animation: slipPop .55s cubic-bezier(.4, 0, .2, 1);
-    }
-    .slip-col .slip {
-      border-radius: 14px 14px 0 0;
-      border-left: 0; border-right: 0; border-bottom: 0;
-      max-height: 80vh;
-    }
-    .slip-toggle-icon { display: block; }
-    .slip-col.open .slip-toggle-icon { transform: rotate(180deg); }
-    .slip-head { cursor: pointer; }
-    /* leave room at the very bottom of the page so collapsed drawer doesn't
-       cover the footer text or the last bit of content */
-    main { padding-bottom: 80px; }
   }
+  .slip-col.open { transform: translateY(0); }
+  .slip-col.pop { animation: slipPop .55s cubic-bezier(.4, 0, .2, 1); }
+  .slip-col .slip {
+    border-radius: 14px 14px 0 0;
+    border-left: 0; border-right: 0; border-bottom: 0;
+    max-height: 80vh;
+  }
+  .slip-toggle-icon { display: block; }
+  .slip-col.open .slip-toggle-icon { transform: rotate(180deg); }
+  .slip-head { cursor: pointer; }
+  /* Leave space below for the collapsed drawer header. */
+  main { padding-bottom: 90px; }
   @keyframes slipPop {
     0%   { transform: translateY(calc(100% - 56px)); }
     25%  { transform: translateY(0); }
@@ -505,6 +511,225 @@
     .league-pill, .fixture-filter-btn, .news-cat-tab { min-height: 32px; }
     .leg-remove { min-width: 32px; min-height: 32px; font-size: 18px; }
     nav.tabs button { min-height: 36px; }
+  }
+
+  /* ============== WORLD CUP TAB ============== */
+  /* Outright winner grid — tier-based visual hierarchy. Top contenders get a brighter
+     border and slightly larger card; longshots are dimmer and more compact. */
+  .wc-section { margin-bottom: 36px; }
+  .wc-section-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 18px; flex-wrap: wrap; gap: 10px;
+  }
+  .wc-section-head h2 {
+    font-family: var(--display); font-size: 32px; letter-spacing: .02em;
+    line-height: 1;
+  }
+  .wc-section-head .sub {
+    font-family: var(--mono); font-size: 10px;
+    color: var(--ink-3); text-transform: uppercase; letter-spacing: .12em;
+  }
+
+  /* Outright cards — grid of team chips with their American odds. */
+  .wc-outright-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 8px;
+  }
+  .wc-outright {
+    background: var(--bg-2); border: 1px solid var(--line);
+    padding: 12px 14px; border-radius: 4px;
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    cursor: pointer; transition: all .15s;
+  }
+  .wc-outright:hover { border-color: var(--ink-3); background: var(--bg-3); }
+  .wc-outright.tier-fav { border-color: rgba(212,255,60,.4); }
+  .wc-outright.tier-fav:hover { border-color: var(--accent); }
+  .wc-outright .team {
+    display: flex; align-items: center; gap: 10px; min-width: 0;
+  }
+  .wc-outright .team-name {
+    font-family: var(--serif); font-weight: 600;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .wc-outright .price {
+    font-family: var(--mono); font-weight: 700; font-size: 13px;
+    color: var(--ink);
+  }
+  .wc-outright.tier-fav .price { color: var(--accent); }
+  .wc-outright.tier-longshot { opacity: .65; padding: 9px 12px; }
+  .wc-outright.tier-longshot .team-name { font-size: 13px; }
+  .wc-outright.tier-longshot .price { font-size: 11px; color: var(--ink-3); }
+
+  /* Group cards — one per group with teams and matches inside */
+  .wc-groups-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+  }
+  .wc-group {
+    background: var(--bg-2); border: 1px solid var(--line);
+    border-radius: 6px; overflow: hidden;
+  }
+  .wc-group-head {
+    background: var(--ink); color: #000;
+    padding: 12px 16px;
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .wc-group-head .id {
+    font-family: var(--display); font-size: 22px; letter-spacing: .02em;
+  }
+  .wc-group-head .label {
+    font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: .14em;
+    opacity: .7;
+  }
+  .wc-group-teams {
+    padding: 12px 16px; border-bottom: 1px solid var(--line);
+  }
+  .wc-group-team-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 7px 0; gap: 10px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .wc-group-team-row:last-child { border-bottom: none; }
+  .wc-group-team-row .team {
+    display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1;
+  }
+  .wc-group-team-row .team-name {
+    font-family: var(--serif); font-weight: 600; font-size: 13px;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .wc-group-team-row .win-price {
+    font-family: var(--mono); font-size: 11px; font-weight: 700;
+    color: var(--ink); cursor: pointer;
+    padding: 4px 8px; border: 1px solid var(--line); border-radius: 3px;
+    background: var(--bg-3);
+    transition: all .15s;
+  }
+  .wc-group-team-row .win-price:hover {
+    border-color: var(--accent); color: var(--accent);
+  }
+  .wc-group-matches {
+    padding: 12px 16px;
+  }
+  .wc-group-matches h6 {
+    font-family: var(--mono); font-size: 9px; text-transform: uppercase;
+    letter-spacing: .12em; color: var(--ink-3); margin: 0 0 8px;
+  }
+  .wc-match {
+    padding: 8px 0; border-bottom: 1px dashed var(--line);
+    font-size: 12px;
+  }
+  .wc-match:last-child { border-bottom: none; }
+  .wc-match-teams {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 4px; gap: 8px;
+  }
+  .wc-match-name {
+    font-family: var(--serif); font-weight: 600;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .wc-match-meta {
+    font-family: var(--mono); font-size: 9px; color: var(--ink-3);
+    text-transform: uppercase; letter-spacing: .08em;
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .wc-match-note {
+    display: inline-block;
+    background: rgba(212,255,60,.12); color: var(--accent);
+    padding: 2px 7px; border-radius: 8px;
+    font-family: var(--mono); font-size: 8px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .1em;
+    margin-top: 4px;
+  }
+  .wc-match-odds {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 4px; margin-top: 6px;
+  }
+  .wc-match-odd {
+    background: var(--bg-3); border: 1px solid var(--line);
+    color: var(--ink); padding: 6px 4px;
+    font-family: var(--mono); font-size: 11px; font-weight: 700;
+    cursor: pointer; border-radius: 3px;
+    text-align: center;
+    transition: all .15s;
+  }
+  .wc-match-odd:hover { border-color: var(--accent); color: var(--accent); }
+  .wc-match-odd .lbl {
+    display: block; font-size: 8px; font-weight: 600;
+    color: var(--ink-3); text-transform: uppercase; letter-spacing: .1em;
+    margin-bottom: 2px;
+  }
+
+  /* Knockout rounds — pending lines, displayed as informational tiles */
+  .wc-knockout-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+  }
+  .wc-knockout {
+    background: var(--bg-2); border: 1px dashed var(--line);
+    padding: 18px 16px; border-radius: 4px;
+    text-align: center;
+  }
+  .wc-knockout .label {
+    font-family: var(--display); font-size: 24px; letter-spacing: .02em;
+    margin-bottom: 4px;
+  }
+  .wc-knockout .date {
+    font-family: var(--mono); font-size: 10px; color: var(--ink-3);
+    text-transform: uppercase; letter-spacing: .12em; margin-bottom: 12px;
+  }
+  .wc-knockout .pending-pill {
+    display: inline-block;
+    background: rgba(255,255,255,.04); color: var(--ink-3);
+    padding: 4px 12px; border-radius: 12px;
+    font-family: var(--mono); font-size: 9px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .14em;
+    margin-bottom: 10px;
+  }
+  .wc-knockout .desc {
+    font-size: 11px; color: var(--ink-2); line-height: 1.5;
+  }
+  .wc-knockout .count {
+    font-family: var(--mono); font-size: 9px; color: var(--ink-3);
+    text-transform: uppercase; letter-spacing: .12em; margin-top: 8px;
+  }
+
+  /* Analytics block for the WC — sits below knockout rounds */
+  .wc-analytics {
+    background: var(--bg-2); border: 1px solid var(--line);
+    padding: 22px; border-radius: 6px;
+    margin-top: 18px;
+  }
+  .wc-analytics h3 {
+    font-family: var(--display); font-size: 22px; margin: 0 0 4px;
+    letter-spacing: .02em;
+  }
+  .wc-analytics .sub {
+    font-family: var(--mono); font-size: 10px; color: var(--ink-3);
+    text-transform: uppercase; letter-spacing: .12em; margin-bottom: 18px;
+  }
+  .wc-pathway-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+  }
+  @media (max-width: 640px) {
+    .wc-pathway-grid { grid-template-columns: 1fr; }
+  }
+  .wc-pathway {
+    background: var(--bg-3); border: 1px solid var(--line);
+    padding: 14px; border-radius: 4px;
+  }
+  .wc-pathway-head {
+    font-family: var(--mono); font-size: 10px; text-transform: uppercase;
+    letter-spacing: .12em; color: var(--accent); margin-bottom: 10px;
+  }
+  .wc-pathway-team {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 5px 0; font-size: 12px;
+  }
+  .wc-pathway-team .name { font-family: var(--serif); font-weight: 600; }
+  .wc-pathway-team .price {
+    font-family: var(--mono); font-size: 10px; color: var(--ink-2);
   }
 
   /* ============== HERO STRIP ============== */
@@ -848,7 +1073,7 @@
   .book-toggle button.on { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 700; }
 
   /* ============== BET SLIP ============== */
-  .slip-col { position: sticky; top: 80px; }
+  /* legacy sticky rule removed — slip is now a universal floating drawer */
   .slip {
     border: 1px solid var(--line);
     background: var(--bg-2);
@@ -1138,6 +1363,235 @@
     gap: 24px;
   }
   @media (max-width: 1000px) { .news-grid { grid-template-columns: 1fr; } }
+
+  /* ============== WORLD CUP TAB ============== */
+  /* The World Cup section has three major blocks: outright futures, group stage cards,
+     and knockout-round placeholders. Plus a WC-specific analytics panel at the bottom. */
+  .wc-body { display: flex; flex-direction: column; gap: 28px; }
+
+  .wc-section {
+    border: 1px solid var(--line); background: var(--bg-2);
+    padding: 24px; border-radius: 4px;
+  }
+  .wc-section h2 {
+    font-family: var(--display); font-size: 28px;
+    margin: 0 0 4px; letter-spacing: .02em;
+  }
+  .wc-section .wc-sub {
+    font-family: var(--mono); font-size: 10px;
+    color: var(--ink-3); text-transform: uppercase; letter-spacing: .12em;
+    margin-bottom: 18px;
+  }
+
+  /* Outright futures — top 6 highlighted as featured cards, rest as a compact list */
+  .wc-featured {
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px;
+    margin-bottom: 18px;
+  }
+  @media (max-width: 900px) { .wc-featured { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 480px) { .wc-featured { grid-template-columns: repeat(2, 1fr); } }
+  .wc-fav-card {
+    border: 1px solid var(--accent); border-radius: 4px;
+    background: rgba(212,255,60,.04);
+    padding: 14px 10px; text-align: center;
+    cursor: pointer; transition: all .15s;
+  }
+  .wc-fav-card:hover { background: rgba(212,255,60,.10); transform: translateY(-2px); }
+  .wc-fav-card .wc-team {
+    font-family: var(--serif); font-weight: 600; font-size: 14px;
+    margin-top: 8px; color: var(--ink);
+  }
+  .wc-fav-card .wc-odds {
+    font-family: var(--mono); font-size: 14px; font-weight: 700;
+    color: var(--accent); margin-top: 4px;
+  }
+  .wc-outright-list {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
+  }
+  @media (max-width: 720px) { .wc-outright-list { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .wc-outright-list { grid-template-columns: 1fr; } }
+  .wc-outright-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 10px; border: 1px solid var(--line);
+    border-radius: 3px; background: var(--bg-3);
+    cursor: pointer; transition: all .15s;
+    gap: 8px;
+  }
+  .wc-outright-row:hover { border-color: var(--ink-3); background: var(--bg-2); }
+  .wc-outright-row .wc-team-name {
+    font-family: var(--serif); font-weight: 600; font-size: 12px;
+    color: var(--ink-2);
+    display: flex; align-items: center; gap: 8px;
+    min-width: 0; flex: 1;
+  }
+  .wc-outright-row .wc-odds {
+    font-family: var(--mono); font-weight: 700; font-size: 11px;
+    flex-shrink: 0;
+  }
+  .wc-outright-row.tier-contender .wc-team-name { color: var(--ink); }
+  .wc-outright-row.tier-dark .wc-team-name { color: var(--ink-2); }
+  .wc-outright-row.tier-longshot { opacity: .7; }
+  .wc-outright-row.tier-longshot .wc-team-name { color: var(--ink-3); }
+
+  /* Group cards — 3 columns of group cards on desktop, drops to 1 on phone */
+  .wc-groups-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  @media (max-width: 1100px) { .wc-groups-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 720px) { .wc-groups-grid { grid-template-columns: 1fr; } }
+  .wc-group-card {
+    border: 1px solid var(--line); background: var(--bg-3);
+    border-radius: 4px; padding: 16px;
+  }
+  /* Group header strip: full-width chartreuse bar with everything in black —
+     the "Group X" label and "Favorite: TeamName" both render on the same background
+     so contrast is unambiguous and consistent. */
+  .wc-group-card .wc-group-head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin: -16px -16px 12px;  /* negative margins bleed to the card's padded edges */
+    padding: 10px 14px;
+    background: var(--accent);
+    border-radius: 3px 3px 0 0;
+    gap: 10px;
+  }
+  .wc-group-card .wc-group-id {
+    font-family: var(--display); font-size: 18px;
+    color: #000;
+    letter-spacing: .04em; text-transform: uppercase;
+    font-weight: 700;
+  }
+  .wc-group-card .wc-group-fav {
+    font-family: var(--mono); font-size: 9px;
+    color: rgba(0,0,0,.75);
+    text-transform: uppercase; letter-spacing: .12em;
+    text-align: right;
+  }
+  .wc-group-card .wc-group-fav b {
+    color: #000; font-weight: 700;
+  }
+  .wc-group-teams { margin-bottom: 14px; }
+  .wc-group-team {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 6px 8px; border-radius: 3px;
+    cursor: pointer; transition: all .15s;
+    margin-bottom: 2px;
+  }
+  .wc-group-team:hover { background: var(--bg-2); }
+  .wc-group-team .name {
+    font-family: var(--serif); font-weight: 600; font-size: 13px;
+    color: var(--ink);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .wc-group-team .odds {
+    font-family: var(--mono); font-weight: 700; font-size: 11px;
+    color: var(--accent);
+  }
+  .wc-group-matches {
+    border-top: 1px dashed var(--line);
+    padding-top: 12px;
+  }
+  .wc-group-match {
+    padding: 8px 4px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .wc-group-match:last-child { border-bottom: none; }
+  .wc-group-match .wc-match-teams {
+    font-family: var(--serif); font-size: 12px; font-weight: 600;
+    color: var(--ink); margin-bottom: 3px;
+  }
+  .wc-group-match .wc-match-meta {
+    font-family: var(--mono); font-size: 9px;
+    color: var(--ink-3); text-transform: uppercase; letter-spacing: .08em;
+    line-height: 1.4;
+  }
+  .wc-group-match .wc-match-note {
+    display: inline-block; margin-left: 6px;
+    background: rgba(212,255,60,.12); color: var(--accent);
+    padding: 1px 6px; border-radius: 8px; font-size: 8px;
+    text-transform: uppercase; letter-spacing: .1em;
+  }
+
+  /* Knockout rounds — six horizontal cards showing pending state */
+  .wc-knockouts {
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px;
+  }
+  @media (max-width: 1100px) { .wc-knockouts { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 600px) { .wc-knockouts { grid-template-columns: repeat(2, 1fr); } }
+  .wc-knockout-card {
+    border: 1px dashed var(--line); background: var(--bg-3);
+    border-radius: 4px; padding: 14px;
+    text-align: center;
+  }
+  .wc-knockout-card .wc-ko-label {
+    font-family: var(--display); font-size: 18px;
+    color: var(--ink); margin-bottom: 4px;
+  }
+  .wc-knockout-card .wc-ko-date {
+    font-family: var(--mono); font-size: 9px;
+    color: var(--ink-3); text-transform: uppercase; letter-spacing: .12em;
+    margin-bottom: 8px;
+  }
+  .wc-knockout-card .wc-ko-pending {
+    background: rgba(255,255,255,.06);
+    padding: 6px 8px; border-radius: 3px;
+    font-family: var(--mono); font-size: 9px;
+    color: var(--ink-3); text-transform: uppercase; letter-spacing: .1em;
+  }
+  .wc-knockout-card .wc-ko-count {
+    font-family: var(--mono); font-size: 10px;
+    color: var(--ink-2); margin-top: 6px;
+  }
+
+  /* WC analytics panel */
+  .wc-analytics {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px;
+  }
+  @media (max-width: 720px) { .wc-analytics { grid-template-columns: 1fr; } }
+  .wc-ana-block {
+    border: 1px solid var(--line); background: var(--bg-3);
+    border-radius: 4px; padding: 16px;
+  }
+  .wc-ana-block h3 {
+    font-family: var(--mono); font-size: 10px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: .12em;
+    color: var(--ink-3); margin: 0 0 12px;
+  }
+  .wc-pathway {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+  }
+  .wc-path-side {
+    padding: 12px; border-radius: 3px;
+    background: var(--bg-2);
+  }
+  .wc-path-side h4 {
+    font-family: var(--serif); font-size: 14px; font-weight: 600;
+    margin: 0 0 8px; color: var(--accent);
+  }
+  .wc-path-side ul {
+    list-style: none; margin: 0; padding: 0;
+    font-family: var(--mono); font-size: 10px; line-height: 1.7;
+  }
+  .wc-path-side li { color: var(--ink-2); }
+  .wc-value-row {
+    display: flex; justify-content: space-between;
+    padding: 6px 0; border-bottom: 1px dashed var(--line);
+    font-family: var(--mono); font-size: 11px;
+  }
+  .wc-value-row:last-child { border-bottom: none; }
+  .wc-value-row .team {
+    color: var(--ink); font-family: var(--serif); font-weight: 600;
+    font-size: 12px;
+  }
+  .wc-value-row .delta { color: var(--win); font-weight: 700; }
+  .wc-value-row .delta.neg { color: var(--loss); }
+  .wc-tier-badge {
+    display: inline-block; width: 6px; height: 6px;
+    border-radius: 50%; margin-right: 6px;
+  }
+  .wc-tier-badge.fav { background: var(--accent); }
+  .wc-tier-badge.contender { background: var(--ink); }
+  .wc-tier-badge.dark { background: var(--ink-2); }
+  .wc-tier-badge.longshot { background: var(--ink-3); }
   .news-feed { display: flex; flex-direction: column; gap: 14px; }
   .news-item {
     border: 1px solid var(--line);
@@ -1284,6 +1738,7 @@
       </div>
       <nav class="tabs" id="tabs">
         <button data-tab="builder" class="active" data-i18n="tab.builder">Builder</button>
+        <button data-tab="wc" data-i18n="tab.wc">World Cup</button>
         <button data-tab="news" data-i18n="tab.news">News</button>
         <button data-tab="analytics" data-i18n="tab.analytics">Analytics</button>
         <button data-tab="my" data-i18n="tab.my">My Slips</button>
@@ -1355,21 +1810,22 @@
           <div class="fixture-filter" id="fixture-filter"></div>
           <div class="matches" id="matches"></div>
         </div>
-        <aside class="slip-col" id="slip-col">
-          <div class="slip">
-            <div class="slip-head" id="slip-head" onclick="toggleSlipDrawer()">
-              <h3 data-i18n="slip.title">Bet Slip</h3>
-              <div class="head-right">
-                <span class="slip-count" id="slip-count">0</span>
-                <svg class="slip-toggle-icon" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <polyline points="3 5 7 9 11 5"/>
-                </svg>
-              </div>
-            </div>
-            <div class="slip-body-wrap"><div id="slip-body"></div></div>
-          </div>
-        </aside>
       </div>
+    </section>
+
+    <!-- ===== WORLD CUP ===== -->
+    <section id="tab-wc" class="hidden">
+      <div class="hero">
+        <h1 data-i18n="wc.title">World Cup <em>2026</em>.</h1>
+        <p class="sub" data-i18n="wc.sub">48 teams, 12 groups, 104 matches across the United States, Canada, and Mexico. Outright futures and group-stage lines available now; knockout matchups priced once groups conclude June 27.</p>
+        <div class="hero-meta" id="wc-hero-meta">
+          <div><b id="wc-stat-days">—</b><span data-i18n="wc.stat.days">Days to kickoff</span></div>
+          <div><b>48</b><span data-i18n="wc.stat.teams">Teams</span></div>
+          <div><b>12</b><span data-i18n="wc.stat.groups">Groups</span></div>
+          <div><b>104</b><span data-i18n="wc.stat.matches">Matches</span></div>
+        </div>
+      </div>
+      <div class="wc-body" id="wc-body"><!-- populated by renderWorldCup() --></div>
     </section>
 
     <!-- ===== NEWS ===== -->
@@ -1442,6 +1898,25 @@
       </div>
       <div id="my-slips"></div>
     </section>
+  
+    <!-- ============= PERSISTENT BET SLIP =============
+         Lives outside any tab section so it remains visible on every tab.
+         Always floats as a fixed bottom drawer: collapsed when empty or dismissed,
+         popped open when a selection is added on any tab. -->
+    <aside class="slip-col" id="slip-col">
+      <div class="slip">
+        <div class="slip-head" id="slip-head" onclick="toggleSlipDrawer()">
+          <h3 data-i18n="slip.title">Bet Slip</h3>
+          <div class="head-right">
+            <span class="slip-count" id="slip-count">0</span>
+            <svg class="slip-toggle-icon" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="3 5 7 9 11 5"/>
+            </svg>
+          </div>
+        </div>
+        <div class="slip-body-wrap"><div id="slip-body"></div></div>
+      </div>
+    </aside>
   </main>
 
   <footer>
@@ -1565,6 +2040,65 @@ const I18N = {
     'disclaim': 'Simulation tool only · No real wagers placed · Odds shown reflect representative live pricing from FanDuel and DraftKings · 18+ where applicable · Gamble responsibly',
     'tag.injury': 'INJURY', 'tag.lineup': 'LINEUP', 'tag.transfer': 'TRANSFER',
     'tag.form': 'FORM', 'tag.suspension': 'SUSPENSION', 'tag.tactics': 'TACTICS',
+    'tab.wc': 'World Cup',
+    'wc.title': 'World Cup <em>2026</em>.',
+    'wc.sub': '48 teams, 12 groups, 104 matches across the United States, Canada, and Mexico. Outright futures and group-stage lines available now; knockout matchups priced once groups conclude June 27.',
+    'wc.stat.days': 'Days to kickoff',
+    'wc.stat.teams': 'Teams',
+    'wc.stat.groups': 'Groups',
+    'wc.stat.matches': 'Matches',
+    'wc.live': 'Live',
+    'wc.outright': 'Outright winner',
+    'wc.outright.sub': 'Top six co-favorites featured · Tap any nation to add to slip',
+    'wc.groups': 'Group stage',
+    'wc.groups.sub': 'All 12 groups · Tap a team for group-winner odds or a match button for 1X2',
+    'wc.groupPrefix': 'Group',
+    'wc.favorite': 'Favorite',
+    'wc.toWinGroup': 'To win the group',
+    'wc.toWin': 'to win World Cup',
+    'wc.knockout': 'Knockout rounds',
+    'wc.knockout.sub': 'Round of 32 begins June 28 · Per-match lines published once group standings are final',
+    'wc.pending': 'Lines TBD after groups',
+    'wc.match': 'match',
+    'wc.matches': 'matches',
+    'wc.analytics': 'Tournament analytics',
+    'wc.analytics.sub': 'Pre-tournament bracket pathway, value bets, and Golden Boot market',
+    'wc.pathway': 'Bracket pathway',
+    'wc.topHalf': 'Top half',
+    'wc.botHalf': 'Bottom half',
+    'wc.pathwayNote': 'Top half champion meets bottom half champion in the July 19 final at MetLife. Spain and Argentina are drawn into opposite halves and cannot meet before the final.',
+    'wc.valuePicks': 'Value watch',
+    'wc.noValue': 'No standout value bets at current pricing.',
+    'wc.topScorer': 'Top scorer (Golden Boot)',
+    'wc.news': 'World Cup news',
+    'wc.news.sub': 'Curated reporting from the lead-up to kickoff',
+    'tab.wc': 'World Cup',
+    'wc.heroTitle': 'The road to <em>MetLife</em>.',
+    'wc.heroSub': '48 teams, 12 groups, 104 matches across the United States, Canada, and Mexico. Outrights and group winners pricing now; knockout brackets fill in as the tournament unfolds.',
+    'wc.heroTeams': '48',
+    'wc.heroTeamsLbl': 'Teams',
+    'wc.heroGroups': '12',
+    'wc.heroGroupsLbl': 'Groups',
+    'wc.heroMatches': '104',
+    'wc.heroMatchesLbl': 'Matches',
+    'wc.heroFinal': 'Jul 19',
+    'wc.heroFinalLbl': 'Final · MetLife',
+    'wc.outright': 'Outright Winner',
+    'wc.outrightSub': 'Tap any price to add to slip · Top contenders highlighted',
+    'wc.groups': 'Group Stage',
+    'wc.groupsSub': 'Group winners and individual match lines · Jun 11 — Jun 27',
+    'wc.knockout': 'Knockout Rounds',
+    'wc.knockoutSub': 'Matchups confirmed after group stage · Lines pending',
+    'wc.group': 'Group',
+    'wc.toWinGroup': 'Group Winner',
+    'wc.matches': 'Matches',
+    'wc.pending': 'Lines pending',
+    'wc.analytics': 'Tournament Analytics',
+    'wc.pathways': 'Bracket Pathways',
+    'wc.pathwaysSub': 'Spain and Argentina drawn into opposite halves of the bracket — they can only meet in the final',
+    'wc.topHalf': 'Top half (Spain pathway)',
+    'wc.bottomHalf': 'Bottom half (Argentina pathway)',
+    'wc.openerNote': 'Tournament opener',
     'auth.signIn': 'Sign in',
     'auth.signUp': 'Sign up',
     'auth.signOut': 'Sign out',
@@ -1753,6 +2287,65 @@ const I18N = {
     'disclaim': 'Herramienta de simulación · Sin apuestas reales · Las cuotas reflejan precios representativos de FanDuel y DraftKings · +18 · Juega con responsabilidad',
     'tag.injury': 'LESIÓN', 'tag.lineup': 'ALINEACIÓN', 'tag.transfer': 'FICHAJE',
     'tag.form': 'FORMA', 'tag.suspension': 'SANCIÓN', 'tag.tactics': 'TÁCTICA',
+    'tab.wc': 'Mundial',
+    'wc.title': 'Mundial <em>2026</em>.',
+    'wc.sub': '48 selecciones, 12 grupos, 104 partidos en Estados Unidos, Canadá y México. Apuestas a ganador y fase de grupos disponibles; las eliminatorias se valoran cuando concluyan los grupos el 27 de junio.',
+    'wc.stat.days': 'Días al inicio',
+    'wc.stat.teams': 'Selecciones',
+    'wc.stat.groups': 'Grupos',
+    'wc.stat.matches': 'Partidos',
+    'wc.live': 'En vivo',
+    'wc.outright': 'Ganador del torneo',
+    'wc.outright.sub': 'Los seis cofavoritos destacados · Toca cualquier selección para agregarla',
+    'wc.groups': 'Fase de grupos',
+    'wc.groups.sub': 'Los 12 grupos · Toca un equipo o un botón de partido para agregar a la apuesta',
+    'wc.groupPrefix': 'Grupo',
+    'wc.favorite': 'Favorito',
+    'wc.toWinGroup': 'Ganar el grupo',
+    'wc.toWin': 'gana el Mundial',
+    'wc.knockout': 'Eliminatorias',
+    'wc.knockout.sub': 'Dieciseisavos desde el 28 de junio · Líneas por partido tras los grupos',
+    'wc.pending': 'Líneas pendientes',
+    'wc.match': 'partido',
+    'wc.matches': 'partidos',
+    'wc.analytics': 'Analítica del torneo',
+    'wc.analytics.sub': 'Trayectoria del cuadro, apuestas de valor y mercado de máximo goleador',
+    'wc.pathway': 'Trayectoria del cuadro',
+    'wc.topHalf': 'Cuadro superior',
+    'wc.botHalf': 'Cuadro inferior',
+    'wc.pathwayNote': 'El campeón de cada mitad se enfrenta en la final del 19 de julio en MetLife. España y Argentina caen en mitades opuestas y solo podrían cruzarse en la final.',
+    'wc.valuePicks': 'Apuestas de valor',
+    'wc.noValue': 'Sin apuestas de valor destacadas al precio actual.',
+    'wc.topScorer': 'Máximo goleador (Bota de Oro)',
+    'wc.news': 'Noticias del Mundial',
+    'wc.news.sub': 'Reportes curados desde la previa al inicio',
+    'tab.wc': 'Mundial',
+    'wc.heroTitle': 'Camino a <em>MetLife</em>.',
+    'wc.heroSub': '48 selecciones, 12 grupos, 104 partidos en Estados Unidos, Canadá y México. Apuestas a campeón y ganadores de grupo ya disponibles; las eliminatorias se completan conforme avanza el torneo.',
+    'wc.heroTeams': '48',
+    'wc.heroTeamsLbl': 'Selecciones',
+    'wc.heroGroups': '12',
+    'wc.heroGroupsLbl': 'Grupos',
+    'wc.heroMatches': '104',
+    'wc.heroMatchesLbl': 'Partidos',
+    'wc.heroFinal': '19 Jul',
+    'wc.heroFinalLbl': 'Final · MetLife',
+    'wc.outright': 'Ganador del torneo',
+    'wc.outrightSub': 'Toca cualquier cuota para añadir al boleto · Favoritos destacados',
+    'wc.groups': 'Fase de Grupos',
+    'wc.groupsSub': 'Ganadores de grupo y partidos individuales · 11 jun — 27 jun',
+    'wc.knockout': 'Eliminatorias',
+    'wc.knockoutSub': 'Cruces confirmados tras la fase de grupos · Cuotas pendientes',
+    'wc.group': 'Grupo',
+    'wc.toWinGroup': 'Ganador de grupo',
+    'wc.matches': 'Partidos',
+    'wc.pending': 'Cuotas pendientes',
+    'wc.analytics': 'Análisis del torneo',
+    'wc.pathways': 'Caminos de cuadro',
+    'wc.pathwaysSub': 'España y Argentina caen en mitades opuestas del cuadro — solo pueden enfrentarse en la final',
+    'wc.topHalf': 'Mitad superior (camino de España)',
+    'wc.bottomHalf': 'Mitad inferior (camino de Argentina)',
+    'wc.openerNote': 'Partido inaugural',
     'auth.signIn': 'Iniciar sesión',
     'auth.signUp': 'Registrarse',
     'auth.signOut': 'Cerrar sesión',
@@ -1942,6 +2535,65 @@ const I18N = {
     'disclaim': 'Simulations-Tool · Keine echten Wetten · Quoten zeigen repräsentative Live-Preise von FanDuel und DraftKings · 18+ · Verantwortungsvoll spielen',
     'tag.injury': 'VERLETZUNG', 'tag.lineup': 'AUFSTELLUNG', 'tag.transfer': 'TRANSFER',
     'tag.form': 'FORM', 'tag.suspension': 'SPERRE', 'tag.tactics': 'TAKTIK',
+    'tab.wc': 'WM',
+    'wc.title': 'WM <em>2026</em>.',
+    'wc.sub': '48 Teams, 12 Gruppen, 104 Spiele in den USA, Kanada und Mexiko. Sieger- und Gruppenphasenwetten jetzt verfügbar; K.o.-Runden werden bepreist, sobald die Gruppen am 27. Juni abgeschlossen sind.',
+    'wc.stat.days': 'Tage bis Anpfiff',
+    'wc.stat.teams': 'Teams',
+    'wc.stat.groups': 'Gruppen',
+    'wc.stat.matches': 'Spiele',
+    'wc.live': 'Live',
+    'wc.outright': 'Turniersieger',
+    'wc.outright.sub': 'Top sechs Mitfavoriten · Tippe ein Team an, um es zum Wettschein hinzuzufügen',
+    'wc.groups': 'Gruppenphase',
+    'wc.groups.sub': 'Alle 12 Gruppen · Tippe ein Team oder einen Spiel-Button für 1X2',
+    'wc.groupPrefix': 'Gruppe',
+    'wc.favorite': 'Favorit',
+    'wc.toWinGroup': 'Gruppensieg',
+    'wc.toWin': 'gewinnt die WM',
+    'wc.knockout': 'K.o.-Runden',
+    'wc.knockout.sub': 'Sechzehntelfinale ab 28. Juni · Einzelquoten erscheinen nach Abschluss der Gruppen',
+    'wc.pending': 'Quoten folgen',
+    'wc.match': 'Spiel',
+    'wc.matches': 'Spiele',
+    'wc.analytics': 'Turnieranalyse',
+    'wc.analytics.sub': 'Bracket-Pfad, Value-Wetten und Torschützenkönig-Markt',
+    'wc.pathway': 'Bracket-Pfad',
+    'wc.topHalf': 'Obere Hälfte',
+    'wc.botHalf': 'Untere Hälfte',
+    'wc.pathwayNote': 'Die Sieger beider Hälften treffen sich im Finale am 19. Juli im MetLife. Spanien und Argentinien wurden in unterschiedliche Hälften gelost und können sich frühestens im Finale begegnen.',
+    'wc.valuePicks': 'Value-Watch',
+    'wc.noValue': 'Keine herausragenden Value-Wetten zum aktuellen Preis.',
+    'wc.topScorer': 'Torschützenkönig (Goldener Schuh)',
+    'wc.news': 'WM-News',
+    'wc.news.sub': 'Kuratierte Berichte aus dem Vorlauf',
+    'tab.wc': 'WM',
+    'wc.heroTitle': 'Weg zum <em>MetLife</em>.',
+    'wc.heroSub': '48 Teams, 12 Gruppen, 104 Spiele in den USA, Kanada und Mexiko. Quoten für Sieger und Gruppensieger jetzt; K.-o.-Runden werden mit Turnierverlauf ergänzt.',
+    'wc.heroTeams': '48',
+    'wc.heroTeamsLbl': 'Teams',
+    'wc.heroGroups': '12',
+    'wc.heroGroupsLbl': 'Gruppen',
+    'wc.heroMatches': '104',
+    'wc.heroMatchesLbl': 'Spiele',
+    'wc.heroFinal': '19. Jul',
+    'wc.heroFinalLbl': 'Finale · MetLife',
+    'wc.outright': 'Turniersieger',
+    'wc.outrightSub': 'Tippe auf einen Preis, um zum Tippschein hinzuzufügen · Top-Favoriten hervorgehoben',
+    'wc.groups': 'Gruppenphase',
+    'wc.groupsSub': 'Gruppensieger und Einzelspiele · 11. Jun — 27. Jun',
+    'wc.knockout': 'K.-o.-Runden',
+    'wc.knockoutSub': 'Paarungen nach Gruppenphase · Quoten ausstehend',
+    'wc.group': 'Gruppe',
+    'wc.toWinGroup': 'Gruppensieger',
+    'wc.matches': 'Spiele',
+    'wc.pending': 'Quoten ausstehend',
+    'wc.analytics': 'Turnier-Analyse',
+    'wc.pathways': 'Turnierbäume',
+    'wc.pathwaysSub': 'Spanien und Argentinien wurden in entgegengesetzte Hälften gelost — sie können sich nur im Finale treffen',
+    'wc.topHalf': 'Obere Hälfte (Spanien-Pfad)',
+    'wc.bottomHalf': 'Untere Hälfte (Argentinien-Pfad)',
+    'wc.openerNote': 'Eröffnungsspiel',
     'auth.signIn': 'Anmelden',
     'auth.signUp': 'Registrieren',
     'auth.signOut': 'Abmelden',
@@ -2131,6 +2783,65 @@ const I18N = {
     'disclaim': 'Strumento di simulazione · Nessuna scommessa reale · Le quote riflettono prezzi rappresentativi di FanDuel e DraftKings · +18 · Gioca responsabilmente',
     'tag.injury': 'INFORTUNIO', 'tag.lineup': 'FORMAZIONE', 'tag.transfer': 'MERCATO',
     'tag.form': 'FORMA', 'tag.suspension': 'SQUALIFICA', 'tag.tactics': 'TATTICA',
+    'tab.wc': 'Mondiale',
+    'wc.title': 'Mondiale <em>2026</em>.',
+    'wc.sub': '48 squadre, 12 gironi, 104 partite tra Stati Uniti, Canada e Messico. Mercati per vincitore e gironi disponibili; le eliminatorie vengono quotate al termine dei gironi il 27 giugno.',
+    'wc.stat.days': 'Giorni al via',
+    'wc.stat.teams': 'Squadre',
+    'wc.stat.groups': 'Gironi',
+    'wc.stat.matches': 'Partite',
+    'wc.live': 'Live',
+    'wc.outright': 'Vincitore torneo',
+    'wc.outright.sub': 'Le sei co-favorite in evidenza · Tocca una nazionale per aggiungerla',
+    'wc.groups': 'Fase a gironi',
+    'wc.groups.sub': 'Tutti i 12 gironi · Tocca una squadra o un pulsante 1X2 per aggiungere alla schedina',
+    'wc.groupPrefix': 'Girone',
+    'wc.favorite': 'Favorita',
+    'wc.toWinGroup': 'Vincere il girone',
+    'wc.toWin': 'vince il Mondiale',
+    'wc.knockout': 'Eliminazione diretta',
+    'wc.knockout.sub': 'Sedicesimi dal 28 giugno · Quote per singola partita dopo i gironi',
+    'wc.pending': 'Quote in arrivo',
+    'wc.match': 'partita',
+    'wc.matches': 'partite',
+    'wc.analytics': 'Analisi torneo',
+    'wc.analytics.sub': 'Percorso del tabellone, scommesse di valore e mercato capocannoniere',
+    'wc.pathway': 'Percorso del tabellone',
+    'wc.topHalf': 'Metà alta',
+    'wc.botHalf': 'Metà bassa',
+    'wc.pathwayNote': 'I vincitori delle due metà si affrontano in finale il 19 luglio al MetLife. Spagna e Argentina sono in metà opposte e potranno scontrarsi solo in finale.',
+    'wc.valuePicks': 'Value bet',
+    'wc.noValue': 'Nessuna scommessa di valore evidente ai prezzi attuali.',
+    'wc.topScorer': 'Capocannoniere (Scarpa d\'Oro)',
+    'wc.news': 'Notizie Mondiale',
+    'wc.news.sub': 'Approfondimenti curati alla vigilia del via',
+    'tab.wc': 'Mondiale',
+    'wc.heroTitle': 'Verso <em>MetLife</em>.',
+    'wc.heroSub': '48 squadre, 12 gironi, 104 partite tra USA, Canada e Messico. Quote vincente e vincitori di girone già disponibili; tabellone a eliminazione diretta si completa con il torneo.',
+    'wc.heroTeams': '48',
+    'wc.heroTeamsLbl': 'Squadre',
+    'wc.heroGroups': '12',
+    'wc.heroGroupsLbl': 'Gironi',
+    'wc.heroMatches': '104',
+    'wc.heroMatchesLbl': 'Partite',
+    'wc.heroFinal': '19 lug',
+    'wc.heroFinalLbl': 'Finale · MetLife',
+    'wc.outright': 'Vincente Mondiale',
+    'wc.outrightSub': 'Tocca una quota per aggiungere alla schedina · Favoriti evidenziati',
+    'wc.groups': 'Fase a Gironi',
+    'wc.groupsSub': 'Vincitori di girone e partite singole · 11 giu — 27 giu',
+    'wc.knockout': 'Fase a Eliminazione',
+    'wc.knockoutSub': 'Accoppiamenti dopo i gironi · Quote in attesa',
+    'wc.group': 'Girone',
+    'wc.toWinGroup': 'Vincitore girone',
+    'wc.matches': 'Partite',
+    'wc.pending': 'Quote in attesa',
+    'wc.analytics': 'Analisi torneo',
+    'wc.pathways': 'Cammini tabellone',
+    'wc.pathwaysSub': 'Spagna e Argentina nei due rami opposti — possono incontrarsi solo in finale',
+    'wc.topHalf': 'Metà alta (cammino Spagna)',
+    'wc.bottomHalf': 'Metà bassa (cammino Argentina)',
+    'wc.openerNote': 'Partita inaugurale',
     'auth.signIn': 'Accedi',
     'auth.signUp': 'Registrati',
     'auth.signOut': 'Esci',
@@ -2320,6 +3031,65 @@ const I18N = {
     'disclaim': "Outil de simulation · Aucun pari réel · Les cotes reflètent des prix représentatifs FanDuel et DraftKings · +18 · Jouez avec modération",
     'tag.injury': 'BLESSURE', 'tag.lineup': 'COMPO', 'tag.transfer': 'TRANSFERT',
     'tag.form': 'FORME', 'tag.suspension': 'SUSPENSION', 'tag.tactics': 'TACTIQUE',
+    'tab.wc': 'Coupe du Monde',
+    'wc.title': 'Coupe du Monde <em>2026</em>.',
+    'wc.sub': '48 équipes, 12 groupes, 104 matches aux États-Unis, au Canada et au Mexique. Paris vainqueur et phase de groupes disponibles; les rencontres à élimination directe seront cotées à la fin des groupes le 27 juin.',
+    'wc.stat.days': 'Jours avant le coup d\'envoi',
+    'wc.stat.teams': 'Équipes',
+    'wc.stat.groups': 'Groupes',
+    'wc.stat.matches': 'Matches',
+    'wc.live': 'En direct',
+    'wc.outright': 'Vainqueur du tournoi',
+    'wc.outright.sub': 'Les six co-favoris à la une · Touchez une équipe pour l\'ajouter au ticket',
+    'wc.groups': 'Phase de groupes',
+    'wc.groups.sub': 'Les 12 groupes · Touchez une équipe ou un bouton 1X2 pour ajouter au ticket',
+    'wc.groupPrefix': 'Groupe',
+    'wc.favorite': 'Favori',
+    'wc.toWinGroup': 'Vainqueur du groupe',
+    'wc.toWin': 'remporte la Coupe',
+    'wc.knockout': 'Phase à élimination directe',
+    'wc.knockout.sub': 'Seizièmes dès le 28 juin · Cotes match par match après la phase de groupes',
+    'wc.pending': 'Cotes à venir',
+    'wc.match': 'match',
+    'wc.matches': 'matches',
+    'wc.analytics': 'Analyse du tournoi',
+    'wc.analytics.sub': 'Trajectoire du tableau, paris de valeur et marché meilleur buteur',
+    'wc.pathway': 'Trajectoire du tableau',
+    'wc.topHalf': 'Moitié haute',
+    'wc.botHalf': 'Moitié basse',
+    'wc.pathwayNote': 'Les vainqueurs des deux moitiés s\'affrontent en finale le 19 juillet au MetLife. Espagne et Argentine sont tirées dans des moitiés opposées et ne peuvent se croiser qu\'en finale.',
+    'wc.valuePicks': 'Paris de valeur',
+    'wc.noValue': 'Pas de paris de valeur notables aux cotes actuelles.',
+    'wc.topScorer': 'Meilleur buteur (Soulier d\'Or)',
+    'wc.news': 'Actualités Coupe du Monde',
+    'wc.news.sub': 'Reportages sélectionnés à l\'approche du coup d\'envoi',
+    'tab.wc': 'Coupe du Monde',
+    'wc.heroTitle': 'Direction <em>MetLife</em>.',
+    'wc.heroSub': '48 équipes, 12 groupes, 104 matchs aux États-Unis, au Canada et au Mexique. Vainqueurs et premiers de groupe déjà cotés; les tableaux à élimination directe se remplissent au fil du tournoi.',
+    'wc.heroTeams': '48',
+    'wc.heroTeamsLbl': 'Équipes',
+    'wc.heroGroups': '12',
+    'wc.heroGroupsLbl': 'Groupes',
+    'wc.heroMatches': '104',
+    'wc.heroMatchesLbl': 'Matchs',
+    'wc.heroFinal': '19 juil',
+    'wc.heroFinalLbl': 'Finale · MetLife',
+    'wc.outright': 'Vainqueur du tournoi',
+    'wc.outrightSub': 'Touchez une cote pour ajouter au ticket · Favoris en avant',
+    'wc.groups': 'Phase de Groupes',
+    'wc.groupsSub': 'Vainqueurs de groupe et matchs individuels · 11 juin — 27 juin',
+    'wc.knockout': 'Éliminatoires',
+    'wc.knockoutSub': 'Confrontations après la phase de groupes · Cotes en attente',
+    'wc.group': 'Groupe',
+    'wc.toWinGroup': 'Vainqueur groupe',
+    'wc.matches': 'Matchs',
+    'wc.pending': 'Cotes en attente',
+    'wc.analytics': 'Analyse du tournoi',
+    'wc.pathways': 'Chemins du tableau',
+    'wc.pathwaysSub': 'Espagne et Argentine dans des moitiés opposées — elles ne peuvent se rencontrer qu’en finale',
+    'wc.topHalf': 'Moitié supérieure (chemin Espagne)',
+    'wc.bottomHalf': 'Moitié inférieure (chemin Argentine)',
+    'wc.openerNote': 'Match d’ouverture',
     'auth.signIn': 'Se connecter',
     'auth.signUp': 'S\'inscrire',
     'auth.signOut': 'Se déconnecter',
@@ -3054,6 +3824,306 @@ const TEAM_SPLITS = {
   'Paris FC':             { xgF:1.10, xgA:1.45, homeRec:'5-5-7', awayRec:'4-4-9' },
 };
 
+// ============= FIFA WORLD CUP 2026 =============
+// The 23rd FIFA Men's World Cup, hosted by the United States, Canada, and Mexico
+// from June 11 to July 19, 2026. First edition with 48 teams in 12 groups of 4.
+// Top 2 from each group plus the 8 best third-place teams advance to a new Round of 32.
+//
+// Final draw was held December 5, 2025 in Washington, DC. Qualification concluded
+// March 31, 2026 with the European and intercontinental playoffs. All 48 teams now set.
+//
+// Odds below reflect outright-winner futures and group-winner markets as reported by
+// major US sportsbooks (DraftKings, FanDuel, BetMGM) in early May 2026. Knockout-round
+// matchups are not priced individually until groups conclude — we surface those as
+// pending lines so users know data is forthcoming rather than missing.
+
+const WC_TOURNAMENT = {
+  name: 'FIFA World Cup 2026',
+  hosts: ['United States', 'Canada', 'Mexico'],
+  startDate: '2026-06-11',
+  endDate:   '2026-07-19',
+  openerUtc: '2026-06-11T23:00:00Z', // Mexico v South Africa, Estadio Azteca
+  finalUtc:  '2026-07-19T19:00:00Z', // MetLife Stadium, East Rutherford NJ
+  totalMatches: 104,
+};
+
+// Outright winner futures. Decimal odds approximated from American consensus across
+// DK / FanDuel / BetMGM in early May. We carry the American figure as the canonical
+// market line and derive decimal from it for the slip math (american→decimal: for +N,
+// decimal = N/100 + 1; for -N, decimal = 100/N + 1).
+//
+// Tiers are visual buckets — they don't affect math, just how the team is rendered:
+// 'fav' (top 6 contenders), 'contender' (next 8), 'dark' (mid-tier), 'longshot' (rest).
+const WC_OUTRIGHTS = [
+  // Top tier
+  { team:'France',       american:'+500',  tier:'fav' },
+  { team:'Spain',        american:'+500',  tier:'fav' },
+  { team:'England',      american:'+650',  tier:'fav' },
+  { team:'Brazil',       american:'+800',  tier:'fav' },
+  { team:'Argentina',    american:'+850',  tier:'fav' },
+  { team:'Portugal',     american:'+1100', tier:'fav' },
+  // Contenders
+  { team:'Germany',      american:'+1400', tier:'contender' },
+  { team:'Netherlands',  american:'+2000', tier:'contender' },
+  { team:'Belgium',      american:'+2500', tier:'contender' },
+  { team:'Italy',        american:'+2800', tier:'contender' }, // (did not qualify — kept for legacy reference)
+  { team:'Croatia',      american:'+3500', tier:'contender' },
+  { team:'Uruguay',      american:'+4000', tier:'contender' },
+  { team:'Colombia',     american:'+4000', tier:'contender' },
+  { team:'Norway',       american:'+5000', tier:'contender' },
+  // Dark horses
+  { team:'Morocco',      american:'+6000', tier:'dark' },
+  { team:'Switzerland',  american:'+7000', tier:'dark' },
+  { team:'Mexico',       american:'+8000', tier:'dark' },
+  { team:'Senegal',      american:'+8000', tier:'dark' },
+  { team:'United States',american:'+8000', tier:'dark' },
+  { team:'Japan',        american:'+10000', tier:'dark' },
+  { team:'Denmark',      american:'+10000', tier:'dark' },
+  { team:'Côte d\'Ivoire',american:'+15000',tier:'dark' },
+  { team:'Sweden',       american:'+15000',tier:'dark' },
+  { team:'Ecuador',      american:'+15000',tier:'dark' },
+  // Long shots
+  { team:'Australia',    american:'+25000',tier:'longshot' },
+  { team:'Canada',       american:'+25000',tier:'longshot' },
+  { team:'Egypt',        american:'+25000',tier:'longshot' },
+  { team:'South Korea',  american:'+25000',tier:'longshot' },
+  { team:'Iran',         american:'+30000',tier:'longshot' },
+  { team:'Algeria',      american:'+30000',tier:'longshot' },
+  { team:'Austria',      american:'+30000',tier:'longshot' },
+  { team:'Czechia',      american:'+30000',tier:'longshot' },
+  { team:'Ghana',        american:'+40000',tier:'longshot' },
+  { team:'Saudi Arabia', american:'+40000',tier:'longshot' },
+  { team:'Tunisia',      american:'+50000',tier:'longshot' },
+  { team:'Paraguay',     american:'+50000',tier:'longshot' },
+  { team:'Bosnia and Herzegovina',american:'+50000',tier:'longshot' },
+  { team:'New Zealand',  american:'+50000',tier:'longshot' },
+  { team:'Scotland',     american:'+75000',tier:'longshot' },
+  { team:'Cabo Verde',   american:'+100000',tier:'longshot' },
+  { team:'South Africa', american:'+100000',tier:'longshot' },
+  { team:'Iraq',         american:'+100000',tier:'longshot' },
+  { team:'Uzbekistan',   american:'+100000',tier:'longshot' },
+  { team:'Jordan',       american:'+150000',tier:'longshot' },
+  { team:'Panama',       american:'+150000',tier:'longshot' },
+  { team:'Congo DR',     american:'+150000',tier:'longshot' },
+  { team:'Curaçao',      american:'+200000',tier:'longshot' },
+  { team:'Haiti',        american:'+200000',tier:'longshot' },
+  { team:'Qatar',        american:'+200000',tier:'longshot' },
+];
+
+// 12 groups, fully drawn. Each group lists teams in seed order (Pot 1 → Pot 4).
+// Group-winner American odds reflect FanDuel pricing as of May 4-7. We also include
+// the three intra-group matches that determine the standings — these are the games
+// you can actually price right now, before knockout matchups are known.
+//
+// Match kickoffs use placeholder UTC dates within the group-stage window; the exact
+// schedule was published by FIFA but most kickoffs are between June 11 and June 27.
+const WC_GROUPS = [
+  { id:'A', teams:[
+      { team:'Mexico',       seed:1, groupWin:'-120' },
+      { team:'South Korea',  seed:2, groupWin:'+330' },
+      { team:'Czechia',      seed:3, groupWin:'+240' },
+      { team:'South Africa', seed:4, groupWin:'+750' },
+    ],
+    matches:[
+      { home:'Mexico',       away:'South Africa', kickoffUtc:'2026-06-11T23:00:00Z', venue:'Estadio Azteca, Mexico City', note:'Tournament opener' },
+      { home:'South Korea',  away:'Czechia',      kickoffUtc:'2026-06-17T19:00:00Z', venue:'BC Place, Vancouver' },
+      { home:'Mexico',       away:'Czechia',      kickoffUtc:'2026-06-18T22:00:00Z', venue:'Estadio Akron, Guadalajara' },
+    ],
+  },
+  { id:'B', teams:[
+      { team:'Canada',                 seed:1, groupWin:'+210' },
+      { team:'Switzerland',            seed:2, groupWin:'+100' },
+      { team:'Bosnia and Herzegovina', seed:3, groupWin:'+350' },
+      { team:'Qatar',                  seed:4, groupWin:'+2200' },
+    ],
+    matches:[
+      { home:'Canada',      away:'Bosnia and Herzegovina', kickoffUtc:'2026-06-12T20:00:00Z', venue:'BMO Field, Toronto', note:'Canada opener' },
+      { home:'Switzerland', away:'Qatar',                  kickoffUtc:'2026-06-13T16:00:00Z', venue:'Lumen Field, Seattle' },
+      { home:'Canada',      away:'Switzerland',            kickoffUtc:'2026-06-18T23:00:00Z', venue:'BC Place, Vancouver' },
+    ],
+  },
+  { id:'C', teams:[
+      { team:'Brazil',   seed:1, groupWin:'-280' },
+      { team:'Morocco',  seed:2, groupWin:'+450' },
+      { team:'Scotland', seed:3, groupWin:'+1000' },
+      { team:'Haiti',    seed:4, groupWin:'+10000' },
+    ],
+    matches:[
+      { home:'Brazil',   away:'Morocco',  kickoffUtc:'2026-06-14T23:00:00Z', venue:'SoFi Stadium, Los Angeles' },
+      { home:'Scotland', away:'Haiti',    kickoffUtc:'2026-06-15T19:00:00Z', venue:'Mercedes-Benz Stadium, Atlanta' },
+      { home:'Brazil',   away:'Scotland', kickoffUtc:'2026-06-20T22:00:00Z', venue:'NRG Stadium, Houston' },
+    ],
+  },
+  { id:'D', teams:[
+      { team:'United States', seed:1, groupWin:'-110' },
+      { team:'Paraguay',      seed:2, groupWin:'+320' },
+      { team:'Australia',     seed:3, groupWin:'+260' },
+      { team:'Türkiye',       seed:4, groupWin:'+500' },
+    ],
+    matches:[
+      { home:'United States', away:'Paraguay',   kickoffUtc:'2026-06-12T23:00:00Z', venue:'SoFi Stadium, Los Angeles', note:'USA opener' },
+      { home:'Australia',     away:'Türkiye',    kickoffUtc:'2026-06-13T22:00:00Z', venue:'Levi\'s Stadium, Santa Clara' },
+      { home:'United States', away:'Australia',  kickoffUtc:'2026-06-19T23:00:00Z', venue:'Lumen Field, Seattle' },
+    ],
+  },
+  { id:'E', teams:[
+      { team:'Germany',       seed:1, groupWin:'-350' },
+      { team:'Côte d\'Ivoire',seed:2, groupWin:'+550' },
+      { team:'Ecuador',       seed:3, groupWin:'+650' },
+      { team:'Curaçao',       seed:4, groupWin:'+5000' },
+    ],
+    matches:[
+      { home:'Germany',       away:'Curaçao',        kickoffUtc:'2026-06-15T19:00:00Z', venue:'Hard Rock Stadium, Miami', note:'Smallest nation in WC history makes debut' },
+      { home:'Côte d\'Ivoire',away:'Ecuador',        kickoffUtc:'2026-06-15T22:00:00Z', venue:'GEHA Field at Arrowhead, Kansas City' },
+      { home:'Germany',       away:'Côte d\'Ivoire', kickoffUtc:'2026-06-20T19:00:00Z', venue:'Lincoln Financial Field, Philadelphia' },
+    ],
+  },
+  { id:'F', teams:[
+      { team:'Netherlands', seed:1, groupWin:'-180' },
+      { team:'Japan',       seed:2, groupWin:'+400' },
+      { team:'Tunisia',     seed:3, groupWin:'+1200' },
+      { team:'Sweden',      seed:4, groupWin:'+450' },
+    ],
+    matches:[
+      { home:'Netherlands', away:'Sweden',      kickoffUtc:'2026-06-16T23:00:00Z', venue:'AT&T Stadium, Arlington' },
+      { home:'Japan',       away:'Tunisia',     kickoffUtc:'2026-06-16T19:00:00Z', venue:'Gillette Stadium, Foxborough' },
+      { home:'Netherlands', away:'Japan',       kickoffUtc:'2026-06-21T22:00:00Z', venue:'MetLife Stadium, East Rutherford' },
+    ],
+  },
+  { id:'G', teams:[
+      { team:'Belgium',     seed:1, groupWin:'-150' },
+      { team:'Egypt',       seed:2, groupWin:'+400' },
+      { team:'Iran',        seed:3, groupWin:'+600' },
+      { team:'New Zealand', seed:4, groupWin:'+1800' },
+    ],
+    matches:[
+      { home:'Belgium',     away:'Egypt',       kickoffUtc:'2026-06-17T22:00:00Z', venue:'Mercedes-Benz Stadium, Atlanta' },
+      { home:'Iran',        away:'New Zealand', kickoffUtc:'2026-06-17T19:00:00Z', venue:'Lincoln Financial Field, Philadelphia' },
+      { home:'Belgium',     away:'Iran',        kickoffUtc:'2026-06-22T23:00:00Z', venue:'NRG Stadium, Houston' },
+    ],
+  },
+  { id:'H', teams:[
+      { team:'Spain',        seed:1, groupWin:'-450' },
+      { team:'Uruguay',      seed:2, groupWin:'+370' },
+      { team:'Saudi Arabia', seed:3, groupWin:'+2500' },
+      { team:'Cabo Verde',   seed:4, groupWin:'+5000' },
+    ],
+    matches:[
+      { home:'Spain',        away:'Cabo Verde',    kickoffUtc:'2026-06-13T19:00:00Z', venue:'Levi\'s Stadium, Santa Clara' },
+      { home:'Uruguay',      away:'Saudi Arabia', kickoffUtc:'2026-06-13T22:00:00Z', venue:'GEHA Field at Arrowhead, Kansas City' },
+      { home:'Spain',        away:'Uruguay',       kickoffUtc:'2026-06-19T19:00:00Z', venue:'MetLife Stadium, East Rutherford' },
+    ],
+  },
+  { id:'I', teams:[
+      { team:'France',  seed:1, groupWin:'-400' },
+      { team:'Senegal', seed:2, groupWin:'+500' },
+      { team:'Norway',  seed:3, groupWin:'+350' },
+      { team:'Iraq',    seed:4, groupWin:'+5000' },
+    ],
+    matches:[
+      { home:'France',  away:'Senegal',   kickoffUtc:'2026-06-14T19:00:00Z', venue:'MetLife Stadium, East Rutherford', note:'France opener' },
+      { home:'Norway',  away:'Iraq',      kickoffUtc:'2026-06-14T22:00:00Z', venue:'Bank of America Stadium, Charlotte' },
+      { home:'France',  away:'Norway',    kickoffUtc:'2026-06-21T19:00:00Z', venue:'AT&T Stadium, Arlington' },
+    ],
+  },
+  { id:'J', teams:[
+      { team:'Argentina', seed:1, groupWin:'-500' },
+      { team:'Algeria',   seed:2, groupWin:'+550' },
+      { team:'Austria',   seed:3, groupWin:'+500' },
+      { team:'Jordan',    seed:4, groupWin:'+5000' },
+    ],
+    matches:[
+      { home:'Argentina', away:'Jordan',  kickoffUtc:'2026-06-15T19:00:00Z', venue:'Mercedes-Benz Superdome, New Orleans' },
+      { home:'Algeria',   away:'Austria', kickoffUtc:'2026-06-15T22:00:00Z', venue:'BMO Stadium, Los Angeles' },
+      { home:'Argentina', away:'Algeria', kickoffUtc:'2026-06-22T19:00:00Z', venue:'Mercedes-Benz Stadium, Atlanta' },
+    ],
+  },
+  { id:'K', teams:[
+      { team:'Portugal',   seed:1, groupWin:'-280' },
+      { team:'Colombia',   seed:2, groupWin:'+260' },
+      { team:'Uzbekistan', seed:3, groupWin:'+1500' },
+      { team:'Congo DR',   seed:4, groupWin:'+2000' },
+    ],
+    matches:[
+      { home:'Portugal',   away:'Uzbekistan',kickoffUtc:'2026-06-16T19:00:00Z', venue:'Lumen Field, Seattle' },
+      { home:'Colombia',   away:'Congo DR',  kickoffUtc:'2026-06-16T22:00:00Z', venue:'Hard Rock Stadium, Miami' },
+      { home:'Portugal',   away:'Colombia',  kickoffUtc:'2026-06-23T22:00:00Z', venue:'Lincoln Financial Field, Philadelphia' },
+    ],
+  },
+  { id:'L', teams:[
+      { team:'England', seed:1, groupWin:'-200' },
+      { team:'Croatia', seed:2, groupWin:'+350' },
+      { team:'Ghana',   seed:3, groupWin:'+450' },
+      { team:'Panama',  seed:4, groupWin:'+3000' },
+    ],
+    matches:[
+      { home:'England', away:'Croatia', kickoffUtc:'2026-06-13T19:00:00Z', venue:'AT&T Stadium, Arlington', note:'2018 semi-final rematch' },
+      { home:'Ghana',   away:'Panama',  kickoffUtc:'2026-06-13T22:00:00Z', venue:'BC Place, Vancouver' },
+      { home:'England', away:'Ghana',   kickoffUtc:'2026-06-19T22:00:00Z', venue:'Gillette Stadium, Foxborough' },
+    ],
+  },
+];
+
+// Knockout-round structure. Lines for individual knockout matches can't be priced
+// until the group stage concludes (we don't know who plays whom), so we display these
+// as pending. Once the bracket fills in, market data could be wired into per-match
+// pricing here.
+const WC_KNOCKOUT_ROUNDS = [
+  { id:'R32', label:'Round of 32', startDate:'2026-06-28', matchCount:16, status:'pending', desc:'Top 2 from each group + 8 best third-place teams' },
+  { id:'R16', label:'Round of 16', startDate:'2026-07-03', matchCount:8,  status:'pending', desc:'Winners of Round of 32' },
+  { id:'QF',  label:'Quarterfinals', startDate:'2026-07-09', matchCount:4, status:'pending', desc:'Winners of Round of 16' },
+  { id:'SF',  label:'Semifinals',  startDate:'2026-07-14', matchCount:2,  status:'pending', desc:'Winners of Quarterfinals — Spain and Argentina drawn into opposite pathways' },
+  { id:'3RD', label:'Third place', startDate:'2026-07-18', matchCount:1,  status:'pending', desc:'Losing semifinalists' },
+  { id:'F',   label:'Final',       startDate:'2026-07-19', matchCount:1,  status:'pending', desc:'MetLife Stadium, East Rutherford NJ' },
+];
+
+// Curated World Cup news — current as of mid-May 2026 reporting, ahead of June kickoff.
+// Each item carries the same {league, tag, team, title, body, impact, moveText} shape
+// the news tab already uses so it can be merged into the main news feed if desired.
+// We use 'wc' as a synthetic league code for these.
+const WC_NEWS_SEED = [
+  { tag:'form', team:'France',
+    title:'France move into co-favorites after Brazil friendly win',
+    body:'Didier Deschamps\' side beat Brazil 2-1 in a March international friendly, vaulting France into co-favorite status with Spain at +500 across major US sportsbooks. Kylian Mbappé led the line and is widely expected to be the tournament\'s focal scorer. The French open against Senegal at MetLife Stadium on June 14.',
+    impact:'up', moveText:'France outright firmed +600 → +500' },
+  { tag:'injury', team:'Spain',
+    title:'Yamal expected to recover in time for Spain opener',
+    body:'Lamine Yamal\'s hamstring injury at Barcelona has him out for the rest of the club season, but Spain medical staff expect him fit for the June 13 group opener against Cabo Verde. Spain remain co-favorites at +500 and are heavy favorites to win Group H at -450.',
+    impact:'down', moveText:'Spain group winner drifted -500 → -450' },
+  { tag:'form', team:'Argentina',
+    title:'Defending champions arrive aging but largely intact',
+    body:'Lionel Scaloni\'s Argentina enter as defending champions at +850 with much of the 2022 winning core still in place — Messi, Álvarez, Lautaro, Enzo Fernández. The concern is age across the spine. Argentina face Jordan in their opener and are -500 to win Group J.',
+    impact:'down', moveText:'Argentina outright drifted +700 → +850' },
+  { tag:'tactics', team:'United States',
+    title:'USA in Group D — Paraguay, Australia, Türkiye',
+    body:'Co-hosts USA open June 12 at SoFi Stadium against Paraguay. Mauricio Pochettino\'s side then travel to Lumen Field in Seattle to face Australia before closing the group against Türkiye, who beat Kosovo in the playoff to qualify. USA are -110 to win the group.',
+    impact:'up', moveText:'USA to advance from Group D firmed 1.45 → 1.30' },
+  { tag:'tactics', team:'Mexico',
+    title:'Mexico host opener against South Africa at Estadio Azteca',
+    body:'The 2026 World Cup begins June 11 at Estadio Azteca, Mexico City — the third time the venue has hosted a World Cup opening match. Mexico are -120 to win Group A and face South Korea and Czechia after the South Africa fixture. Javier Aguirre\'s side will lean on home support but the squad lacks star quality at the top of recent rankings.',
+    impact:'up', moveText:'Mexico group winner firmed -100 → -120' },
+  { tag:'tactics', team:'England',
+    title:'England drawn into Group L with Croatia — 2018 rematch in opener',
+    body:'Thomas Tuchel\'s England face Croatia in their group opener at AT&T Stadium on June 13 — a rematch of the 2018 World Cup semifinal which Croatia won 2-1. The group also includes Ghana and Panama. England are -200 to win the group and +650 in outright winner futures, third-best behind France and Spain.',
+    impact:'up', moveText:'England to win Group L firmed -180 → -200' },
+  { tag:'form', team:'Brazil',
+    title:'Brazil land in Group C with Morocco rematch first up',
+    body:'Brazil open against Morocco — a rematch of the 2022 World Cup quarter-final shock that Morocco won. Carlo Ancelotti\'s Seleção, in his first major tournament with the national side, are -280 to win Group C. Vinícius Jr, Raphinha, and Rodrygo lead the attack though the latter\'s ACL recovery has been a concern.',
+    impact:'down', moveText:'Brazil outright drifted +700 → +800' },
+  { tag:'form', team:'Norway',
+    title:'Norway in Group I with France — first WC appearance since 1998',
+    body:'Ståle Solbakken\'s Norway qualified for their first World Cup since 1998 after a dominant campaign that included a 7-goal rout of Italy. Erling Haaland is the centerpiece, with Martin Ødegaard captaining. They face France on June 21 in Arlington in what will likely decide the group runner-up spot.',
+    impact:'up', moveText:'Norway to advance firmed 1.85 → 1.65' },
+  { tag:'tactics', team:'Curaçao',
+    title:'Smallest nation in WC history to debut against Germany',
+    body:'Curaçao, with a population of roughly 155,000, becomes the smallest country ever to qualify for a World Cup. They open Group E against Germany at Hard Rock Stadium in Miami on June 15. The Dutch Caribbean side is +5000 to win the group and a +200000 longshot in outright futures.',
+    impact:'down', moveText:'Curaçao to advance out at 8.50' },
+  { tag:'form', team:'Portugal',
+    title:'Portugal-Colombia headline Group K',
+    body:'Cristiano Ronaldo, almost certainly in his final World Cup, leads a Portugal side that opens against Uzbekistan in Seattle before the marquee Group K fixture against Colombia at Lincoln Financial Field on June 23. Portugal are -280 to win the group and +1100 in outright futures, behind only the top six.',
+    impact:'up', moveText:'Portugal outright firmed +1200 → +1100' },
+];
+
 // Per-player profile defaults by role. Used to drive shots/tackles/cards/assist
 // probabilities for the expanded player props market. The two scorers per team
 // listed in TEAM_SCORERS are typed here as 'striker' or 'attacker'; midfielders
@@ -3227,6 +4297,37 @@ const REAL_FIXTURES = [
   { league:'ligue1', home:'Monaco',       away:'Nice',            kickoffUtc:'2026-05-09T19:00:00Z', homeStrength:1.30, awayStrength:0.95 },
   { league:'ligue1', home:'Lille',        away:'Lens',            kickoffUtc:'2026-05-10T13:00:00Z', homeStrength:1.10, awayStrength:1.00 },
   { league:'ligue1', home:'Strasbourg',   away:'Toulouse',        kickoffUtc:'2026-05-09T17:00:00Z', homeStrength:0.95, awayStrength:0.80 },
+
+  // ===== ROUND 3 — May 16-17, 2026 weekend =====
+  // Premier League — Matchweek 37
+  { league:'epl', home:'Arsenal',         away:'Newcastle',       kickoffUtc:'2026-05-17T15:30:00Z', homeStrength:1.55, awayStrength:1.20 },
+  { league:'epl', home:'Manchester City', away:'West Ham',        kickoffUtc:'2026-05-16T14:00:00Z', homeStrength:1.55, awayStrength:0.85 },
+  { league:'epl', home:'Brighton',        away:'Liverpool',       kickoffUtc:'2026-05-16T16:30:00Z', homeStrength:1.00, awayStrength:1.30 },
+  { league:'epl', home:'Chelsea',         away:'Crystal Palace',  kickoffUtc:'2026-05-17T13:00:00Z', homeStrength:1.10, awayStrength:0.85 },
+
+  // La Liga — Jornada 36
+  { league:'laliga', home:'Barcelona',    away:'Villarreal',      kickoffUtc:'2026-05-17T19:00:00Z', homeStrength:1.55, awayStrength:1.00 },
+  { league:'laliga', home:'Real Madrid',  away:'Mallorca',        kickoffUtc:'2026-05-16T16:15:00Z', homeStrength:1.35, awayStrength:0.85 },
+  { league:'laliga', home:'Atletico Madrid',away:'Real Sociedad', kickoffUtc:'2026-05-16T18:30:00Z', homeStrength:1.30, awayStrength:1.05 },
+  { league:'laliga', home:'Sevilla',      away:'Valencia',        kickoffUtc:'2026-05-17T14:00:00Z', homeStrength:0.95, awayStrength:0.85 },
+
+  // Bundesliga — Matchday 34 (final round)
+  { league:'bundes', home:'Bayern Munich',       away:'Mainz',             kickoffUtc:'2026-05-16T13:30:00Z', homeStrength:1.65, awayStrength:0.75 },
+  { league:'bundes', home:'Bayer Leverkusen',    away:'Borussia Dortmund', kickoffUtc:'2026-05-16T13:30:00Z', homeStrength:1.30, awayStrength:1.30 },
+  { league:'bundes', home:'RB Leipzig',          away:'Stuttgart',         kickoffUtc:'2026-05-16T13:30:00Z', homeStrength:1.20, awayStrength:1.15 },
+  { league:'bundes', home:'Hoffenheim',          away:'Eintracht Frankfurt',kickoffUtc:'2026-05-16T13:30:00Z', homeStrength:0.85, awayStrength:1.20 },
+
+  // Serie A — Giornata 37
+  { league:'seriea', home:'Inter Milan',  away:'Lazio',           kickoffUtc:'2026-05-17T18:45:00Z', homeStrength:1.55, awayStrength:0.95 },
+  { league:'seriea', home:'Juventus',     away:'Udinese',         kickoffUtc:'2026-05-17T16:00:00Z', homeStrength:1.20, awayStrength:0.75 },
+  { league:'seriea', home:'AC Milan',     away:'Atalanta',        kickoffUtc:'2026-05-16T18:45:00Z', homeStrength:1.30, awayStrength:1.20 },
+  { league:'seriea', home:'Napoli',       away:'Genoa',           kickoffUtc:'2026-05-17T13:00:00Z', homeStrength:1.35, awayStrength:0.75 },
+
+  // Ligue 1 — Journée 34
+  { league:'ligue1', home:'Paris SG',     away:'Auxerre',         kickoffUtc:'2026-05-16T19:00:00Z', homeStrength:1.70, awayStrength:0.65 },
+  { league:'ligue1', home:'Marseille',    away:'Rennes',          kickoffUtc:'2026-05-17T18:45:00Z', homeStrength:1.30, awayStrength:0.95 },
+  { league:'ligue1', home:'Monaco',       away:'Lyon',            kickoffUtc:'2026-05-17T15:00:00Z', homeStrength:1.30, awayStrength:1.05 },
+  { league:'ligue1', home:'Nice',         away:'Lille',           kickoffUtc:'2026-05-16T17:00:00Z', homeStrength:0.95, awayStrength:1.10 },
 ];
 
 // Format a UTC ISO datetime as a kickoff display string in the user's local timezone.
@@ -4251,12 +5352,12 @@ function renderMatches() {
 }
 
 // ============= SLIP =============
-// Mobile drawer behavior — under 1100px the slip is fixed at the bottom
-// in collapsed state; when a leg is added it pops up and stays open until
-// the user taps the header to dismiss.
+// Universal slip drawer — the slip is always a fixed-position bottom drawer at
+// every width since it now lives outside any tab. It starts collapsed to a 56px
+// header strip, pops open when a leg is added, and can be toggled by tapping
+// the header. It stays open until the user collapses it or saves/clears the slip.
 function isMobileSlip() { return window.innerWidth <= 1100; }
 function popSlipDrawer() {
-  if (!isMobileSlip()) return;
   const col = document.getElementById('slip-col');
   if (!col) return;
   col.classList.add('open');
@@ -4267,17 +5368,13 @@ function popSlipDrawer() {
   col.classList.add('pop');
 }
 window.toggleSlipDrawer = function () {
-  if (!isMobileSlip()) return;
   const col = document.getElementById('slip-col');
-  col.classList.toggle('open');
+  if (col) col.classList.toggle('open');
 };
 window.addEventListener('resize', () => {
-  // when widening past breakpoint, drop the mobile-open class so the
-  // sticky desktop sidebar is unaffected by leftover transforms
-  if (!isMobileSlip()) {
-    const col = document.getElementById('slip-col');
-    if (col) col.classList.remove('open', 'pop');
-  }
+  // The drawer is fixed at all widths now, so no cleanup is needed on resize.
+  // The previous logic stripped 'open' when widening past 1100px because the
+  // slip used to switch to a sticky desktop sidebar; now it stays a drawer.
 });
 
 function toggleSlipLeg(match, marketDef, opt) {
@@ -4331,7 +5428,12 @@ function renderSlip() {
   const legHtml = state.slip.map((leg, i) => {
     const dec = getLegDisplayOdds(leg);
     const mktDef = MARKETS_DEF.find(m => m.key === leg.marketKey);
-    const mktName = mktDef ? t(mktDef.labelKey) : leg.marketKey;
+    // World Cup outright legs use a synthetic marketKey 'wc-outright' that isn't in
+    // MARKETS_DEF; fall back to a friendly label so the slip reads naturally.
+    let mktName;
+    if (mktDef) mktName = t(mktDef.labelKey);
+    else if (leg.marketKey === 'wc-outright') mktName = t('wc.outright');
+    else mktName = leg.marketKey;
     const american = americanFromDecimal(dec);
     const americanClass = american.startsWith('+') ? 'underdog' : 'favorite';
     return `
@@ -5643,7 +6745,388 @@ window.manualRefreshNews = function () { refreshNewsFeed({ manual: true }); };
   });
 })();
 
-// ============= ANALYTICS =============
+// ============= WORLD CUP =============
+// Convert American odds string ("+500", "-180") to a decimal for the slip math.
+function wcAmericanToDecimal(am) {
+  const n = parseFloat(am);
+  if (isNaN(n)) return 1.0;
+  return n > 0 ? (n / 100) + 1 : (100 / Math.abs(n)) + 1;
+}
+
+// Format a kickoff time for display in the user's local time zone.
+function wcKickoffLabel(utc) {
+  try {
+    const d = new Date(utc);
+    return d.toLocaleString(currentLang, {
+      month: 'short', day: 'numeric',
+      hour: 'numeric', minute: '2-digit',
+    });
+  } catch (e) { return utc; }
+}
+
+// Synthesize 1X2 probabilities for a group-stage match from the two teams' group-winner
+// American odds. A team with shorter group-winner odds gets a higher implied win share.
+// Not perfectly calibrated, but produces realistic moneylines pre-tournament.
+function wcMatchProbs(homeGroupWin, awayGroupWin) {
+  const hd = wcAmericanToDecimal(homeGroupWin);
+  const ad = wcAmericanToDecimal(awayGroupWin);
+  // Lower decimal odds = stronger team. Convert to relative strength.
+  const hp = 1 / hd, ap = 1 / ad;
+  const totalP = hp + ap;
+  const homeRaw = hp / totalP;
+  const awayRaw = ap / totalP;
+  // Allocate ~25% to draw for tight matches, less for blowouts
+  const closeness = 1 - Math.abs(homeRaw - awayRaw);
+  const draw = 0.18 + closeness * 0.12;
+  const remaining = 1 - draw;
+  return { H: homeRaw * remaining, D: draw, A: awayRaw * remaining };
+}
+
+// Add a WC outright leg to the slip — synthesized as a single-leg market.
+window.addWcOutright = function (team, american) {
+  try {
+    const dec = wcAmericanToDecimal(american);
+    // Make per-book odds — duplicate the same number across books since this is a
+    // single market line (no per-book variation for futures).
+    const odds = {};
+    BOOKS.forEach(b => { odds[b.id] = dec; });
+    const leg = {
+      matchId: 'wc-outright-' + team.toLowerCase().replace(/[^a-z]/g, ''),
+      matchLabel: 'World Cup 2026 — Outright winner',
+      marketKey: 'wc-outright',
+      key: team.toLowerCase().replace(/[^a-z]/g, ''),
+      tpl: { kind: 'wcOutright', team: team },
+      odds: odds,
+    };
+    // Don't add duplicates
+    if (state.slip.some(l => l.matchId === leg.matchId)) return;
+    state.slip.push(leg);
+    // Render slip in a try/catch so any downstream error doesn't swallow the click.
+    try { renderSlip(); } catch (err) { console.warn('renderSlip failed for WC outright:', err); }
+    // Pop the slip drawer on mobile so the user sees their pick was added
+    try { popSlipDrawer(); } catch (err) {}
+    // Visual feedback on the clicked element — pulse the chartreuse accent briefly.
+    try {
+      const evt = window.event;
+      if (evt && evt.currentTarget) {
+        const card = evt.currentTarget;
+        const orig = card.style.background;
+        card.style.background = 'rgba(212,255,60,.25)';
+        setTimeout(() => { card.style.background = orig; }, 250);
+      }
+    } catch (err) {}
+  } catch (e) {
+    console.error('addWcOutright crashed:', e);
+  }
+};
+
+// Add a WC group-stage match leg.
+window.addWcMatchLeg = function (groupId, homeIdx, awayIdx, side) {
+  try {
+    const group = WC_GROUPS.find(g => g.id === groupId);
+    if (!group) return;
+    const home = group.teams[homeIdx];
+    const away = group.teams[awayIdx];
+    const probs = wcMatchProbs(home.groupWin, away.groupWin);
+    // Apply ~4% book hold
+    const hold = 1.04;
+    const dec = 1 / (probs[side] * hold);
+    const odds = {};
+    BOOKS.forEach(b => {
+      // Slight per-book jitter to mimic real shopping
+      const jitter = 1 + ((b.id.charCodeAt(0) % 7) - 3) * 0.005;
+      odds[b.id] = +(dec * jitter).toFixed(2);
+    });
+    const team = side === 'H' ? home.team : side === 'A' ? away.team : 'Draw';
+    const tpl = side === 'D'
+      ? { kind: 'i18n', i18n: 'opt.draw' }
+      : { kind: 'team', team: team };
+    const leg = {
+      matchId: 'wc-' + groupId + '-' + homeIdx + 'v' + awayIdx,
+      matchLabel: home.team + ' v ' + away.team + ' (Group ' + groupId + ')',
+      marketKey: 'result',
+      key: side,
+      tpl: tpl,
+      odds: odds,
+    };
+    if (state.slip.some(l => l.matchId === leg.matchId && l.key === side)) return;
+    // Remove any existing leg from this same match (only one side per match)
+    state.slip = state.slip.filter(l => l.matchId !== leg.matchId);
+    state.slip.push(leg);
+    try { renderSlip(); } catch (err) { console.warn('renderSlip failed for WC match leg:', err); }
+    try { popSlipDrawer(); } catch (err) {}
+    try {
+      const evt = window.event;
+      if (evt && evt.currentTarget) {
+        const btn = evt.currentTarget;
+        const orig = btn.style.background;
+        btn.style.background = 'rgba(212,255,60,.35)';
+        setTimeout(() => { btn.style.background = orig; }, 250);
+      }
+    } catch (err) {}
+  } catch (e) {
+    console.error('addWcMatchLeg crashed:', e);
+  }
+};
+
+// Build a value-bet shortlist: outright teams whose implied probability looks
+// generous relative to their FIFA ranking tier. Pure heuristic for the analytics card.
+function wcValuePicks() {
+  // Implied probability ranges roughly: top 6 favorites ~10-20%, contenders 3-8%, dark ~1-3%
+  // We highlight teams where the implied probability is unusually high or low for their tier.
+  const picks = [];
+  WC_OUTRIGHTS.forEach(o => {
+    const dec = wcAmericanToDecimal(o.american);
+    const impl = (1 / dec) * 100;
+    let delta = 0, label = '';
+    if (o.tier === 'fav' && impl > 12 && o.team !== 'France' && o.team !== 'Spain') {
+      delta = +((impl - 11).toFixed(1));
+      label = 'Elite tier value';
+    }
+    if (o.tier === 'contender' && impl > 3.5) {
+      delta = +((impl - 3).toFixed(1));
+      label = 'Contender value';
+    }
+    if (o.team === 'Curaçao' || o.team === 'Cabo Verde' || o.team === 'Uzbekistan') {
+      delta = -1;
+      label = 'Debut nation — outright off the board';
+    }
+    if (delta !== 0) picks.push({ team: o.team, impl, delta, label, tier: o.tier });
+  });
+  return picks.sort((a, b) => b.delta - a.delta).slice(0, 8);
+}
+
+function renderWorldCup() {
+  const el = document.getElementById('wc-body');
+  if (!el) return;
+
+  // Days-to-kickoff calculation
+  const opener = new Date(WC_TOURNAMENT.openerUtc).getTime();
+  const now = Date.now();
+  const days = Math.max(0, Math.ceil((opener - now) / (24 * 60 * 60 * 1000)));
+  const daysEl = document.getElementById('wc-stat-days');
+  if (daysEl) daysEl.textContent = days > 0 ? days : t('wc.live');
+
+  // ===== OUTRIGHTS =====
+  const top6 = WC_OUTRIGHTS.filter(o => o.tier === 'fav').slice(0, 6);
+  const rest = WC_OUTRIGHTS.filter(o => o.tier !== 'fav');
+  const outrightsHtml = `
+    <section class="wc-section">
+      <h2>${t('wc.outright')}</h2>
+      <div class="wc-sub">${t('wc.outright.sub')}</div>
+      <div class="wc-featured">
+        ${top6.map(o => `
+          <div class="wc-fav-card" onclick="addWcOutright('${o.team.replace(/'/g, "\\'")}', '${o.american}')">
+            ${crest(o.team, 32)}
+            <div class="wc-team">${o.team}</div>
+            <div class="wc-odds">${o.american}</div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="wc-outright-list">
+        ${rest.map(o => `
+          <div class="wc-outright-row tier-${o.tier}" onclick="addWcOutright('${o.team.replace(/'/g, "\\'")}', '${o.american}')">
+            <span class="wc-team-name">${crest(o.team, 18)} ${o.team}</span>
+            <span class="wc-odds">${o.american}</span>
+          </div>
+        `).join('')}
+      </div>
+    </section>
+  `;
+
+  // ===== GROUPS =====
+  const groupsHtml = `
+    <section class="wc-section">
+      <h2>${t('wc.groups')}</h2>
+      <div class="wc-sub">${t('wc.groups.sub')}</div>
+      <div class="wc-groups-grid">
+        ${WC_GROUPS.map(g => {
+          const fav = g.teams.reduce((best, tt) => {
+            const dec = wcAmericanToDecimal(tt.groupWin);
+            const bestDec = best ? wcAmericanToDecimal(best.groupWin) : 999;
+            return dec < bestDec ? tt : best;
+          }, null);
+          return `
+            <div class="wc-group-card">
+              <div class="wc-group-head">
+                <span class="wc-group-id">${t('wc.groupPrefix')} ${g.id}</span>
+                <span class="wc-group-fav">${t('wc.favorite')}: <b>${fav.team}</b></span>
+              </div>
+              <div class="wc-group-teams">
+                ${g.teams.map(tt => `
+                  <div class="wc-group-team" onclick="addWcOutright('${tt.team.replace(/'/g, "\\'")}', '${tt.groupWin}')" title="${t('wc.toWinGroup')}">
+                    <span class="name">${crest(tt.team, 20)} ${tt.team}</span>
+                    <span class="odds">${tt.groupWin}</span>
+                  </div>
+                `).join('')}
+              </div>
+              <div class="wc-group-matches">
+                ${g.matches.map(m => {
+                  const hi = g.teams.findIndex(x => x.team === m.home);
+                  const ai = g.teams.findIndex(x => x.team === m.away);
+                  const probs = wcMatchProbs(g.teams[hi].groupWin, g.teams[ai].groupWin);
+                  // Convert each side's true probability to American odds with the
+                  // existing helper. The +/- prefix makes it instantly readable to
+                  // American bettors; decimal would force them to mentally convert.
+                  const dh = 1 / (probs.H * 1.04);
+                  const dd = 1 / (probs.D * 1.04);
+                  const da = 1 / (probs.A * 1.04);
+                  const ah = americanFromDecimal(dh);
+                  const ad = americanFromDecimal(dd);
+                  const aa = americanFromDecimal(da);
+                  // Color-code the prices: favorites (negative American) in white,
+                  // underdogs (positive American) in chartreuse — same convention as the league cards.
+                  const colH = ah.startsWith('-') ? 'var(--ink)' : 'var(--accent)';
+                  const colD = ad.startsWith('-') ? 'var(--ink)' : 'var(--accent)';
+                  const colA = aa.startsWith('-') ? 'var(--ink)' : 'var(--accent)';
+                  return `
+                    <div class="wc-group-match">
+                      <div class="wc-match-teams">${m.home} v ${m.away}${m.note ? `<span class="wc-match-note">${m.note}</span>` : ''}</div>
+                      <div class="wc-match-meta">${wcKickoffLabel(m.kickoffUtc)} · ${m.venue}</div>
+                      <div style="display:flex; gap:4px; margin-top:6px;">
+                        <button onclick="addWcMatchLeg('${g.id}', ${hi}, ${ai}, 'H')" style="flex:1; padding:6px 4px; background:var(--bg-2); border:1px solid var(--line); color:${colH}; font-family:var(--mono); font-size:10px; cursor:pointer; border-radius:3px; display:flex; flex-direction:column; gap:2px;"><span style="color:var(--ink-3); font-size:9px;">${m.home.slice(0,3).toUpperCase()}</span><span style="font-weight:700;">${ah}</span></button>
+                        <button onclick="addWcMatchLeg('${g.id}', ${hi}, ${ai}, 'D')" style="flex:0 0 56px; padding:6px 4px; background:var(--bg-2); border:1px solid var(--line); color:${colD}; font-family:var(--mono); font-size:10px; cursor:pointer; border-radius:3px; display:flex; flex-direction:column; gap:2px;"><span style="color:var(--ink-3); font-size:9px;">X</span><span style="font-weight:700;">${ad}</span></button>
+                        <button onclick="addWcMatchLeg('${g.id}', ${hi}, ${ai}, 'A')" style="flex:1; padding:6px 4px; background:var(--bg-2); border:1px solid var(--line); color:${colA}; font-family:var(--mono); font-size:10px; cursor:pointer; border-radius:3px; display:flex; flex-direction:column; gap:2px;"><span style="color:var(--ink-3); font-size:9px;">${m.away.slice(0,3).toUpperCase()}</span><span style="font-weight:700;">${aa}</span></button>
+                      </div>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+          `;
+        }).join('')}
+      </div>
+    </section>
+  `;
+
+  // ===== KNOCKOUTS =====
+  const knockoutsHtml = `
+    <section class="wc-section">
+      <h2>${t('wc.knockout')}</h2>
+      <div class="wc-sub">${t('wc.knockout.sub')}</div>
+      <div class="wc-knockouts">
+        ${WC_KNOCKOUT_ROUNDS.map(r => `
+          <div class="wc-knockout-card">
+            <div class="wc-ko-label">${r.label}</div>
+            <div class="wc-ko-date">${r.startDate}</div>
+            <div class="wc-ko-pending">${t('wc.pending')}</div>
+            <div class="wc-ko-count">${r.matchCount} ${r.matchCount === 1 ? t('wc.match') : t('wc.matches')}</div>
+          </div>
+        `).join('')}
+      </div>
+    </section>
+  `;
+
+  // ===== ANALYTICS =====
+  // Bracket pathway: per reporting, Spain and Argentina are drawn into opposite halves
+  // of the bracket — Spain (Group H) sits in the top half, Argentina (Group J) in the bottom.
+  const topHalfGroups = ['A','B','C','D','E','F'];
+  const botHalfGroups = ['G','H','I','J','K','L'];
+  const valuePicks = wcValuePicks();
+  const analyticsHtml = `
+    <section class="wc-section">
+      <h2>${t('wc.analytics')}</h2>
+      <div class="wc-sub">${t('wc.analytics.sub')}</div>
+      <div class="wc-analytics">
+        <div class="wc-ana-block">
+          <h3>${t('wc.pathway')}</h3>
+          <div class="wc-pathway">
+            <div class="wc-path-side">
+              <h4>${t('wc.topHalf')}</h4>
+              <ul>
+                ${topHalfGroups.map(gid => {
+                  const g = WC_GROUPS.find(x => x.id === gid);
+                  const fav = g.teams.reduce((b, tt) => !b || wcAmericanToDecimal(tt.groupWin) < wcAmericanToDecimal(b.groupWin) ? tt : b, null);
+                  return `<li>Group ${gid}: ${fav.team}</li>`;
+                }).join('')}
+              </ul>
+            </div>
+            <div class="wc-path-side">
+              <h4>${t('wc.botHalf')}</h4>
+              <ul>
+                ${botHalfGroups.map(gid => {
+                  const g = WC_GROUPS.find(x => x.id === gid);
+                  const fav = g.teams.reduce((b, tt) => !b || wcAmericanToDecimal(tt.groupWin) < wcAmericanToDecimal(b.groupWin) ? tt : b, null);
+                  return `<li>Group ${gid}: ${fav.team}</li>`;
+                }).join('')}
+              </ul>
+            </div>
+          </div>
+          <div style="margin-top:10px; font-family:var(--mono); font-size:9px; color:var(--ink-3); line-height:1.5;">
+            ${t('wc.pathwayNote')}
+          </div>
+        </div>
+        <div class="wc-ana-block">
+          <h3>${t('wc.valuePicks')}</h3>
+          ${valuePicks.length === 0
+            ? `<div style="font-family:var(--mono); font-size:10px; color:var(--ink-3); padding:14px 0;">${t('wc.noValue')}</div>`
+            : valuePicks.map(p => `
+                <div class="wc-value-row">
+                  <span class="team"><span class="wc-tier-badge ${p.tier}"></span>${p.team}</span>
+                  <span class="delta ${p.delta < 0 ? 'neg' : ''}">${p.impl.toFixed(1)}% · ${p.label}</span>
+                </div>
+              `).join('')
+          }
+        </div>
+        <div class="wc-ana-block" style="grid-column: 1 / -1;">
+          <h3>${t('wc.topScorer')}</h3>
+          <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:10px;">
+            ${[
+              { player:'Kylian Mbappé',    team:'France',    odds:'+600' },
+              { player:'Harry Kane',       team:'England',   odds:'+700' },
+              { player:'Lionel Messi',     team:'Argentina', odds:'+1200' },
+              { player:'Erling Haaland',   team:'Norway',    odds:'+1400' },
+              { player:'Lamine Yamal',     team:'Spain',     odds:'+1800' },
+              { player:'Ousmane Dembélé',  team:'France',    odds:'+2000' },
+              { player:'Cristiano Ronaldo',team:'Portugal',  odds:'+2000' },
+              { player:'Vinícius Jr.',     team:'Brazil',    odds:'+2500' },
+            ].map(s => `
+              <div style="background:var(--bg-2); border:1px solid var(--line); padding:10px; border-radius:3px;">
+                <div style="font-family:var(--serif); font-weight:600; font-size:12px; color:var(--ink);">${s.player}</div>
+                <div style="font-family:var(--mono); font-size:9px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.1em; margin:2px 0 6px;">${s.team}</div>
+                <div style="font-family:var(--mono); font-weight:700; font-size:13px; color:var(--accent);">${s.odds}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+    </section>
+  `;
+
+  // ===== WC NEWS =====
+  const newsHtml = `
+    <section class="wc-section">
+      <h2>${t('wc.news')}</h2>
+      <div class="wc-sub">${t('wc.news.sub')}</div>
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        ${WC_NEWS_SEED.slice(0, 8).map(n => `
+          <article class="news-item" style="padding:16px;">
+            <div class="news-meta">
+              <span class="news-tag tag-${n.tag}">${t('tag.' + n.tag)}</span>
+              <span style="display:inline-flex; align-items:center; gap:6px;">${crest(n.team, 16)} ${n.team}</span>
+            </div>
+            <div class="news-title" style="font-size:14px;">${n.title}</div>
+            <div class="news-body" style="font-size:12px;">${n.body}</div>
+            <div class="news-impact">
+              <span>${t('news.impact')}</span>
+              <span class="impact-arrow ${n.impact === 'down' ? 'down' : ''}">${n.impact === 'up' ? '▲' : '▼'} ${n.moveText}</span>
+            </div>
+          </article>
+        `).join('')}
+      </div>
+    </section>
+  `;
+
+  el.innerHTML = outrightsHtml + groupsHtml + knockoutsHtml + newsHtml + analyticsHtml;
+}
+
+// Extend optName() to handle wcOutright templates
+const __origOptName = optName;
+optName = function (tpl) {
+  if (tpl && tpl.kind === 'wcOutright') return tpl.team + ' ' + t('wc.toWin');
+  return __origOptName(tpl);
+};
+
 function renderAnalytics() {
   // top stats
   const totalMatches = state.matches.length;
@@ -5705,9 +7188,10 @@ function renderAnalytics() {
 function setTab(t) {
   state.tab = t;
   document.querySelectorAll('#tabs button').forEach(b => b.classList.toggle('active', b.dataset.tab === t));
-  ['builder','news','analytics','my'].forEach(name => {
+  ['builder','wc','news','analytics','my'].forEach(name => {
     document.getElementById('tab-' + name).classList.toggle('hidden', name !== t);
   });
+  if (t === 'wc') renderWorldCup();
   if (t === 'analytics') renderAnalytics();
   if (t === 'my') renderMySlips();
   if (t === 'news') renderNews();
@@ -5753,11 +7237,10 @@ document.getElementById('lang').addEventListener('change', e => {
   renderNews();       // movers + suspensions + weather all live in here
   refreshAuthButton(); // auth button label needs re-translation when not signed in
   if (authState.modalOpen) renderAuthModal(); // re-render modal if open
+  if (state.tab === 'wc') renderWorldCup();
   if (state.tab === 'analytics') renderAnalytics();
   if (state.tab === 'my') renderMySlips();
 });
-
-// currency
 document.getElementById('currency').addEventListener('change', e => {
   currentCurrency = e.target.value;
   renderSlip();
@@ -5779,9 +7262,13 @@ function refreshOddsTick() {
       });
     });
   });
-  // also update slip leg odds references
+  // also update slip leg odds references — skip WC legs and any other legs whose
+  // matchId isn't a league fixture, since they don't have live-refresh odds.
   state.slip.forEach(leg => {
-    const mkt = state.oddsByMatch[leg.matchId][leg.marketKey];
+    const matchOdds = state.oddsByMatch[leg.matchId];
+    if (!matchOdds) return; // WC legs and other synthetic legs are immune to live refresh
+    const mkt = matchOdds[leg.marketKey];
+    if (!mkt) return;
     const m = mkt.find(o => o.key === leg.key);
     if (m) { leg.odds = { ...m.odds }; }
   });
