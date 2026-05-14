@@ -1196,6 +1196,22 @@
     color: var(--accent); border-color: var(--line-2);
   }
   .stake-input input:focus { outline: 1px solid var(--accent); border-color: var(--accent); }
+  /* Hide native number-input spinner arrows. They take horizontal space, look
+     out of place against the dark theme, and on some browsers their tiny click
+     target encourages "spam clicking" instead of typing. Typing is the primary
+     interaction; users who want to step up/down can use keyboard arrows. */
+  .stake-input input[type=number]::-webkit-outer-spin-button,
+  .stake-input input[type=number]::-webkit-inner-spin-button,
+  #bankroll-in[type=number]::-webkit-outer-spin-button,
+  #bankroll-in[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .stake-input input[type=number],
+  #bankroll-in[type=number] {
+    -moz-appearance: textfield;  /* Firefox */
+    appearance: textfield;
+  }
 
   .calc-row {
     display: flex; justify-content: space-between;
@@ -5552,22 +5568,72 @@ function renderSlip() {
       <button class="clear-btn" onclick="clearSlip()">${t('slip.clear')}</button>
     </div>
   `;
-  document.getElementById('stake-in').addEventListener('input', e => {
-    // User typed value in display currency; convert back to USD for storage
-    const v = parseFloat(e.target.value) || 0;
-    state.stake = Math.max(1, v / fx().rate);
-    renderSlip();
-  });
-  // Bankroll input — same pattern: typed in display currency, stored in USD.
-  // Debounce isn't needed since renderSlip is fast and only the slip re-renders.
+  // Stake input — typing was getting clobbered by full slip re-renders on every
+  // keystroke (each keystroke destroyed the input element and rebuilt it, wiping
+  // focus and any in-progress typing). The fix is two parts:
+  //   1. Debounce the re-render so it only fires after the user pauses typing
+  //   2. Restore focus and cursor position after re-render so multi-digit values
+  //      can be typed naturally.
+  // This applies to BOTH the stake input and the bankroll input.
+  const stakeInEl = document.getElementById('stake-in');
+  if (stakeInEl) {
+    stakeInEl.addEventListener('input', e => {
+      const v = parseFloat(e.target.value) || 0;
+      // Update state immediately so any other code reading state.stake sees the new value.
+      // The displayed payout/profit/Kelly figures will refresh after the debounce.
+      state.stake = Math.max(1, v / fx().rate);
+      scheduleSlipReRender('stake-in', e.target.selectionStart, e.target.selectionEnd);
+    });
+    // Also handle the case where the user uses up/down arrows or the browser spinner —
+    // those fire 'change' events with a complete value; render immediately on commit.
+    stakeInEl.addEventListener('change', e => {
+      const v = parseFloat(e.target.value) || 0;
+      state.stake = Math.max(1, v / fx().rate);
+      renderSlip();
+    });
+    // When the user clicks into the field, select all so they can replace the value
+    // with a single keystroke (typing "250" replaces "25" cleanly).
+    stakeInEl.addEventListener('focus', e => e.target.select());
+  }
+
   const bankrollEl = document.getElementById('bankroll-in');
   if (bankrollEl) {
     bankrollEl.addEventListener('input', e => {
       const v = parseFloat(e.target.value) || 0;
       state.bankrollUsd = Math.max(1, v / fx().rate);
+      scheduleSlipReRender('bankroll-in', e.target.selectionStart, e.target.selectionEnd);
+    });
+    bankrollEl.addEventListener('change', e => {
+      const v = parseFloat(e.target.value) || 0;
+      state.bankrollUsd = Math.max(1, v / fx().rate);
       renderSlip();
     });
+    bankrollEl.addEventListener('focus', e => e.target.select());
   }
+}
+
+// Debounced re-render for numeric inputs in the slip. Each call resets the
+// timer, so the slip only refreshes after the user has paused typing for ~300ms.
+// We also remember which input was focused (and its cursor position) and restore
+// that focus after the re-render — without this, the input would lose focus mid-typing.
+let _slipReRenderTimer = null;
+function scheduleSlipReRender(focusId, selStart, selEnd) {
+  if (_slipReRenderTimer) clearTimeout(_slipReRenderTimer);
+  _slipReRenderTimer = setTimeout(() => {
+    _slipReRenderTimer = null;
+    renderSlip();
+    // Re-find the input (renderSlip just rebuilt the HTML) and restore focus + caret.
+    const el = document.getElementById(focusId);
+    if (el) {
+      el.focus();
+      try {
+        // Some browsers throw on setSelectionRange for number inputs; ignore failures.
+        if (typeof selStart === 'number' && typeof selEnd === 'number') {
+          el.setSelectionRange(selStart, selEnd);
+        }
+      } catch (e) { /* number input doesn't support selection in all browsers */ }
+    }
+  }, 350);
 }
 
 function getLegDisplayOdds(leg) {
