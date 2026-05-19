@@ -4265,97 +4265,42 @@ function crest(name, size, leagueHint) {
 // Once all fixtures are over, the schedule shows an empty state with a "next round" date hint.
 // To add a future round, just append more fixtures with later kickoffUtc values.
 const REAL_FIXTURES = [
-  // ===== Premier League — Matchweek 35, May 1-3, 2026 (BST = UTC+1) =====
-  { league:'epl', home:'Manchester Utd',  away:'Liverpool',       kickoffUtc:'2026-05-03T15:30:00Z', homeStrength:1.00, awayStrength:1.20 },
-  { league:'epl', home:'Arsenal',         away:'Fulham',          kickoffUtc:'2026-05-02T16:30:00Z', homeStrength:1.55, awayStrength:0.85 },
-  { league:'epl', home:'Aston Villa',     away:'Tottenham',       kickoffUtc:'2026-05-03T18:00:00Z', homeStrength:1.10, awayStrength:0.75 },
-  { league:'epl', home:'Everton',         away:'Manchester City', kickoffUtc:'2026-05-04T19:00:00Z', homeStrength:0.70, awayStrength:1.55 },
+  // ============================================================
+  // FINAL MATCHWEEK — May 19-28, 2026 window
+  // ============================================================
+  // Bundesliga finished May 16 (Bayern champions).
+  // Ligue 1 finished May 16-17 (PSG champions).
+  // PL, La Liga, and Serie A all have their final-day fixtures
+  // scheduled for the weekend of May 22-24.
 
-  // ===== La Liga — Jornada 34, May 2-3, 2026 (CEST = UTC+2) =====
-  { league:'laliga', home:'Osasuna',      away:'Barcelona',       kickoffUtc:'2026-05-02T19:00:00Z', homeStrength:0.80, awayStrength:1.55 },
-  { league:'laliga', home:'Espanyol',     away:'Real Madrid',     kickoffUtc:'2026-05-03T19:00:00Z', homeStrength:0.75, awayStrength:1.35 },
-  { league:'laliga', home:'Valencia',     away:'Atletico Madrid', kickoffUtc:'2026-05-02T16:30:00Z', homeStrength:0.85, awayStrength:1.30 },
-  { league:'laliga', home:'Alaves',       away:'Athletic Bilbao', kickoffUtc:'2026-05-02T14:15:00Z', homeStrength:0.85, awayStrength:1.15 },
+  // ===== Premier League — Matchweek 38 (FINAL DAY), Sunday May 24, 2026 =====
+  // All 10 fixtures kick off simultaneously at 16:00 BST (15:00 UTC) per tradition.
+  { league:'epl', home:'Brighton',         away:'Manchester Utd',  kickoffUtc:'2026-05-24T15:00:00Z', homeStrength:1.00, awayStrength:1.00 },
+  { league:'epl', home:'Crystal Palace',   away:'Arsenal',         kickoffUtc:'2026-05-24T15:00:00Z', homeStrength:0.95, awayStrength:1.55 },
+  { league:'epl', home:'Liverpool',        away:'Brentford',       kickoffUtc:'2026-05-24T15:00:00Z', homeStrength:1.30, awayStrength:0.95 },
+  { league:'epl', home:'Manchester City',  away:'Aston Villa',     kickoffUtc:'2026-05-24T15:00:00Z', homeStrength:1.55, awayStrength:1.10 },
+  { league:'epl', home:'Tottenham',        away:'Everton',         kickoffUtc:'2026-05-24T15:00:00Z', homeStrength:1.05, awayStrength:0.85 },
+  { league:'epl', home:'West Ham',         away:'Leeds',           kickoffUtc:'2026-05-24T15:00:00Z', homeStrength:0.85, awayStrength:0.80 },
+  { league:'epl', home:'Fulham',           away:'Newcastle',       kickoffUtc:'2026-05-24T15:00:00Z', homeStrength:1.00, awayStrength:1.20 },
+  { league:'epl', home:'Sunderland',       away:'Chelsea',         kickoffUtc:'2026-05-24T15:00:00Z', homeStrength:0.85, awayStrength:1.20 },
 
-  // ===== Bundesliga — Matchday 32, May 2, 2026 (CEST = UTC+2) =====
-  { league:'bundes', home:'Bayern Munich',       away:'Heidenheim',        kickoffUtc:'2026-05-02T13:30:00Z', homeStrength:1.65, awayStrength:0.50 },
-  { league:'bundes', home:'Bayer Leverkusen',    away:'RB Leipzig',        kickoffUtc:'2026-05-02T16:30:00Z', homeStrength:1.30, awayStrength:1.20 },
-  { league:'bundes', home:'Borussia M.Gladbach', away:'Borussia Dortmund', kickoffUtc:'2026-05-02T13:30:00Z', homeStrength:0.90, awayStrength:1.30 },
-  { league:'bundes', home:'Eintracht Frankfurt', away:'Hamburg',           kickoffUtc:'2026-05-02T13:30:00Z', homeStrength:1.20, awayStrength:0.70 },
+  // ===== La Liga — Jornada 38 (FINAL DAY), May 23-24, 2026 =====
+  // All matches Sat May 23 21:00 CEST (19:00 UTC), except Villarreal-Atlético on Sun.
+  { league:'laliga', home:'Valencia',         away:'Barcelona',       kickoffUtc:'2026-05-23T19:00:00Z', homeStrength:0.85, awayStrength:1.55 },
+  { league:'laliga', home:'Real Madrid',      away:'Athletic Bilbao', kickoffUtc:'2026-05-23T19:00:00Z', homeStrength:1.35, awayStrength:1.15 },
+  { league:'laliga', home:'Villarreal',       away:'Atletico Madrid', kickoffUtc:'2026-05-24T19:00:00Z', homeStrength:1.10, awayStrength:1.30 },
+  { league:'laliga', home:'Sevilla',          away:'Real Sociedad',   kickoffUtc:'2026-05-23T19:00:00Z', homeStrength:0.95, awayStrength:1.05 },
 
-  // ===== Serie A — Giornata 35, May 2-4, 2026 (CEST = UTC+2) =====
-  { league:'seriea', home:'Inter Milan',  away:'Parma',           kickoffUtc:'2026-05-03T18:45:00Z', homeStrength:1.55, awayStrength:0.65 },
-  { league:'seriea', home:'Como',         away:'Napoli',          kickoffUtc:'2026-05-02T16:00:00Z', homeStrength:0.85, awayStrength:1.35 },
-  { league:'seriea', home:'Juventus',     away:'Verona',          kickoffUtc:'2026-05-03T16:00:00Z', homeStrength:1.20, awayStrength:0.65 },
-  { league:'seriea', home:'Sassuolo',     away:'AC Milan',        kickoffUtc:'2026-05-03T13:00:00Z', homeStrength:0.80, awayStrength:1.30 },
-
-  // ===== Ligue 1 — Journée 32, May 1-3, 2026 (CEST = UTC+2) =====
-  { league:'ligue1', home:'Paris SG',     away:'Lorient',         kickoffUtc:'2026-05-02T15:00:00Z', homeStrength:1.70, awayStrength:0.60 },
-  { league:'ligue1', home:'Nantes',       away:'Marseille',       kickoffUtc:'2026-05-01T19:00:00Z', homeStrength:0.80, awayStrength:1.30 },
-  { league:'ligue1', home:'Metz',         away:'Monaco',          kickoffUtc:'2026-05-02T17:00:00Z', homeStrength:0.65, awayStrength:1.30 },
-  { league:'ligue1', home:'Lyon',         away:'Rennes',          kickoffUtc:'2026-05-03T18:45:00Z', homeStrength:1.05, awayStrength:0.95 },
-
-  // ===== NEXT ROUND — These activate automatically once this week's games conclude =====
-  // Premier League — Matchweek 36, May 9-10, 2026
-  { league:'epl', home:'Liverpool',       away:'Arsenal',         kickoffUtc:'2026-05-10T15:30:00Z', homeStrength:1.30, awayStrength:1.50 },
-  { league:'epl', home:'Manchester City', away:'Bournemouth',     kickoffUtc:'2026-05-09T14:00:00Z', homeStrength:1.55, awayStrength:0.85 },
-  { league:'epl', home:'Chelsea',         away:'Manchester Utd',  kickoffUtc:'2026-05-10T15:30:00Z', homeStrength:1.10, awayStrength:0.95 },
-  { league:'epl', home:'Tottenham',       away:'West Ham',        kickoffUtc:'2026-05-09T16:30:00Z', homeStrength:0.75, awayStrength:0.85 },
-
-  // La Liga — Jornada 35, May 9-10, 2026
-  { league:'laliga', home:'Real Madrid',  away:'Barcelona',       kickoffUtc:'2026-05-10T19:00:00Z', homeStrength:1.40, awayStrength:1.55 }, // El Clásico
-  { league:'laliga', home:'Atletico Madrid',away:'Sevilla',       kickoffUtc:'2026-05-09T18:30:00Z', homeStrength:1.30, awayStrength:0.85 },
-  { league:'laliga', home:'Real Sociedad',away:'Villarreal',      kickoffUtc:'2026-05-10T16:15:00Z', homeStrength:1.05, awayStrength:1.00 },
-  { league:'laliga', home:'Mallorca',     away:'Real Betis',      kickoffUtc:'2026-05-09T16:00:00Z', homeStrength:0.85, awayStrength:1.00 },
-
-  // Bundesliga — Matchday 33, May 9, 2026
-  { league:'bundes', home:'RB Leipzig',          away:'Bayern Munich',     kickoffUtc:'2026-05-09T16:30:00Z', homeStrength:1.20, awayStrength:1.65 },
-  { league:'bundes', home:'Borussia Dortmund',   away:'Hoffenheim',        kickoffUtc:'2026-05-09T13:30:00Z', homeStrength:1.30, awayStrength:0.85 },
-  { league:'bundes', home:'Stuttgart',           away:'Werder Bremen',     kickoffUtc:'2026-05-09T13:30:00Z', homeStrength:1.15, awayStrength:0.80 },
-  { league:'bundes', home:'Wolfsburg',           away:'Bayer Leverkusen',  kickoffUtc:'2026-05-09T13:30:00Z', homeStrength:0.85, awayStrength:1.30 },
-
-  // Serie A — Giornata 36, May 9-10, 2026
-  { league:'seriea', home:'Napoli',       away:'Juventus',        kickoffUtc:'2026-05-10T18:45:00Z', homeStrength:1.35, awayStrength:1.20 },
-  { league:'seriea', home:'AC Milan',     away:'Lazio',           kickoffUtc:'2026-05-09T18:45:00Z', homeStrength:1.30, awayStrength:0.95 },
-  { league:'seriea', home:'Roma',         away:'Atalanta',        kickoffUtc:'2026-05-10T16:00:00Z', homeStrength:1.10, awayStrength:1.20 },
-  { league:'seriea', home:'Fiorentina',   away:'Bologna',         kickoffUtc:'2026-05-09T16:00:00Z', homeStrength:0.95, awayStrength:1.05 },
-
-  // Ligue 1 — Journée 33, May 9-10, 2026
-  { league:'ligue1', home:'Marseille',    away:'Paris SG',        kickoffUtc:'2026-05-10T18:45:00Z', homeStrength:1.20, awayStrength:1.65 }, // Le Classique
-  { league:'ligue1', home:'Monaco',       away:'Nice',            kickoffUtc:'2026-05-09T19:00:00Z', homeStrength:1.30, awayStrength:0.95 },
-  { league:'ligue1', home:'Lille',        away:'Lens',            kickoffUtc:'2026-05-10T13:00:00Z', homeStrength:1.10, awayStrength:1.00 },
-  { league:'ligue1', home:'Strasbourg',   away:'Toulouse',        kickoffUtc:'2026-05-09T17:00:00Z', homeStrength:0.95, awayStrength:0.80 },
-
-  // ===== ROUND 3 — May 16-17, 2026 weekend =====
-  // Premier League — Matchweek 37
-  { league:'epl', home:'Arsenal',         away:'Newcastle',       kickoffUtc:'2026-05-17T15:30:00Z', homeStrength:1.55, awayStrength:1.20 },
-  { league:'epl', home:'Manchester City', away:'West Ham',        kickoffUtc:'2026-05-16T14:00:00Z', homeStrength:1.55, awayStrength:0.85 },
-  { league:'epl', home:'Brighton',        away:'Liverpool',       kickoffUtc:'2026-05-16T16:30:00Z', homeStrength:1.00, awayStrength:1.30 },
-  { league:'epl', home:'Chelsea',         away:'Crystal Palace',  kickoffUtc:'2026-05-17T13:00:00Z', homeStrength:1.10, awayStrength:0.85 },
-
-  // La Liga — Jornada 36
-  { league:'laliga', home:'Barcelona',    away:'Villarreal',      kickoffUtc:'2026-05-17T19:00:00Z', homeStrength:1.55, awayStrength:1.00 },
-  { league:'laliga', home:'Real Madrid',  away:'Mallorca',        kickoffUtc:'2026-05-16T16:15:00Z', homeStrength:1.35, awayStrength:0.85 },
-  { league:'laliga', home:'Atletico Madrid',away:'Real Sociedad', kickoffUtc:'2026-05-16T18:30:00Z', homeStrength:1.30, awayStrength:1.05 },
-  { league:'laliga', home:'Sevilla',      away:'Valencia',        kickoffUtc:'2026-05-17T14:00:00Z', homeStrength:0.95, awayStrength:0.85 },
-
-  // Bundesliga — Matchday 34 (final round)
-  { league:'bundes', home:'Bayern Munich',       away:'Mainz',             kickoffUtc:'2026-05-16T13:30:00Z', homeStrength:1.65, awayStrength:0.75 },
-  { league:'bundes', home:'Bayer Leverkusen',    away:'Borussia Dortmund', kickoffUtc:'2026-05-16T13:30:00Z', homeStrength:1.30, awayStrength:1.30 },
-  { league:'bundes', home:'RB Leipzig',          away:'Stuttgart',         kickoffUtc:'2026-05-16T13:30:00Z', homeStrength:1.20, awayStrength:1.15 },
-  { league:'bundes', home:'Hoffenheim',          away:'Eintracht Frankfurt',kickoffUtc:'2026-05-16T13:30:00Z', homeStrength:0.85, awayStrength:1.20 },
-
-  // Serie A — Giornata 37
-  { league:'seriea', home:'Inter Milan',  away:'Lazio',           kickoffUtc:'2026-05-17T18:45:00Z', homeStrength:1.55, awayStrength:0.95 },
-  { league:'seriea', home:'Juventus',     away:'Udinese',         kickoffUtc:'2026-05-17T16:00:00Z', homeStrength:1.20, awayStrength:0.75 },
-  { league:'seriea', home:'AC Milan',     away:'Atalanta',        kickoffUtc:'2026-05-16T18:45:00Z', homeStrength:1.30, awayStrength:1.20 },
-  { league:'seriea', home:'Napoli',       away:'Genoa',           kickoffUtc:'2026-05-17T13:00:00Z', homeStrength:1.35, awayStrength:0.75 },
-
-  // Ligue 1 — Journée 34
-  { league:'ligue1', home:'Paris SG',     away:'Auxerre',         kickoffUtc:'2026-05-16T19:00:00Z', homeStrength:1.70, awayStrength:0.65 },
-  { league:'ligue1', home:'Marseille',    away:'Rennes',          kickoffUtc:'2026-05-17T18:45:00Z', homeStrength:1.30, awayStrength:0.95 },
-  { league:'ligue1', home:'Monaco',       away:'Lyon',            kickoffUtc:'2026-05-17T15:00:00Z', homeStrength:1.30, awayStrength:1.05 },
-  { league:'ligue1', home:'Nice',         away:'Lille',           kickoffUtc:'2026-05-16T17:00:00Z', homeStrength:0.95, awayStrength:1.10 },
+  // ===== Serie A — Matchday 38 (FINAL DAY), May 22-24, 2026 =====
+  // Spread across three days per Lega Serie A schedule. CEST = UTC+2.
+  { league:'seriea', home:'Fiorentina',       away:'Atalanta',        kickoffUtc:'2026-05-22T18:45:00Z', homeStrength:1.00, awayStrength:1.20 },
+  { league:'seriea', home:'Bologna',          away:'Inter Milan',     kickoffUtc:'2026-05-23T16:00:00Z', homeStrength:1.05, awayStrength:1.55 },
+  { league:'seriea', home:'Lazio',            away:'Pisa',            kickoffUtc:'2026-05-23T18:45:00Z', homeStrength:1.10, awayStrength:0.65 },
+  { league:'seriea', home:'Napoli',           away:'Udinese',         kickoffUtc:'2026-05-24T16:00:00Z', homeStrength:1.35, awayStrength:0.75 },
+  { league:'seriea', home:'AC Milan',         away:'Cagliari',        kickoffUtc:'2026-05-24T18:45:00Z', homeStrength:1.30, awayStrength:0.70 },
+  { league:'seriea', home:'Torino',           away:'Juventus',        kickoffUtc:'2026-05-24T18:45:00Z', homeStrength:0.90, awayStrength:1.20 },
+  { league:'seriea', home:'Hellas Verona',    away:'Roma',            kickoffUtc:'2026-05-24T18:45:00Z', homeStrength:0.75, awayStrength:1.25 },
+  { league:'seriea', home:'Parma',            away:'Sassuolo',        kickoffUtc:'2026-05-24T13:00:00Z', homeStrength:0.85, awayStrength:0.90 },
 ];
 
 // Format a UTC ISO datetime as a kickoff display string in the user's local timezone.
@@ -6214,110 +6159,109 @@ function computeRecord() {
 // timestamps shift naturally as the page sits open and reads as a true feed.
 // On refresh, news items are slightly reordered/jittered to mimic a live wire.
 const NEWS_SEED = [
-  { league:'epl', tag:'form', team:'Arsenal',
-    title:'Arsenal reach Champions League final after 20 years — Saka the difference',
-    body:'A first-half Bukayo Saka rebound finish was enough to beat Atlético Madrid 1-0 at the Emirates on Tuesday, sending Mikel Arteta\'s side through 2-1 on aggregate and into the Champions League final on May 30 in Budapest. It is Arsenal\'s first European Cup final since 2006. They will face PSG.',
-    impact:'up', moveText:'Arsenal to win UCL shortened 5.50 → 3.30',
-    minutesAgo: 22 },
-  { league:'ligue1', tag:'form', team:'Paris Saint-Germain',
-    title:'PSG survive late Kane goal to reach back-to-back UCL finals',
-    body:'Ousmane Dembélé struck inside three minutes at the Allianz Arena and PSG held on through a 1-1 draw to advance 6-5 on aggregate over Bayern Munich. Harry Kane equalised in the seventh minute of stoppage time, his 55th goal in all competitions this season, but the comeback came too late. The defending champions face Arsenal in Budapest on May 30.',
-    impact:'up', moveText:'PSG to retain UCL firmed 2.10 → 1.85',
-    minutesAgo: 38 },
-  { league:'seriea', tag:'form', team:'Inter Milan',
-    title:'Inter clinch 21st Scudetto — Thuram and Mkhitaryan sink Parma',
-    body:'A 2-0 home win over Parma on May 3 wrapped up the Serie A title for Inter with three rounds to spare. Marcus Thuram opened the scoring in first-half stoppage time and Henrikh Mkhitaryan added the second late on. The result, combined with Napoli\'s 0-0 draw at Como the previous day, gave Cristian Chivu\'s side an unassailable 12-point cushion. Coppa Italia final vs Lazio still to come on May 13.',
-    impact:'up', moveText:'Inter Coppa Italia firmed 1.55 → 1.42',
-    minutesAgo: 64 },
   { league:'epl', tag:'form', team:'Manchester City',
-    title:'City rescue late draw at Everton — Haaland and Doku salvage point',
-    body:'Manchester City trailed 3-1 at Goodison with eight minutes left before goals from Erling Haaland and Jérémy Doku snatched a 3-3 draw. The point keeps City five behind Arsenal in the title race with one game in hand. The two sides cannot meet again, so City need to win out and hope Arsenal slip at West Ham, Burnley, or Crystal Palace.',
-    impact:'down', moveText:'Arsenal to win EPL drifted 1.30 → 1.42',
-    minutesAgo: 92 },
-  { league:'laliga', tag:'form', team:'Real Madrid',
-    title:'Vinícius brace at Espanyol keeps Madrid title hopes formally alive',
-    body:'Vinícius Jr scored twice in 11 minutes to give Real Madrid a 2-0 win at Espanyol on May 3, with Mbappé, Güler, Courtois and Militão all absent. The result trims Barcelona\'s lead to 11 points heading into the El Clásico at Camp Nou on May 10 — but a Barcelona win there would settle the title. Álvaro Arbeloa\'s interim spell continues to be tested.',
-    impact:'down', moveText:'Real Madrid to win La Liga out at 25.00',
-    minutesAgo: 118 },
+    title:'Final-day permutations — title still hangs on Sunday',
+    body:'Arsenal hold a five-point lead heading into Matchweek 38, with goal difference also strongly in their favour. Pep Guardiola\'s City need to win at home against Aston Villa AND see Arsenal lose at Crystal Palace AND erase a sizeable goal-difference deficit. Mathematically alive, practically a long shot. Both fixtures kick off simultaneously at 16:00 BST on Sunday.',
+    impact:'down', moveText:'Manchester City to win EPL drifted 12.00 → 18.00',
+    minutesAgo: 35 },
+  { league:'seriea', tag:'form', team:'Inter Milan',
+    title:'Inter close out the Scudetto season at Bologna',
+    body:'Already crowned domestic champions, Inter travel to Bologna on Saturday for their last league match before turning attention to the Champions League final on May 30. Cristian Chivu is expected to rotate. Bologna meanwhile chase a European place — they sit just outside the Conference League spots with one to play.',
+    impact:'up', moveText:'Inter to lift UCL eased 4.20 → 3.80',
+    minutesAgo: 78 },
   { league:'laliga', tag:'tactics', team:'Barcelona',
-    title:'Barcelona within touching distance of title — Clásico looms',
-    body:'A 2-1 win at Osasuna on May 2 left Barcelona 11 points clear with four matches remaining. Hansi Flick\'s side travel to Mallorca next then host Real Madrid on May 10 in a Clásico that could mathematically clinch the title. Robert Lewandowski and Raphinha continue to lead the line with Lamine Yamal sidelined for the season.',
-    impact:'up', moveText:'Barcelona to win La Liga locked at 1.01',
-    minutesAgo: 145 },
-  { league:'epl', tag:'injury', team:'Liverpool',
-    title:'Salah\'s season effectively over with hamstring injury',
-    body:'Mohamed Salah pulled up against Crystal Palace on April 25 and Arne Slot has all but ruled him out for the rest of the campaign. Liverpool, fifth in the table, are also without Hugo Ekitiké (Achilles, 9-12 months) and Conor Bradley. Cody Gakpo and Florian Wirtz are expected to lead the line as Liverpool fight to lock down a top-five Champions League place.',
-    impact:'down', moveText:'Liverpool top-5 firmed 1.18 → 1.09',
-    minutesAgo: 178 },
-  { league:'laliga', tag:'injury', team:'Real Madrid',
-    title:'Mbappé still racing the clock for El Clásico',
-    body:'Kylian Mbappé\'s left semitendinosus tear suffered at Real Betis on April 24 has already cost him the Espanyol trip. Madrid medical staff are working on a return for the May 10 Clásico but will not commit. Without him, Vinícius and Bellingham have shouldered the goal threat. Rodrygo remains out with his ACL recovery.',
-    impact:'down', moveText:'Mbappé to score vs Barça out at 4.50',
-    minutesAgo: 205 },
-  { league:'laliga', tag:'injury', team:'Barcelona',
-    title:'Yamal confirmed out for season — biceps femoris recovery ongoing',
-    body:'Lamine Yamal, who tore his hamstring scoring a winning penalty against Celta on April 22, will not return for Barcelona this campaign. The 18-year-old is expected to be fit for Spain\'s World Cup opener on June 15 against Cape Verde. Hansi Flick has rotated Raphinha, Ferran Torres and Dani Olmo into the wide attacking spots in his absence.',
-    impact:'down', moveText:'Yamal anytime scorer Clásico off the board',
-    minutesAgo: 244 },
+    title:'Barcelona end their title-winning campaign at Mestalla',
+    body:'Champions for the second consecutive season after a May 10 Clásico win, Hansi Flick\'s Barcelona close at Valencia on Saturday. Robert Lewandowski has talked openly about Golden Boot incentives — he sits two behind Kylian Mbappé in the Pichichi race with one match each to play. Lamine Yamal is still out with hamstring recovery aimed at the World Cup opener.',
+    impact:'up', moveText:'Lewandowski anytime scorer at Mestalla locked at 1.55',
+    minutesAgo: 112 },
+  { league:'laliga', tag:'lineup', team:'Real Madrid',
+    title:'Madrid host Athletic in Álvaro Arbeloa\'s final game as interim',
+    body:'Real Madrid finish a difficult campaign at home to Athletic Club. Reports have Xabi Alonso\'s replacement search nearing conclusion — Bayer Leverkusen\'s recent struggles in the title chase put Alonso back in the frame for next season. Mbappé needs one goal to secure the Pichichi; he leads Lewandowski 23-21 heading into the final round.',
+    impact:'neutral', moveText:'Mbappé to win Pichichi firmed 1.42 → 1.30',
+    minutesAgo: 165 },
+  { league:'epl', tag:'form', team:'Arsenal',
+    title:'Arsenal six days from rare double — title and UCL final',
+    body:'Mikel Arteta\'s side need only avoid catastrophe at Selhurst Park on Sunday to wrap up the Premier League. Then five days later, they face PSG in the Champions League final at the Puskás Aréna in Budapest. The Gunners have not won a league-and-European double in club history. Saka, Ødegaard, and Saliba all fit and available.',
+    impact:'up', moveText:'Arsenal to win EPL firmed 1.04 → 1.02',
+    minutesAgo: 188 },
+  { league:'ligue1', tag:'form', team:'Paris Saint-Germain',
+    title:'PSG complete league campaign with focus on UCL final',
+    body:'Crowned champions for a fourteenth time after a 2-0 win at Lens on May 13, Luis Enrique\'s side closed their season Sunday with a surprise 2-1 home defeat to Paris FC at Parc des Princes. Squad rotation was extensive — Dembélé, Vitinha, and Doué all rested. Focus is now squarely on Arsenal in Budapest May 30.',
+    impact:'neutral', moveText:'Dembélé to score in UCL Final firmed 2.40 → 2.10',
+    minutesAgo: 220 },
+  { league:'seriea', tag:'tactics', team:'Roma',
+    title:'Roma at Verona with Champions League berth in their hands',
+    body:'A 2-0 home win over Lazio in the derby has moved Roma into the top four with one round to play. They need only avoid defeat at relegated Verona to secure direct Champions League qualification. Juventus (away at Torino) and Lazio (home to Pisa) remain mathematically alive for the same spot.',
+    impact:'up', moveText:'Roma to finish top 4 firmed 1.45 → 1.20',
+    minutesAgo: 252 },
   { league:'bundes', tag:'form', team:'Bayern Munich',
-    title:'Bayern bow out of Europe but Kane finishes second leg with 55-goal haul',
-    body:'Vincent Kompany\'s side lost the semi-final tie to PSG despite Harry Kane\'s late equaliser in Munich. Kane has now scored in every competitive match Bayern have played this season and sits on 55 goals across all competitions including the German Supercup. Bayern wrapped up the Bundesliga in mid-April; focus shifts to the DFB-Pokal final.',
-    impact:'down', moveText:'Bayern to retain UCL eliminated',
-    minutesAgo: 280 },
-  { league:'epl', tag:'form', team:'Liverpool',
-    title:'Manchester United host Liverpool with both clubs needing points',
-    body:'Sunday\'s fixture at Old Trafford carries weight on both sides. Liverpool need wins to lock up their top-five spot; United, under Carrick since January, are still drifting in the lower half. Bryan Mbeumo and Benjamin Šeško have led the United attack since the Salah hamstring; Salah is now ruled out, meaning Gakpo and Wirtz lead the away threat.',
-    impact:'up', moveText:'Liverpool to win drifted 2.05 → 2.30',
+    title:'Bayern wrap title celebrations — DFB-Pokal final still to come',
+    body:'Bundesliga title lifted Saturday after the season-ending unified matchday. Bayern face the DFB-Pokal holders in the cup final later this month — Vincent Kompany is targeting a domestic double. Harry Kane finished the league season with 30 goals in 34 matches, his best Bundesliga return.',
+    impact:'up', moveText:'Bayern to win DFB-Pokal firmed 1.45 → 1.32',
+    minutesAgo: 288 },
+  { league:'epl', tag:'injury', team:'Liverpool',
+    title:'Salah confirmed back for World Cup squad — Liverpool finish at home to Brentford',
+    body:'Mohamed Salah, ruled out for the season with a hamstring injury in April, has been declared fit for Egypt\'s World Cup campaign. Liverpool finished fifth heading into the final day after their Aston Villa loss last weekend; a top-five place was already secured before. The Brentford match Sunday gives Slot a chance to rotate and rest key personnel.',
+    impact:'up', moveText:'Salah top scorer at WC 2026 firmed 18.00 → 14.00',
     minutesAgo: 312 },
-  { league:'seriea', tag:'tactics', team:'Inter Milan',
-    title:'Coppa Italia final preview — Inter chase domestic double vs Lazio',
-    body:'With the Scudetto in the bag, Inter turn to the Coppa Italia final at the Stadio Olimpico on May 13 against Lazio. A win would complete a domestic double for Cristian Chivu in his debut campaign. Lautaro Martínez has 16 league goals on his return from a February injury; Marcus Thuram and Mkhitaryan are in form following the Parma decider.',
-    impact:'up', moveText:'Inter to lift Coppa firmed 1.55 → 1.42',
+  { league:'laliga', tag:'form', team:'Atletico Madrid',
+    title:'Atlético need a result at Villarreal to clinch third',
+    body:'Diego Simeone\'s side travel to Villarreal in the only La Liga match played Sunday. Atlético are in a points-and-goal-difference fight with Villarreal for third place and the second-best UCL spot. Julián Álvarez has 18 goals — his most prolific Atlético season.',
+    impact:'neutral', moveText:'Atlético to finish 3rd firmed 1.85 → 1.55',
     minutesAgo: 360 },
-  { league:'epl', tag:'tactics', team:'Manchester City',
-    title:'FA Cup final May 16 — City face Chelsea at Wembley',
-    body:'After Pep Guardiola\'s side eliminated Southampton 2-1 in the semi-final, City face Rosenior\'s Chelsea in the FA Cup final. With the league title slipping toward Arsenal, the Cup gives City a chance to salvage silverware. Chelsea, who have struggled in the league since the Maresca dismissal, will be the underdog at Wembley but have nothing to lose.',
-    impact:'up', moveText:'City to win FA Cup firmed 1.50 → 1.40',
-    minutesAgo: 405 },
-  { league:'ligue1', tag:'form', team:'Marseille',
-    title:'Marseille hold on to Champions League spot under Beye',
-    body:'Mehdi Beye, who took over from Roberto De Zerbi after the 5-0 Classique loss in February, has stabilised Marseille in second place. Mason Greenwood (15 league goals) and a returning Pierre-Emerick Aubameyang have led the attack. With PSG already crowned, Marseille\'s remaining games are about cementing automatic Champions League qualification.',
-    impact:'up', moveText:'Marseille top-2 finish firmed 1.40 → 1.25',
-    minutesAgo: 458 },
+  { league:'seriea', tag:'lineup', team:'Juventus',
+    title:'Juventus must win at Torino to reach Champions League',
+    body:'The Derby della Mole on Sunday night doubles as Juve\'s last chance to claim a top-four Serie A finish. A loss to Torino and Lazio doing the business at home against Pisa would see Juve drop to Europa League. Igor Tudor has hinted at full-strength selection despite end-of-season fatigue.',
+    impact:'neutral', moveText:'Juventus to finish top 4 firmed 1.30 → 1.15',
+    minutesAgo: 422 },
+  { league:'epl', tag:'tactics', team:'Newcastle',
+    title:'Newcastle travel to Fulham with European fate in their own hands',
+    body:'Eddie Howe\'s Newcastle need a win at Craven Cottage to lock down a Europa League spot. Aston Villa and Brentford remain in the race. Alexander Isak has 17 league goals and is fit for the final day after concussion protocols cleared him midweek.',
+    impact:'up', moveText:'Newcastle top 6 firmed 1.65 → 1.45',
+    minutesAgo: 470 },
+  { league:'ligue1', tag:'form', team:'Lille',
+    title:'Lille hold third despite losing to Auxerre — Lyon miss out',
+    body:'Lille secured a Champions League spot Sunday despite a 2-0 home defeat to Auxerre on the final day. Lyon were one point behind and could only manage a draw. Marseille (4th) drop to Europa League. The trio represent the French contingent for the 2026-27 European campaign.',
+    impact:'neutral', moveText:'Lille to qualify UCL firmed 1.40 → 1.05',
+    minutesAgo: 540 },
+  { league:'seriea', tag:'form', team:'AC Milan',
+    title:'Allegri\'s Milan close at home to Cagliari with European fate set',
+    body:'Milan finished outside the top six and will play continental football only via the Coppa Italia route. The final match at San Siro on Sunday evening doubles as a farewell to several veterans whose contracts expire. Pulisic is set for the start; Leão remains a doubt with a calf knock.',
+    impact:'neutral', moveText:'Pulisic to score vs Cagliari priced at 2.50',
+    minutesAgo: 612 },
 ];
 
 // Each mover carries a 12-point price history (one reading every 30 minutes for the
 // last 6 hours) so we can render a sparkline showing the line's trajectory.
 // The history ends with the current price (last entry == `to`).
 const MOVERS_SEED = [
-  { match:'Barcelona v Real Madrid',  market:'Barcelona to win El Clásico', from:1.95, to:1.72, dir:'up',
-    history:[1.95, 1.94, 1.92, 1.90, 1.86, 1.83, 1.80, 1.78, 1.76, 1.74, 1.73, 1.72] },
-  { match:'Arsenal v PSG (UCL Final)', market:'Arsenal to win UCL',         from:3.50, to:3.30, dir:'up',
-    history:[3.50, 3.50, 3.45, 3.42, 3.40, 3.38, 3.36, 3.34, 3.33, 3.31, 3.30, 3.30] },
-  { match:'Liverpool v Arsenal',      market:'Over 2.5 goals',              from:1.78, to:1.92, dir:'down',
+  { match:'Crystal Palace v Arsenal',     market:'Arsenal to win EPL',           from:1.04, to:1.02, dir:'up',
+    history:[1.04, 1.04, 1.03, 1.03, 1.03, 1.03, 1.02, 1.02, 1.02, 1.02, 1.02, 1.02] },
+  { match:'Arsenal v PSG (UCL Final)',    market:'PSG to win UCL',               from:1.95, to:2.10, dir:'down',
+    history:[1.95, 1.96, 1.98, 2.00, 2.02, 2.04, 2.05, 2.06, 2.07, 2.08, 2.09, 2.10] },
+  { match:'Arsenal v PSG (UCL Final)',    market:'Arsenal to win UCL',           from:3.30, to:3.10, dir:'up',
+    history:[3.30, 3.28, 3.25, 3.22, 3.20, 3.18, 3.16, 3.14, 3.13, 3.12, 3.11, 3.10] },
+  { match:'Bologna v Inter',              market:'Over 2.5 goals',               from:1.78, to:1.92, dir:'down',
     history:[1.78, 1.79, 1.81, 1.83, 1.85, 1.87, 1.88, 1.89, 1.90, 1.91, 1.92, 1.92] },
-  { match:'Inter v Lazio (Coppa)',    market:'Inter to lift Coppa Italia',  from:1.55, to:1.42, dir:'up',
-    history:[1.55, 1.54, 1.52, 1.50, 1.48, 1.46, 1.45, 1.44, 1.43, 1.42, 1.42, 1.42] },
-  { match:'Marseille v PSG',          market:'PSG to win Le Classique',     from:1.65, to:1.78, dir:'down',
-    history:[1.65, 1.66, 1.68, 1.70, 1.72, 1.73, 1.74, 1.75, 1.76, 1.77, 1.78, 1.78] },
-  { match:'Man City v Chelsea (FAC)', market:'City to win FA Cup',          from:1.50, to:1.40, dir:'up',
-    history:[1.50, 1.50, 1.48, 1.47, 1.46, 1.45, 1.44, 1.43, 1.42, 1.41, 1.40, 1.40] },
+  { match:'Villarreal v Atletico Madrid', market:'Atlético to finish 3rd',       from:1.85, to:1.55, dir:'up',
+    history:[1.85, 1.83, 1.80, 1.75, 1.70, 1.66, 1.63, 1.61, 1.59, 1.57, 1.56, 1.55] },
+  { match:'Torino v Juventus',            market:'Juventus to finish top 4',     from:1.30, to:1.15, dir:'up',
+    history:[1.30, 1.29, 1.27, 1.25, 1.23, 1.21, 1.19, 1.18, 1.17, 1.16, 1.16, 1.15] },
 ];
 const SUSPENSIONS_SEED = [
-  { player:'Mohamed Salah',         team:'Liverpool',  games:99, reason:'Hamstring — ruled out for season' },
   { player:'Hugo Ekitiké',          team:'Liverpool',  games:99, reason:'Achilles surgery — out 9-12 months' },
-  { player:'Conor Bradley',         team:'Liverpool',  games:99, reason:'Knee surgery — out for season' },
-  { player:'Lamine Yamal',          team:'Barcelona',  games:99, reason:'Hamstring — out for season' },
-  { player:'Kylian Mbappé',         team:'Real Madrid',games:0,  reason:'Hamstring — Clásico fitness race' },
+  { player:'Lamine Yamal',          team:'Barcelona',  games:99, reason:'Hamstring — targeting WC opener' },
   { player:'Rodrygo',               team:'Real Madrid',games:99, reason:'ACL — out for season' },
-  { player:'Serge Gnabry',          team:'Bayern',     games:99, reason:'Adductor tear — out for season' },
+  { player:'Rafael Leão',           team:'AC Milan',   games:0,  reason:'Calf knock — doubt vs Cagliari' },
+  { player:'Alexander Isak',        team:'Newcastle',  games:0,  reason:'Cleared concussion protocols — available' },
+  { player:'Pierre-Emerick Aubameyang', team:'Marseille', games:99, reason:'Hamstring — season over' },
 ];
 const WEATHER_SEED = [
-  { match:'Liverpool v Arsenal',          cond:'Light rain · 13°C · Wind 18 kph', impact:'Under 2.5 +3%' },
-  { match:'Barcelona v Real Madrid',      cond:'Clear · 22°C · Calm',             impact:'Neutral' },
-  { match:'Marseille v PSG',              cond:'Sunny · 24°C · Light breeze',     impact:'Neutral' },
-  { match:'Arsenal v PSG (Budapest)',     cond:'Clear · 19°C · Calm',             impact:'Goals Over +1%' },
-  { match:'Inter v Lazio (Olimpico)',     cond:'Partly cloudy · 21°C · Calm',     impact:'Neutral' },
+  { match:'Crystal Palace v Arsenal',     cond:'Cloudy · 18°C · Wind 12 kph',    impact:'Neutral' },
+  { match:'Manchester City v Aston Villa',cond:'Light rain · 15°C · Wind 18 kph',impact:'Under 2.5 +2%' },
+  { match:'Valencia v Barcelona',         cond:'Clear · 24°C · Calm',            impact:'Goals Over +1%' },
+  { match:'Bologna v Inter',              cond:'Clear · 22°C · Light breeze',    impact:'Neutral' },
+  { match:'Arsenal v PSG (Budapest UCL)', cond:'Partly cloudy · 21°C · Calm',    impact:'Neutral' },
 ];
 
 // Working state — gets replaced on each refresh so we can simulate live updates
