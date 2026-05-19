@@ -4152,6 +4152,12 @@ const WC_NEWS_SEED = [
     impact:'up', moveText:'Portugal outright firmed +1200 → +1100' },
 ];
 
+// Working copy of WC news so refresh can mutate (rotate, age, add live items)
+// without touching the seed. Deep-cloned so nested objects don't bleed.
+let WC_NEWS = JSON.parse(JSON.stringify(WC_NEWS_SEED));
+let wcNewsRefreshing = false;
+let wcNewsLastSyncMins = 0;
+
 // Per-player profile defaults by role. Used to drive shots/tackles/cards/assist
 // probabilities for the expanded player props market. The two scorers per team
 // listed in TEAM_SCORERS are typed here as 'striker' or 'attacker'; midfielders
@@ -6739,6 +6745,133 @@ function driftMovers() {
 
 window.manualRefreshNews = function () { refreshNewsFeed({ manual: true }); };
 
+// ============= WORLD CUP NEWS REFRESH =============
+// Mirrors the regular news refresh but pulls from the same RSS feeds and filters
+// for World Cup-related items. Falls back to a curated rotation when the live
+// fetch returns nothing relevant (which is common pre-tournament — most football
+// reporting is still about domestic leagues).
+
+// Keyword matcher used to decide if an RSS item is World Cup-related. Broad enough
+// to catch qualifier news, squad announcements, tournament previews, host-city
+// stories, and friendlies featuring confirmed WC nations.
+function isWcRelevant(text) {
+  const t = (text || '').toLowerCase();
+  if (/world cup|fifa\b|qualif|usa 2026|canada 2026|mexico 2026|metlife|estadio azteca|mbapp[eé]|haaland|harry kane|messi/i.test(t)) return true;
+  // Confirmed WC nations — mentioning any of them in a non-club context plausibly hits.
+  if (/morocco|senegal|cote d|c[oô]te d|ivory coast|qatar|saudi arabia|cape verde|cabo verde|curaçao|curacao|uzbekistan|jordan|panama|haiti|paraguay|t[uü]rkiye|turkey|ecuador|tunisia/i.test(t)) return true;
+  return false;
+}
+
+// Map an RSS item to a WC news item shape. Same structure as regular news but
+// without the `league` field (WC items aren't tied to a domestic league).
+function rssToWcNewsItem(rssItem) {
+  const combined = (rssItem.title + ' ' + (rssItem.body || ''));
+  return {
+    tag:     inferTag(combined),
+    team:    inferTeam(combined) || 'World Cup',
+    title:   rssItem.title,
+    body:    rssItem.body || rssItem.title,
+    impact:  Math.random() < 0.5 ? 'up' : 'down',
+    moveText:'Live update — futures markets reacting',
+    minutesAgo: minutesAgoFromDate(rssItem.pubDate),
+    _live: true,
+  };
+}
+
+// Fetch WC-relevant items from the configured RSS feeds. Returns up to 8.
+async function fetchLiveWcNews() {
+  const all = await Promise.all(NEWS_FEEDS.map(fetchFeed));
+  const seen = new Set();
+  const merged = [];
+  all.flat().forEach(rss => {
+    const combined = (rss.title || '') + ' ' + (rss.body || '');
+    if (!isWcRelevant(combined)) return;
+    const key = (rss.title || '').toLowerCase().slice(0, 60);
+    if (!key || seen.has(key)) return;
+    seen.add(key);
+    merged.push(rssToWcNewsItem(rss));
+  });
+  merged.sort((a, b) => a.minutesAgo - b.minutesAgo);
+  return merged.slice(0, 8);
+}
+
+// Curated rotation — when a live fetch returns nothing usable, age the existing
+// items and occasionally rotate in a fresh seed item to keep the feed feeling alive.
+function applyCuratedWcRefresh() {
+  WC_NEWS.forEach(n => { n.minutesAgo += 1 + Math.floor(Math.random() * 3); });
+  if (Math.random() < 0.5) {
+    // Pick a seed item that isn't already in the current WC_NEWS list
+    const candidates = WC_NEWS_SEED.filter(seed =>
+      !WC_NEWS.some(curr => curr.title === seed.title)
+    );
+    if (candidates.length > 0) {
+      const fresh = candidates[Math.floor(Math.random() * candidates.length)];
+      WC_NEWS.unshift({ ...fresh, minutesAgo: 0, _justAdded: true });
+      if (WC_NEWS.length > 10) WC_NEWS.pop();
+    }
+  }
+}
+
+// Main refresh entry point. Called by the manual button and (optionally) auto-tick.
+function refreshWcNewsFeed(opts = {}) {
+  const { manual = false } = opts;
+  if (wcNewsRefreshing) return;
+  wcNewsRefreshing = true;
+
+  const ctrl = document.getElementById('wc-news-controls');
+  const btn  = document.getElementById('wc-refresh-news-btn');
+  if (ctrl) ctrl.classList.add('refreshing');
+  if (btn)  btn.classList.add('spinning');
+
+  const finishUI = () => {
+    wcNewsLastSyncMins = 0;
+    wcNewsRefreshing = false;
+    if (ctrl) ctrl.classList.remove('refreshing');
+    if (btn)  btn.classList.remove('spinning');
+    // Re-render the WC tab if we're on it; if not, the next renderWorldCup
+    // call (when the user switches back to the tab) will pick up new content.
+    if (state.tab === 'wc') renderWorldCup();
+  };
+
+  if (manual) {
+    fetchLiveWcNews().then(liveItems => {
+      if (liveItems && liveItems.length >= 3) {
+        liveItems.forEach(n => { n._justAdded = true; });
+        WC_NEWS = liveItems;
+      } else {
+        // Not enough fresh WC-relevant content from the wire — rotate the curated set.
+        applyCuratedWcRefresh();
+      }
+      finishUI();
+    }).catch(() => {
+      applyCuratedWcRefresh();
+      finishUI();
+    });
+    return;
+  }
+
+  // Background tick: light curated rotation, no network.
+  setTimeout(() => {
+    applyCuratedWcRefresh();
+    finishUI();
+  }, 250);
+}
+
+window.manualRefreshWcNews = function () { refreshWcNewsFeed({ manual: true }); };
+
+// Age the WC news every minute alongside the regular news so the "Xm ago"
+// timestamps stay believable. Auto-refresh every 90 seconds in the background
+// matches what regular news does.
+setInterval(() => {
+  wcNewsLastSyncMins += 1;
+  if (state.tab === 'wc') {
+    // re-render so the lastsync label updates
+    renderWorldCup();
+  }
+}, 60000);
+setInterval(() => { refreshWcNewsFeed({ manual: false }); }, 90000);
+
+
 // ============= PULL-TO-REFRESH =============
 // Mobile swipe-down on the news tab triggers a refresh.
 (function setupPullToRefresh() {
@@ -7119,16 +7252,33 @@ function renderWorldCup() {
   `;
 
   // ===== WC NEWS =====
+  // Show the "last sync" timestamp in human-friendly form. Mirrors the regular
+  // news section's pattern so the UI feels consistent across tabs.
+  // Reuse the same timeAgo helper the regular news section uses, so the
+  // "X minutes ago" / "just now" / "X hours ago" strings translate consistently.
+  const wcLastSyncLabel = timeAgo(wcNewsLastSyncMins);
   const newsHtml = `
     <section class="wc-section">
       <h2>${t('wc.news')}</h2>
       <div class="wc-sub">${t('wc.news.sub')}</div>
+      <div class="news-controls" id="wc-news-controls" style="margin-bottom:14px;">
+        <span class="lastsync"><span>${t('news.lastsync')}</span> <span>${wcLastSyncLabel}</span></span>
+        <button class="refresh-btn" id="wc-refresh-news-btn" onclick="manualRefreshWcNews()">
+          <svg class="arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"/>
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+          </svg>
+          <span class="spin"></span>
+          <span>${t('news.refreshbtn')}</span>
+        </button>
+      </div>
       <div style="display:flex; flex-direction:column; gap:12px;">
-        ${WC_NEWS_SEED.slice(0, 8).map(n => `
-          <article class="news-item" style="padding:16px;">
+        ${WC_NEWS.slice(0, 8).map(n => `
+          <article class="news-item ${n._justAdded ? 'fresh' : ''}" style="padding:16px;">
             <div class="news-meta">
               <span class="news-tag tag-${n.tag}">${t('tag.' + n.tag)}</span>
               <span style="display:inline-flex; align-items:center; gap:6px;">${crest(n.team, 16)} ${n.team}</span>
+              <span style="color:var(--ink-3); font-family:var(--mono); font-size:9px; margin-left:auto;">${timeAgo(n.minutesAgo)}</span>
             </div>
             <div class="news-title" style="font-size:14px;">${n.title}</div>
             <div class="news-body" style="font-size:12px;">${n.body}</div>
