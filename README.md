@@ -2,7 +2,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>PARLAY//LAB — Soccer Bet Builder</title>
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAUCElEQVR42u3ae3RU1b0H8O9vn3NyZibzYAIJ5MEjPCzyEpWXCiRRlwhatWgioL2WVrBaseILe3vrZOzSggW9tmiLVam1tmsl3kvFR+VamqEoCggSMZG3vCEJ5DHPM+ex9/0jMxBCQNq7ete9a+3PWvkjM+fss2efvX/7t/c5gCRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkvRPRAAghCAASvcvI5EIysvLORHx8xUihGAAWJePHCISPV2vrq5OKS8v7+k6AgDvfl4oFGLl5eUMwAXV5e+pjxBCiUQidK6yhRAsEokwAGhpaRFVVVVODxejsupqZR2AypEjRW1Px/RwDqqrT7f3yEaBqtoez6usqVRqG0ZQj+V0nscBnN3WAoTaGob8hs5zIwAAjnCY//29hCjbqP90Qgjl/9Lg+H8hFGLn/b97x+gc8AAAFQDWr18/YMyYMVczxizOOQEgxphoaW21jh46tHPy5MnbiIgLIajrSAqFQqy6ulrU19ePHDBgwGWMMTOdtnN2797xl8mTJx8TQiBzPAEQq1at6nXFhAkzcv1+OI4Dzjlpmsaj0SgOHTp0sr6+fiMRdQghqLq6msLhMI98EBmd43ePEYJYPBnfNe3qqzd2r0fXEcsY8e3bvxhRVFQ0XtO0tGVZ6s6dOz+44oormrqe9/zzz+uTJl11s+M4qmBCSUSNT6dNq/gy8/tBROKdd9ZcnpcXGAmQnU6nkxWRtatPjSAhCESi7KVQSZOIX5O0uRNk7sS240+9ReFzRKnMOVf8/OGCIzmpaQlBDlMUrZB8ez+//6kPs+10+l4JGvXCwhubHTtIgk5FCMdx4HK5WZ8cz+Ef+0d/VFVVZWbLRijEEA7zhx++M3f1sKJpbRofELfSLI9r6TzHtfFLevpTp7NvEwChAoDb7Z7k9/tXdq+v1+tFSWGh097evuGTLVsWEFG9EIJlQ2V1dTWISBw/fnxpMBiclj0vmRqwAsD3Mx3Mzja8V9dL+xYVvdHTdQoKCjBmzCVHr7tu+lNE9KIQQguHw+aIS0bMyc/PfxwAvjpw8I8A5mTCu9NzGwP9+vV9MRgMlmU/KyouXgLg8cw0Z9fU1CgNDQ1O//5F9xQWFl4NAM3NJ7YKIcZlGyYUCrmuvHJ8bTAYLAWAXbv2/AHh8FtCCIWInMraWlYLOG2uxMRjXtdvEykTKdNuaxjZ8C4As/vNBIDK2lr2JuCYvdWFzYHg43YsBeFSQAnn0Mq6uovmVlSku0QegbJqpcPNXmzN9ZRQ2gZnlP0GihBodeK4P711R9kff37vOqIIQiEV4bA99hcPXvuqj1YkFHuwrTLwXDeabY42y8CA1378p9t7F3938Q33tgMgBgCKAhOADcDinFuplJE2TdMAAE3TlEAgMOWKceNXv/fee/mdA01QtiO8/fabwwIB/xQANufcBOAEg8GZy37zmzwisruGUtXttpLJpJW5eY7jODBNE5xzqKoKt9tVNGhQ/xcaGhq+R0QmALhcrlTmeDsnJydxvnmfiHhdXd1wvz8wEYAFwADg+AOBWxcuXOhmjJ2qTzgctqMnTiy0bTsNwOrdO3jptm1fTCMiTkRizpw5szI330ynzRN79x5elIkeZ9xUm5NlptK2nUw5FqG98TyRuraqyuGhkHpUmN8yYgnHscy0E0uasRyn//KD668GIFBTeUb4doB2J5W2HdOy1LRl64Zj6KadFpwjZdtOM5nDv0y1/uGhFUv7oDrs3PFKaMShXKxqUzDYtmy4kpaZGzdOCNNEyrasAx7nljdbm1YwIgFUE+sy36kAtNa29kPvv7/20tajrRfX19fflEqlmgHYfr9vwMDSIbMzjaBkk6xRoy6/0eVyezLTRg4ABPze/MmXjruGiFBXV3dqTndSqWxypiSTqcT7H/z19g2bNlVs3Lhxeltb2wYAHADvk9/vkYULl7kBQBCxzPXUr8lDGAAMGzKkUtM0V+Z/FwD4vd6hc749t0IIASEEq6qqcoQQyvAxYz5vaWn5EwBNURQqKuq3CADmz5+v9e3b98HMzc5pbm56fsaMisOcc6V7oqgQIwJUECkk6Jz5S2VNpQIA0waaFVEFF8GyiGmqTiDVYFwc50YV9ZyIKOBCdblc2sV6358NdQdGjkh4xg4xtcUuTSUkTbtDMQv/Qh2XgyC2OLHrYx7Vi7Rl5yo5rRO0guvKLe/YYodq9FyPRtEkWszUzZUvLO0PCvOzGtTmPD5z5o1fFg0u2j927Ni3jx078m6mc3CFRMmZnRMU8PtnCSFgGGlzx47d67Ohr6S48HYhBMrLy/k5Uizj6V8t/3PFlCmRK6+88v2dO3c+BCGYEILpLn3A1Gnj+nTmrZwuMGFz5s+fr3n9/tsAwLRs4+DBQ38B54wxhpLivrPPDhqC9uzZ84RpmkkAPC8vWPbxli1jFi5YcFUgELgEAFKp1OG1a7csz+Ql4vzVOHeCXYtKEIB9MCuNHJWIMZQit95DalKYFiVg3zBvxYo+qKp1EApRl6Qtm4kjaYiN2+8I79vywM927Jj3THUQigUhGCMGpnQOAIvQz3GEA5CiciU92+jT8O69Tx+Z+2H7XXkn49f1PmFc602kru/wxzrQbanU+RMcns60DgDowWDeyEw1SFG0VHa0EZGIRCLjvD7fpUQEwzD2r169ap5hGAkA5Pd5r//9798cSEQ8u5Tqdh1lw+r1rEseMFp0Jl8O53Zr84Ed0b9j5cCISMybN2+Cx+MZnblxO9esef8HZmeIh9/rm756dV0fInIyOQkHwKZOnbqro6PjtwCYojAaVFT8k/zCwkezv3n/oSMvzp37rXYALHzOJRR9fQetqnJ+GbrP2+bY0x0jDZeqs0uUfg+6ideDCCmN9/kw58g0AFRW3u2+ECC4gNfFJk984ZExk5599LLhrzzyZKtIa/C5mc9iu8sY+xgAepGyOUdTFIDMKIzCH2m7N5euWPTwX68qKTy+4IUPmhe9tPbID39Z9/63w9GeOoDo5fcNOnz48HPNzc2/iMZi64LBvAnZ0dLREXuv68FDBg/+rqZpGgBE44m6RYsW7UwmEp8CgDc3N/eycWNmZtbYrHtrqZrqb9yx6ZUdO3e/evTosT8MHTr0uez0crKt47f33HNPR7cx8LVKSkru1DSNAKAjGt8wf/78XbFY7FMA8Hjcvb8xov8N2ciNzixWCCFo+/btzxiGEQPA+/Xre1teXt4MAIjH4wfX/teGlzJTD/9HV2lloZACgH7X1zU9qbMSQMAnlMNv3nn/Op/AWlVTYTpctHLz2wwQ68pPX0t0rslgGSneYDY9Xu+yP/vMb366R3Ues6BQsaNvukkrnvb83HA7QiH200TJ6sIor9H9bt1RgFayBh302Eu3Uryx78pH117+cugW6rJUPKsDeDzu/OLi4gfz8/MX+LzeiQBg2w776qsD/zZu3NiNQgiFMWYuD4W8Pr//RgCwLIvv2bXnDQBobWtbmY0gwWCvymx4BgChaadupkvXtYu/MfTWb1w0dG5hYb/ZLpfLa1mWc/To8dc/jPz1KSE6VygXMPqJiJwlS5b4vF7vTQBgmqa978Ch1wAgGo2+nj02GAjM6RqrqXNEs2uuuebAiRMnfp1pD5uIHADU1NRUvWDBXSc7AxOdpyOKrmnIWdY1NgoCxDGFzzLBoOTkwMtdrxGRGJ7yvOFOO0lhW5RQnLLpry4ZBgrz7Fo9e1VBBM45d8AtAWExAQgGSjh2ry1oLc/GoBkPPGDuPZx7x0VJZWE+Vz/zOMIhAAkVribFuXqnx1w1cmX1Uywc5hAhdlaN06aZiMViGxKJxIZ4PP7hkSPHXmps3Dl1yJDSp4QQFIlESAhBU2+5pczn85UAQMowjufm6nzv3r1jOjo6Wg3DMIgIeb16jX9nzZpLMg0KsqxTSyPTtGL79+9/xbZtM5Oxi22fNzxYXFz4L9/5znfS54urmd076jIdYebMmdd4vd4iAEgkUof9bhUHDx4cbRhGi2VZNgD4ff4pH6xfP5iIeOj0ZgkXQtCmTZuWGoZxNBMdlI5otH7r1q1vZKYX58LGOscx78Fs3Tr/QiGG2lrnrqUP9e9QxDVOOi10R4GbWHTAq49dGc3VBgaYmoDgwtDg+hKpmZ1lVZ/+/VzA5XazUXrx04NNGj44pY4ebSv3+BxE2yl90X7FfLXi9SVTEA5zEAkKh+3tc5/+95Nzl102XHgmlhj0RNBCC3McHk9E7cOa8a/X//65saAw7z7KWGtr+46iwr5XnWuZJYTgAETfoqI7WWf/sf0+X+H48eM/5pxj4MCBUBQFncs2TR0+bNhtALZ1L8+y7XRpaem8pqYmT0FBwWwAGNC/+DYAvz5X6CdigohQXl4uiEhk8hQhhEAgELirM2fkTjAYGOD3X7I5u4vJGBMAbF3PcQ8p7n8bgGeqq6tZOBzmmXKUW2+9tXnfvr1/Ky0dPAsAjje1vFtVVWVmIhH/2hyUAA6IB+LT7R921l10mW74Bp9zo+HWApR07KSZoh3MWkIMOEYmbNvmADmWbakxkZojasRSInJQlu2kHABBU5Tt2+59fn+m3F1DXn7smzHFvCEqLOxxkjcDWH/5svsnNGtKqW3ZilfJad86b/F7ALbMeSn09mrq+DgO0lJk873xtmEAtp0dZomROL1VSACotrYWXZOnmpqV/bxe73XZ5b1hGCYAk4hyIIRtWZbqcrlyhBAI9greXlm58Kna2udSyMk5Y8t30aLF/sbGxicCgcDNuq67+hbkl3+6tX4uEb0shNAzexOnVyiWRZndxewIY0TkrFq1qr/X670WABhjSiYCkRDCAQQjYjm6ritCCOTl9ZoFYFn3jSQhBO3bu/f0ngVTxYVuB1OmBIWYtrxpea8QRsQaJ/kVj66L1xobLQWEdmC25XAIAst1u5mSLZoA0l0sbhjMSVsi4dJGTjWWTASwYfeYPAWIZZZcAqZtl15bs3hA2rAUx0yPblDil8J2HNI0Burc1TV9rhtO5GlPmB1xJPUcTH796TnfPKq8s0o5eREBKsAFcxTFq+gnTm0FZ3qr3RlPYRORyOz/n7G2iUQiCgB7zJgJN3g8nl4A7Lb26IFPPv5oJuc8XlBQ4EkkEoZNFJwyadL7uq77/T5f6f333za1tva5NY7jMCLYAARjlC4o0LwVFRV7Dh048ELJgAGPAjCHDhlUvWjx4loA0cyN4Zm6Of365t/Y3t7+MWOMiEg9efLkxkGDBv1g3Lhx17vdbjcAOxqLbd/++eez3W43a21tdXRdh8fjKRk1atRbuq67PB7PyMhHH11GRJtramqU7AMeIhL79u51su2QjXRfn4RwwcFtCOFEebrgcX3PJutXFXEOwfJ1H1vQr2za7msH6hty7IkinbbdlIOxSp/7enu9ey0zrZHChZtU/rfkV4tbctRRBuN0xIzPArABAASDDWK2mUqJXWT9dI/FnwAIDoPHsG2AAJdQUay6/3wQoMGW/vLR9vj3U5pS0JFKWJ+S8bvtQdptCj40ZXOCx63kGUrDUqXo4woBUjNJnCvbGWzL7tPTNmb2iVkoFFL79Ol7bybjYa2tratmzJjxefdjjx05srFfUdF0VVVQOmTgAgBrPJqmuN0evfOadv7x41EhhKBnn3128d133/09v9+fF/D7i+++reqFqtrauzKjNDdTN1XX9QJd1wtO5SuWZQJgPp/vkWxmf+LkyZrJkyfv7FadXS0tLZ/oun6tpmm4qHTIfQDmVlZWnnGQw51Ath04d7wXNPoF01SvripCqIIIKa8ymJEbXDiwPX4U5OZqf0L6nnReIEdLm+gVp8YNsx5b0b1xR7z6w1HJgHeZYaQRh/W9+W+seHLYHfNPspUP91ZyXSqZNtIEgBQNovMG6UKFy1Lig0ztyU/mPr4GdSH1rYrwoauWL7p1p2KvjHm0oWkCDAUXM0dA54Q8S/tiQm5wdsWsuUZof4ipANDREd905Mix+wCgqam5tcs+gOj2VJAvW7ZMtyxruWEYSjKZ1DraW/+cWSYRABGJRFh5eTnfvHnzj3N9vtWMMRucJwDQwWPH9u3Ysev7Pp+PdcTiaduOtmWy69YpFRUzS4qLR6aTBk8baT4JyKkFUtFo9D8YY/sZY2nOeWbiVzgRz0nEYvuGDh2q2bb9TCKRoHQ6zdpOnny7p/rUb65/TNf1iYwxRwjnROb3OF1XBaaZei4Wi70NgMxEakuXDa+zN3YaGgQA9Fa1L6wO8RNu6SqBFEplwiap3B01Tdva1+YX2hZXG55UoZOPsw+PhULs8m8WKYP3BXlzfgMVtIwU0cPb/gjBvSnuWL4cr/fgiaMuBhLj8eOn/VEUQzBbZOY1YowZEDGXqjWVJl1/e/e+H+3LPAyyEQqxj+4PfxgKhS79z4HmTS12aphCan+H0JwP92cPHaK354YfNSAEhS/g0fr/ii45h/QPNeD5HwfTeR4f9/RCiPi6ZU9dXZ3a5aWOc71s0fWljGyZlH3eH4lEUFFRcSrJq6mpUSorK6n7dz283HHGZTLJqXoBL3/0VJ8zdK1D5uUUfgG9lxCpVjIvXHSbMwFUhB3UVDLkZ17qKAcH9bCjKECIhE6XEw47nQ+HahQ0NFBPZZcBWBc5x0seAlRWHVLWlQNoaRRAZrqrrOKgC99ckyRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkv5H/hsOW50vi86RNQAAAABJRU5ErkJggg==">
+<title>PARLAY LABS — Soccer Bet Builder</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800;9..144,900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -154,6 +155,24 @@
     animation: auth-fade-in .15s ease-out;
   }
   @keyframes auth-fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+
+  /* Brand mark in the auth modal — shows the PARLAY LABS logo above each
+     view's heading so the modal feels properly branded. */
+  .auth-brand {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 18px;
+  }
+  .auth-brand img {
+    height: 28px;
+    width: auto;
+    display: block;
+  }
+  @media (max-width: 480px) {
+    .auth-brand { margin-bottom: 14px; }
+    .auth-brand img { height: 24px; }
+  }
 
   .auth-modal {
     background: var(--bg-2); border: 1px solid var(--line);
@@ -1754,6 +1773,10 @@
 
   /* hidden util */
   .hidden { display: none !important; }
+
+  .brand-logo { display: inline-flex; align-items: center; text-decoration: none; line-height: 0; }
+  .brand-logo img { height: clamp(22px, 3.2vw, 32px); width: auto; display: block; }
+  @media (max-width: 480px) { .brand-logo img { height: 22px; } }
 </style>
 </head>
 <body>
@@ -1761,7 +1784,7 @@
   <header class="top">
     <div class="top-inner">
       <div class="brand">
-        <div class="logo" data-i18n="brand">PARLAY//<span>LAB</span></div>
+        <div class="logo brand-logo" role="img" aria-label="Parlay Labs"><img src="data:image/png;base64,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" alt="PARLAY LABS" /></div>
         <div class="tag" data-i18n="tagline">Soccer Bet Simulation Terminal</div>
       </div>
       <nav class="tabs" id="tabs">
@@ -1951,7 +1974,7 @@
     <div class="disclaim" data-i18n="disclaim">
       Simulation tool only · No real wagers placed · Odds shown reflect representative live pricing from FanDuel and DraftKings · 18+ where applicable · Gamble responsibly
     </div>
-    <div>v1.0.0 · LAB</div>
+    <div>v1.0.0 · PARLAY LABS</div>
   </footer>
 </div>
 
@@ -1990,6 +2013,7 @@ const SUPABASE_CONFIG = {
   url: 'https://ajccvuldhjynxegtlgxj.supabase.co',
   anonKey:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFqY2N2dWxkaGp5bnhlZ3RsZ3hqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxNTg1MjEsImV4cCI6MjA5MzczNDUyMX0.jVz9tLC7kwhwvhR_HOuAZWkCyqUGHoP_adQoykcxJA8',
 };
+
 // Initialize the Supabase client only if config is filled in. Otherwise,
 // authClient stays null and the app falls back to local-only mode gracefully.
 let authClient = null;
@@ -2015,7 +2039,7 @@ const authState = {
 // ============= I18N =============
 const I18N = {
   en: {
-    'brand': 'PARLAY//<span>LAB</span>',
+    'brand': 'PARLAY LABS',
     'tagline': 'Soccer Bet Simulation Terminal',
     'tab.builder': 'Builder', 'tab.news': 'News',
     'tab.analytics': 'Analytics', 'tab.my': 'My Slips',
@@ -2263,7 +2287,7 @@ const I18N = {
     'ana.preset.cross': 'Cross-league (5 legs · 2.1 each)',
   },
   es: {
-    'brand': 'PARLAY//<span>LAB</span>',
+    'brand': 'PARLAY LABS',
     'tagline': 'Terminal de Simulación de Apuestas',
     'tab.builder': 'Constructor', 'tab.news': 'Noticias',
     'tab.analytics': 'Análisis', 'tab.my': 'Mis Boletos',
@@ -2510,7 +2534,7 @@ const I18N = {
     'ana.preset.cross': 'Multi-liga (5 sel · 2.1 c/u)',
   },
   de: {
-    'brand': 'PARLAY//<span>LAB</span>',
+    'brand': 'PARLAY LABS',
     'tagline': 'Fußball-Wettsimulations-Terminal',
     'tab.builder': 'Builder', 'tab.news': 'News',
     'tab.analytics': 'Analyse', 'tab.my': 'Meine Tipps',
@@ -2758,7 +2782,7 @@ const I18N = {
     'ana.preset.cross': 'Liga-übergreifend (5 Tipps · 2.1 je)',
   },
   it: {
-    'brand': 'PARLAY//<span>LAB</span>',
+    'brand': 'PARLAY LABS',
     'tagline': 'Terminale di Simulazione Scommesse',
     'tab.builder': 'Costruttore', 'tab.news': 'Notizie',
     'tab.analytics': 'Analisi', 'tab.my': 'Le Mie Schedine',
@@ -3006,7 +3030,7 @@ const I18N = {
     'ana.preset.cross': 'Multi-campionato (5 sel · 2.1 ciasc.)',
   },
   fr: {
-    'brand': 'PARLAY//<span>LAB</span>',
+    'brand': 'PARLAY LABS',
     'tagline': 'Terminal de Simulation de Paris',
     'tab.builder': 'Constructeur', 'tab.news': 'Actus',
     'tab.analytics': 'Analyse', 'tab.my': 'Mes Tickets',
@@ -4652,6 +4676,7 @@ function renderAuthModal() {
   // Disabled state — Supabase not configured
   if (!authClient) {
     body.innerHTML = `
+      <div class="auth-brand"><img src="data:image/png;base64,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" alt="PARLAY LABS" /></div>
       <h2>${t('auth.disabled')}</h2>
       <div class="auth-sub">${t('auth.disabledNote')}</div>
       <div class="auth-msg info" style="margin-top:18px;">
@@ -4672,6 +4697,7 @@ function renderAuthModal() {
     const u = authState.user;
     const displayName = u.user_metadata?.name || u.email?.split('@')[0] || '—';
     body.innerHTML = `
+      <div class="auth-brand"><img src="data:image/png;base64,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" alt="PARLAY LABS" /></div>
       <h2>${t('auth.profile')}</h2>
       <div class="auth-sub">
         <span class="auth-mode-pill cloud"><span class="dot"></span>${t('auth.cloudMode')}</span>
@@ -4701,6 +4727,7 @@ function renderAuthModal() {
   // Reset password view
   if (authState.view === 'reset') {
     body.innerHTML = `
+      <div class="auth-brand"><img src="data:image/png;base64,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" alt="PARLAY LABS" /></div>
       <h2>${t('auth.resetTitle')}</h2>
       <div class="auth-sub">${t('auth.email')}</div>
       ${errorHtml}${infoHtml}
@@ -4722,6 +4749,7 @@ function renderAuthModal() {
   // Sign up view
   if (authState.view === 'signup') {
     body.innerHTML = `
+      <div class="auth-brand"><img src="data:image/png;base64,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" alt="PARLAY LABS" /></div>
       <h2>${t('auth.signUp')}</h2>
       <div class="auth-sub">${t('auth.cloudMode')}</div>
       ${errorHtml}${infoHtml}
