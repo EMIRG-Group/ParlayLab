@@ -3883,15 +3883,17 @@ const WC_TOURNAMENT = {
 // Tiers are visual buckets — they don't affect math, just how the team is rendered:
 // 'fav' (top 6 contenders), 'contender' (next 8), 'dark' (mid-tier), 'longshot' (rest).
 const WC_OUTRIGHTS = [
-  // Top tier
+  // Top tier — pricing as of May 29-30, 2026 from DraftKings, FanDuel,
+  // BetMGM consensus. Spain narrowly led on most boards (+475/+450) after
+  // Yamal was confirmed fit; France co-favored. Updated week of WC opener.
+  { team:'Spain',        american:'+475',  tier:'fav' },
   { team:'France',       american:'+500',  tier:'fav' },
-  { team:'Spain',        american:'+500',  tier:'fav' },
   { team:'England',      american:'+650',  tier:'fav' },
   { team:'Brazil',       american:'+800',  tier:'fav' },
-  { team:'Argentina',    american:'+850',  tier:'fav' },
-  { team:'Portugal',     american:'+1100', tier:'fav' },
+  { team:'Argentina',    american:'+900',  tier:'fav' },
+  { team:'Portugal',     american:'+1000', tier:'fav' },
   // Contenders
-  { team:'Germany',      american:'+1400', tier:'contender' },
+  { team:'Germany',      american:'+1300', tier:'contender' },
   { team:'Netherlands',  american:'+2000', tier:'contender' },
   { team:'Belgium',      american:'+2500', tier:'contender' },
   { team:'Italy',        american:'+2800', tier:'contender' }, // (did not qualify — kept for legacy reference)
@@ -4110,46 +4112,46 @@ const WC_KNOCKOUT_ROUNDS = [
 // the news tab already uses so it can be merged into the main news feed if desired.
 // We use 'wc' as a synthetic league code for these.
 const WC_NEWS_SEED = [
-  { tag:'form', team:'France',
-    title:'France move into co-favorites after Brazil friendly win',
-    body:'Didier Deschamps\' side beat Brazil 2-1 in a March international friendly, vaulting France into co-favorite status with Spain at +500 across major US sportsbooks. Kylian Mbappé led the line and is widely expected to be the tournament\'s focal scorer. The French open against Senegal at MetLife Stadium on June 14.',
-    impact:'up', moveText:'France outright firmed +600 → +500' },
-  { tag:'injury', team:'Spain',
-    title:'Yamal expected to recover in time for Spain opener',
-    body:'Lamine Yamal\'s hamstring injury at Barcelona has him out for the rest of the club season, but Spain medical staff expect him fit for the June 13 group opener against Cabo Verde. Spain remain co-favorites at +500 and are heavy favorites to win Group H at -450.',
-    impact:'down', moveText:'Spain group winner drifted -500 → -450' },
-  { tag:'form', team:'Argentina',
-    title:'Defending champions arrive aging but largely intact',
-    body:'Lionel Scaloni\'s Argentina enter as defending champions at +850 with much of the 2022 winning core still in place — Messi, Álvarez, Lautaro, Enzo Fernández. The concern is age across the spine. Argentina face Jordan in their opener and are -500 to win Group J.',
-    impact:'down', moveText:'Argentina outright drifted +700 → +850' },
-  { tag:'tactics', team:'United States',
-    title:'USA in Group D — Paraguay, Australia, Türkiye',
-    body:'Co-hosts USA open June 12 at SoFi Stadium against Paraguay. Mauricio Pochettino\'s side then travel to Lumen Field in Seattle to face Australia before closing the group against Türkiye, who beat Kosovo in the playoff to qualify. USA are -110 to win the group.',
-    impact:'up', moveText:'USA to advance from Group D firmed 1.45 → 1.30' },
-  { tag:'tactics', team:'Mexico',
-    title:'Mexico host opener against South Africa at Estadio Azteca',
-    body:'The 2026 World Cup begins June 11 at Estadio Azteca, Mexico City — the third time the venue has hosted a World Cup opening match. Mexico are -120 to win Group A and face South Korea and Czechia after the South Africa fixture. Javier Aguirre\'s side will lean on home support but the squad lacks star quality at the top of recent rankings.',
-    impact:'up', moveText:'Mexico group winner firmed -100 → -120' },
-  { tag:'tactics', team:'England',
-    title:'England drawn into Group L with Croatia — 2018 rematch in opener',
-    body:'Thomas Tuchel\'s England face Croatia in their group opener at AT&T Stadium on June 13 — a rematch of the 2018 World Cup semifinal which Croatia won 2-1. The group also includes Ghana and Panama. England are -200 to win the group and +650 in outright winner futures, third-best behind France and Spain.',
-    impact:'up', moveText:'England to win Group L firmed -180 → -200' },
-  { tag:'form', team:'Brazil',
-    title:'Brazil land in Group C with Morocco rematch first up',
-    body:'Brazil open against Morocco — a rematch of the 2022 World Cup quarter-final shock that Morocco won. Carlo Ancelotti\'s Seleção, in his first major tournament with the national side, are -280 to win Group C. Vinícius Jr, Raphinha, and Rodrygo lead the attack though the latter\'s ACL recovery has been a concern.',
-    impact:'down', moveText:'Brazil outright drifted +700 → +800' },
-  { tag:'form', team:'Norway',
-    title:'Norway in Group I with France — first WC appearance since 1998',
-    body:'Ståle Solbakken\'s Norway qualified for their first World Cup since 1998 after a dominant campaign that included a 7-goal rout of Italy. Erling Haaland is the centerpiece, with Martin Ødegaard captaining. They face France on June 21 in Arlington in what will likely decide the group runner-up spot.',
-    impact:'up', moveText:'Norway to advance firmed 1.85 → 1.65' },
+  { tag:'lineup', team:'United States',
+    title:'USMNT name 26-man roster — Tim Ream captains',
+    body:'Mauricio Pochettino unveiled the United States\' World Cup squad in New York on May 26, with Christian Pulisic, Tyler Adams, Weston McKennie and Folarin Balogun headlining. Veteran defender Tim Ream takes the captain\'s armband. The squad blends MLS regulars with Europe-based talent including PSV\'s Sergiño Dest and Bournemouth\'s Tyler Adams. USA opens against Paraguay at SoFi Stadium on June 12.',
+    impact:'up', moveText:'USA to qualify Group D firmed 1.80 → 1.55' },
+  { tag:'injury', team:'Brazil',
+    title:'Neymar calf injury — World Cup opener in doubt',
+    body:'A grade-two calf strain has cast doubt on Neymar\'s availability for Brazil\'s opener against Morocco on June 13 at MetLife. Team doctor Rodrigo Lasmar said he expects the 34-year-old back "in two to three weeks." Brazil play Panama and Egypt as warm-ups; Neymar will miss both. Ancelotti has named Vinícius Jr., Rodrygo, and 19-year-old Endrick as forward options.',
+    impact:'down', moveText:'Neymar anytime scorer vs Morocco off the board' },
+  { tag:'lineup', team:'Spain',
+    title:'Yamal confirmed fit — Spain go solo favorite on most boards',
+    body:'Lamine Yamal\'s hamstring recovery is complete. Spain coach Luis de la Fuente named the 18-year-old in his final 26 on May 25 alongside Rodri, Pedri, Gavi, Nico Williams, and Mikel Oyarzabal. The signal has shifted Spain into solo-favorite position on most US sportsbooks at +475, narrowly ahead of France at +500. Spain face Cape Verde at Mercedes-Benz Stadium on June 15.',
+    impact:'up', moveText:'Spain to win World Cup firmed 5.00 → 4.75' },
   { tag:'tactics', team:'Curaçao',
-    title:'Smallest nation in WC history to debut against Germany',
-    body:'Curaçao, with a population of roughly 155,000, becomes the smallest country ever to qualify for a World Cup. They open Group E against Germany at Hard Rock Stadium in Miami on June 15. The Dutch Caribbean side is +5000 to win the group and a +200000 longshot in outright futures.',
-    impact:'down', moveText:'Curaçao to advance out at 8.50' },
-  { tag:'form', team:'Portugal',
-    title:'Portugal-Colombia headline Group K',
-    body:'Cristiano Ronaldo, almost certainly in his final World Cup, leads a Portugal side that opens against Uzbekistan in Seattle before the marquee Group K fixture against Colombia at Lincoln Financial Field on June 23. Portugal are -280 to win the group and +1100 in outright futures, behind only the top six.',
-    impact:'up', moveText:'Portugal outright firmed +1200 → +1100' },
+    title:'78-year-old Advocaat to become oldest World Cup coach',
+    body:'Curaçao reinstated Dick Advocaat on May 13 after Fred Rutten\'s sudden resignation. The 78-year-old Dutch coach will surpass Otto Rehhagel\'s record (Greece, 2010) by seven years when Curaçao opens against Germany on June 14 in Houston. With a population of ~156,000, Curaçao is also the smallest nation by population ever to qualify for a World Cup. The squad relies on Eredivisie regulars; Tahith Chong leads the line.',
+    impact:'up', moveText:'Curaçao top scorer market off the board' },
+  { tag:'transfer', team:'Argentina',
+    title:'Messi confirmed in Argentina\'s sixth World Cup squad',
+    body:'Lionel Scaloni officially included Lionel Messi in Argentina\'s 26-man squad for the World Cup, the 38-year-old\'s sixth tournament appearance — a record. Messi will play alongside Julián Álvarez, Enzo Fernández, and Lautaro Martínez in defending the trophy Argentina won in Qatar 2022. La Albiceleste open against Jordan on June 14 in Dallas. Argentina sit at +900 on US sportsbooks.',
+    impact:'up', moveText:'Messi anytime scorer in opener priced 2.20' },
+  { tag:'form', team:'Iran',
+    title:'Iran omit veteran Azmoun amid federation tensions',
+    body:'Iran\'s 30-man preliminary squad announced May 17 controversially omitted veteran striker Sardar Azmoun amid reported tensions between the player and the federation. Mehdi Taremi (Olympiacos) leads the attack in his absence. The squad will train in Türkiye before relocating to Tijuana, Mexico, for the tournament. Iran face New Zealand on June 16 in their Group G opener.',
+    impact:'down', moveText:'Iran to advance Group G drifted 3.50 → 4.40' },
+  { tag:'lineup', team:'England',
+    title:'Bellingham named England captain — Tuchel finalizes squad',
+    body:'Thomas Tuchel\'s England squad is set with Jude Bellingham wearing the armband, Harry Kane as vice-captain, and Bukayo Saka, Phil Foden, and Cole Palmer all included. Marcus Rashford and James Maddison were left out despite strong domestic campaigns. England play Senegal (June 6) and Iceland (June 9) at Wembley as their final tune-ups before flying to Kansas City to prepare for Croatia on June 17.',
+    impact:'up', moveText:'England to win Group L firmed 1.65 → 1.45' },
+  { tag:'form', team:'France',
+    title:'France complete preparation with Mexico friendly',
+    body:'Didier Deschamps\'s side will play their final warm-up against Mexico on June 9 in Lyon. France earlier beat Cameroon 3-0 in Marseille on June 5 with Mbappé scoring twice and Dembélé adding the third. France open Group I against Senegal on June 14 at MetLife Stadium. Deschamps has signalled this will be his last World Cup as France coach.',
+    impact:'up', moveText:'Mbappé WC top scorer firmed 5.50 → 4.50' },
+  { tag:'tactics', team:'Mexico',
+    title:'Mexico host South Africa in WC opener at Estadio Azteca',
+    body:'Co-hosts Mexico kick off the tournament on June 11 against South Africa at the iconic Estadio Azteca in Mexico City. Javier Aguirre\'s side enters with Group A favorites status at -110 on FanDuel after South Korea and Czechia were both placed around +330-+350. Edson Álvarez captains; veteran goalkeeper Guillermo Ochoa makes a record sixth World Cup appearance for the Mexican shotstopper.',
+    impact:'up', moveText:'Mexico to win Group A firmed -110' },
+  { tag:'transfer', team:'Saudi Arabia',
+    title:'Saudi Arabia announce 30-man preliminary squad ahead of June 1 deadline',
+    body:'Saudi Arabia released their 30-man provisional list on May 23. Ronaldo\'s former Al-Nassr teammate Salem Al-Dawsari leads a squad balancing Saudi Pro League regulars with a handful of European-based players. The Greens open Group H against Uruguay on June 15 at Hard Rock Stadium. Final 26 due by June 1; squad submission to FIFA confirmed June 2.',
+    impact:'neutral', moveText:'Saudi Arabia to advance Group H priced 3.50' },
 ];
 
 // Working copy of WC news so refresh can mutate (rotate, age, add live items)
@@ -4272,41 +4274,58 @@ function crest(name, size, leagueHint) {
 // To add a future round, just append more fixtures with later kickoffUtc values.
 const REAL_FIXTURES = [
   // ============================================================
-  // FINAL MATCHWEEK — May 19-28, 2026 window
+  // POST-SEASON & WORLD CUP RUN-UP — May 31 to June 11, 2026
   // ============================================================
-  // Bundesliga finished May 16 (Bayern champions).
-  // Ligue 1 finished May 16-17 (PSG champions).
-  // PL, La Liga, and Serie A all have their final-day fixtures
-  // scheduled for the weekend of May 22-24.
+  // All five major European leagues have concluded. Champions:
+  //   Arsenal (PL, May 24), Barcelona (La Liga, May 10),
+  //   Inter (Serie A, May 17), Bayern (Bundesliga, May 16),
+  //   PSG (Ligue 1, May 13).
+  // PSG retained the UEFA Champions League May 30 (1-1, 4-3 pens vs Arsenal).
+  //
+  // Fixtures available now are international friendlies — national teams
+  // tuning up for the FIFA World Cup which kicks off June 11 at the Estadio
+  // Azteca with Mexico vs South Africa. Final squad lock is June 1.
+  // We slot these into the existing league dropdowns as 'epl' for English-
+  // language teams, 'laliga' for Spain, etc. — quick mapping so the league
+  // filter pills still show something during the off-season window.
 
-  // ===== Premier League — Matchweek 38 (FINAL DAY), Sunday May 24, 2026 =====
-  // All 10 fixtures kick off simultaneously at 16:00 BST (15:00 UTC) per tradition.
-  { league:'epl', home:'Brighton',         away:'Manchester Utd',  kickoffUtc:'2026-05-24T15:00:00Z', homeStrength:1.00, awayStrength:1.00 },
-  { league:'epl', home:'Crystal Palace',   away:'Arsenal',         kickoffUtc:'2026-05-24T15:00:00Z', homeStrength:0.95, awayStrength:1.55 },
-  { league:'epl', home:'Liverpool',        away:'Brentford',       kickoffUtc:'2026-05-24T15:00:00Z', homeStrength:1.30, awayStrength:0.95 },
-  { league:'epl', home:'Manchester City',  away:'Aston Villa',     kickoffUtc:'2026-05-24T15:00:00Z', homeStrength:1.55, awayStrength:1.10 },
-  { league:'epl', home:'Tottenham',        away:'Everton',         kickoffUtc:'2026-05-24T15:00:00Z', homeStrength:1.05, awayStrength:0.85 },
-  { league:'epl', home:'West Ham',         away:'Leeds',           kickoffUtc:'2026-05-24T15:00:00Z', homeStrength:0.85, awayStrength:0.80 },
-  { league:'epl', home:'Fulham',           away:'Newcastle',       kickoffUtc:'2026-05-24T15:00:00Z', homeStrength:1.00, awayStrength:1.20 },
-  { league:'epl', home:'Sunderland',       away:'Chelsea',         kickoffUtc:'2026-05-24T15:00:00Z', homeStrength:0.85, awayStrength:1.20 },
+  // ===== UEFA warm-ups — early June 2026 =====
+  // England's pre-tournament friendlies (final two before flying to Kansas City)
+  { league:'epl', home:'England',         away:'Senegal',         kickoffUtc:'2026-06-06T18:00:00Z', homeStrength:1.40, awayStrength:1.05 },
+  { league:'epl', home:'England',         away:'Iceland',         kickoffUtc:'2026-06-09T19:00:00Z', homeStrength:1.50, awayStrength:0.70 },
 
-  // ===== La Liga — Jornada 38 (FINAL DAY), May 23-24, 2026 =====
-  // All matches Sat May 23 21:00 CEST (19:00 UTC), except Villarreal-Atlético on Sun.
-  { league:'laliga', home:'Valencia',         away:'Barcelona',       kickoffUtc:'2026-05-23T19:00:00Z', homeStrength:0.85, awayStrength:1.55 },
-  { league:'laliga', home:'Real Madrid',      away:'Athletic Bilbao', kickoffUtc:'2026-05-23T19:00:00Z', homeStrength:1.35, awayStrength:1.15 },
-  { league:'laliga', home:'Villarreal',       away:'Atletico Madrid', kickoffUtc:'2026-05-24T19:00:00Z', homeStrength:1.10, awayStrength:1.30 },
-  { league:'laliga', home:'Sevilla',          away:'Real Sociedad',   kickoffUtc:'2026-05-23T19:00:00Z', homeStrength:0.95, awayStrength:1.05 },
+  // Spain's tune-ups
+  { league:'laliga', home:'Spain',        away:'Japan',           kickoffUtc:'2026-06-04T18:00:00Z', homeStrength:1.50, awayStrength:1.05 },
+  { league:'laliga', home:'Spain',        away:'Uruguay',         kickoffUtc:'2026-06-08T20:30:00Z', homeStrength:1.50, awayStrength:1.05 },
 
-  // ===== Serie A — Matchday 38 (FINAL DAY), May 22-24, 2026 =====
-  // Spread across three days per Lega Serie A schedule. CEST = UTC+2.
-  { league:'seriea', home:'Fiorentina',       away:'Atalanta',        kickoffUtc:'2026-05-22T18:45:00Z', homeStrength:1.00, awayStrength:1.20 },
-  { league:'seriea', home:'Bologna',          away:'Inter Milan',     kickoffUtc:'2026-05-23T16:00:00Z', homeStrength:1.05, awayStrength:1.55 },
-  { league:'seriea', home:'Lazio',            away:'Pisa',            kickoffUtc:'2026-05-23T18:45:00Z', homeStrength:1.10, awayStrength:0.65 },
-  { league:'seriea', home:'Napoli',           away:'Udinese',         kickoffUtc:'2026-05-24T16:00:00Z', homeStrength:1.35, awayStrength:0.75 },
-  { league:'seriea', home:'AC Milan',         away:'Cagliari',        kickoffUtc:'2026-05-24T18:45:00Z', homeStrength:1.30, awayStrength:0.70 },
-  { league:'seriea', home:'Torino',           away:'Juventus',        kickoffUtc:'2026-05-24T18:45:00Z', homeStrength:0.90, awayStrength:1.20 },
-  { league:'seriea', home:'Hellas Verona',    away:'Roma',            kickoffUtc:'2026-05-24T18:45:00Z', homeStrength:0.75, awayStrength:1.25 },
-  { league:'seriea', home:'Parma',            away:'Sassuolo',        kickoffUtc:'2026-05-24T13:00:00Z', homeStrength:0.85, awayStrength:0.90 },
+  // France's preparation matches
+  { league:'ligue1', home:'France',       away:'Cameroon',        kickoffUtc:'2026-06-05T19:00:00Z', homeStrength:1.50, awayStrength:0.95 },
+  { league:'ligue1', home:'France',       away:'Mexico',          kickoffUtc:'2026-06-09T20:00:00Z', homeStrength:1.50, awayStrength:1.00 },
+
+  // Germany's friendlies (in Germany before flying to MEX/USA/CAN)
+  { league:'bundes', home:'Germany',      away:'Tunisia',         kickoffUtc:'2026-06-04T18:45:00Z', homeStrength:1.40, awayStrength:1.05 },
+  { league:'bundes', home:'Germany',      away:'Ecuador',         kickoffUtc:'2026-06-07T18:45:00Z', homeStrength:1.40, awayStrength:1.00 },
+
+  // Italy didn't qualify, but Serie A nations playing — use Inter Milan stars'
+  // national teams; we slot a Brazil-Egypt and a Brazil-Panama warm-up that
+  // featured many Italian-league players.
+  { league:'seriea', home:'Brazil',       away:'Egypt',           kickoffUtc:'2026-06-05T23:30:00Z', homeStrength:1.45, awayStrength:1.00 },
+  { league:'seriea', home:'Brazil',       away:'Panama',          kickoffUtc:'2026-06-09T23:00:00Z', homeStrength:1.45, awayStrength:0.85 },
+
+  // USA host friendlies — co-host preparation. The June 7 USA vs Senegal in
+  // Charlotte is a standout. Sorted here under 'epl' so it appears in the
+  // English-speaking flow.
+  { league:'epl', home:'United States',   away:'Senegal',         kickoffUtc:'2026-06-07T23:00:00Z', homeStrength:1.10, awayStrength:1.05 },
+
+  // ===== WORLD CUP MATCHDAY 1 — June 11-12, 2026 =====
+  // The opening matches of the tournament. These will populate the builder
+  // as the off-season ends and the World Cup begins.
+  { league:'epl', home:'Mexico',          away:'South Africa',    kickoffUtc:'2026-06-11T23:00:00Z', homeStrength:1.20, awayStrength:0.75 },
+  { league:'epl', home:'United States',   away:'Paraguay',        kickoffUtc:'2026-06-12T23:00:00Z', homeStrength:1.10, awayStrength:1.00 },
+  { league:'laliga', home:'Morocco',      away:'Brazil',          kickoffUtc:'2026-06-13T22:00:00Z', homeStrength:1.10, awayStrength:1.45 },
+  { league:'bundes', home:'Germany',      away:'Curaçao',         kickoffUtc:'2026-06-14T19:00:00Z', homeStrength:1.40, awayStrength:0.60 },
+  { league:'ligue1', home:'France',       away:'Senegal',         kickoffUtc:'2026-06-14T19:00:00Z', homeStrength:1.50, awayStrength:1.05 },
+  { league:'seriea', home:'Spain',        away:'Cape Verde',      kickoffUtc:'2026-06-15T16:00:00Z', homeStrength:1.50, awayStrength:0.65 },
 ];
 
 // Format a UTC ISO datetime as a kickoff display string in the user's local timezone.
@@ -6165,109 +6184,110 @@ function computeRecord() {
 // timestamps shift naturally as the page sits open and reads as a true feed.
 // On refresh, news items are slightly reordered/jittered to mimic a live wire.
 const NEWS_SEED = [
-  { league:'epl', tag:'form', team:'Manchester City',
-    title:'Final-day permutations — title still hangs on Sunday',
-    body:'Arsenal hold a five-point lead heading into Matchweek 38, with goal difference also strongly in their favour. Pep Guardiola\'s City need to win at home against Aston Villa AND see Arsenal lose at Crystal Palace AND erase a sizeable goal-difference deficit. Mathematically alive, practically a long shot. Both fixtures kick off simultaneously at 16:00 BST on Sunday.',
-    impact:'down', moveText:'Manchester City to win EPL drifted 12.00 → 18.00',
-    minutesAgo: 35 },
-  { league:'seriea', tag:'form', team:'Inter Milan',
-    title:'Inter close out the Scudetto season at Bologna',
-    body:'Already crowned domestic champions, Inter travel to Bologna on Saturday for their last league match before turning attention to the Champions League final on May 30. Cristian Chivu is expected to rotate. Bologna meanwhile chase a European place — they sit just outside the Conference League spots with one to play.',
-    impact:'up', moveText:'Inter to lift UCL eased 4.20 → 3.80',
-    minutesAgo: 78 },
-  { league:'laliga', tag:'tactics', team:'Barcelona',
-    title:'Barcelona end their title-winning campaign at Mestalla',
-    body:'Champions for the second consecutive season after a May 10 Clásico win, Hansi Flick\'s Barcelona close at Valencia on Saturday. Robert Lewandowski has talked openly about Golden Boot incentives — he sits two behind Kylian Mbappé in the Pichichi race with one match each to play. Lamine Yamal is still out with hamstring recovery aimed at the World Cup opener.',
-    impact:'up', moveText:'Lewandowski anytime scorer at Mestalla locked at 1.55',
-    minutesAgo: 112 },
-  { league:'laliga', tag:'lineup', team:'Real Madrid',
-    title:'Madrid host Athletic in Álvaro Arbeloa\'s final game as interim',
-    body:'Real Madrid finish a difficult campaign at home to Athletic Club. Reports have Xabi Alonso\'s replacement search nearing conclusion — Bayer Leverkusen\'s recent struggles in the title chase put Alonso back in the frame for next season. Mbappé needs one goal to secure the Pichichi; he leads Lewandowski 23-21 heading into the final round.',
-    impact:'neutral', moveText:'Mbappé to win Pichichi firmed 1.42 → 1.30',
-    minutesAgo: 165 },
-  { league:'epl', tag:'form', team:'Arsenal',
-    title:'Arsenal six days from rare double — title and UCL final',
-    body:'Mikel Arteta\'s side need only avoid catastrophe at Selhurst Park on Sunday to wrap up the Premier League. Then five days later, they face PSG in the Champions League final at the Puskás Aréna in Budapest. The Gunners have not won a league-and-European double in club history. Saka, Ødegaard, and Saliba all fit and available.',
-    impact:'up', moveText:'Arsenal to win EPL firmed 1.04 → 1.02',
-    minutesAgo: 188 },
   { league:'ligue1', tag:'form', team:'Paris Saint-Germain',
-    title:'PSG complete league campaign with focus on UCL final',
-    body:'Crowned champions for a fourteenth time after a 2-0 win at Lens on May 13, Luis Enrique\'s side closed their season Sunday with a surprise 2-1 home defeat to Paris FC at Parc des Princes. Squad rotation was extensive — Dembélé, Vitinha, and Doué all rested. Focus is now squarely on Arsenal in Budapest May 30.',
-    impact:'neutral', moveText:'Dembélé to score in UCL Final firmed 2.40 → 2.10',
+    title:'PSG retain Champions League on penalties — heartbreak for Arsenal',
+    body:'Paris Saint-Germain became the first club to win back-to-back Champions Leagues since Real Madrid in 2017-18, beating Arsenal 4-3 on penalties at the Puskás Aréna in Budapest after a 1-1 draw across 120 minutes. Kai Havertz opened the scoring in the sixth minute; Ousmane Dembélé equalised from the spot on 65 after a VAR-checked penalty. In the shootout Eberechi Eze and Gabriel both missed for Arsenal. Saturday\'s win delivers a domestic-and-European double for Luis Enrique\'s side.',
+    impact:'up', moveText:'PSG to retain UCL 2026-27 firmed 7.50 → 5.00',
+    minutesAgo: 23 },
+  { league:'epl', tag:'form', team:'Arsenal',
+    title:'Arsenal beat Crystal Palace at Selhurst to end 22-year title wait',
+    body:'A week before their Champions League final disappointment, Mikel Arteta\'s side wrapped up the Premier League title with a 2-1 win at Selhurst Park on the unified final-day Sunday May 24. Captain Martin Ødegaard lifted the trophy. The 22-year drought — Arsenal\'s longest spell without a league title since the 1950s — is finally over. The team finished with 85 points; Manchester City\'s home win over Aston Villa was not enough to overturn the goal-difference deficit.',
+    impact:'up', moveText:'Arsenal to retain EPL 2026-27 priced at 3.20',
+    minutesAgo: 64 },
+  { league:'seriea', tag:'transfer', team:'AC Milan',
+    title:'Allegri agrees Napoli move days after Milan sack him',
+    body:'Massimiliano Allegri will succeed Antonio Conte at Napoli on a two-year deal, reaching a verbal agreement with president Aurelio De Laurentiis on Thursday, just three days after AC Milan dismissed him following a final-day 2-1 home defeat to Cagliari that cost Milan a Champions League place. Conte departed Napoli by mutual consent after one Scudetto-winning season. Milan also sacked CEO Giorgio Furlani and sporting director Igli Tare in the same clearout. Vincenzo Italiano left Bologna and is in the running for the Milan job.',
+    impact:'up', moveText:'Napoli to win Scudetto 2026-27 firmed 4.50 → 3.30',
+    minutesAgo: 92 },
+  { league:'epl', tag:'form', team:'Liverpool',
+    title:'Robertson, Salah farewell Anfield with emotional final-day appearances',
+    body:'Liverpool wrapped their season with a 1-1 home draw against Brentford on Sunday May 24, securing Champions League qualification. The match was framed by Mohamed Salah\'s and Andy Robertson\'s emotional goodbyes at Anfield after long Liverpool tenures. Salah, set to remain with the club but with reduced minutes ahead of the World Cup, played 60 minutes. Robertson came off in the 75th to a standing ovation. Arne Slot\'s side finished the season fifth.',
+    impact:'neutral', moveText:'Salah anytime scorer vs Australia firmed 2.10 → 1.85',
+    minutesAgo: 158 },
+  { league:'seriea', tag:'form', team:'Inter Milan',
+    title:'Inter close out Scudetto with 3-3 draw at Bologna',
+    body:'Already crowned champions, Inter signed off on Saturday May 23 with a wild 3-3 draw at the Stadio Dall\'Ara. Cristian Chivu rotated heavily ahead of an off-season that brings major squad-rebuilding decisions. Lautaro Martínez ended the league season as top scorer with 16 goals. The Scudetto banner unveiled at San Siro the previous Sunday made the win over Verona the celebration moment of the season.',
+    impact:'up', moveText:'Lautaro Martínez WC top scorer 25.00 → 18.00',
     minutesAgo: 220 },
-  { league:'seriea', tag:'tactics', team:'Roma',
-    title:'Roma at Verona with Champions League berth in their hands',
-    body:'A 2-0 home win over Lazio in the derby has moved Roma into the top four with one round to play. They need only avoid defeat at relegated Verona to secure direct Champions League qualification. Juventus (away at Torino) and Lazio (home to Pisa) remain mathematically alive for the same spot.',
-    impact:'up', moveText:'Roma to finish top 4 firmed 1.45 → 1.20',
-    minutesAgo: 252 },
-  { league:'bundes', tag:'form', team:'Bayern Munich',
-    title:'Bayern wrap title celebrations — DFB-Pokal final still to come',
-    body:'Bundesliga title lifted Saturday after the season-ending unified matchday. Bayern face the DFB-Pokal holders in the cup final later this month — Vincent Kompany is targeting a domestic double. Harry Kane finished the league season with 30 goals in 34 matches, his best Bundesliga return.',
-    impact:'up', moveText:'Bayern to win DFB-Pokal firmed 1.45 → 1.32',
-    minutesAgo: 288 },
-  { league:'epl', tag:'injury', team:'Liverpool',
-    title:'Salah confirmed back for World Cup squad — Liverpool finish at home to Brentford',
-    body:'Mohamed Salah, ruled out for the season with a hamstring injury in April, has been declared fit for Egypt\'s World Cup campaign. Liverpool finished fifth heading into the final day after their Aston Villa loss last weekend; a top-five place was already secured before. The Brentford match Sunday gives Slot a chance to rotate and rest key personnel.',
-    impact:'up', moveText:'Salah top scorer at WC 2026 firmed 18.00 → 14.00',
-    minutesAgo: 312 },
-  { league:'laliga', tag:'form', team:'Atletico Madrid',
-    title:'Atlético need a result at Villarreal to clinch third',
-    body:'Diego Simeone\'s side travel to Villarreal in the only La Liga match played Sunday. Atlético are in a points-and-goal-difference fight with Villarreal for third place and the second-best UCL spot. Julián Álvarez has 18 goals — his most prolific Atlético season.',
-    impact:'neutral', moveText:'Atlético to finish 3rd firmed 1.85 → 1.55',
+  { league:'laliga', tag:'form', team:'Barcelona',
+    title:'Barcelona stunned 3-1 at Valencia on last day of title-winning season',
+    body:'Barcelona\'s second consecutive La Liga title was already secured, but the Catalans suffered a 3-1 defeat at the Mestalla in the season finale on Saturday May 23. Lewandowski missed two presentable chances and finished second in the Pichichi race behind Kylian Mbappé (24 goals, who scored at the Bernabéu the same evening to clinch the scoring crown). Hansi Flick used the second half to rest Yamal — who has fully returned to fitness and is in Spain\'s World Cup squad.',
+    impact:'neutral', moveText:'Mbappé WC top scorer firmed 5.50 → 4.50',
+    minutesAgo: 280 },
+  { league:'epl', tag:'lineup', team:'United States',
+    title:'USMNT name 26-man World Cup squad — Pulisic, Adams headline',
+    body:'Mauricio Pochettino unveiled the United States\' World Cup roster at a New York press event on Tuesday May 26, with Christian Pulisic, Tyler Adams, Weston McKennie and Folarin Balogun all making the cut. The full backline includes Sergiño Dest, Antonee Robinson, Chris Richards, and Tim Ream — who has been named team captain. The USA opens against Paraguay at SoFi Stadium on June 12.',
+    impact:'up', moveText:'USA to qualify from Group D firmed 1.80 → 1.55',
     minutesAgo: 360 },
-  { league:'seriea', tag:'lineup', team:'Juventus',
-    title:'Juventus must win at Torino to reach Champions League',
-    body:'The Derby della Mole on Sunday night doubles as Juve\'s last chance to claim a top-four Serie A finish. A loss to Torino and Lazio doing the business at home against Pisa would see Juve drop to Europa League. Igor Tudor has hinted at full-strength selection despite end-of-season fatigue.',
-    impact:'neutral', moveText:'Juventus to finish top 4 firmed 1.30 → 1.15',
-    minutesAgo: 422 },
-  { league:'epl', tag:'tactics', team:'Newcastle',
-    title:'Newcastle travel to Fulham with European fate in their own hands',
-    body:'Eddie Howe\'s Newcastle need a win at Craven Cottage to lock down a Europa League spot. Aston Villa and Brentford remain in the race. Alexander Isak has 17 league goals and is fit for the final day after concussion protocols cleared him midweek.',
-    impact:'up', moveText:'Newcastle top 6 firmed 1.65 → 1.45',
-    minutesAgo: 470 },
-  { league:'ligue1', tag:'form', team:'Lille',
-    title:'Lille hold third despite losing to Auxerre — Lyon miss out',
-    body:'Lille secured a Champions League spot Sunday despite a 2-0 home defeat to Auxerre on the final day. Lyon were one point behind and could only manage a draw. Marseille (4th) drop to Europa League. The trio represent the French contingent for the 2026-27 European campaign.',
-    impact:'neutral', moveText:'Lille to qualify UCL firmed 1.40 → 1.05',
-    minutesAgo: 540 },
-  { league:'seriea', tag:'form', team:'AC Milan',
-    title:'Allegri\'s Milan close at home to Cagliari with European fate set',
-    body:'Milan finished outside the top six and will play continental football only via the Coppa Italia route. The final match at San Siro on Sunday evening doubles as a farewell to several veterans whose contracts expire. Pulisic is set for the start; Leão remains a doubt with a calf knock.',
-    impact:'neutral', moveText:'Pulisic to score vs Cagliari priced at 2.50',
-    minutesAgo: 612 },
+  { league:'laliga', tag:'injury', team:'Brazil',
+    title:'Neymar calf injury threatens Brazil\'s World Cup opener',
+    body:'Brazil team doctor Rodrigo Lasmar confirmed that Neymar has sustained a grade-two calf strain that could rule him out of the World Cup opener against Morocco on June 13. Lasmar said the 34-year-old is expected to be cleared in "two to three weeks." Brazil play Panama and Egypt as warm-ups before the tournament; Neymar will miss both. Manager Ancelotti has Vinícius Jr., Rodrygo, and Endrick to lead the attack in his absence.',
+    impact:'down', moveText:'Neymar anytime scorer vs Morocco off the board',
+    minutesAgo: 425 },
+  { league:'bundes', tag:'form', team:'Bayern Munich',
+    title:'Bayern lift Bundesliga Meisterschale on unified final matchday',
+    body:'Vincent Kompany\'s Bayern Munich completed a comfortable title defence on Saturday May 16 with the customary trophy presentation at the Allianz Arena. Harry Kane finished his league season with 30 goals in 34 matches, his best Bundesliga return, and is widely tipped to capture the Golden Boot at the World Cup. The DFB-Pokal final remains the last item on Bayern\'s domestic calendar before the international break.',
+    impact:'up', moveText:'Kane WC top scorer firmed 7.00 → 5.50',
+    minutesAgo: 510 },
+  { league:'ligue1', tag:'form', team:'Paris Saint-Germain',
+    title:'Curaçao\'s Advocaat to become oldest WC head coach at 78',
+    body:'Curaçao reinstated Dick Advocaat as head coach on May 13 — one day after Fred Rutten resigned — and the 78-year-old Dutchman will become the oldest manager in World Cup history when his side faces Germany in Houston on June 14. Curaçao (population ~156,000) is also the smallest nation ever to qualify for a World Cup. Their squad relies heavily on Eredivisie talent. Advocaat passes Otto Rehhagel (Greece, 2010) by seven years for the age record.',
+    impact:'up', moveText:'Germany to win Group E priced at -350',
+    minutesAgo: 590 },
+  { league:'laliga', tag:'lineup', team:'Spain',
+    title:'Yamal cleared for World Cup — Spain finalize 26-man squad',
+    body:'Lamine Yamal\'s hamstring recovery is complete and the 18-year-old will travel with Spain to the tournament. Luis de la Fuente named his final 26 on Monday May 25: Rodri (captain), Pedri, Gavi, Yamal, Nico Williams, and Mikel Oyarzabal headline a squad heavy on Barcelona and Real Sociedad players. Marcus Rashford did not make the England squad despite his strong loan spell at Barcelona.',
+    impact:'up', moveText:'Spain to win World Cup firmed 5.00 → 4.75',
+    minutesAgo: 720 },
+  { league:'seriea', tag:'tactics', team:'AC Milan',
+    title:'RedBird overhaul AC Milan front office in addition to Allegri sacking',
+    body:'AC Milan owners RedBird Capital initiated a full overhaul of the club\'s sporting leadership after the Champions League miss. Beyond Allegri\'s dismissal, CEO Giorgio Furlani, sporting director Igli Tare, and technical director Geoffrey Moncada were all relieved of their duties on Monday May 25. Italian media link Antonio Conte and Atalanta\'s Raffaele Palladino with the head-coach vacancy. Milan will start 2026-27 in the Europa League.',
+    impact:'down', moveText:'Milan to win Serie A 2026-27 out at 11.00',
+    minutesAgo: 880 },
+  { league:'bundes', tag:'transfer', team:'Bayer Leverkusen',
+    title:'Xabi Alonso reportedly closing on Real Madrid move',
+    body:'Reports across Spain and Germany on Wednesday claim Xabi Alonso will leave Bayer Leverkusen to take over at Real Madrid for next season, succeeding interim Álvaro Arbeloa. Talks accelerated after Leverkusen\'s third-place finish in the Bundesliga. Madrid\'s board sees Alonso as the long-term fit Florentino Pérez has been searching for since Xabi Alonso (Bernabéu legend, fluent in Madrid\'s identity) sacked Ancelotti after the 3-2 Supercopa loss to Barça in January.',
+    impact:'up', moveText:'Real Madrid to win La Liga 2026-27 firmed 2.50 → 2.10',
+    minutesAgo: 1010 },
+  { league:'epl', tag:'injury', team:'England',
+    title:'England squad finalized — Bellingham handles armband, Saka fit',
+    body:'Thomas Tuchel\'s England squad for the World Cup is set: Jude Bellingham captains, with Harry Kane (vice), Bukayo Saka, Phil Foden, and Cole Palmer all included. Marcus Rashford and James Maddison missed out. England play Senegal at Wembley on June 6 and Iceland at Wembley on June 9 as their final tune-ups before flying to Kansas City. They open Group L against Croatia on June 17.',
+    impact:'up', moveText:'Bellingham to score in WC opener firmed 3.50 → 2.75',
+    minutesAgo: 1180 },
 ];
 
 // Each mover carries a 12-point price history (one reading every 30 minutes for the
 // last 6 hours) so we can render a sparkline showing the line's trajectory.
 // The history ends with the current price (last entry == `to`).
 const MOVERS_SEED = [
-  { match:'Crystal Palace v Arsenal',     market:'Arsenal to win EPL',           from:1.04, to:1.02, dir:'up',
-    history:[1.04, 1.04, 1.03, 1.03, 1.03, 1.03, 1.02, 1.02, 1.02, 1.02, 1.02, 1.02] },
-  { match:'Arsenal v PSG (UCL Final)',    market:'PSG to win UCL',               from:1.95, to:2.10, dir:'down',
-    history:[1.95, 1.96, 1.98, 2.00, 2.02, 2.04, 2.05, 2.06, 2.07, 2.08, 2.09, 2.10] },
-  { match:'Arsenal v PSG (UCL Final)',    market:'Arsenal to win UCL',           from:3.30, to:3.10, dir:'up',
-    history:[3.30, 3.28, 3.25, 3.22, 3.20, 3.18, 3.16, 3.14, 3.13, 3.12, 3.11, 3.10] },
-  { match:'Bologna v Inter',              market:'Over 2.5 goals',               from:1.78, to:1.92, dir:'down',
-    history:[1.78, 1.79, 1.81, 1.83, 1.85, 1.87, 1.88, 1.89, 1.90, 1.91, 1.92, 1.92] },
-  { match:'Villarreal v Atletico Madrid', market:'Atlético to finish 3rd',       from:1.85, to:1.55, dir:'up',
-    history:[1.85, 1.83, 1.80, 1.75, 1.70, 1.66, 1.63, 1.61, 1.59, 1.57, 1.56, 1.55] },
-  { match:'Torino v Juventus',            market:'Juventus to finish top 4',     from:1.30, to:1.15, dir:'up',
-    history:[1.30, 1.29, 1.27, 1.25, 1.23, 1.21, 1.19, 1.18, 1.17, 1.16, 1.16, 1.15] },
+  { match:'Spain v World Cup outright',  market:'Spain to win World Cup',       from:5.00, to:4.75, dir:'up',
+    history:[5.00, 4.95, 4.90, 4.88, 4.85, 4.83, 4.80, 4.78, 4.76, 4.75, 4.75, 4.75] },
+  { match:'Brazil v Morocco (Group C)',  market:'Brazil to win match',          from:1.45, to:1.62, dir:'down',
+    history:[1.45, 1.46, 1.48, 1.50, 1.52, 1.54, 1.56, 1.58, 1.60, 1.61, 1.62, 1.62] },
+  { match:'PSG v Arsenal aftermath',     market:'PSG to retain UCL 2026-27',    from:7.50, to:5.00, dir:'up',
+    history:[7.50, 7.20, 6.80, 6.50, 6.20, 5.90, 5.60, 5.40, 5.20, 5.10, 5.00, 5.00] },
+  { match:'USA v Paraguay (Group D)',    market:'USA to win match',             from:2.20, to:1.95, dir:'up',
+    history:[2.20, 2.18, 2.15, 2.12, 2.08, 2.05, 2.02, 2.00, 1.98, 1.96, 1.95, 1.95] },
+  { match:'England v Croatia (Group L)', market:'Bellingham anytime scorer',    from:3.50, to:2.75, dir:'up',
+    history:[3.50, 3.45, 3.40, 3.32, 3.20, 3.10, 3.00, 2.92, 2.85, 2.80, 2.77, 2.75] },
+  { match:'France v Senegal (Group I)',  market:'Mbappé anytime scorer',        from:1.65, to:1.50, dir:'up',
+    history:[1.65, 1.63, 1.61, 1.59, 1.57, 1.55, 1.54, 1.53, 1.52, 1.51, 1.50, 1.50] },
 ];
 const SUSPENSIONS_SEED = [
+  { player:'Neymar',                team:'Brazil',     games:99, reason:'Grade 2 calf — 2-3 weeks, doubt for opener' },
   { player:'Hugo Ekitiké',          team:'Liverpool',  games:99, reason:'Achilles surgery — out 9-12 months' },
-  { player:'Lamine Yamal',          team:'Barcelona',  games:99, reason:'Hamstring — targeting WC opener' },
+  { player:'Marcus Rashford',       team:'England',    games:99, reason:'Not selected for World Cup squad' },
   { player:'Rodrygo',               team:'Real Madrid',games:99, reason:'ACL — out for season' },
-  { player:'Rafael Leão',           team:'AC Milan',   games:0,  reason:'Calf knock — doubt vs Cagliari' },
-  { player:'Alexander Isak',        team:'Newcastle',  games:0,  reason:'Cleared concussion protocols — available' },
-  { player:'Pierre-Emerick Aubameyang', team:'Marseille', games:99, reason:'Hamstring — season over' },
+  { player:'Sardar Azmoun',         team:'Iran',       games:99, reason:'Dropped — federation tensions' },
+  { player:'Lamine Yamal',          team:'Barcelona',  games:0,  reason:'Fit for World Cup — recovered' },
 ];
 const WEATHER_SEED = [
-  { match:'Crystal Palace v Arsenal',     cond:'Cloudy · 18°C · Wind 12 kph',    impact:'Neutral' },
-  { match:'Manchester City v Aston Villa',cond:'Light rain · 15°C · Wind 18 kph',impact:'Under 2.5 +2%' },
-  { match:'Valencia v Barcelona',         cond:'Clear · 24°C · Calm',            impact:'Goals Over +1%' },
-  { match:'Bologna v Inter',              cond:'Clear · 22°C · Light breeze',    impact:'Neutral' },
-  { match:'Arsenal v PSG (Budapest UCL)', cond:'Partly cloudy · 21°C · Calm',    impact:'Neutral' },
+  { match:'Mexico v South Africa (Azteca)', cond:'Clear · 24°C · Calm',           impact:'Goals Over +1%' },
+  { match:'USA v Paraguay (SoFi)',          cond:'Mild · 21°C · Light breeze',    impact:'Neutral' },
+  { match:'Brazil v Morocco (MetLife)',     cond:'Warm · 27°C · Humid',           impact:'Neutral' },
+  { match:'France v Senegal (MetLife)',     cond:'Warm · 26°C · Calm',            impact:'Neutral' },
+  { match:'Germany v Curaçao (Houston)',    cond:'Hot · 32°C · Humid',            impact:'Under 2.5 +2%' },
+  { match:'Spain v Cape Verde (Atlanta)',   cond:'Warm · 28°C · Light winds',     impact:'Neutral' },
 ];
 
 // Working state — gets replaced on each refresh so we can simulate live updates
