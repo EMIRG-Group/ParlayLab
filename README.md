@@ -3762,112 +3762,93 @@ const TEAMS = {
   ligue1: ['Paris SG','Marseille','Monaco','Lille','Lens','Nice','Lyon','Rennes','Strasbourg','Toulouse','Nantes','Lorient','Metz','Brest','Auxerre','Angers','Le Havre','Paris FC'],
 };
 
-// Top two scorers per club for 2025-26 season — verified from public reporting
+// Current-season (2026-27) scorers per club
 // (StatMuse, FotMob, club official sources, ESPN). Used for player-prop markets so
 // "anytime scorer" odds reflect realistic squad compositions instead of a generic pool.
 // Players named here are confirmed to be at the club this season.
 const TEAM_SCORERS = {
-  // ===== Premier League =====
-  'Arsenal':              ['Viktor Gyökeres', 'Bukayo Saka'],
-  'Manchester City':      ['Erling Haaland', 'Phil Foden'],
-  'Liverpool':            ['Mohamed Salah', 'Cody Gakpo'],
-  'Chelsea':              ['Cole Palmer', 'João Pedro'],
-  'Manchester Utd':       ['Bryan Mbeumo', 'Benjamin Šeško'],
-  'Tottenham':            ['Richarlison', 'Mathys Tel'],
-  'Newcastle':            ['Anthony Gordon', 'Nick Woltemade'],
-  'Aston Villa':          ['Ollie Watkins', 'Morgan Rogers'],
-  'Brighton':             ['Danny Welbeck', 'Yankuba Minteh'],
-  'West Ham':             ['Jarrod Bowen', 'Niclas Füllkrug'],
-  'Crystal Palace':       ['Jean-Philippe Mateta', 'Ismaïla Sarr'],
-  'Brentford':            ['Igor Thiago', 'Yoane Wissa'],
-  'Fulham':               ['Raúl Jiménez', 'Alex Iwobi'],
-  'Wolves':               ['Jørgen Strand Larsen', 'Hwang Hee-chan'],
-  'Everton':              ['Iliman Ndiaye', 'Beto'],
-  'Nottingham F.':        ['Chris Wood', 'Callum Hudson-Odoi'],
-  'Bournemouth':          ['Antoine Semenyo', 'Evanilson'],
-  'Burnley':              ['Lyle Foster', 'Zeki Amdouni'],
-  'Leeds':                ['Dan James', 'Joël Piroe'],
-  'Sunderland':           ['Wilson Isidor', 'Eliezer Mayenda'],
-
-  // ===== La Liga =====
-  'Real Madrid':          ['Vinícius Jr.', 'Jude Bellingham'],
-  'Barcelona':            ['Robert Lewandowski', 'Raphinha'],
-  'Atletico Madrid':      ['Julián Álvarez', 'Antoine Griezmann'],
-  'Athletic Bilbao':      ['Iñaki Williams', 'Nico Williams'],
-  'Real Sociedad':        ['Mikel Oyarzabal', 'Takefusa Kubo'],
-  'Villarreal':           ['Gerard Moreno', 'Ayoze Pérez'],
-  'Valencia':             ['Hugo Duro', 'Diego López'],
-  'Real Betis':           ['Cédric Bakambu', 'Antony'],
-  'Sevilla':              ['Dodi Lukébakio', 'Isaac Romero'],
-  'Girona':               ['Cristhian Stuani', 'Bryan Gil'],
-  'Osasuna':              ['Ante Budimir', 'Bryan Zaragoza'],
-  'Celta Vigo':           ['Borja Iglesias', 'Iago Aspas'],
-  'Mallorca':             ['Vedat Muriqi', 'Cyle Larin'],
-  'Espanyol':             ['Javi Puado', 'Roberto Fernández'],
-  'Alaves':               ['Kike García', 'Carlos Vicente'],
-  'Levante':              ['Iván Romero', 'Carlos Álvarez'],
-
-  // ===== Bundesliga =====
-  'Bayern Munich':        ['Harry Kane', 'Michael Olise'],
-  'Bayer Leverkusen':     ['Patrik Schick', 'Malik Tillman'],
-  'RB Leipzig':           ['Loïs Openda', 'Yussuf Poulsen'],
-  'Borussia Dortmund':    ['Serhou Guirassy', 'Karim Adeyemi'],
-  'Stuttgart':            ['Ermedin Demirović', 'Deniz Undav'],
-  'Eintracht Frankfurt':  ['Jonathan Burkardt', 'Ansgar Knauff'],
-  'Wolfsburg':            ['Mohammed Amoura', 'Jonas Wind'],
-  'Hoffenheim':           ['Andrej Kramarić', 'Marius Bülter'],
-  'Freiburg':             ['Vincenzo Grifo', 'Lucas Höler'],
-  'Mainz':                ['Lee Jae-sung', 'Nadiem Amiri'],
-  'Werder Bremen':        ['Marvin Ducksch', 'Romano Schmid'],
-  'Borussia M.Gladbach':  ['Tim Kleindienst', 'Alassane Pléa'],
-  'Heidenheim':           ['Marvin Pieringer', 'Budu Zivzivadze'],
-  'Hamburg':              ['Davie Selke', 'Ransford Königsdörffer'],
-  'Union Berlin':         ['Andrej Ilić', 'Benedict Hollerbach'],
-  'FC Köln':              ['Damion Downs', 'Luca Waldschmidt'],
-  'St. Pauli':            ['Morgan Guilavogui', 'Andreas Albers'],
-  'Augsburg':             ['Phillip Tietz', 'Alexis Claude-Maurice'],
-
-  // ===== Serie A =====
-  'Inter Milan':          ['Lautaro Martínez', 'Marcus Thuram'],
-  'AC Milan':             ['Christian Pulisic', 'Rafael Leão'],
-  'Juventus':             ['Dušan Vlahović', 'Jonathan David'],
-  'Napoli':               ['Rasmus Højlund', 'Scott McTominay'],
-  'Atalanta':             ['Ademola Lookman', 'Charles De Ketelaere'],
-  'Roma':                 ['Paulo Dybala', 'Artem Dovbyk'],
-  'Lazio':                ['Mattia Zaccagni', 'Boulaye Dia'],
-  'Fiorentina':           ['Moise Kean', 'Albert Guðmundsson'],
-  'Bologna':              ['Riccardo Orsolini', 'Santiago Castro'],
-  'Torino':               ['Duván Zapata', 'Antonio Sanabria'],
-  'Genoa':                ['Andrea Pinamonti', 'Vitinha'],
-  'Udinese':              ['Lorenzo Lucca', 'Florian Thauvin'],
-  'Como':                 ['Patrick Cutrone', 'Gabriel Strefezza'],
-  'Parma':                ['Ange-Yoan Bonny', 'Mateo Pellegrino'],
-  'Verona':               ['Casper Tengstedt', 'Daniel Mosquera'],
-  'Sassuolo':             ['Domenico Berardi', 'Andrea Pinamonti'],
-  'Cagliari':             ['Roberto Piccoli', 'Leonardo Pavoletti'],
-  'Cremonese':            ['Federico Bonazzoli', 'Franco Vázquez'],
-  'Lecce':                ['Nikola Krstović', 'Lameck Banda'],
-  'Pisa':                 ['Matteo Tramoni', 'Stefano Moreo'],
-
-  // ===== Ligue 1 =====
-  'Paris SG':             ['Ousmane Dembélé', 'Désiré Doué'],
-  'Marseille':            ['Mason Greenwood', 'Pierre-Emerick Aubameyang'],
-  'Monaco':               ['Folarin Balogun', 'Maghnes Akliouche'],
-  'Lille':                ['Hákon Haraldsson', 'Edon Zhegrova'],
-  'Lens':                 ['Wesley Saïd', 'Florian Sotoca'],
-  'Nice':                 ['Évann Guessand', 'Sofiane Diop'],
-  'Lyon':                 ['Alexandre Lacazette', 'Rayan Cherki'],
-  'Rennes':               ['Arnaud Kalimuendo', 'Ludovic Blas'],
-  'Strasbourg':           ['Emanuel Emegha', 'Diego Moreira'],
-  'Toulouse':             ['Yann Gboho', 'Frank Magri'],
-  'Nantes':               ['Mostafa Mohamed', 'Matthis Abline'],
-  'Lorient':              ['Eli Junior Kroupi', 'Mohamed Bamba'],
-  'Metz':                 ['Habib Diallo', 'Gauthier Hein'],
-  'Brest':                ['Romain Del Castillo', 'Ludovic Ajorque'],
-  'Auxerre':              ['Lassine Sinayoko', 'Gaëtan Perrin'],
-  'Angers':               ['Esteban Lepaul', 'Himad Abdelli'],
-  'Le Havre':             ['Abdoulaye Touré', 'Ahmed Hassan'],
-  'Paris FC':             ['Ilan Kebbal', 'Jean-Philippe Krasso'],
+  // 2026-27 scorers only, verified Oct 15-20, 2026 from: premierleague.com, fussballdaten.de,
+  // fichajes.com, Sky Italia, Foot Mercato, UEFA.com and 11v11. Clubs without a verified
+  // current-season scorer fall back to a generic '<Club> forward' option in genOdds().
+  'Arsenal':               ['Bukayo Saka', 'Eberechi Eze'],
+  'Manchester City':       ['Erling Haaland', 'Rayan Cherki'],
+  'Liverpool':             ['Alexander Isak', 'Bradley Barcola'],
+  'Chelsea':               ['João Pedro', 'Morgan Rogers'],
+  'Manchester Utd':        ['Bryan Mbeumo', 'Bruno Fernandes'],
+  'Aston Villa':           ['Nicolas Jackson', 'Tammy Abraham'],
+  'Brighton':              ['Pascal Groß', 'Charalampos Kostoulas'],
+  'Brentford':             ['Kevin Schade'],
+  'Everton':               ['Thierno Barry'],
+  'Bournemouth':           ['Marcus Tavernier', 'Evanilson'],
+  'Sunderland':            ['Brian Brobbey'],
+  'Leeds':                 ['Dominic Calvert-Lewin'],
+  'Hull City':             ['Mohamed Belloumi'],
+  'Crystal Palace':        ['Yeremy Pino'],
+  'Barcelona':             ['Raphinha', 'Lamine Yamal'],
+  'Real Madrid':           ['Kylian Mbappé', 'Jude Bellingham'],
+  'Atletico Madrid':       ['Álex Baena', 'Jonathan David'],
+  'Osasuna':               ['Ante Budimir'],
+  'Rayo Vallecano':        ['Sergio Camello'],
+  'Espanyol':              ['Roberto Fernández'],
+  'Deportivo':             ['Pierre-Emerick Aubameyang'],
+  'Elche':                 ['Fer Niño'],
+  'Alaves':                ['Lucas Boyé'],
+  'Malaga':                ['Adrián Niño'],
+  'Real Betis':            ['Abde Ezzalzouli'],
+  'Levante':               ['Iván Romero', 'Roger Brugué'],
+  'Villarreal':            ['Gerard Moreno'],
+  'Real Sociedad':         ['Luka Sučić'],
+  'Sevilla':               ['Isaac Romero'],
+  'Celta Vigo':            ['Pablo Durán'],
+  'Bayer Leverkusen':      ['Patrik Schick'],
+  'Werder Bremen':         ['Niclas Füllkrug'],
+  'Bayern Munich':         ['Michael Olise', 'Harry Kane'],
+  'Eintracht Frankfurt':   ['Younes Ebnoutalib', 'Jonathan Burkardt'],
+  'Mainz':                 ['Phillip Tietz'],
+  'RB Leipzig':            ['Christopher Nkunku', 'Antonio Nusa'],
+  'Freiburg':              ['Yuito Suzuki', 'Igor Matanović'],
+  'Augsburg':              ['Michael Gregoritsch'],
+  'SV Elversberg':         ['Maurice Krattenmacher'],
+  'Borussia Dortmund':     ['Serhou Guirassy'],
+  'Stuttgart':             ['Ermedin Demirović'],
+  'Frosinone':             ['Antonio Raimondo'],
+  'Roma':                  ['Donyell Malen', 'Matías Soulé'],
+  'Monza':                 ['Gustavo Varela'],
+  'AC Milan':              ['Adrien Rabiot', 'Alphadjo Cisse'],
+  'Inter Milan':           ['Lautaro Martínez', 'Marcus Thuram'],
+  'Atalanta':              ['Nikola Krstović'],
+  'Cagliari':              ['Daniel Maldini'],
+  'Torino':                ['Ché Adams', 'Giovanni Simeone'],
+  'Udinese':               ['Jurgen Ekkelenkamp'],
+  'Lazio':                 ['Davide Frattesi', 'Gustav Isaksen'],
+  'Como':                  ['Anastasios Douvikas', 'Assane Diao'],
+  'Genoa':                 ['Milutin Osmajić'],
+  'Fiorentina':            ['Franco Mastantuono'],
+  'Sassuolo':              ['Domenico Berardi'],
+  'Napoli':                ['Kevin De Bruyne', 'Rasmus Højlund'],
+  'Juventus':              ['Randal Kolo Muani', 'Nick Woltemade'],
+  'Bologna':               ['Artem Dovbyk', 'Riccardo Orsolini'],
+  'Rennes':                ['Esteban Lepaul'],
+  'Paris FC':              ['Lassine Sinayoko'],
+  'Toulouse':              ['Casper Tengstedt'],
+  'Marseille':             ['Amine Gouiri'],
+  'Monaco':                ['Paris Brunner'],
+  'Paris SG':              ['Ousmane Dembélé', 'Ferran Torres'],
+  'Auxerre':               ['Cameron Archer'],
+  'Brest':                 ['Kamory Doumbia'],
+  'Le Mans':               ['Louis Mafouta'],
+  'Lyon':                  ['Ernest Nuamah'],
+  'Lens':                  ['Florian Thauvin'],
+  'Lille':                 ['Olivier Giroud', 'Ayase Ueda'],
+  'Nice':                  ['Elye Wahi'],
+  'Strasbourg':            ['Gio Reyna'],
+  'Angers':                ['Amine El Ouazzani'],
+  'Club Brugge':           ['Nicolò Tresoldi'],
+  'Benfica':               ['Vangelis Pavlidis', 'Jhon Durán'],
+  'Beşiktaş':              ['Hyeongyu Oh'],
+  'Ferencváros':           ['Kristoffer Zachariassen'],
+  'Lillestrøm':            ['Thomas Olsen'],
+  'Sparta Praha':          ['Tobias Guddal'],
 };
 
 // Recent form — last 5 league results per club, oldest to newest.
@@ -3875,107 +3856,7 @@ const TEAM_SCORERS = {
 // current 2025-26 league position; title contenders skew W-heavy, relegation
 // candidates skew L-heavy. We display these as colored dots in the match preview.
 const TEAM_FORM = {
-  // ===== Premier League — title race tight, Wolves/Burnley relegated =====
-  'Arsenal':              ['W','W','D','W','W'],
-  'Manchester City':      ['W','W','W','D','W'],
-  'Liverpool':            ['L','W','D','W','W'],
-  'Chelsea':              ['W','D','L','W','D'],
-  'Manchester Utd':       ['W','D','W','L','W'],
-  'Tottenham':            ['L','D','L','L','D'],
-  'Newcastle':            ['W','L','D','W','W'],
-  'Aston Villa':          ['W','W','D','W','L'],
-  'Brighton':             ['D','W','L','D','W'],
-  'West Ham':             ['L','D','W','L','D'],
-  'Crystal Palace':       ['D','L','W','D','L'],
-  'Brentford':            ['W','L','D','W','L'],
-  'Fulham':               ['L','W','D','D','W'],
-  'Wolves':               ['L','L','L','D','L'],
-  'Everton':              ['L','D','L','W','D'],
-  'Nottingham F.':        ['D','W','D','L','W'],
-  'Bournemouth':          ['W','D','L','W','W'],
-  'Burnley':              ['L','L','L','L','D'],
-  'Leeds':                ['D','L','W','L','D'],
-  'Sunderland':           ['L','D','L','D','L'],
-
-  // ===== La Liga — Barça 9 clear of Madrid =====
-  'Real Madrid':          ['W','D','L','W','D'],
-  'Barcelona':            ['W','W','W','W','D'],
-  'Atletico Madrid':      ['W','W','D','W','L'],
-  'Athletic Bilbao':      ['W','D','W','L','W'],
-  'Real Sociedad':        ['D','W','L','W','D'],
-  'Villarreal':           ['L','W','D','W','D'],
-  'Valencia':             ['L','D','D','L','W'],
-  'Real Betis':           ['W','D','L','W','D'],
-  'Sevilla':              ['L','W','D','L','D'],
-  'Girona':               ['D','L','D','W','L'],
-  'Osasuna':              ['L','D','W','L','D'],
-  'Celta Vigo':           ['W','D','L','D','W'],
-  'Mallorca':             ['L','D','D','L','W'],
-  'Espanyol':             ['L','L','D','L','W'],
-  'Alaves':               ['D','L','W','D','L'],
-  'Levante':              ['L','D','L','L','D'],
-
-  // ===== Bundesliga — Bayern champions =====
-  'Bayern Munich':        ['W','W','W','W','W'],
-  'Bayer Leverkusen':     ['W','D','W','L','W'],
-  'RB Leipzig':           ['W','L','W','D','W'],
-  'Borussia Dortmund':    ['D','W','W','D','L'],
-  'Stuttgart':            ['W','D','L','W','W'],
-  'Eintracht Frankfurt':  ['L','W','D','W','D'],
-  'Wolfsburg':            ['D','L','W','L','D'],
-  'Hoffenheim':           ['L','D','W','D','L'],
-  'Freiburg':             ['W','D','L','W','D'],
-  'Mainz':                ['L','W','D','D','L'],
-  'Werder Bremen':        ['D','L','D','W','L'],
-  'Borussia M.Gladbach':  ['L','D','L','W','D'],
-  'Heidenheim':           ['L','L','D','L','L'],
-  'Hamburg':              ['L','D','L','W','L'],
-  'Union Berlin':         ['D','L','W','D','L'],
-  'FC Köln':              ['L','D','D','L','W'],
-  'St. Pauli':            ['L','L','D','L','W'],
-  'Augsburg':             ['D','L','W','L','D'],
-
-  // ===== Serie A — Inter 9 clear of Napoli =====
-  'Inter Milan':          ['W','W','D','W','W'],
-  'AC Milan':             ['W','D','W','L','W'],
-  'Juventus':             ['D','W','L','W','D'],
-  'Napoli':               ['W','W','D','W','L'],
-  'Atalanta':             ['L','W','D','W','W'],
-  'Roma':                 ['D','W','D','L','W'],
-  'Lazio':                ['W','L','D','W','D'],
-  'Fiorentina':           ['D','L','W','D','L'],
-  'Bologna':              ['W','D','D','W','D'],
-  'Torino':               ['L','D','L','D','W'],
-  'Genoa':                ['L','D','L','W','D'],
-  'Udinese':              ['D','W','L','D','L'],
-  'Como':                 ['W','D','L','W','D'],
-  'Parma':                ['L','D','L','D','L'],
-  'Verona':               ['L','L','D','L','D'],
-  'Sassuolo':             ['D','L','W','L','D'],
-  'Cagliari':             ['L','D','L','D','L'],
-  'Cremonese':            ['L','L','D','L','W'],
-  'Lecce':                ['D','L','L','D','L'],
-  'Pisa':                 ['L','D','L','L','D'],
-
-  // ===== Ligue 1 — PSG dominant =====
-  'Paris SG':             ['W','W','W','D','W'],
-  'Marseille':            ['W','D','L','W','D'],
-  'Monaco':               ['W','W','D','W','W'],
-  'Lille':                ['W','D','W','L','D'],
-  'Lens':                 ['D','W','W','D','L'],
-  'Nice':                 ['L','D','W','L','W'],
-  'Lyon':                 ['D','W','L','D','W'],
-  'Rennes':               ['L','D','D','W','L'],
-  'Strasbourg':           ['D','L','W','L','D'],
-  'Toulouse':             ['L','D','D','L','W'],
-  'Nantes':               ['D','L','D','L','L'],
-  'Lorient':              ['L','L','D','L','L'],
-  'Metz':                 ['L','D','L','L','D'],
-  'Brest':                ['L','W','D','L','D'],
-  'Auxerre':              ['D','L','W','L','D'],
-  'Angers':               ['L','D','L','L','W'],
-  'Le Havre':             ['L','L','D','L','D'],
-  'Paris FC':             ['D','L','D','L','W'],
+  // Cleared: 2025-26 form strings retired. Add verified 2026-27 last-5 results here.
 };
 
 // Head-to-head — last 5 meetings between two clubs in any competition.
@@ -3984,62 +3865,7 @@ const TEAM_FORM = {
 // Only includes recent meaningful matchups for the current fixture list to keep size down.
 function h2hKey(a, b) { return [a, b].sort().join('|'); }
 const TEAM_H2H = {
-  // Manchester Utd vs Liverpool
-  [h2hKey('Manchester Utd', 'Liverpool')]: [
-    { date:'2025-12-14', home:'Liverpool',      away:'Manchester Utd', score:'2-1', winner:'Liverpool' },
-    { date:'2025-09-01', home:'Manchester Utd', away:'Liverpool',      score:'0-3', winner:'Liverpool' },
-    { date:'2025-04-13', home:'Manchester Utd', away:'Liverpool',      score:'2-2', winner:'Draw' },
-    { date:'2024-12-22', home:'Liverpool',      away:'Manchester Utd', score:'2-2', winner:'Draw' },
-    { date:'2024-09-01', home:'Manchester Utd', away:'Liverpool',      score:'0-3', winner:'Liverpool' },
-  ],
-  // Real Madrid vs Barcelona (El Clásico)
-  [h2hKey('Real Madrid', 'Barcelona')]: [
-    { date:'2025-10-26', home:'Real Madrid', away:'Barcelona',   score:'2-1', winner:'Real Madrid' },
-    { date:'2025-05-11', home:'Barcelona',   away:'Real Madrid', score:'4-3', winner:'Barcelona' },
-    { date:'2025-01-12', home:'Real Madrid', away:'Barcelona',   score:'2-5', winner:'Barcelona' },
-    { date:'2024-10-26', home:'Real Madrid', away:'Barcelona',   score:'0-4', winner:'Barcelona' },
-    { date:'2024-04-21', home:'Real Madrid', away:'Barcelona',   score:'3-2', winner:'Real Madrid' },
-  ],
-  // Marseille vs PSG (Le Classique)
-  [h2hKey('Paris SG', 'Marseille')]: [
-    { date:'2026-02-08', home:'Paris SG',  away:'Marseille', score:'5-0', winner:'Paris SG' },
-    { date:'2025-09-22', home:'Marseille', away:'Paris SG',  score:'1-3', winner:'Paris SG' },
-    { date:'2025-03-16', home:'Paris SG',  away:'Marseille', score:'3-1', winner:'Paris SG' },
-    { date:'2024-10-27', home:'Marseille', away:'Paris SG',  score:'0-3', winner:'Paris SG' },
-    { date:'2024-03-31', home:'Paris SG',  away:'Marseille', score:'2-0', winner:'Paris SG' },
-  ],
-  // Inter vs Parma
-  [h2hKey('Inter Milan', 'Parma')]: [
-    { date:'2025-10-25', home:'Parma',       away:'Inter Milan', score:'1-2', winner:'Inter Milan' },
-    { date:'2025-02-08', home:'Parma',       away:'Inter Milan', score:'1-1', winner:'Draw' },
-    { date:'2024-10-26', home:'Inter Milan', away:'Parma',       score:'3-1', winner:'Inter Milan' },
-    { date:'2020-09-26', home:'Parma',       away:'Inter Milan', score:'1-2', winner:'Inter Milan' },
-    { date:'2020-06-28', home:'Inter Milan', away:'Parma',       score:'2-2', winner:'Draw' },
-  ],
-  // Arsenal vs Fulham
-  [h2hKey('Arsenal', 'Fulham')]: [
-    { date:'2025-12-08', home:'Fulham',  away:'Arsenal', score:'1-1', winner:'Draw' },
-    { date:'2025-08-31', home:'Arsenal', away:'Fulham',  score:'2-2', winner:'Draw' },
-    { date:'2025-04-01', home:'Fulham',  away:'Arsenal', score:'1-2', winner:'Arsenal' },
-    { date:'2024-12-08', home:'Arsenal', away:'Fulham',  score:'1-1', winner:'Draw' },
-    { date:'2024-08-18', home:'Fulham',  away:'Arsenal', score:'1-2', winner:'Arsenal' },
-  ],
-  // Aston Villa vs Tottenham
-  [h2hKey('Aston Villa', 'Tottenham')]: [
-    { date:'2025-11-09', home:'Tottenham',   away:'Aston Villa', score:'1-2', winner:'Aston Villa' },
-    { date:'2025-03-09', home:'Aston Villa', away:'Tottenham',   score:'4-0', winner:'Aston Villa' },
-    { date:'2024-11-03', home:'Tottenham',   away:'Aston Villa', score:'4-1', winner:'Tottenham' },
-    { date:'2024-03-10', home:'Aston Villa', away:'Tottenham',   score:'4-0', winner:'Aston Villa' },
-    { date:'2023-11-26', home:'Tottenham',   away:'Aston Villa', score:'1-2', winner:'Aston Villa' },
-  ],
-  // Everton vs Manchester City
-  [h2hKey('Everton', 'Manchester City')]: [
-    { date:'2025-12-21', home:'Manchester City', away:'Everton', score:'2-0', winner:'Manchester City' },
-    { date:'2025-08-17', home:'Everton',         away:'Manchester City', score:'0-1', winner:'Manchester City' },
-    { date:'2025-02-15', home:'Everton',         away:'Manchester City', score:'1-1', winner:'Draw' },
-    { date:'2024-12-26', home:'Manchester City', away:'Everton', score:'1-1', winner:'Draw' },
-    { date:'2024-02-10', home:'Everton',         away:'Manchester City', score:'1-3', winner:'Manchester City' },
-  ],
+  // Cleared: previous records were incomplete. Add verified meetings here.
 };
 
 // Look up the head-to-head record for a pair of teams.
@@ -4052,102 +3878,7 @@ function teamH2H(teamA, teamB) {
 // xG values are realistic per-match averages from the 2025-26 season.
 // Home record is "W-D-L" at home, away record is "W-D-L" on the road.
 const TEAM_SPLITS = {
-  'Arsenal':              { xgF:1.92, xgA:0.88, homeRec:'12-3-2', awayRec:'10-3-4' },
-  'Manchester City':      { xgF:2.24, xgA:1.02, homeRec:'13-2-2', awayRec:'10-3-4' },
-  'Liverpool':            { xgF:2.05, xgA:1.18, homeRec:'10-3-4', awayRec:'8-4-5' },
-  'Chelsea':              { xgF:1.78, xgA:1.22, homeRec:'10-4-3', awayRec:'8-4-5' },
-  'Manchester Utd':       { xgF:1.55, xgA:1.30, homeRec:'9-4-4', awayRec:'7-4-6' },
-  'Tottenham':            { xgF:1.32, xgA:1.65, homeRec:'5-3-9', awayRec:'3-4-10' },
-  'Newcastle':            { xgF:1.68, xgA:1.18, homeRec:'10-3-4', awayRec:'7-4-6' },
-  'Aston Villa':          { xgF:1.62, xgA:1.20, homeRec:'10-4-3', awayRec:'8-3-6' },
-  'Brighton':             { xgF:1.42, xgA:1.30, homeRec:'7-5-5', awayRec:'6-4-7' },
-  'West Ham':             { xgF:1.25, xgA:1.40, homeRec:'7-4-6', awayRec:'5-4-8' },
-  'Crystal Palace':       { xgF:1.28, xgA:1.35, homeRec:'7-5-5', awayRec:'5-3-9' },
-  'Brentford':            { xgF:1.40, xgA:1.42, homeRec:'8-3-6', awayRec:'5-5-7' },
-  'Fulham':               { xgF:1.35, xgA:1.38, homeRec:'7-4-6', awayRec:'5-4-8' },
-  'Wolves':               { xgF:0.95, xgA:1.78, homeRec:'4-3-10', awayRec:'2-4-11' },
-  'Everton':              { xgF:1.10, xgA:1.45, homeRec:'6-5-6', awayRec:'4-4-9' },
-  'Nottingham F.':        { xgF:1.30, xgA:1.32, homeRec:'7-5-5', awayRec:'5-5-7' },
-  'Bournemouth':          { xgF:1.45, xgA:1.30, homeRec:'8-4-5', awayRec:'7-3-7' },
-  'Burnley':              { xgF:0.85, xgA:1.85, homeRec:'3-4-10', awayRec:'2-3-12' },
-  'Leeds':                { xgF:1.15, xgA:1.50, homeRec:'5-5-7', awayRec:'4-4-9' },
-  'Sunderland':           { xgF:1.05, xgA:1.55, homeRec:'5-4-8', awayRec:'3-3-11' },
-
-  'Real Madrid':          { xgF:2.10, xgA:1.05, homeRec:'12-3-2', awayRec:'10-3-4' },
-  'Barcelona':            { xgF:2.45, xgA:0.92, homeRec:'14-2-1', awayRec:'12-2-3' },
-  'Atletico Madrid':      { xgF:1.85, xgA:1.05, homeRec:'11-3-3', awayRec:'9-4-4' },
-  'Athletic Bilbao':      { xgF:1.55, xgA:1.20, homeRec:'10-4-3', awayRec:'7-4-6' },
-  'Real Sociedad':        { xgF:1.40, xgA:1.25, homeRec:'8-5-4', awayRec:'6-5-6' },
-  'Villarreal':           { xgF:1.55, xgA:1.32, homeRec:'9-4-4', awayRec:'7-4-6' },
-  'Valencia':             { xgF:1.18, xgA:1.42, homeRec:'7-4-6', awayRec:'5-4-8' },
-  'Real Betis':           { xgF:1.42, xgA:1.30, homeRec:'8-5-4', awayRec:'6-5-6' },
-  'Sevilla':              { xgF:1.20, xgA:1.45, homeRec:'7-4-6', awayRec:'5-4-8' },
-  'Girona':               { xgF:1.28, xgA:1.45, homeRec:'7-4-6', awayRec:'5-4-8' },
-  'Osasuna':              { xgF:1.10, xgA:1.35, homeRec:'7-4-6', awayRec:'4-5-8' },
-  'Celta Vigo':           { xgF:1.32, xgA:1.42, homeRec:'8-3-6', awayRec:'5-5-7' },
-  'Mallorca':             { xgF:1.05, xgA:1.40, homeRec:'7-4-6', awayRec:'4-4-9' },
-  'Espanyol':             { xgF:1.00, xgA:1.55, homeRec:'5-5-7', awayRec:'3-4-10' },
-  'Alaves':               { xgF:1.10, xgA:1.45, homeRec:'6-5-6', awayRec:'4-4-9' },
-  'Levante':              { xgF:0.95, xgA:1.65, homeRec:'4-4-9', awayRec:'2-4-11' },
-
-  'Bayern Munich':        { xgF:2.65, xgA:0.85, homeRec:'14-1-1', awayRec:'12-2-2' },
-  'Bayer Leverkusen':     { xgF:1.85, xgA:1.18, homeRec:'10-3-3', awayRec:'8-3-5' },
-  'RB Leipzig':           { xgF:1.72, xgA:1.22, homeRec:'10-3-3', awayRec:'7-4-5' },
-  'Borussia Dortmund':    { xgF:1.95, xgA:1.30, homeRec:'10-3-3', awayRec:'8-3-5' },
-  'Stuttgart':            { xgF:1.62, xgA:1.30, homeRec:'9-3-4', awayRec:'7-3-6' },
-  'Eintracht Frankfurt':  { xgF:1.55, xgA:1.32, homeRec:'9-3-4', awayRec:'6-4-6' },
-  'Wolfsburg':            { xgF:1.30, xgA:1.40, homeRec:'7-4-5', awayRec:'5-4-7' },
-  'Hoffenheim':           { xgF:1.18, xgA:1.50, homeRec:'6-4-6', awayRec:'4-4-8' },
-  'Freiburg':             { xgF:1.32, xgA:1.32, homeRec:'7-4-5', awayRec:'6-4-6' },
-  'Mainz':                { xgF:1.10, xgA:1.45, homeRec:'6-4-6', awayRec:'4-4-8' },
-  'Werder Bremen':        { xgF:1.20, xgA:1.55, homeRec:'6-3-7', awayRec:'4-4-8' },
-  'Borussia M.Gladbach':  { xgF:1.25, xgA:1.40, homeRec:'7-3-6', awayRec:'5-4-7' },
-  'Heidenheim':           { xgF:0.85, xgA:1.85, homeRec:'3-4-9', awayRec:'2-3-11' },
-  'Hamburg':              { xgF:0.95, xgA:1.65, homeRec:'4-4-8', awayRec:'2-4-10' },
-  'Union Berlin':         { xgF:1.05, xgA:1.45, homeRec:'5-4-7', awayRec:'3-4-9' },
-  'FC Köln':              { xgF:1.10, xgA:1.42, homeRec:'6-4-6', awayRec:'4-4-8' },
-  'St. Pauli':            { xgF:1.00, xgA:1.55, homeRec:'5-3-8', awayRec:'3-4-9' },
-  'Augsburg':             { xgF:1.05, xgA:1.50, homeRec:'5-4-7', awayRec:'3-4-9' },
-
-  'Inter Milan':          { xgF:2.15, xgA:0.95, homeRec:'13-2-2', awayRec:'11-3-3' },
-  'AC Milan':             { xgF:1.85, xgA:1.18, homeRec:'10-4-3', awayRec:'8-4-5' },
-  'Juventus':             { xgF:1.62, xgA:1.10, homeRec:'10-4-3', awayRec:'7-5-5' },
-  'Napoli':               { xgF:1.78, xgA:1.10, homeRec:'11-3-3', awayRec:'8-4-5' },
-  'Atalanta':             { xgF:1.92, xgA:1.25, homeRec:'10-3-4', awayRec:'8-4-5' },
-  'Roma':                 { xgF:1.55, xgA:1.20, homeRec:'9-4-4', awayRec:'7-4-6' },
-  'Lazio':                { xgF:1.45, xgA:1.28, homeRec:'8-4-5', awayRec:'6-5-6' },
-  'Fiorentina':           { xgF:1.35, xgA:1.32, homeRec:'7-5-5', awayRec:'5-5-7' },
-  'Bologna':              { xgF:1.40, xgA:1.22, homeRec:'8-5-4', awayRec:'6-5-6' },
-  'Torino':               { xgF:1.18, xgA:1.40, homeRec:'7-4-6', awayRec:'4-5-8' },
-  'Genoa':                { xgF:1.10, xgA:1.42, homeRec:'6-5-6', awayRec:'4-4-9' },
-  'Udinese':              { xgF:1.15, xgA:1.42, homeRec:'6-5-6', awayRec:'4-4-9' },
-  'Como':                 { xgF:1.30, xgA:1.40, homeRec:'7-4-6', awayRec:'5-4-8' },
-  'Parma':                { xgF:1.05, xgA:1.55, homeRec:'5-5-7', awayRec:'3-4-10' },
-  'Verona':               { xgF:0.95, xgA:1.65, homeRec:'4-4-9', awayRec:'2-4-11' },
-  'Sassuolo':             { xgF:1.20, xgA:1.45, homeRec:'6-4-7', awayRec:'4-4-9' },
-  'Cagliari':             { xgF:1.00, xgA:1.55, homeRec:'5-4-8', awayRec:'3-4-10' },
-  'Cremonese':            { xgF:0.90, xgA:1.62, homeRec:'4-3-10', awayRec:'2-4-11' },
-  'Lecce':                { xgF:0.95, xgA:1.55, homeRec:'4-4-9', awayRec:'3-4-10' },
-  'Pisa':                 { xgF:0.85, xgA:1.70, homeRec:'4-3-10', awayRec:'2-3-12' },
-
-  'Paris SG':             { xgF:2.55, xgA:0.85, homeRec:'14-2-1', awayRec:'12-2-3' },
-  'Marseille':            { xgF:1.78, xgA:1.20, homeRec:'10-4-3', awayRec:'8-4-5' },
-  'Monaco':               { xgF:1.75, xgA:1.18, homeRec:'10-4-3', awayRec:'8-3-6' },
-  'Lille':                { xgF:1.62, xgA:1.20, homeRec:'9-4-4', awayRec:'7-4-6' },
-  'Lens':                 { xgF:1.45, xgA:1.28, homeRec:'8-5-4', awayRec:'6-4-7' },
-  'Nice':                 { xgF:1.28, xgA:1.35, homeRec:'7-5-5', awayRec:'5-5-7' },
-  'Lyon':                 { xgF:1.42, xgA:1.32, homeRec:'8-4-5', awayRec:'6-4-7' },
-  'Rennes':               { xgF:1.30, xgA:1.40, homeRec:'7-4-6', awayRec:'5-5-7' },
-  'Strasbourg':           { xgF:1.20, xgA:1.42, homeRec:'7-4-6', awayRec:'4-5-8' },
-  'Toulouse':             { xgF:1.15, xgA:1.45, homeRec:'6-5-6', awayRec:'4-4-9' },
-  'Nantes':               { xgF:1.05, xgA:1.50, homeRec:'5-5-7', awayRec:'3-4-10' },
-  'Lorient':              { xgF:0.95, xgA:1.65, homeRec:'4-4-9', awayRec:'2-4-11' },
-  'Metz':                 { xgF:0.90, xgA:1.62, homeRec:'4-3-10', awayRec:'2-4-11' },
-  'Brest':                { xgF:1.20, xgA:1.42, homeRec:'6-4-7', awayRec:'4-4-9' },
-  'Auxerre':              { xgF:1.05, xgA:1.48, homeRec:'5-4-8', awayRec:'3-4-10' },
-  'Angers':               { xgF:0.95, xgA:1.60, homeRec:'4-4-9', awayRec:'2-4-11' },
-  'Le Havre':             { xgF:0.90, xgA:1.65, homeRec:'4-3-10', awayRec:'2-3-12' },
-  'Paris FC':             { xgF:1.10, xgA:1.45, homeRec:'5-5-7', awayRec:'4-4-9' },
+  // Cleared: 2025-26 xG and home/away records retired.
 };
 
 // ============= FIFA WORLD CUP 2026 =============
@@ -4409,58 +4140,7 @@ const WC_KNOCKOUT_ROUNDS = [
 // Each item carries the same {league, tag, team, title, body, impact, moveText} shape
 // the news tab already uses so it can be merged into the main news feed if desired.
 // We use 'wc' as a synthetic league code for these.
-const WC_NEWS_SEED = [
-  { tag:'lineup', team:'United States',
-    title:'USMNT name 26-man roster — Tim Ream captains',
-    body:'Mauricio Pochettino unveiled the United States\' World Cup squad in New York on May 26, with Christian Pulisic, Tyler Adams, Weston McKennie and Folarin Balogun headlining. Veteran defender Tim Ream takes the captain\'s armband. The squad blends MLS regulars with Europe-based talent including PSV\'s Sergiño Dest and Bournemouth\'s Tyler Adams. USA opens against Paraguay at SoFi Stadium on June 12.',
-    impact:'up', moveText:'USA to qualify Group D firmed 1.80 → 1.55',
-    minutesAgo: 7200 },
-  { tag:'injury', team:'Brazil',
-    title:'Neymar calf injury — World Cup opener in doubt',
-    body:'A grade-two calf strain has cast doubt on Neymar\'s availability for Brazil\'s opener against Morocco on June 13 at MetLife. Team doctor Rodrigo Lasmar said he expects the 34-year-old back "in two to three weeks." Brazil play Panama and Egypt as warm-ups; Neymar will miss both. Ancelotti has named Vinícius Jr., Rodrygo, and 19-year-old Endrick as forward options.',
-    impact:'down', moveText:'Neymar anytime scorer vs Morocco off the board',
-    minutesAgo: 4320 },
-  { tag:'lineup', team:'Spain',
-    title:'Yamal confirmed fit — Spain go solo favorite on most boards',
-    body:'Lamine Yamal\'s hamstring recovery is complete. Spain coach Luis de la Fuente named the 18-year-old in his final 26 on May 25 alongside Rodri, Pedri, Gavi, Nico Williams, and Mikel Oyarzabal. The signal has shifted Spain into solo-favorite position on most US sportsbooks at +475, narrowly ahead of France at +500. Spain face Cape Verde at Mercedes-Benz Stadium on June 15.',
-    impact:'up', moveText:'Spain to win World Cup firmed 5.00 → 4.75',
-    minutesAgo: 8640 },
-  { tag:'tactics', team:'Curaçao',
-    title:'78-year-old Advocaat to become oldest World Cup coach',
-    body:'Curaçao reinstated Dick Advocaat on May 13 after Fred Rutten\'s sudden resignation. The 78-year-old Dutch coach will surpass Otto Rehhagel\'s record (Greece, 2010) by seven years when Curaçao opens against Germany on June 14 in Houston. With a population of ~156,000, Curaçao is also the smallest nation by population ever to qualify for a World Cup. The squad relies on Eredivisie regulars; Tahith Chong leads the line.',
-    impact:'up', moveText:'Curaçao top scorer market off the board',
-    minutesAgo: 25920 },
-  { tag:'transfer', team:'Argentina',
-    title:'Messi confirmed in Argentina\'s sixth World Cup squad',
-    body:'Lionel Scaloni officially included Lionel Messi in Argentina\'s 26-man squad for the World Cup, the 38-year-old\'s sixth tournament appearance — a record. Messi will play alongside Julián Álvarez, Enzo Fernández, and Lautaro Martínez in defending the trophy Argentina won in Qatar 2022. La Albiceleste open against Jordan on June 14 in Dallas. Argentina sit at +900 on US sportsbooks.',
-    impact:'up', moveText:'Messi anytime scorer in opener priced 2.20',
-    minutesAgo: 11520 },
-  { tag:'form', team:'Iran',
-    title:'Iran omit veteran Azmoun amid federation tensions',
-    body:'Iran\'s 30-man preliminary squad announced May 17 controversially omitted veteran striker Sardar Azmoun amid reported tensions between the player and the federation. Mehdi Taremi (Olympiacos) leads the attack in his absence. The squad will train in Türkiye before relocating to Tijuana, Mexico, for the tournament. Iran face New Zealand on June 16 in their Group G opener.',
-    impact:'down', moveText:'Iran to advance Group G drifted 3.50 → 4.40',
-    minutesAgo: 20160 },
-  { tag:'lineup', team:'England',
-    title:'Tuchel drops Foden and Palmer from England squad — Kane captains',
-    body:'Thomas Tuchel made his statement of intent on May 22, omitting Phil Foden, Cole Palmer, and Trent Alexander-Arnold from England\'s 26-man squad. Harry Maguire, Luke Shaw, and Adam Wharton also missed out. Captain Harry Kane leads his record-equalling third World Cup — matching Billy Wright (1950, 1954, 1958). Marcus Rashford (Barcelona) and Bukayo Saka (Arsenal) are both in, alongside Jude Bellingham, Declan Rice, Cole-replacement Eberechi Eze, and surprise pick Ivan Toney. England open against Croatia on June 17.',
-    impact:'down', moveText:'England outright drifted +650 → +700 on omissions',
-    minutesAgo: 12960 },
-  { tag:'form', team:'France',
-    title:'France complete preparation with Mexico friendly',
-    body:'Didier Deschamps\'s side will play their final warm-up against Mexico on June 9 in Lyon. France earlier beat Cameroon 3-0 in Marseille on June 5 with Mbappé scoring twice and Dembélé adding the third. France open Group I against Senegal on June 14 at MetLife Stadium. Deschamps has signalled this will be his last World Cup as France coach.',
-    impact:'up', moveText:'Mbappé WC top scorer firmed 5.50 → 4.50',
-    minutesAgo: 360 },
-  { tag:'tactics', team:'Mexico',
-    title:'Mexico host South Africa in WC opener at Estadio Azteca',
-    body:'Co-hosts Mexico kick off the tournament on June 11 against South Africa at the iconic Estadio Azteca in Mexico City. Javier Aguirre\'s side enters with Group A favorites status at -110 on FanDuel after South Korea and Czechia were both placed around +330-+350. Edson Álvarez captains; veteran goalkeeper Guillermo Ochoa makes a record sixth World Cup appearance for the Mexican shotstopper.',
-    impact:'up', moveText:'Mexico to win Group A firmed -110',
-    minutesAgo: 720 },
-  { tag:'transfer', team:'Saudi Arabia',
-    title:'Saudi Arabia announce 30-man preliminary squad ahead of June 1 deadline',
-    body:'Saudi Arabia released their 30-man provisional list on May 23. Ronaldo\'s former Al-Nassr teammate Salem Al-Dawsari leads a squad balancing Saudi Pro League regulars with a handful of European-based players. The Greens open Group H against Uruguay on June 15 at Hard Rock Stadium. Final 26 due by June 1; squad submission to FIFA confirmed June 2.',
-    impact:'neutral', moveText:'Saudi Arabia to advance Group H priced 3.50',
-    minutesAgo: 11520 },
-];
+const WC_NEWS_SEED = [];  // retired — the World Cup tab is now a results archive
 
 // Working copy of WC news so refresh can mutate (rotate, age, add live items)
 // without touching the seed. Deep-cloned so nested objects don't bleed.
@@ -4492,6 +4172,8 @@ const PLAYER_ROLES = {
 // fall through to a default 'attacker' role (since the TEAM_SCORERS data
 // emphasizes goalscorers, most listed names are forwards or attacking midfielders).
 const PLAYER_ROLE_MAP = {
+  // 2026-27 centre-forwards
+  'Alexander Isak':'striker', 'João Pedro':'striker', 'Nicolas Jackson':'striker', 'Niclas Füllkrug':'striker', 'Ante Budimir':'striker', 'Antonio Raimondo':'striker', 'Esteban Lepaul':'striker', 'Dominic Calvert-Lewin':'striker', 'Brian Brobbey':'striker', 'Thierno Barry':'striker', 'Lassine Sinayoko':'striker', 'Sergio Camello':'striker', 'Fer Niño':'striker', 'Lucas Boyé':'striker', 'Nikola Krstović':'striker', 'Gustavo Varela':'striker', 'Phillip Tietz':'striker', 'Younes Ebnoutalib':'striker', 'Ermedin Demirović':'striker', 'Nicolò Tresoldi':'striker', 'Amine Gouiri':'striker', 'Casper Tengstedt':'striker', 'Kamory Doumbia':'striker', 'Cameron Archer':'striker', 'Louis Mafouta':'striker', 'Ayase Ueda':'striker', 'Olivier Giroud':'striker', 'Elye Wahi':'striker', 'Anastasios Douvikas':'striker', 'Giovanni Simeone':'striker', 'Michael Gregoritsch':'striker', 'Tammy Abraham':'striker', 'Artem Dovbyk':'striker', 'Vangelis Pavlidis':'striker', 'Jhon Durán':'striker', 'Randal Kolo Muani':'striker', 'Nick Woltemade':'striker', 'Donyell Malen':'striker', 'Adrián Niño':'striker', 'Isaac Romero':'striker', 'Igor Matanović':'striker', 'Ché Adams':'striker', 'Evanilson':'striker',
   // Pure strikers (shoot a lot)
   'Erling Haaland':'striker', 'Harry Kane':'striker', 'Robert Lewandowski':'striker',
   'Viktor Gyökeres':'striker', 'Hugo Ekitiké':'striker', 'Folarin Balogun':'striker',
@@ -4850,8 +4532,8 @@ function genOdds(match, seed) {
   ];
   // Player Props (anytime scorer) — pull real top scorers from each team's roster.
   // Show one home-team scorer and one away-team scorer for each match.
-  const homeScorers = TEAM_SCORERS[match.home] || ['Striker'];
-  const awayScorers = TEAM_SCORERS[match.away] || ['Striker'];
+  const homeScorers = TEAM_SCORERS[match.home] || [match.home + ' forward'];
+  const awayScorers = TEAM_SCORERS[match.away] || [match.away + ' forward'];
   // Pick a primary from each side; if rng triggers, swap to the secondary scorer for variety.
   const homePick = homeScorers[Math.floor(rng() * homeScorers.length)];
   const awayPick = awayScorers[Math.floor(rng() * awayScorers.length)];
@@ -5656,13 +5338,13 @@ function renderMatches() {
         </div>
       </div>
       <div class="markets" id="markets-${m.id}"></div>
-      <div class="match-preview-wrap">
+      ${(TEAM_FORM[m.home] || TEAM_FORM[m.away] || TEAM_SPLITS[m.home] || teamH2H(m.home, m.away)) ? `<div class="match-preview-wrap">
         <button class="preview-toggle" onclick="togglePreview('${m.id}')" id="preview-btn-${m.id}">
           <span>${t('preview.title')}</span>
           <span class="preview-chevron" id="preview-chev-${m.id}">▾</span>
         </button>
         <div class="match-preview" id="preview-${m.id}" style="display:none;"></div>
-      </div>
+      </div>` : ''}
     `;
     el.appendChild(div);
 
@@ -6561,7 +6243,7 @@ const NEWS_SEED = [
     minutesAgo: 260 },
   { league:'ucl', tag:'form', team:'Real Madrid',
     title:'Real Madrid edge Roma 4-3, now host Leipzig before the Clásico',
-    body:'Madrid won a seven-goal thriller in Rome on Matchday 2. They host RB Leipzig at the Bernabéu on Wednesday, four days before visiting Barcelona. Rotation is expected with the league fixture looming.',
+    body:'José Mourinho\'s side won a seven-goal thriller in Rome on Matchday 2. They host RB Leipzig at the Bernabéu on Wednesday, four days before visiting Barcelona. Kylian Mbappé has 9 league goals, second in the Pichichi race behind Raphinha (12).',
     impact:'neutral', moveText:'Real Madrid v Leipzig over 2.5 firmed',
     minutesAgo: 330 },
   { league:'ucl', tag:'form', team:'Inter Milan',
@@ -6570,7 +6252,7 @@ const NEWS_SEED = [
     impact:'down', moveText:'Inter to win league phase drifted after Brugge loss',
     minutesAgo: 410 },
   { league:'ucl', tag:'tactics', team:'Manchester Utd',
-    title:'Manchester United visit Como seeking first points',
+    title:'Manchester United visit Como after defeat in Madrid',
     body:'United lost 2-0 at Atlético Madrid on Matchday 2 and travel to Como for an 18:45 CET kickoff on Wednesday. Bournemouth visit Old Trafford on Sunday.',
     impact:'down', moveText:'Como v Manchester Utd draw shortened',
     minutesAgo: 470 },
@@ -6596,7 +6278,7 @@ const NEWS_SEED = [
     minutesAgo: 820 },
   { league:'seriea', tag:'tactics', team:'Napoli',
     title:'Napoli and Roma meet at the Maradona on Saturday',
-    body:'Both clubs play in the Champions League this week before the giornata 8 meeting in Naples on Saturday at 18:00 CEST. Elsewhere, Udinese host Milan on Sunday night and Lecce face Juventus.',
+    body:'Both won in the Champions League on Tuesday — Napoli 4-3 against Bodø/Glimt, Roma 4-0 against Slovan Bratislava — before Saturday\'s giornata 8 meeting in Naples at 18:00 CEST. It pits Massimiliano Allegri, appointed at Napoli in July, against Gian Piero Gasperini. Roma\'s Donyell Malen has 6 league goals. Elsewhere, Udinese host Milan on Sunday night and Lecce face Juventus.',
     impact:'neutral', moveText:'Napoli v Roma under 2.5 favored',
     minutesAgo: 900 },
   { league:'bundes', tag:'tactics', team:'Borussia Dortmund',
@@ -6631,13 +6313,8 @@ const MOVERS_SEED = [
 // Left empty until verified team news is published for this round — better an
 // honest empty state than invented absences.
 const SUSPENSIONS_SEED = [];
-const WEATHER_SEED = [
-  { match:'Bayern Munich v Arsenal',  cond:'Cool · 8°C · Light wind',   impact:'Neutral' },
-  { match:'Aston Villa v Man City',   cond:'Showers · 11°C · Breezy',   impact:'Under 2.5 +1%' },
-  { match:'Barcelona v Real Madrid',  cond:'Mild · 19°C · Calm',        impact:'Neutral' },
-  { match:'Napoli v Roma',            cond:'Clear · 20°C · Calm',       impact:'Neutral' },
-  { match:'Paris SG v Lyon',          cond:'Overcast · 12°C',           impact:'Neutral' },
-];
+// Left empty until a verified forecast source is wired in.
+const WEATHER_SEED = [];
 
 // Working state — gets replaced on each refresh so we can simulate live updates
 let NEWS = JSON.parse(JSON.stringify(NEWS_SEED));
@@ -6793,7 +6470,9 @@ function renderNews() {
     </div>`;
   }).join('');
 
-  document.getElementById('weather').innerHTML = WEATHER.map(w => `
+  document.getElementById('weather').innerHTML = !WEATHER.length
+    ? '<div class="ticker-row"><div class="lbl" style="font-size:11px; color:var(--ink-3);">Match-day forecasts are added closer to kickoff.</div></div>'
+    : WEATHER.map(w => `
     <div class="ticker-row" style="flex-direction:column; align-items:flex-start; gap:3px;">
       <div style="font-weight:600; color:var(--ink); font-size:12px;">${w.match}</div>
       <div style="font-size:10px; color:var(--ink-2); font-family:var(--mono);">${w.cond}</div>
@@ -6807,73 +6486,57 @@ function renderNews() {
 }
 
 // Rotation pool — additional season-accurate news that can be surfaced on refresh.
-// All facts verified against late-April 2026 reporting from official club channels,
-// ESPN, Al Jazeera, beIN Sports, and league websites.
+// All facts verified against October 2026 reporting (league sites, UEFA, Wikipedia,
+// beIN Sports, Sky Italia, Foot Mercato).
 const NEWS_ROTATION = [
-  { league:'epl', tag:'lineup', team:'Arsenal',
-    title:'Saliba and Eze pass late fitness tests for Atlético trip',
-    body:'Mikel Arteta confirmed both players cleared the muscle issues picked up against Newcastle. Viktor Gyökeres leads the line. Arsenal travel to the Metropolitano in the UCL semi-final second leg looking to reach the Budapest final.',
-    impact:'up', moveText:'Arsenal +0 AH steamed 2.20 → 2.05' },
+  { league:'epl', tag:'transfer', team:'Aston Villa',
+    title:'Villa rebuilt the attack after selling Watkins to Al Hilal',
+    body:'Aston Villa sold Ollie Watkins to Saudi club Al Hilal at the end of August for a reported £50m, and Morgan Rogers left for Chelsea. Nicolas Jackson, signed from Chelsea, has 3 Champions League goals, with Tammy Abraham and Ross Barkley also on the scoresheet. Unai Emery remains in charge and John McGinn is captain.',
+    impact:'neutral', moveText:'Nicolas Jackson anytime vs Viking priced short' },
   { league:'epl', tag:'tactics', team:'Manchester City',
-    title:'Pep eyes Foden in deeper midfield as Rodri continues recovery',
-    body:'With Rodri still being protected from the groin issue, Guardiola is reshaping his midfield. Phil Foden tested in the double pivot during Friday\'s session ahead of the Everton trip on May 4 and the FA Cup final vs Chelsea on May 16.',
-    impact:'up', moveText:'City +0.5 AH on Arsenal title gap firmed' },
-  { league:'laliga', tag:'form', team:'Atletico Madrid',
-    title:'Simeone\'s Atleti welcome Álvarez and Lookman back for Arsenal',
-    body:'Diego Simeone has Julián Álvarez, Ademola Lookman and David Hancko available. Pablo Barrios suffered a hamstring relapse and is out for a month. José María Giménez also misses out. Atleti host Arsenal in the UCL semi second leg with the tie on a knife edge.',
-    impact:'up', moveText:'Atlético +0 AH for the tie firmed 2.10 → 1.92' },
-  { league:'bundes', tag:'transfer', team:'Borussia Dortmund',
-    title:'Adeyemi sale on the table — Liverpool, Arsenal tracking',
-    body:'BVB are reportedly willing to listen to offers for winger Karim Adeyemi this summer to fund a midfield rebuild. Liverpool, Arsenal and Newcastle all linked. Niko Kovač\'s side has stabilised but the title race ended long ago.',
-    impact:'down', moveText:'Adeyemi at Dortmund next season odds 1.85' },
-  { league:'seriea', tag:'lineup', team:'Juventus',
-    title:'Spalletti returns Yıldız to starting XI — Vlahović fit again',
-    body:'Luciano Spalletti, who replaced the sacked Igor Tudor on October 30, brings Kenan Yıldız back into the XI. With Vlahović fit and Jonathan David adapting well after his summer free transfer from Lille, Juve push for a Champions League finish in fourth.',
-    impact:'up', moveText:'Juventus to score 2+ firmed to 1.95' },
-  { league:'ligue1', tag:'tactics', team:'Paris Saint-Germain',
-    title:'Luis Enrique manages Dembélé minutes ahead of Bayern 2nd leg',
-    body:'PSG already lead Ligue 1 comfortably and balance their domestic position with the May 5 Champions League semi-final return leg in Munich. Luis Enrique signalled the Ballon d\'Or-winning Dembélé will rotate; PSG won the 5-4 thriller in the first leg.',
-    impact:'up', moveText:'PSG to win UCL firmed 2.40 → 1.95' },
-  { league:'epl', tag:'injury', team:'Aston Villa',
-    title:'Watkins out two weeks — Villa look to Durán for top-four push',
-    body:'Ollie Watkins is sidelined with a calf strain. Unai Emery confirmed Jhon Durán steps in as Villa look to lock down a Champions League place. Villa hold third with Manchester United fourth and Liverpool chasing in fifth.',
-    impact:'down', moveText:'Villa Over 1.5 team goals 1.55 → 1.72' },
-  { league:'laliga', tag:'tactics', team:'Athletic Bilbao',
-    title:'Valverde shifts to back three for Sociedad derby',
-    body:'Athletic\'s Ernesto Valverde is set to deploy a 3-4-2-1 shape against Real Sociedad, with Iñaki Williams pushed forward and Yuri Berchiche returning at left wing-back.',
-    impact:'up', moveText:'Athletic to score firmed to 1.30' },
-  { league:'bundes', tag:'lineup', team:'RB Leipzig',
-    title:'Openda returns from injury for Leipzig\'s Europa push',
-    body:'Loïs Openda is back in the Leipzig XI after missing three weeks with a knee issue. Leipzig need every win to lock in European football alongside Bayern, Leverkusen and the chasing pack.',
-    impact:'up', moveText:'Leipzig Over 2.5 team goals firmed' },
-  { league:'seriea', tag:'transfer', team:'Inter Milan',
-    title:'Inter close to extending Lautaro to 2030',
-    body:'Captain Lautaro Martínez is reportedly set to sign through 2030 with a release clause raised to €150m. With Chivu and the Scudetto in sight, Marotta and Ausilio want continuity. Thuram remains his strike partner.',
-    impact:'up', moveText:'Lautaro top scorer firmed to 1.40' },
-  { league:'ligue1', tag:'form', team:'RC Lens',
-    title:'Lens close in on Marseille for second — title race PSG\'s alone',
-    body:'Lens have surged into Champions League contention. Will Still\'s side has won five of their last six and host PSG for what could be a top-two-deciding fixture. PSG\'s margin at the top is now too big to threaten.',
-    impact:'up', moveText:'Lens top-2 finish 2.10 → 1.78' },
-  { league:'epl', tag:'form', team:'Liverpool',
-    title:'Slot on Salah: "I don\'t know" if he plays again this season',
-    body:'With Salah\'s hamstring serious enough that Slot would not commit to him returning this season, Liverpool turn to Florian Wirtz centrally with Cody Gakpo, Federico Chiesa and Alexander Isak — back from his broken leg — fighting for forward roles. Defending champions Liverpool sit fifth.',
-    impact:'down', moveText:'Liverpool to win EPL out at 1000.00' },
-  { league:'bundes', tag:'injury', team:'Bayern Munich',
-    title:'Gnabry out for season — adductor tear confirmed',
-    body:'Bayern confirmed Serge Gnabry has a torn adductor and will miss the remainder of the campaign. The Bundesliga is already wrapped up, but Bayern still chase the DFB-Pokal final and the Champions League — though the 4-5 first leg loss to PSG hurt.',
-    impact:'down', moveText:'Bayern -2.5 AH drifted 2.15 → 2.40' },
-  { league:'seriea', tag:'tactics', team:'AS Roma',
-    title:'Gasperini\'s Roma chase final UCL spot — five points to play with',
-    body:'Gian Piero Gasperini, who left Atalanta after nine years for Roma in summer 2025, has the Giallorossi within striking distance of a Champions League place. Pellegrini and Dybala lead the line; the run-in features Fiorentina, Parma, Lazio and Verona.',
-    impact:'up', moveText:'Roma top-4 firmed 2.20 → 1.85' },
-  { league:'ligue1', tag:'lineup', team:'AS Monaco',
-    title:'Pocognoli works Pogba back in carefully',
-    body:'Belgian boss Sébastien Pocognoli is integrating Paul Pogba carefully — the World Cup winner has not played competitively since 2023. Folarin Balogun, Maghnes Akliouche and Eliesse Ben Seghir continue to lead the attack.',
-    impact:'up', moveText:'Monaco to win firmed 1.45 → 1.32' },
-  { league:'epl', tag:'transfer', team:'Manchester United',
-    title:'Carrick targets summer rebuild — top-four secure',
-    body:'Michael Carrick, who replaced Rúben Amorim on January 13 after Darren Fletcher\'s interim spell, has United on track for a top-four finish. The board is already preparing for a summer of transfer activity to consolidate the rebuild.',
-    impact:'up', moveText:'Man Utd top-4 firmed 1.32 → 1.22' },
+    title:'Maresca\'s City top the table in the post-Guardiola era',
+    body:'Enzo Maresca succeeded Pep Guardiola, who stepped down in the summer after a decade in charge. City led the Premier League with 21 points from 7 games as of October 18, with Erling Haaland on 8 league goals and Rayan Cherki on 4.',
+    impact:'up', moveText:'Manchester City to win the league favored' },
+  { league:'laliga', tag:'transfer', team:'Barcelona',
+    title:'Perfect Barcelona added Rodri from Manchester City this summer',
+    body:'Barcelona signed Spain captain Rodri from Manchester City in August. Hansi Flick\'s side have won all nine LaLiga games, with Raphinha leading the Pichichi race on 12 goals and Lamine Yamal on 8.',
+    impact:'up', moveText:'Raphinha anytime scorer in the Clásico shortened' },
+  { league:'epl', tag:'tactics', team:'Liverpool',
+    title:'Iraola\'s Liverpool lean on Isak and Barcola',
+    body:'Andoni Iraola replaced Arne Slot in the summer. Alexander Isak has 5 Premier League goals, and Bradley Barcola and Alexis Mac Allister have 3 each in the Champions League. Liverpool host Brighton, third in the table, on Sunday.',
+    impact:'neutral', moveText:'Isak anytime vs Brighton priced near even' },
+  { league:'epl', tag:'form', team:'Chelsea',
+    title:'Xabi Alonso\'s Chelsea: João Pedro and Morgan Rogers on 9 between them',
+    body:'Chelsea, managed by Xabi Alonso, sat fourth as of October 18. João Pedro has 5 league goals and summer signing Morgan Rogers has 4. They host Tottenham, now under Roberto De Zerbi, on Saturday evening.',
+    impact:'up', moveText:'João Pedro anytime vs Tottenham shortened' },
+  { league:'seriea', tag:'tactics', team:'AC Milan',
+    title:'Amorim\'s Milan and Allegri\'s Napoli after summer coaching swap',
+    body:'Rúben Amorim took over at Milan in June after Massimiliano Allegri was sacked, and Allegri moved to Napoli in July to replace Antonio Conte. Adrien Rabiot leads Milan with 4 Serie A goals, and Alphadjo Cisse scored a Europa League hat-trick in Salzburg.',
+    impact:'neutral', moveText:'Milan double chance at Udinese priced short' },
+  { league:'seriea', tag:'form', team:'Frosinone',
+    title:'Promoted Frosinone\'s Raimondo leads the Serie A scoring chart',
+    body:'Antonio Raimondo leads Serie A with 7 goals (Sky Italia, October 20), ahead of Roma\'s Donyell Malen and Monza\'s Gustavo Varela on 6. Frosinone visit Atalanta on Sunday.',
+    impact:'up', moveText:'Raimondo anytime at Atalanta priced long' },
+  { league:'bundes', tag:'form', team:'Werder Bremen',
+    title:'Füllkrug and Schick share the Bundesliga scoring lead',
+    body:'Niclas Füllkrug (Werder Bremen) and Patrik Schick (Bayer Leverkusen) both have 6 Bundesliga goals. Bayern\'s Michael Olise has 5 and Harry Kane 4. Leverkusen visit Hoffenheim on Sunday under new coach Carles Martínez Novell.',
+    impact:'neutral', moveText:'Schick anytime at Hoffenheim priced near even' },
+  { league:'ligue1', tag:'form', team:'Rennes',
+    title:'Lepaul leads Ligue 1 scorers; Ferran Torres scoring for PSG',
+    body:'Rennes\' Esteban Lepaul tops the Ligue 1 scoring chart with 7 goals, ahead of Paris FC\'s Lassine Sinayoko on 6. Ferran Torres has 4 league goals and 3 in the Champions League for Paris Saint-Germain.',
+    impact:'up', moveText:'Lepaul anytime vs Strasbourg shortened' },
+  { league:'laliga', tag:'tactics', team:'Real Madrid',
+    title:'Mourinho back at the Bernabéu for his first Clásico of the season',
+    body:'José Mourinho succeeded Álvaro Arbeloa as Real Madrid coach. Madrid face Barcelona at Spotify Camp Nou on Sunday at 21:00 CET, four days after hosting RB Leipzig in the Champions League.',
+    impact:'neutral', moveText:'Clásico draw priced around 3.20' },
+  { league:'ucl', tag:'form', team:'Stuttgart',
+    title:'Four players share the Champions League scoring lead',
+    body:'Per UEFA on October 20, Stuttgart\'s Ermedin Demirović, Dortmund\'s Serhou Guirassy, Manchester City\'s Erling Haaland and Club Brugge\'s Nicolò Tresoldi each have 4 Champions League goals. Brugge host Lens on Wednesday.',
+    impact:'neutral', moveText:'Tresoldi anytime vs Lens priced short' },
+  { league:'uel', tag:'form', team:'Benfica',
+    title:'Jhon Durán on target for Benfica in Europa League rout of Celtic',
+    body:'Former Aston Villa striker Jhon Durán scored twice, including a Panenka penalty, as Benfica beat Celtic 4-1 on Matchday 2. Benfica visit Omonia on Thursday.',
+    impact:'up', moveText:'Benfica -1 handicap at Omonia shortened' },
 ];
 
 let _newsRotationIdx = 0;
