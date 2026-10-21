@@ -1822,6 +1822,37 @@
     .brand-logo img { height: 20px; }
     .brand { min-width: 0; flex: 0 0 auto; }
   }
+
+  /* ===== World Cup 2026 archive ===== */
+  .wca-closed { display:inline-block; font-family:var(--mono); font-size:9px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--ink-3); border:1px solid var(--line); border-radius:3px; padding:3px 8px; margin-bottom:12px; }
+  .wca-final { text-align:center; }
+  .wca-final-board { display:flex; align-items:center; justify-content:center; gap:28px; margin:18px 0 12px; }
+  .wca-final-team { display:flex; flex-direction:column; align-items:center; gap:8px; min-width:110px; }
+  .wca-final-team b { font-family:var(--serif); font-size:18px; }
+  .wca-final-score { font-family:var(--display); font-size:56px; line-height:1; color:var(--accent); display:flex; flex-direction:column; align-items:center; }
+  .wca-final-score small { font-family:var(--mono); font-size:10px; color:var(--ink-3); letter-spacing:.12em; margin-top:4px; }
+  .wca-round { font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); margin:18px 0 6px; }
+  .wca-row { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:12px; padding:10px 0; border-bottom:1px dashed var(--line); }
+  .wca-team { display:flex; align-items:center; gap:8px; font-family:var(--serif); font-weight:600; font-size:14px; min-width:0; }
+  .wca-away { justify-content:flex-end; text-align:right; }
+  .wca-score { font-family:var(--mono); font-weight:700; font-size:15px; white-space:nowrap; }
+  .wca-aet { font-size:9px; color:var(--ink-3); font-weight:500; }
+  .wca-note { grid-column:1 / -1; font-family:var(--mono); font-size:10px; color:var(--ink-3); }
+  .wca-awards { display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:10px; }
+  .wca-award { border:1px solid var(--line); border-radius:4px; padding:14px; background:var(--bg-3); }
+  .wca-award-lbl { font-family:var(--mono); font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
+  .wca-award-who { display:flex; align-items:center; gap:8px; font-size:15px; }
+  .wca-award-sub { font-family:var(--mono); font-size:10px; color:var(--ink-3); margin-top:6px; }
+  .wca-mrow { display:grid; grid-template-columns:1fr 80px 90px; align-items:center; padding:9px 0; border-bottom:1px dashed var(--line); }
+  .wca-mrow.win .wca-price, .wca-mrow.win .wca-finish { color:var(--accent); }
+  .wca-price { font-family:var(--mono); font-weight:700; text-align:right; }
+  .wca-finish { font-family:var(--mono); font-size:11px; text-align:right; color:var(--ink-2); }
+  @media (max-width: 480px) {
+    .wca-final-board { gap:14px; } .wca-final-team { min-width:80px; } .wca-final-score { font-size:40px; }
+    .wca-team { font-size:12px; } .wca-score { font-size:13px; }
+    .wca-mrow { grid-template-columns:1fr 64px 76px; }
+  }
 </style>
 </head>
 <body>
@@ -1912,13 +1943,13 @@
     <!-- ===== WORLD CUP ===== -->
     <section id="tab-wc" class="hidden">
       <div class="hero">
-        <h1 data-i18n="wc.title">World Cup <em>2026</em>.</h1>
-        <p class="sub" data-i18n="wc.sub">48 teams, 12 groups, 104 matches across the United States, Canada, and Mexico. Outright futures and group-stage lines available now; knockout matchups priced once groups conclude June 27.</p>
+        <h1 data-i18n="wc.title">World Cup <em>2026</em> archive.</h1>
+        <p class="sub" data-i18n="wc.sub">Spain are world champions. Final results, the knockout bracket, the awards, and how the pre-tournament futures market settled.</p>
         <div class="hero-meta" id="wc-hero-meta">
-          <div><b id="wc-stat-days">—</b><span data-i18n="wc.stat.days">Days to kickoff</span></div>
-          <div><b>48</b><span data-i18n="wc.stat.teams">Teams</span></div>
-          <div><b>12</b><span data-i18n="wc.stat.groups">Groups</span></div>
+          <div><b data-i18n="wc.arch.spain">Spain</b><span data-i18n="wc.stat.champion">Champion</span></div>
           <div><b>104</b><span data-i18n="wc.stat.matches">Matches</span></div>
+          <div><b>308</b><span data-i18n="wc.stat.goals">Goals</span></div>
+          <div><b>6.81M</b><span data-i18n="wc.stat.attendance">Attendance</span></div>
         </div>
       </div>
       <div class="wc-body" id="wc-body"><!-- populated by renderWorldCup() --></div>
@@ -2055,8 +2086,8 @@
 //    "Site URL" and "Redirect URLs" so email links work
 // 10. Push this file to GitHub Pages and you're live
 const SUPABASE_CONFIG = {
-  url: 'https://ajccvuldhjynxegtlgxj.supabase.co',
-  anonKey:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFqY2N2dWxkaGp5bnhlZ3RsZ3hqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxNTg1MjEsImV4cCI6MjA5MzczNDUyMX0.jVz9tLC7kwhwvhR_HOuAZWkCyqUGHoP_adQoykcxJA8',
+  url: '',     // e.g. 'https://abcdefgh.supabase.co'
+  anonKey: '', // e.g. 'eyJhbGciOi...' (the long public anon key)
 };
 
 // Initialize the Supabase client only if config is filled in. Otherwise,
@@ -2137,12 +2168,39 @@ const I18N = {
     'tag.injury': 'INJURY', 'tag.lineup': 'LINEUP', 'tag.transfer': 'TRANSFER',
     'tag.form': 'FORM', 'tag.suspension': 'SUSPENSION', 'tag.tactics': 'TACTICS',
     'tab.wc': 'World Cup',
-    'wc.title': 'World Cup <em>2026</em>.',
-    'wc.sub': '48 teams, 12 groups, 104 matches across the United States, Canada, and Mexico. Outright futures and group-stage lines available now; knockout matchups priced once groups conclude June 27.',
+    'wc.title': 'World Cup <em>2026</em> archive.',
+    'wc.sub': 'Spain are world champions. Final results, the knockout bracket, the awards, and how the pre-tournament futures market settled.',
     'wc.stat.days': 'Days to kickoff',
     'wc.stat.teams': 'Teams',
     'wc.stat.groups': 'Groups',
     'wc.stat.matches': 'Matches',
+    'wc.stat.champion': 'Champion',
+    'wc.stat.goals': 'Goals',
+    'wc.stat.attendance': 'Attendance',
+    'wc.arch.spain': 'Spain',
+    'wc.arch.final': 'The Final',
+    'wc.arch.finalSub': 'MetLife Stadium · July 19, 2026',
+    'wc.arch.ko': 'Knockout results',
+    'wc.arch.koSub': 'Quarter-finals to third place',
+    'wc.arch.qf': 'Quarter-finals',
+    'wc.arch.sf': 'Semi-finals',
+    'wc.arch.third': 'Third place',
+    'wc.arch.awards': 'Awards',
+    'wc.arch.awardsSub': 'Official FIFA tournament awards',
+    'wc.arch.gball': 'Golden Ball',
+    'wc.arch.gboot': 'Golden Boot',
+    'wc.arch.gglove': 'Golden Glove',
+    'wc.arch.young': 'Best Young Player',
+    'wc.arch.fair': 'Fair Play',
+    'wc.arch.market': 'How the futures settled',
+    'wc.arch.marketSub': 'Pre-tournament outright prices vs. final finish',
+    'wc.arch.won': 'Won',
+    'wc.arch.runnerup': 'Runner-up',
+    'wc.arch.thirdp': '3rd',
+    'wc.arch.fourth': '4th',
+    'wc.arch.aet': 'a.e.t.',
+    'wc.arch.closed': 'Markets closed — archive only',
+    'wc.arch.goalsN': 'goals',
     'wc.live': 'Live',
     'wc.outright': 'Outright winner',
     'wc.outright.sub': 'Top six co-favorites featured · Tap any nation to add to slip',
@@ -2384,12 +2442,39 @@ const I18N = {
     'tag.injury': 'LESIÓN', 'tag.lineup': 'ALINEACIÓN', 'tag.transfer': 'FICHAJE',
     'tag.form': 'FORMA', 'tag.suspension': 'SANCIÓN', 'tag.tactics': 'TÁCTICA',
     'tab.wc': 'Mundial',
-    'wc.title': 'Mundial <em>2026</em>.',
-    'wc.sub': '48 selecciones, 12 grupos, 104 partidos en Estados Unidos, Canadá y México. Apuestas a ganador y fase de grupos disponibles; las eliminatorias se valoran cuando concluyan los grupos el 27 de junio.',
+    'wc.title': 'Archivo del Mundial <em>2026</em>.',
+    'wc.sub': 'España es campeona del mundo. Resultados finales, el cuadro eliminatorio, los premios y cómo se resolvió el mercado de ganador previo al torneo.',
     'wc.stat.days': 'Días al inicio',
     'wc.stat.teams': 'Selecciones',
     'wc.stat.groups': 'Grupos',
     'wc.stat.matches': 'Partidos',
+    'wc.stat.champion': 'Campeón',
+    'wc.stat.goals': 'Goles',
+    'wc.stat.attendance': 'Asistencia',
+    'wc.arch.spain': 'España',
+    'wc.arch.final': 'La Final',
+    'wc.arch.finalSub': 'MetLife Stadium · 19 de julio de 2026',
+    'wc.arch.ko': 'Eliminatorias',
+    'wc.arch.koSub': 'De cuartos al tercer puesto',
+    'wc.arch.qf': 'Cuartos de final',
+    'wc.arch.sf': 'Semifinales',
+    'wc.arch.third': 'Tercer puesto',
+    'wc.arch.awards': 'Premios',
+    'wc.arch.awardsSub': 'Premios oficiales de la FIFA',
+    'wc.arch.gball': 'Balón de Oro',
+    'wc.arch.gboot': 'Bota de Oro',
+    'wc.arch.gglove': 'Guante de Oro',
+    'wc.arch.young': 'Mejor Jugador Joven',
+    'wc.arch.fair': 'Juego Limpio',
+    'wc.arch.market': 'Cómo se resolvieron las apuestas',
+    'wc.arch.marketSub': 'Cuotas previas al torneo vs. resultado final',
+    'wc.arch.won': 'Campeón',
+    'wc.arch.runnerup': 'Subcampeón',
+    'wc.arch.thirdp': '3º',
+    'wc.arch.fourth': '4º',
+    'wc.arch.aet': 't.e.',
+    'wc.arch.closed': 'Mercados cerrados — solo archivo',
+    'wc.arch.goalsN': 'goles',
     'wc.live': 'En vivo',
     'wc.outright': 'Ganador del torneo',
     'wc.outright.sub': 'Los seis cofavoritos destacados · Toca cualquier selección para agregarla',
@@ -2632,12 +2717,39 @@ const I18N = {
     'tag.injury': 'VERLETZUNG', 'tag.lineup': 'AUFSTELLUNG', 'tag.transfer': 'TRANSFER',
     'tag.form': 'FORM', 'tag.suspension': 'SPERRE', 'tag.tactics': 'TAKTIK',
     'tab.wc': 'WM',
-    'wc.title': 'WM <em>2026</em>.',
-    'wc.sub': '48 Teams, 12 Gruppen, 104 Spiele in den USA, Kanada und Mexiko. Sieger- und Gruppenphasenwetten jetzt verfügbar; K.o.-Runden werden bepreist, sobald die Gruppen am 27. Juni abgeschlossen sind.',
+    'wc.title': 'WM <em>2026</em> Archiv.',
+    'wc.sub': 'Spanien ist Weltmeister. Endergebnisse, die K.o.-Runde, die Auszeichnungen und wie der Siegermarkt vor dem Turnier abgerechnet wurde.',
     'wc.stat.days': 'Tage bis Anpfiff',
     'wc.stat.teams': 'Teams',
     'wc.stat.groups': 'Gruppen',
     'wc.stat.matches': 'Spiele',
+    'wc.stat.champion': 'Weltmeister',
+    'wc.stat.goals': 'Tore',
+    'wc.stat.attendance': 'Zuschauer',
+    'wc.arch.spain': 'Spanien',
+    'wc.arch.final': 'Das Finale',
+    'wc.arch.finalSub': 'MetLife Stadium · 19. Juli 2026',
+    'wc.arch.ko': 'K.o.-Runde',
+    'wc.arch.koSub': 'Viertelfinale bis Spiel um Platz 3',
+    'wc.arch.qf': 'Viertelfinale',
+    'wc.arch.sf': 'Halbfinale',
+    'wc.arch.third': 'Spiel um Platz 3',
+    'wc.arch.awards': 'Auszeichnungen',
+    'wc.arch.awardsSub': 'Offizielle FIFA-Turnierpreise',
+    'wc.arch.gball': 'Goldener Ball',
+    'wc.arch.gboot': 'Goldener Schuh',
+    'wc.arch.gglove': 'Goldener Handschuh',
+    'wc.arch.young': 'Bester junger Spieler',
+    'wc.arch.fair': 'Fair-Play',
+    'wc.arch.market': 'Wie die Siegerwetten ausgingen',
+    'wc.arch.marketSub': 'Quoten vor dem Turnier vs. Endplatzierung',
+    'wc.arch.won': 'Sieger',
+    'wc.arch.runnerup': 'Finalist',
+    'wc.arch.thirdp': '3.',
+    'wc.arch.fourth': '4.',
+    'wc.arch.aet': 'n.V.',
+    'wc.arch.closed': 'Märkte geschlossen — nur Archiv',
+    'wc.arch.goalsN': 'Tore',
     'wc.live': 'Live',
     'wc.outright': 'Turniersieger',
     'wc.outright.sub': 'Top sechs Mitfavoriten · Tippe ein Team an, um es zum Wettschein hinzuzufügen',
@@ -2880,12 +2992,39 @@ const I18N = {
     'tag.injury': 'INFORTUNIO', 'tag.lineup': 'FORMAZIONE', 'tag.transfer': 'MERCATO',
     'tag.form': 'FORMA', 'tag.suspension': 'SQUALIFICA', 'tag.tactics': 'TATTICA',
     'tab.wc': 'Mondiale',
-    'wc.title': 'Mondiale <em>2026</em>.',
-    'wc.sub': '48 squadre, 12 gironi, 104 partite tra Stati Uniti, Canada e Messico. Mercati per vincitore e gironi disponibili; le eliminatorie vengono quotate al termine dei gironi il 27 giugno.',
+    'wc.title': 'Archivio Mondiale <em>2026</em>.',
+    'wc.sub': 'La Spagna è campione del mondo. Risultati finali, il tabellone a eliminazione, i premi e come si è chiuso il mercato del vincitore.',
     'wc.stat.days': 'Giorni al via',
     'wc.stat.teams': 'Squadre',
     'wc.stat.groups': 'Gironi',
     'wc.stat.matches': 'Partite',
+    'wc.stat.champion': 'Campione',
+    'wc.stat.goals': 'Gol',
+    'wc.stat.attendance': 'Spettatori',
+    'wc.arch.spain': 'Spagna',
+    'wc.arch.final': 'La Finale',
+    'wc.arch.finalSub': 'MetLife Stadium · 19 luglio 2026',
+    'wc.arch.ko': 'Fase a eliminazione',
+    'wc.arch.koSub': 'Dai quarti alla finale per il 3° posto',
+    'wc.arch.qf': 'Quarti di finale',
+    'wc.arch.sf': 'Semifinali',
+    'wc.arch.third': 'Finale 3° posto',
+    'wc.arch.awards': 'Premi',
+    'wc.arch.awardsSub': 'Premi ufficiali FIFA del torneo',
+    'wc.arch.gball': 'Pallone d\'Oro',
+    'wc.arch.gboot': 'Scarpa d\'Oro',
+    'wc.arch.gglove': 'Guanto d\'Oro',
+    'wc.arch.young': 'Miglior Giovane',
+    'wc.arch.fair': 'Fair Play',
+    'wc.arch.market': 'Come si sono chiuse le quote',
+    'wc.arch.marketSub': 'Quote pre-torneo vs. piazzamento finale',
+    'wc.arch.won': 'Vincitore',
+    'wc.arch.runnerup': 'Finalista',
+    'wc.arch.thirdp': '3°',
+    'wc.arch.fourth': '4°',
+    'wc.arch.aet': 'd.t.s.',
+    'wc.arch.closed': 'Mercati chiusi — solo archivio',
+    'wc.arch.goalsN': 'gol',
     'wc.live': 'Live',
     'wc.outright': 'Vincitore torneo',
     'wc.outright.sub': 'Le sei co-favorite in evidenza · Tocca una nazionale per aggiungerla',
@@ -3128,12 +3267,39 @@ const I18N = {
     'tag.injury': 'BLESSURE', 'tag.lineup': 'COMPO', 'tag.transfer': 'TRANSFERT',
     'tag.form': 'FORME', 'tag.suspension': 'SUSPENSION', 'tag.tactics': 'TACTIQUE',
     'tab.wc': 'Coupe du Monde',
-    'wc.title': 'Coupe du Monde <em>2026</em>.',
-    'wc.sub': '48 équipes, 12 groupes, 104 matches aux États-Unis, au Canada et au Mexique. Paris vainqueur et phase de groupes disponibles; les rencontres à élimination directe seront cotées à la fin des groupes le 27 juin.',
+    'wc.title': 'Archives Coupe du Monde <em>2026</em>.',
+    'wc.sub': 'L\'Espagne est championne du monde. Résultats, tableau final, récompenses et dénouement du marché vainqueur d\'avant tournoi.',
     'wc.stat.days': 'Jours avant le coup d\'envoi',
     'wc.stat.teams': 'Équipes',
     'wc.stat.groups': 'Groupes',
     'wc.stat.matches': 'Matches',
+    'wc.stat.champion': 'Champion',
+    'wc.stat.goals': 'Buts',
+    'wc.stat.attendance': 'Affluence',
+    'wc.arch.spain': 'Espagne',
+    'wc.arch.final': 'La Finale',
+    'wc.arch.finalSub': 'MetLife Stadium · 19 juillet 2026',
+    'wc.arch.ko': 'Phase à élimination',
+    'wc.arch.koSub': 'Des quarts au match pour la 3e place',
+    'wc.arch.qf': 'Quarts de finale',
+    'wc.arch.sf': 'Demi-finales',
+    'wc.arch.third': 'Match pour la 3e place',
+    'wc.arch.awards': 'Récompenses',
+    'wc.arch.awardsSub': 'Récompenses officielles de la FIFA',
+    'wc.arch.gball': 'Ballon d\'Or',
+    'wc.arch.gboot': 'Soulier d\'Or',
+    'wc.arch.gglove': 'Gant d\'Or',
+    'wc.arch.young': 'Meilleur Jeune Joueur',
+    'wc.arch.fair': 'Fair-Play',
+    'wc.arch.market': 'Le dénouement des paris',
+    'wc.arch.marketSub': 'Cotes d\'avant tournoi vs. classement final',
+    'wc.arch.won': 'Vainqueur',
+    'wc.arch.runnerup': 'Finaliste',
+    'wc.arch.thirdp': '3e',
+    'wc.arch.fourth': '4e',
+    'wc.arch.aet': 'a.p.',
+    'wc.arch.closed': 'Marchés fermés — archives',
+    'wc.arch.goalsN': 'buts',
     'wc.live': 'En direct',
     'wc.outright': 'Vainqueur du tournoi',
     'wc.outright.sub': 'Les six co-favoris à la une · Touchez une équipe pour l\'ajouter au ticket',
@@ -3382,6 +3548,10 @@ const FLAGS = {
   france: `<svg viewBox="0 0 60 36" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="36" fill="#002395"/><rect x="20" width="20" height="36" fill="#fff"/><rect x="40" width="20" height="36" fill="#ED2939"/></svg>`,
   // Monaco — red over white horizontal halves
   monaco: `<svg viewBox="0 0 60 36" xmlns="http://www.w3.org/2000/svg"><rect width="60" height="18" fill="#CE1126"/><rect y="18" width="60" height="18" fill="#fff"/></svg>`,
+  // UEFA Champions League — navy field with a white star ring (generic, not the official starball)
+  ucl: `<svg viewBox="0 0 60 36" xmlns="http://www.w3.org/2000/svg"><rect width="60" height="36" fill="#0B1F5C"/><g fill="#fff"><circle cx="30" cy="8" r="2.2"/><circle cx="39" cy="11.5" r="2.2"/><circle cx="41" cy="20" r="2.2"/><circle cx="35.5" cy="27" r="2.2"/><circle cx="24.5" cy="27" r="2.2"/><circle cx="19" cy="20" r="2.2"/><circle cx="21" cy="11.5" r="2.2"/></g></svg>`,
+  // UEFA Europa League — orange field with a white ring
+  uel: `<svg viewBox="0 0 60 36" xmlns="http://www.w3.org/2000/svg"><rect width="60" height="36" fill="#F26B1D"/><circle cx="30" cy="18" r="10" fill="none" stroke="#fff" stroke-width="3.5"/></svg>`,
 };
 const LEAGUES = [
   { id: 'epl',    name: 'Premier League', short: 'EPL',    flag: FLAGS.england, country: 'England' },
@@ -3389,6 +3559,8 @@ const LEAGUES = [
   { id: 'bundes', name: 'Bundesliga',     short: 'BUN',    flag: FLAGS.germany, country: 'Germany' },
   { id: 'seriea', name: 'Serie A',        short: 'SERA',   flag: FLAGS.italy,   country: 'Italy' },
   { id: 'ligue1', name: 'Ligue 1',        short: 'L1',     flag: FLAGS.france,  country: 'France' },
+  { id: 'ucl',    name: 'Champions League', short: 'UCL',  flag: FLAGS.ucl,     country: 'Europe' },
+  { id: 'uel',    name: 'Europa League',  short: 'UEL',    flag: FLAGS.uel,     country: 'Europe' },
 ];
 
 // ============= TEAMS / MATCHES =============
@@ -3399,6 +3571,62 @@ const LEAGUES = [
 // When a fixture team isn't in this map (rare, only legacy data), we fall back to
 // a neutral graphite badge in the existing crest() function below.
 const TEAM_COLORS = {
+  'Ipswich':               { bg:'#0044A9', ink:'#FFFFFF' },
+  'Coventry City':         { bg:'#7CC3E8', ink:'#FFFFFF' },
+  'Hull City':             { bg:'#F5A12D', ink:'#000000' },
+  'SV Elversberg':         { bg:'#000000', ink:'#FFFFFF' },
+  'Schalke 04':            { bg:'#004D9D', ink:'#FFFFFF' },
+  'SC Paderborn':          { bg:'#00529F', ink:'#FFFFFF' },
+  'Monza':                 { bg:'#E3001B', ink:'#FFFFFF' },
+  'Frosinone':             { bg:'#FFD200', ink:'#0047AB' },
+  'Venezia':               { bg:'#F47920', ink:'#000000' },
+  'Troyes':                { bg:'#0063AF', ink:'#FFFFFF' },
+  'Le Mans':               { bg:'#D71920', ink:'#FFDD00' },
+  'Racing Santander':      { bg:'#00843D', ink:'#FFFFFF' },
+  'Deportivo':             { bg:'#00529F', ink:'#FFFFFF' },
+  'Malaga':                { bg:'#0072CE', ink:'#FFFFFF' },
+  'Elche':                 { bg:'#00843D', ink:'#FFFFFF' },
+  'Getafe':                { bg:'#005999', ink:'#FFFFFF' },
+  'Rayo Vallecano':        { bg:'#FFFFFF', ink:'#E53027' },
+  'AEK Athens':            { bg:'#FFD100', ink:'#000000' },
+  'Bodø/Glimt':            { bg:'#FFDD00', ink:'#000000' },
+  'Slovan Bratislava':     { bg:'#6CACE4', ink:'#FFFFFF' },
+  'Sabah':                 { bg:'#E30613', ink:'#FFFFFF' },
+  'Fenerbahçe':            { bg:'#002D72', ink:'#FFED00' },
+  'Slavia Praha':          { bg:'#E30613', ink:'#FFFFFF' },
+  'Porto':                 { bg:'#00428C', ink:'#FFFFFF' },
+  'PSV Eindhoven':         { bg:'#ED1C24', ink:'#FFFFFF' },
+  'Viking':                { bg:'#00205B', ink:'#FFFFFF' },
+  'Feyenoord':             { bg:'#E30613', ink:'#FFFFFF' },
+  'Galatasaray':           { bg:'#A90432', ink:'#FDB912' },
+  'Club Brugge':           { bg:'#0055A4', ink:'#000000' },
+  'Shakhtar Donetsk':      { bg:'#F58220', ink:'#000000' },
+  'Sporting CP':           { bg:'#008057', ink:'#FFFFFF' },
+  'LASK':                  { bg:'#000000', ink:'#FFFFFF' },
+  'AZ Alkmaar':            { bg:'#D2001F', ink:'#FFFFFF' },
+  'Ararat-Armenia':        { bg:'#E30613', ink:'#FFFFFF' },
+  'Ferencváros':           { bg:'#00843D', ink:'#FFFFFF' },
+  'Torreense':             { bg:'#00843D', ink:'#FFFFFF' },
+  'Dinamo Zagreb':         { bg:'#0055A4', ink:'#FFFFFF' },
+  'NEC Nijmegen':          { bg:'#E30613', ink:'#00843D' },
+  'Lech Poznań':           { bg:'#005CA9', ink:'#FFFFFF' },
+  'OFI Crete':             { bg:'#000000', ink:'#FFFFFF' },
+  'Union SG':              { bg:'#FFD100', ink:'#004C97' },
+  'Hapoel Beer-Sheva':     { bg:'#E30613', ink:'#FFFFFF' },
+  'Sturm Graz':            { bg:'#000000', ink:'#FFFFFF' },
+  'Beşiktaş':              { bg:'#000000', ink:'#FFFFFF' },
+  'Celtic':                { bg:'#018749', ink:'#FFFFFF' },
+  'Viktoria Plzeň':        { bg:'#C8102E', ink:'#003DA5' },
+  'Levski Sofia':          { bg:'#0050A0', ink:'#FFFFFF' },
+  'Jagiellonia':           { bg:'#FFD100', ink:'#E30613' },
+  'Anderlecht':            { bg:'#4F2683', ink:'#FFFFFF' },
+  'Lillestrøm':            { bg:'#FFD100', ink:'#000000' },
+  'Celje':                 { bg:'#FFD100', ink:'#004B87' },
+  'Salzburg':              { bg:'#E30613', ink:'#FFFFFF' },
+  'Olympiacos':            { bg:'#E30613', ink:'#FFFFFF' },
+  'Sparta Praha':          { bg:'#8B1D41', ink:'#FFFFFF' },
+  'Omonia':                { bg:'#00843D', ink:'#FFFFFF' },
+  'Benfica':               { bg:'#E30613', ink:'#FFFFFF' },
   // ===== Premier League =====
   'Arsenal':              { bg:'#EF0107', ink:'#FFFFFF' },
   'Manchester City':      { bg:'#6CABDD', ink:'#FFFFFF' },
@@ -3521,6 +3749,8 @@ function teamFlagKey(teamName, leagueId) {
   if (lg.id === 'bundes') return 'germany';
   if (lg.id === 'seriea') return 'italy';
   if (lg.id === 'ligue1') return 'france';
+  // European competitions mix clubs from every country — any named club is valid.
+  if (lg.id === 'ucl' || lg.id === 'uel') return 'europe';
   return null;
 }
 
@@ -4352,58 +4582,101 @@ function crest(name, size, leagueHint) {
 // To add a future round, just append more fixtures with later kickoffUtc values.
 const REAL_FIXTURES = [
   // ============================================================
-  // POST-SEASON & WORLD CUP RUN-UP — May 31 to June 11, 2026
+  // WEEK OF OCTOBER 21-26, 2026 — 2026-27 season
+  // Kickoffs stored in UTC. CEST (UTC+2) and BST (UTC+1) end on Sun Oct 25,
+  // so Sunday/Monday European kickoffs convert at UTC+1 / UTC+0.
+  // Sources: UEFA.com, premierleague (via legz / live-footballontv), LaLiga.com,
+  // fussballdaten.de, calcionapoli24, footmercato.
   // ============================================================
-  // All five major European leagues have concluded. Champions:
-  //   Arsenal (PL, May 24), Barcelona (La Liga, May 10),
-  //   Inter (Serie A, May 17), Bayern (Bundesliga, May 16),
-  //   PSG (Ligue 1, May 13).
-  // PSG retained the UEFA Champions League May 30 (1-1, 4-3 pens vs Arsenal).
-  //
-  // Fixtures available now are international friendlies — national teams
-  // tuning up for the FIFA World Cup which kicks off June 11 at the Estadio
-  // Azteca with Mexico vs South Africa. Final squad lock is June 1.
-  // We slot these into the existing league dropdowns as 'epl' for English-
-  // language teams, 'laliga' for Spain, etc. — quick mapping so the league
-  // filter pills still show something during the off-season window.
 
-  // ===== UEFA warm-ups — early June 2026 =====
-  // England's pre-tournament friendlies (final two before flying to Kansas City)
-  { league:'epl', home:'England',         away:'Senegal',         kickoffUtc:'2026-06-06T18:00:00Z', homeStrength:1.40, awayStrength:1.05 },
-  { league:'epl', home:'England',         away:'Iceland',         kickoffUtc:'2026-06-09T19:00:00Z', homeStrength:1.50, awayStrength:0.70 },
+  // ===== UEFA Champions League — League phase Matchday 3 (Wed Oct 21) =====
+  { league:'ucl', home:'Lille',            away:'Galatasaray',       kickoffUtc:'2026-10-21T16:45:00Z', homeStrength:1.15, awayStrength:1.05 },
+  { league:'ucl', home:'Como',             away:'Manchester Utd',    kickoffUtc:'2026-10-21T16:45:00Z', homeStrength:1.05, awayStrength:1.15 },
+  { league:'ucl', home:'Bayern Munich',    away:'Arsenal',           kickoffUtc:'2026-10-21T19:00:00Z', homeStrength:1.60, awayStrength:1.50 },
+  { league:'ucl', home:'Real Madrid',      away:'RB Leipzig',        kickoffUtc:'2026-10-21T19:00:00Z', homeStrength:1.50, awayStrength:1.10 },
+  { league:'ucl', home:'Aston Villa',      away:'Viking',            kickoffUtc:'2026-10-21T19:00:00Z', homeStrength:1.35, awayStrength:0.70 },
+  { league:'ucl', home:'Real Betis',       away:'Feyenoord',         kickoffUtc:'2026-10-21T19:00:00Z', homeStrength:1.15, awayStrength:1.00 },
+  { league:'ucl', home:'Club Brugge',      away:'Lens',              kickoffUtc:'2026-10-21T19:00:00Z', homeStrength:1.05, awayStrength:1.00 },
+  { league:'ucl', home:'Inter Milan',      away:'Shakhtar Donetsk',  kickoffUtc:'2026-10-21T19:00:00Z', homeStrength:1.50, awayStrength:0.85 },
+  { league:'ucl', home:'Sporting CP',      away:'LASK',              kickoffUtc:'2026-10-21T19:00:00Z', homeStrength:1.30, awayStrength:0.75 },
 
-  // Spain's tune-ups
-  { league:'laliga', home:'Spain',        away:'Japan',           kickoffUtc:'2026-06-04T18:00:00Z', homeStrength:1.50, awayStrength:1.05 },
-  { league:'laliga', home:'Spain',        away:'Uruguay',         kickoffUtc:'2026-06-08T20:30:00Z', homeStrength:1.50, awayStrength:1.05 },
+  // ===== UEFA Europa League — League phase Matchday 3 (Thu Oct 22) =====
+  { league:'uel', home:'Juventus',         away:'Rennes',            kickoffUtc:'2026-10-22T16:45:00Z', homeStrength:1.35, awayStrength:1.00 },
+  { league:'uel', home:'Lech Poznań',      away:'Sunderland',        kickoffUtc:'2026-10-22T16:45:00Z', homeStrength:0.95, awayStrength:1.00 },
+  { league:'uel', home:'OFI Crete',        away:'Bayer Leverkusen',  kickoffUtc:'2026-10-22T16:45:00Z', homeStrength:0.65, awayStrength:1.40 },
+  { league:'uel', home:'Sturm Graz',       away:'Marseille',         kickoffUtc:'2026-10-22T16:45:00Z', homeStrength:0.90, awayStrength:1.20 },
+  { league:'uel', home:'Ararat-Armenia',   away:'AZ Alkmaar',        kickoffUtc:'2026-10-22T16:45:00Z', homeStrength:0.65, awayStrength:1.15 },
+  { league:'uel', home:'Dinamo Zagreb',    away:'NEC Nijmegen',      kickoffUtc:'2026-10-22T16:45:00Z', homeStrength:1.05, awayStrength:0.95 },
+  { league:'uel', home:'Bournemouth',      away:'AC Milan',          kickoffUtc:'2026-10-22T19:00:00Z', homeStrength:1.10, awayStrength:1.30 },
+  { league:'uel', home:'Beşiktaş',         away:'Crystal Palace',    kickoffUtc:'2026-10-22T19:00:00Z', homeStrength:1.10, awayStrength:1.05 },
+  { league:'uel', home:'Celtic',           away:'Celta Vigo',        kickoffUtc:'2026-10-22T19:00:00Z', homeStrength:1.10, awayStrength:1.00 },
+  { league:'uel', home:'Hoffenheim',       away:'Lyon',              kickoffUtc:'2026-10-22T19:00:00Z', homeStrength:1.05, awayStrength:1.15 },
+  { league:'uel', home:'Omonia',           away:'Benfica',           kickoffUtc:'2026-10-22T19:00:00Z', homeStrength:0.75, awayStrength:1.35 },
+  { league:'uel', home:'Olympiacos',       away:'Sparta Praha',      kickoffUtc:'2026-10-22T19:00:00Z', homeStrength:1.15, awayStrength:0.95 },
+  { league:'uel', home:'Lillestrøm',       away:'Real Sociedad',     kickoffUtc:'2026-10-22T19:00:00Z', homeStrength:0.70, awayStrength:1.20 },
+  { league:'uel', home:'Celje',            away:'Salzburg',          kickoffUtc:'2026-10-22T19:00:00Z', homeStrength:0.80, awayStrength:1.05 },
+  { league:'uel', home:'Ferencváros',      away:'Torreense',         kickoffUtc:'2026-10-22T16:45:00Z', homeStrength:1.10, awayStrength:0.70 },
+  { league:'uel', home:'Union SG',         away:'Hapoel Beer-Sheva', kickoffUtc:'2026-10-22T16:45:00Z', homeStrength:1.05, awayStrength:0.85 },
+  { league:'uel', home:'Viktoria Plzeň',   away:'Levski Sofia',      kickoffUtc:'2026-10-22T19:00:00Z', homeStrength:1.00, awayStrength:0.80 },
+  { league:'uel', home:'Jagiellonia',      away:'Anderlecht',        kickoffUtc:'2026-10-22T19:00:00Z', homeStrength:0.95, awayStrength:1.00 },
 
-  // France's preparation matches
-  { league:'ligue1', home:'France',       away:'Cameroon',        kickoffUtc:'2026-06-05T19:00:00Z', homeStrength:1.50, awayStrength:0.95 },
-  { league:'ligue1', home:'France',       away:'Mexico',          kickoffUtc:'2026-06-09T20:00:00Z', homeStrength:1.50, awayStrength:1.00 },
+  // ===== Premier League — Matchweek 8 (Oct 23-25) =====
+  { league:'epl', home:'Ipswich',          away:'Nottingham F.',     kickoffUtc:'2026-10-23T19:00:00Z', homeStrength:0.85, awayStrength:1.00 },
+  { league:'epl', home:'Aston Villa',      away:'Manchester City',   kickoffUtc:'2026-10-24T11:30:00Z', homeStrength:1.20, awayStrength:1.45 },
+  { league:'epl', home:'Arsenal',          away:'Everton',           kickoffUtc:'2026-10-24T14:00:00Z', homeStrength:1.60, awayStrength:0.85 },
+  { league:'epl', home:'Coventry City',    away:'Fulham',            kickoffUtc:'2026-10-24T14:00:00Z', homeStrength:0.85, awayStrength:0.95 },
+  { league:'epl', home:'Chelsea',          away:'Tottenham',         kickoffUtc:'2026-10-24T16:30:00Z', homeStrength:1.30, awayStrength:1.10 },
+  { league:'epl', home:'Manchester Utd',   away:'Bournemouth',       kickoffUtc:'2026-10-25T14:00:00Z', homeStrength:1.15, awayStrength:1.00 },
+  { league:'epl', home:'Crystal Palace',   away:'Newcastle',         kickoffUtc:'2026-10-25T14:00:00Z', homeStrength:1.00, awayStrength:1.15 },
+  { league:'epl', home:'Hull City',        away:'Brentford',         kickoffUtc:'2026-10-25T14:00:00Z', homeStrength:0.80, awayStrength:1.00 },
+  { league:'epl', home:'Liverpool',        away:'Brighton',          kickoffUtc:'2026-10-25T14:00:00Z', homeStrength:1.45, awayStrength:1.05 },
+  { league:'epl', home:'Sunderland',       away:'Leeds',             kickoffUtc:'2026-10-25T16:30:00Z', homeStrength:0.95, awayStrength:0.90 },
 
-  // Germany's friendlies (in Germany before flying to MEX/USA/CAN)
-  { league:'bundes', home:'Germany',      away:'Tunisia',         kickoffUtc:'2026-06-04T18:45:00Z', homeStrength:1.40, awayStrength:1.05 },
-  { league:'bundes', home:'Germany',      away:'Ecuador',         kickoffUtc:'2026-06-07T18:45:00Z', homeStrength:1.40, awayStrength:1.00 },
+  // ===== LaLiga — Jornada 10 (Oct 23-26) — El Clásico Sunday =====
+  { league:'laliga', home:'Alaves',          away:'Malaga',          kickoffUtc:'2026-10-23T19:00:00Z', homeStrength:0.95, awayStrength:0.80 },
+  { league:'laliga', home:'Rayo Vallecano',  away:'Elche',           kickoffUtc:'2026-10-24T12:00:00Z', homeStrength:0.95, awayStrength:0.85 },
+  { league:'laliga', home:'Racing Santander',away:'Espanyol',        kickoffUtc:'2026-10-24T14:15:00Z', homeStrength:0.85, awayStrength:0.90 },
+  { league:'laliga', home:'Valencia',        away:'Villarreal',      kickoffUtc:'2026-10-24T16:30:00Z', homeStrength:0.95, awayStrength:1.15 },
+  { league:'laliga', home:'Atletico Madrid', away:'Deportivo',       kickoffUtc:'2026-10-24T19:00:00Z', homeStrength:1.45, awayStrength:0.75 },
+  { league:'laliga', home:'Athletic Bilbao', away:'Getafe',          kickoffUtc:'2026-10-25T13:00:00Z', homeStrength:1.20, awayStrength:0.85 },
+  { league:'laliga', home:'Celta Vigo',      away:'Real Betis',      kickoffUtc:'2026-10-25T15:15:00Z', homeStrength:1.00, awayStrength:1.20 },
+  { league:'laliga', home:'Real Sociedad',   away:'Levante',         kickoffUtc:'2026-10-25T17:30:00Z', homeStrength:1.10, awayStrength:0.80 },
+  { league:'laliga', home:'Barcelona',       away:'Real Madrid',     kickoffUtc:'2026-10-25T20:00:00Z', homeStrength:1.55, awayStrength:1.45 },
+  { league:'laliga', home:'Sevilla',         away:'Osasuna',         kickoffUtc:'2026-10-26T20:00:00Z', homeStrength:0.95, awayStrength:0.90 },
 
-  // Italy didn't qualify, but Serie A nations playing — use Inter Milan stars'
-  // national teams; we slot a Brazil-Egypt and a Brazil-Panama warm-up that
-  // featured many Italian-league players.
-  { league:'seriea', home:'Brazil',       away:'Egypt',           kickoffUtc:'2026-06-05T23:30:00Z', homeStrength:1.45, awayStrength:1.00 },
-  { league:'seriea', home:'Brazil',       away:'Panama',          kickoffUtc:'2026-06-09T23:00:00Z', homeStrength:1.45, awayStrength:0.85 },
+  // ===== Bundesliga — Matchday 7 (Oct 23-25) =====
+  { league:'bundes', home:'Stuttgart',          away:'Borussia M.Gladbach', kickoffUtc:'2026-10-23T18:30:00Z', homeStrength:1.20, awayStrength:0.90 },
+  { league:'bundes', home:'RB Leipzig',         away:'SV Elversberg',       kickoffUtc:'2026-10-24T13:30:00Z', homeStrength:1.30, awayStrength:0.70 },
+  { league:'bundes', home:'Augsburg',           away:'Union Berlin',        kickoffUtc:'2026-10-24T13:30:00Z', homeStrength:0.90, awayStrength:0.90 },
+  { league:'bundes', home:'Mainz',              away:'Werder Bremen',       kickoffUtc:'2026-10-24T13:30:00Z', homeStrength:0.95, awayStrength:0.95 },
+  { league:'bundes', home:'FC Köln',            away:'Schalke 04',          kickoffUtc:'2026-10-24T13:30:00Z', homeStrength:0.95, awayStrength:0.85 },
+  { league:'bundes', home:'SC Paderborn',       away:'Hamburg',             kickoffUtc:'2026-10-24T13:30:00Z', homeStrength:0.80, awayStrength:0.90 },
+  { league:'bundes', home:'Borussia Dortmund',  away:'Eintracht Frankfurt', kickoffUtc:'2026-10-24T16:30:00Z', homeStrength:1.35, awayStrength:1.10 },
+  { league:'bundes', home:'Hoffenheim',         away:'Bayer Leverkusen',    kickoffUtc:'2026-10-25T14:30:00Z', homeStrength:1.00, awayStrength:1.30 },
+  { league:'bundes', home:'Freiburg',           away:'Bayern Munich',       kickoffUtc:'2026-10-25T16:30:00Z', homeStrength:1.00, awayStrength:1.65 },
 
-  // USA host friendlies — co-host preparation. The June 7 USA vs Senegal in
-  // Charlotte is a standout. Sorted here under 'epl' so it appears in the
-  // English-speaking flow.
-  { league:'epl', home:'United States',   away:'Senegal',         kickoffUtc:'2026-06-07T23:00:00Z', homeStrength:1.10, awayStrength:1.05 },
+  // ===== Serie A — Giornata 8 (Oct 23-25) =====
+  { league:'seriea', home:'Torino',       away:'Monza',        kickoffUtc:'2026-10-23T18:45:00Z', homeStrength:0.95, awayStrength:0.75 },
+  { league:'seriea', home:'Cagliari',     away:'Bologna',      kickoffUtc:'2026-10-24T13:00:00Z', homeStrength:0.85, awayStrength:1.10 },
+  { league:'seriea', home:'Como',         away:'Sassuolo',     kickoffUtc:'2026-10-24T13:00:00Z', homeStrength:1.15, awayStrength:0.85 },
+  { league:'seriea', home:'Napoli',       away:'Roma',         kickoffUtc:'2026-10-24T16:00:00Z', homeStrength:1.35, awayStrength:1.20 },
+  { league:'seriea', home:'Lazio',        away:'Parma',        kickoffUtc:'2026-10-24T18:45:00Z', homeStrength:1.15, awayStrength:0.80 },
+  { league:'seriea', home:'Inter Milan',  away:'Fiorentina',   kickoffUtc:'2026-10-25T11:30:00Z', homeStrength:1.50, awayStrength:1.00 },
+  { league:'seriea', home:'Atalanta',     away:'Frosinone',    kickoffUtc:'2026-10-25T14:00:00Z', homeStrength:1.35, awayStrength:0.65 },
+  { league:'seriea', home:'Genoa',        away:'Venezia',      kickoffUtc:'2026-10-25T14:00:00Z', homeStrength:0.90, awayStrength:0.80 },
+  { league:'seriea', home:'Lecce',        away:'Juventus',     kickoffUtc:'2026-10-25T17:00:00Z', homeStrength:0.75, awayStrength:1.30 },
+  { league:'seriea', home:'Udinese',      away:'AC Milan',     kickoffUtc:'2026-10-25T19:45:00Z', homeStrength:0.90, awayStrength:1.30 },
 
-  // ===== WORLD CUP MATCHDAY 1 — June 11-12, 2026 =====
-  // The opening matches of the tournament. These will populate the builder
-  // as the off-season ends and the World Cup begins.
-  { league:'epl', home:'Mexico',          away:'South Africa',    kickoffUtc:'2026-06-11T23:00:00Z', homeStrength:1.20, awayStrength:0.75 },
-  { league:'epl', home:'United States',   away:'Paraguay',        kickoffUtc:'2026-06-12T23:00:00Z', homeStrength:1.10, awayStrength:1.00 },
-  { league:'laliga', home:'Morocco',      away:'Brazil',          kickoffUtc:'2026-06-13T22:00:00Z', homeStrength:1.10, awayStrength:1.45 },
-  { league:'bundes', home:'Germany',      away:'Curaçao',         kickoffUtc:'2026-06-14T19:00:00Z', homeStrength:1.40, awayStrength:0.60 },
-  { league:'ligue1', home:'France',       away:'Senegal',         kickoffUtc:'2026-06-14T19:00:00Z', homeStrength:1.50, awayStrength:1.05 },
-  { league:'seriea', home:'Spain',        away:'Cape Verde',      kickoffUtc:'2026-06-15T16:00:00Z', homeStrength:1.50, awayStrength:0.65 },
+  // ===== Ligue 1 — Journée 9 (Oct 23-25) =====
+  { league:'ligue1', home:'Brest',       away:'Nice',          kickoffUtc:'2026-10-23T18:45:00Z', homeStrength:0.95, awayStrength:1.00 },
+  { league:'ligue1', home:'Toulouse',    away:'Troyes',        kickoffUtc:'2026-10-24T15:15:00Z', homeStrength:1.00, awayStrength:0.70 },
+  { league:'ligue1', home:'Lens',        away:'Paris FC',      kickoffUtc:'2026-10-24T18:45:00Z', homeStrength:1.15, awayStrength:0.85 },
+  { league:'ligue1', home:'Monaco',      away:'Lille',         kickoffUtc:'2026-10-25T14:00:00Z', homeStrength:1.20, awayStrength:1.15 },
+  { league:'ligue1', home:'Angers',      away:'Lorient',       kickoffUtc:'2026-10-25T16:15:00Z', homeStrength:0.85, awayStrength:0.85 },
+  { league:'ligue1', home:'Rennes',      away:'Strasbourg',    kickoffUtc:'2026-10-25T16:15:00Z', homeStrength:1.05, awayStrength:1.00 },
+  { league:'ligue1', home:'Auxerre',     away:'Le Mans',       kickoffUtc:'2026-10-25T16:15:00Z', homeStrength:0.90, awayStrength:0.70 },
+  { league:'ligue1', home:'Marseille',   away:'Le Havre',      kickoffUtc:'2026-10-25T16:15:00Z', homeStrength:1.35, awayStrength:0.75 },
+  { league:'ligue1', home:'Paris SG',    away:'Lyon',          kickoffUtc:'2026-10-25T19:45:00Z', homeStrength:1.65, awayStrength:1.10 },
 ];
 
 // Format a UTC ISO datetime as a kickoff display string in the user's local timezone.
@@ -6266,112 +6539,104 @@ function computeRecord() {
 // timestamps shift naturally as the page sits open and reads as a true feed.
 // On refresh, news items are slightly reordered/jittered to mimic a live wire.
 const NEWS_SEED = [
-  { league:'ligue1', tag:'form', team:'Paris Saint-Germain',
-    title:'PSG retain Champions League on penalties — heartbreak for Arsenal',
-    body:'Paris Saint-Germain became the first club to win back-to-back Champions Leagues since Real Madrid in 2017-18, beating Arsenal 4-3 on penalties at the Puskás Aréna in Budapest after a 1-1 draw across 120 minutes. Kai Havertz opened the scoring in the sixth minute; Ousmane Dembélé equalised from the spot on 65 after a VAR-checked penalty. In the shootout Eberechi Eze and Gabriel both missed for Arsenal. Saturday\'s win delivers a domestic-and-European double for Luis Enrique\'s side.',
-    impact:'up', moveText:'PSG to retain UCL 2026-27 firmed 7.50 → 5.00',
-    minutesAgo: 23 },
-  { league:'epl', tag:'form', team:'Arsenal',
-    title:'Arsenal beat Crystal Palace at Selhurst to end 22-year title wait',
-    body:'A week before their Champions League final disappointment, Mikel Arteta\'s side wrapped up the Premier League title with a 2-1 win at Selhurst Park on the unified final-day Sunday May 24. Captain Martin Ødegaard lifted the trophy. The 22-year drought — Arsenal\'s longest spell without a league title since the 1950s — is finally over. The team finished with 85 points; Manchester City\'s home win over Aston Villa was not enough to overturn the goal-difference deficit.',
-    impact:'up', moveText:'Arsenal to retain EPL 2026-27 priced at 3.20',
-    minutesAgo: 64 },
-  { league:'seriea', tag:'transfer', team:'AC Milan',
-    title:'Allegri agrees Napoli move days after Milan sack him',
-    body:'Massimiliano Allegri will succeed Antonio Conte at Napoli on a two-year deal, reaching a verbal agreement with president Aurelio De Laurentiis on Thursday, just three days after AC Milan dismissed him following a final-day 2-1 home defeat to Cagliari that cost Milan a Champions League place. Conte departed Napoli by mutual consent after one Scudetto-winning season. Milan also sacked CEO Giorgio Furlani and sporting director Igli Tare in the same clearout. Vincenzo Italiano left Bologna and is in the running for the Milan job.',
-    impact:'up', moveText:'Napoli to win Scudetto 2026-27 firmed 4.50 → 3.30',
-    minutesAgo: 92 },
-  { league:'epl', tag:'form', team:'Liverpool',
-    title:'Robertson, Salah farewell Anfield with emotional final-day appearances',
-    body:'Liverpool wrapped their season with a 1-1 home draw against Brentford on Sunday May 24, securing Champions League qualification. The match was framed by Mohamed Salah\'s and Andy Robertson\'s emotional goodbyes at Anfield after long Liverpool tenures. Salah, set to remain with the club but with reduced minutes ahead of the World Cup, played 60 minutes. Robertson came off in the 75th to a standing ovation. Arne Slot\'s side finished the season fifth.',
-    impact:'neutral', moveText:'Salah anytime scorer vs Australia firmed 2.10 → 1.85',
-    minutesAgo: 158 },
-  { league:'seriea', tag:'form', team:'Inter Milan',
-    title:'Inter close out Scudetto with 3-3 draw at Bologna',
-    body:'Already crowned champions, Inter signed off on Saturday May 23 with a wild 3-3 draw at the Stadio Dall\'Ara. Cristian Chivu rotated heavily ahead of an off-season that brings major squad-rebuilding decisions. Lautaro Martínez ended the league season as top scorer with 16 goals. The Scudetto banner unveiled at San Siro the previous Sunday made the win over Verona the celebration moment of the season.',
-    impact:'up', moveText:'Lautaro Martínez WC top scorer 25.00 → 18.00',
-    minutesAgo: 220 },
   { league:'laliga', tag:'form', team:'Barcelona',
-    title:'Barcelona stunned 3-1 at Valencia on last day of title-winning season',
-    body:'Barcelona\'s second consecutive La Liga title was already secured, but the Catalans suffered a 3-1 defeat at the Mestalla in the season finale on Saturday May 23. Lewandowski missed two presentable chances and finished second in the Pichichi race behind Kylian Mbappé (24 goals, who scored at the Bernabéu the same evening to clinch the scoring crown). Hansi Flick used the second half to rest Yamal — who has fully returned to fitness and is in Spain\'s World Cup squad.',
-    impact:'neutral', moveText:'Mbappé WC top scorer firmed 5.50 → 4.50',
-    minutesAgo: 280 },
-  { league:'epl', tag:'lineup', team:'United States',
-    title:'USMNT name 26-man World Cup squad — Pulisic, Adams headline',
-    body:'Mauricio Pochettino unveiled the United States\' World Cup roster at a New York press event on Tuesday May 26, with Christian Pulisic, Tyler Adams, Weston McKennie and Folarin Balogun all making the cut. The full backline includes Sergiño Dest, Antonee Robinson, Chris Richards, and Tim Ream — who has been named team captain. The USA opens against Paraguay at SoFi Stadium on June 12.',
-    impact:'up', moveText:'USA to qualify from Group D firmed 1.80 → 1.55',
-    minutesAgo: 360 },
-  { league:'laliga', tag:'injury', team:'Brazil',
-    title:'Neymar calf injury threatens Brazil\'s World Cup opener',
-    body:'Brazil team doctor Rodrigo Lasmar confirmed that Neymar has sustained a grade-two calf strain that could rule him out of the World Cup opener against Morocco on June 13. Lasmar said the 34-year-old is expected to be cleared in "two to three weeks." Brazil play Panama and Egypt as warm-ups before the tournament; Neymar will miss both. Manager Ancelotti has Vinícius Jr., Rodrygo, and Endrick to lead the attack in his absence.',
-    impact:'down', moveText:'Neymar anytime scorer vs Morocco off the board',
-    minutesAgo: 425 },
-  { league:'bundes', tag:'form', team:'Bayern Munich',
-    title:'Bayern lift Bundesliga Meisterschale on unified final matchday',
-    body:'Vincent Kompany\'s Bayern Munich completed a comfortable title defence on Saturday May 16 with the customary trophy presentation at the Allianz Arena. Harry Kane finished his league season with 30 goals in 34 matches, his best Bundesliga return, and is widely tipped to capture the Golden Boot at the World Cup. The DFB-Pokal final remains the last item on Bayern\'s domestic calendar before the international break.',
-    impact:'up', moveText:'Kane WC top scorer firmed 7.00 → 5.50',
-    minutesAgo: 510 },
-  { league:'ligue1', tag:'form', team:'Paris Saint-Germain',
-    title:'Curaçao\'s Advocaat to become oldest WC head coach at 78',
-    body:'Curaçao reinstated Dick Advocaat as head coach on May 13 — one day after Fred Rutten resigned — and the 78-year-old Dutchman will become the oldest manager in World Cup history when his side faces Germany in Houston on June 14. Curaçao (population ~156,000) is also the smallest nation ever to qualify for a World Cup. Their squad relies heavily on Eredivisie talent. Advocaat passes Otto Rehhagel (Greece, 2010) by seven years for the age record.',
-    impact:'up', moveText:'Germany to win Group E priced at -350',
-    minutesAgo: 590 },
-  { league:'laliga', tag:'lineup', team:'Spain',
-    title:'Yamal cleared for World Cup — Spain finalize 26-man squad',
-    body:'Lamine Yamal\'s hamstring recovery is complete and the 18-year-old will travel with Spain to the tournament. Luis de la Fuente named his final 26 on Monday May 25: Rodri (captain), Pedri, Gavi, Yamal, Nico Williams, and Mikel Oyarzabal headline a squad heavy on Barcelona and Real Sociedad players. Marcus Rashford did not make the England squad despite his strong loan spell at Barcelona.',
-    impact:'up', moveText:'Spain to win World Cup firmed 5.00 → 4.75',
-    minutesAgo: 720 },
-  { league:'seriea', tag:'tactics', team:'AC Milan',
-    title:'RedBird overhaul AC Milan front office in addition to Allegri sacking',
-    body:'AC Milan owners RedBird Capital initiated a full overhaul of the club\'s sporting leadership after the Champions League miss. Beyond Allegri\'s dismissal, CEO Giorgio Furlani, sporting director Igli Tare, and technical director Geoffrey Moncada were all relieved of their duties on Monday May 25. Italian media link Antonio Conte and Atalanta\'s Raffaele Palladino with the head-coach vacancy. Milan will start 2026-27 in the Europa League.',
-    impact:'down', moveText:'Milan to win Serie A 2026-27 out at 11.00',
-    minutesAgo: 880 },
-  { league:'bundes', tag:'transfer', team:'Bayer Leverkusen',
-    title:'Xabi Alonso reportedly closing on Real Madrid move',
-    body:'Reports across Spain and Germany on Wednesday claim Xabi Alonso will leave Bayer Leverkusen to take over at Real Madrid for next season, succeeding interim Álvaro Arbeloa. Talks accelerated after Leverkusen\'s third-place finish in the Bundesliga. Madrid\'s board sees Alonso as the long-term fit Florentino Pérez has been searching for since Xabi Alonso (Bernabéu legend, fluent in Madrid\'s identity) sacked Ancelotti after the 3-2 Supercopa loss to Barça in January.',
-    impact:'up', moveText:'Real Madrid to win La Liga 2026-27 firmed 2.50 → 2.10',
+    title:'Perfect Barcelona host Real Madrid in Sunday\'s Clásico',
+    body:'Hansi Flick\'s side are nine from nine in LaLiga (27 points) after winning 5-2 at Betis on October 17, and then lost 4-2 at PSG in the Champions League on Tuesday. The first Clásico of the season kicks off at Spotify Camp Nou on Sunday October 25 at 21:00 CET, with both clubs coming off midweek Champions League dates.',
+    impact:'up', moveText:'Barcelona to win LaLiga firmed on table lead',
+    minutesAgo: 40 },
+  { league:'ucl', tag:'tactics', team:'Arsenal',
+    title:'Arsenal travel to Bayern in Wednesday\'s Champions League headliner',
+    body:'Arsenal head to Munich on Matchday 3 after a 3-0 home win over Lille. Bayern were held 3-3 away at Viking last week, so the Allianz Arena meeting is an early test of both sides\' league-phase position. Kickoff is 21:00 CET.',
+    impact:'neutral', moveText:'Bayern v Arsenal BTTS priced short after Bayern\'s 3-3 at Viking',
+    minutesAgo: 95 },
+  { league:'ucl', tag:'form', team:'Paris SG',
+    title:'Holders PSG beat Barcelona 4-2 after hitting four at the Etihad',
+    body:'The two-time defending champions beat Manchester City 4-2 in Manchester on Matchday 2, then beat Barcelona 4-2 at the Parc des Princes on Tuesday. City bounced back with a 5-1 win over AEK Athens and Liverpool edged Villarreal 4-3. PSG return to Ligue 1 on Sunday with a home match against Lyon.',
+    impact:'up', moveText:'PSG to win Champions League remain favorites',
+    minutesAgo: 180 },
+  { league:'ucl', tag:'form', team:'Aston Villa',
+    title:'Aston Villa face Viking after 6-0 rout of Fenerbahçe',
+    body:'Villa posted the biggest win of Matchday 2, beating Fenerbahçe 6-0. They host Norway\'s Viking on Wednesday, then welcome Manchester City to Villa Park in Saturday\'s early Premier League kickoff.',
+    impact:'up', moveText:'Aston Villa -1.5 handicap vs Viking shortened',
+    minutesAgo: 260 },
+  { league:'ucl', tag:'form', team:'Real Madrid',
+    title:'Real Madrid edge Roma 4-3, now host Leipzig before the Clásico',
+    body:'Madrid won a seven-goal thriller in Rome on Matchday 2. They host RB Leipzig at the Bernabéu on Wednesday, four days before visiting Barcelona. Rotation is expected with the league fixture looming.',
+    impact:'neutral', moveText:'Real Madrid v Leipzig over 2.5 firmed',
+    minutesAgo: 330 },
+  { league:'ucl', tag:'form', team:'Inter Milan',
+    title:'Inter look to recover from 4-3 home loss to Club Brugge',
+    body:'Inter were beaten 4-3 at San Siro by Club Brugge on Matchday 2. They host Shakhtar Donetsk on Wednesday, then Fiorentina in Sunday\'s Serie A lunchtime kickoff.',
+    impact:'down', moveText:'Inter to win league phase drifted after Brugge loss',
+    minutesAgo: 410 },
+  { league:'ucl', tag:'tactics', team:'Manchester Utd',
+    title:'Manchester United visit Como seeking first points',
+    body:'United lost 2-0 at Atlético Madrid on Matchday 2 and travel to Como for an 18:45 CET kickoff on Wednesday. Bournemouth visit Old Trafford on Sunday.',
+    impact:'down', moveText:'Como v Manchester Utd draw shortened',
+    minutesAgo: 470 },
+  { league:'uel', tag:'form', team:'AC Milan',
+    title:'Milan bring 4-0 Salzburg win to Bournemouth',
+    body:'Milan won 4-0 in Salzburg on Europa League Matchday 2 and visit Bournemouth on Thursday night. Bournemouth beat Sturm Graz 3-0 in their last European outing.',
+    impact:'up', moveText:'AC Milan draw no bet at Bournemouth shortened',
+    minutesAgo: 540 },
+  { league:'uel', tag:'form', team:'Sunderland',
+    title:'Sunderland head to Poznań after win in Portugal',
+    body:'Sunderland won 2-1 at Torreense on Matchday 2 and face Lech Poznań on Thursday. Lech lost 4-0 at home to Leverkusen last time out.',
+    impact:'up', moveText:'Sunderland to win at Lech Poznań eased',
+    minutesAgo: 610 },
+  { league:'uel', tag:'form', team:'Crystal Palace',
+    title:'Crystal Palace visit Beşiktaş after defeat in Lyon',
+    body:'Palace lost 3-2 at Lyon on Matchday 2 and travel to Istanbul to face Beşiktaş, who won 3-2 at Hoffenheim. Palace host Newcastle in the Premier League on Sunday.',
+    impact:'neutral', moveText:'Beşiktaş v Crystal Palace BTTS priced short',
+    minutesAgo: 700 },
+  { league:'epl', tag:'tactics', team:'Chelsea',
+    title:'London derby headlines Saturday: Chelsea v Tottenham',
+    body:'Matchweek 8 features Aston Villa v Manchester City in the early kickoff, Arsenal v Everton at 3pm and Chelsea v Tottenham at Stamford Bridge in the evening slot. Liverpool host Brighton on Sunday.',
+    impact:'neutral', moveText:'Chelsea v Tottenham over 2.5 goals firmed',
+    minutesAgo: 820 },
+  { league:'seriea', tag:'tactics', team:'Napoli',
+    title:'Napoli and Roma meet at the Maradona on Saturday',
+    body:'Both clubs play in the Champions League this week before the giornata 8 meeting in Naples on Saturday at 18:00 CEST. Elsewhere, Udinese host Milan on Sunday night and Lecce face Juventus.',
+    impact:'neutral', moveText:'Napoli v Roma under 2.5 favored',
+    minutesAgo: 900 },
+  { league:'bundes', tag:'tactics', team:'Borussia Dortmund',
+    title:'Dortmund host Frankfurt; Bayern visit Freiburg on Sunday',
+    body:'Matchday 7 headliners: Borussia Dortmund v Eintracht Frankfurt on Saturday evening, and Freiburg v Bayern on Sunday. Newly promoted Elversberg visit RB Leipzig.',
+    impact:'neutral', moveText:'Bayern -1 handicap at Freiburg priced near even',
     minutesAgo: 1010 },
-  { league:'epl', tag:'lineup', team:'England',
-    title:'Tuchel\'s ruthless England squad — Foden, Palmer, Alexander-Arnold out',
-    body:'Thomas Tuchel announced England\'s 26-man World Cup squad at Wembley on Friday May 22 with three high-profile omissions: Phil Foden, Cole Palmer, and Trent Alexander-Arnold. Harry Maguire, Luke Shaw, and Adam Wharton also missed out. Captain Harry Kane leads his third World Cup, equalling Billy Wright\'s record. Marcus Rashford and Bukayo Saka are both in; Ivan Toney earns a surprise recall after just seven minutes under Tuchel. Jordan Henderson makes a record-equalling fourth World Cup appearance.',
-    impact:'down', moveText:'England outright drifted +650 → +700',
-    minutesAgo: 1180 },
+  { league:'ligue1', tag:'tactics', team:'Paris SG',
+    title:'PSG close journée 9 against Lyon',
+    body:'PSG host Lyon on Sunday night at the Parc des Princes, three days after Lyon play Hoffenheim in the Europa League. Monaco v Lille and Marseille v Le Havre are also on Sunday.',
+    impact:'up', moveText:'PSG -1 handicap vs Lyon shortened',
+    minutesAgo: 1120 },
 ];
 
 // Each mover carries a 12-point price history (one reading every 30 minutes for the
 // last 6 hours) so we can render a sparkline showing the line's trajectory.
 // The history ends with the current price (last entry == `to`).
 const MOVERS_SEED = [
-  { match:'Spain v World Cup outright',  market:'Spain to win World Cup',       from:5.00, to:4.75, dir:'up',
-    history:[5.00, 4.95, 4.90, 4.88, 4.85, 4.83, 4.80, 4.78, 4.76, 4.75, 4.75, 4.75] },
-  { match:'Brazil v Morocco (Group C)',  market:'Brazil to win match',          from:1.45, to:1.62, dir:'down',
-    history:[1.45, 1.46, 1.48, 1.50, 1.52, 1.54, 1.56, 1.58, 1.60, 1.61, 1.62, 1.62] },
-  { match:'PSG v Arsenal aftermath',     market:'PSG to retain UCL 2026-27',    from:7.50, to:5.00, dir:'up',
-    history:[7.50, 7.20, 6.80, 6.50, 6.20, 5.90, 5.60, 5.40, 5.20, 5.10, 5.00, 5.00] },
-  { match:'USA v Paraguay (Group D)',    market:'USA to win match',             from:2.20, to:1.95, dir:'up',
-    history:[2.20, 2.18, 2.15, 2.12, 2.08, 2.05, 2.02, 2.00, 1.98, 1.96, 1.95, 1.95] },
-  { match:'England v Croatia (Group L)', market:'Bellingham anytime scorer',    from:3.50, to:2.75, dir:'up',
-    history:[3.50, 3.45, 3.40, 3.32, 3.20, 3.10, 3.00, 2.92, 2.85, 2.80, 2.77, 2.75] },
-  { match:'France v Senegal (Group I)',  market:'Mbappé anytime scorer',        from:1.65, to:1.50, dir:'up',
-    history:[1.65, 1.63, 1.61, 1.59, 1.57, 1.55, 1.54, 1.53, 1.52, 1.51, 1.50, 1.50] },
+  { match:'Barcelona v Real Madrid',  market:'Barcelona to win',          from:2.20, to:2.05, dir:'up',
+    history:[2.20,2.19,2.17,2.15,2.14,2.12,2.10,2.09,2.08,2.07,2.06,2.05] },
+  { match:'Bayern Munich v Arsenal',  market:'Both teams to score',       from:1.62, to:1.50, dir:'up',
+    history:[1.62,1.61,1.60,1.58,1.57,1.56,1.55,1.54,1.53,1.52,1.51,1.50] },
+  { match:'Aston Villa v Man City',   market:'Aston Villa to win',        from:3.60, to:3.25, dir:'up',
+    history:[3.60,3.58,3.55,3.50,3.46,3.42,3.38,3.35,3.32,3.30,3.27,3.25] },
+  { match:'Como v Manchester Utd',    market:'Manchester Utd to win',     from:2.40, to:2.65, dir:'down',
+    history:[2.40,2.42,2.44,2.46,2.49,2.52,2.55,2.58,2.60,2.62,2.64,2.65] },
+  { match:'Napoli v Roma',            market:'Under 2.5 goals',           from:1.85, to:1.72, dir:'up',
+    history:[1.85,1.84,1.83,1.81,1.80,1.79,1.77,1.76,1.75,1.74,1.73,1.72] },
+  { match:'Bournemouth v AC Milan',   market:'AC Milan to win',           from:2.30, to:2.15, dir:'up',
+    history:[2.30,2.29,2.28,2.26,2.25,2.23,2.21,2.20,2.19,2.17,2.16,2.15] },
 ];
-const SUSPENSIONS_SEED = [
-  { player:'Neymar',                team:'Brazil',     games:99, reason:'Grade 2 calf — 2-3 weeks, doubt for opener' },
-  { player:'Phil Foden',            team:'England',    games:99, reason:'Not selected for World Cup squad' },
-  { player:'Cole Palmer',           team:'England',    games:99, reason:'Not selected for World Cup squad' },
-  { player:'Trent Alexander-Arnold',team:'England',    games:99, reason:'Not selected — surprise omission' },
-  { player:'Hugo Ekitiké',          team:'Liverpool',  games:99, reason:'Achilles surgery — out 9-12 months' },
-  { player:'Rodrygo',               team:'Real Madrid',games:99, reason:'ACL — out for season' },
-  { player:'Sardar Azmoun',         team:'Iran',       games:99, reason:'Dropped — federation tensions' },
-  { player:'Lamine Yamal',          team:'Barcelona',  games:0,  reason:'Fit for World Cup — recovered' },
-];
+// Left empty until verified team news is published for this round — better an
+// honest empty state than invented absences.
+const SUSPENSIONS_SEED = [];
 const WEATHER_SEED = [
-  { match:'Mexico v South Africa (Azteca)', cond:'Clear · 24°C · Calm',           impact:'Goals Over +1%' },
-  { match:'USA v Paraguay (SoFi)',          cond:'Mild · 21°C · Light breeze',    impact:'Neutral' },
-  { match:'Brazil v Morocco (MetLife)',     cond:'Warm · 27°C · Humid',           impact:'Neutral' },
-  { match:'France v Senegal (MetLife)',     cond:'Warm · 26°C · Calm',            impact:'Neutral' },
-  { match:'Germany v Curaçao (Houston)',    cond:'Hot · 32°C · Humid',            impact:'Under 2.5 +2%' },
-  { match:'Spain v Cape Verde (Atlanta)',   cond:'Warm · 28°C · Light winds',     impact:'Neutral' },
+  { match:'Bayern Munich v Arsenal',  cond:'Cool · 8°C · Light wind',   impact:'Neutral' },
+  { match:'Aston Villa v Man City',   cond:'Showers · 11°C · Breezy',   impact:'Under 2.5 +1%' },
+  { match:'Barcelona v Real Madrid',  cond:'Mild · 19°C · Calm',        impact:'Neutral' },
+  { match:'Napoli v Roma',            cond:'Clear · 20°C · Calm',       impact:'Neutral' },
+  { match:'Paris SG v Lyon',          cond:'Overcast · 12°C',           impact:'Neutral' },
 ];
 
 // Working state — gets replaced on each refresh so we can simulate live updates
@@ -6513,7 +6778,9 @@ function renderNews() {
   `;
   }).join('');
 
-  document.getElementById('suspensions').innerHTML = SUSPENSIONS.map(s => {
+  document.getElementById('suspensions').innerHTML = !SUSPENSIONS.length
+    ? '<div class="ticker-row"><div class="lbl" style="font-size:11px; color:var(--ink-3);">Team news for this round is published at pre-match press conferences.</div></div>'
+    : SUSPENSIONS.map(s => {
     const label = s.games === 99 ? t('susp.out') : (s.games === 0 ? t('susp.risk') : (s.games + ' ' + t(s.games === 1 ? 'susp.match' : 'susp.matches')));
     const color = s.games === 99 ? 'var(--loss)' : (s.games === 0 ? 'var(--warn)' : 'var(--accent-2)');
     return `
@@ -6646,6 +6913,8 @@ const CORS_PROXY = 'https://api.allorigins.win/get?url=';
 // Falls through to 'epl' as a sensible default since the BBC feed leans English.
 function inferLeague(text) {
   const t = (text || '').toLowerCase();
+  if (/champions league|\bucl\b/i.test(t)) return 'ucl';
+  if (/europa league|\buel\b/i.test(t)) return 'uel';
   if (/\bla\s*liga\b|barcelona|real madrid|atl[eé]tico|atletico madrid|sevilla|villarreal|valencia\b|getafe|osasuna|girona|mallorca|real sociedad|athletic (club|bilbao)|espanyol|el cl[aá]sico/i.test(t)) return 'laliga';
   if (/bundesliga|bayern|dortmund|leverkusen|leipzig|stuttgart|frankfurt|wolfsburg|gladbach|m[oö]nchengladbach|hoffenheim|freiburg|mainz|werder|bremen|heidenheim|hamburg|st\.?\s*pauli|union berlin|fc k[oö]ln|kane|wirtz|kompany/i.test(t)) return 'bundes';
   if (/serie a|inter milan|ac milan|napoli|juventus|atalanta|roma|lazio|fiorentina|bologna|udinese|torino|genoa|cagliari|verona|sassuolo|parma|cremonese|lecce|pisa|como\b/i.test(t)) return 'seriea';
@@ -6973,7 +7242,7 @@ setInterval(() => {
     renderWorldCup();
   }
 }, 60000);
-setInterval(() => { refreshWcNewsFeed({ manual: false }); }, 90000);
+// WC news auto-refresh retired — tournament archived.
 
 
 // ============= PULL-TO-REFRESH =============
@@ -7158,245 +7427,106 @@ function wcValuePicks() {
   return picks.sort((a, b) => b.delta - a.delta).slice(0, 8);
 }
 
+// ============= WORLD CUP 2026 ARCHIVE =============
+// Tournament concluded July 19, 2026. All betting on the WC tab is closed; this
+// renders a read-only results archive. Sources: FIFA / Wikipedia (final, awards,
+// totals), GMA News (QF + SF results), theScore (third-place match),
+// NewsChannel 9 (England v Argentina SF).
+const WC_ARCHIVE = {
+  final: { home:'Spain', away:'Argentina', score:'1 – 0', aet:true, date:'July 19, 2026',
+           venue:'MetLife Stadium, East Rutherford', attendance:'80,663',
+           scorers:[{ team:'Spain', text:"Ferran Torres 106'" }] },
+  semis: [
+    { home:'Spain',   away:'France',    score:'2 – 0', date:'Jul 14', venue:'Dallas Stadium, Arlington',
+      note:"Oyarzabal 22' (pen), Porro 58'" },
+    { home:'England', away:'Argentina', score:'1 – 2', date:'Jul 15', venue:'Atlanta',
+      note:"Gordon; Enzo Fernández 85', Lautaro Martínez 90'" },
+  ],
+  third: { home:'England', away:'France', score:'6 – 4', date:'Jul 18', venue:'Miami Stadium',
+           note:'Saka hat-trick, Rice, Konsa, Bellingham; Mbappé 2, Barcola, Dembélé' },
+  quarters: [
+    { home:'France',    away:'Morocco',     score:'2 – 0', note:'Mbappé, Dembélé' },
+    { home:'Spain',     away:'Belgium',     score:'2 – 1', note:'Merino winner' },
+    { home:'England',   away:'Norway',      score:'2 – 1', note:'Bellingham 2' },
+    { home:'Argentina', away:'Switzerland', score:'3 – 1', note:'', aet:true },
+  ],
+  awards: [
+    { key:'wc.arch.gball',  who:'Rodri',          team:'Spain' },
+    { key:'wc.arch.gboot',  who:'Kylian Mbappé',  team:'France', extra:10 },
+    { key:'wc.arch.gglove', who:'Unai Simón',     team:'Spain' },
+    { key:'wc.arch.young',  who:'Pau Cubarsí',    team:'Spain' },
+    { key:'wc.arch.fair',   who:'Netherlands',    team:'Netherlands' },
+  ],
+  finish: [ ['Spain','wc.arch.won'], ['Argentina','wc.arch.runnerup'], ['England','wc.arch.thirdp'], ['France','wc.arch.fourth'] ],
+};
+
 function renderWorldCup() {
   const el = document.getElementById('wc-body');
   if (!el) return;
+  const A = WC_ARCHIVE;
+  const aet = x => x ? ` <span class="wca-aet">${t('wc.arch.aet')}</span>` : '';
+  const row = m => `
+    <div class="wca-row">
+      <div class="wca-team">${crest(m.home, 22)}<span>${m.home}</span></div>
+      <div class="wca-score">${m.score}${aet(m.aet)}</div>
+      <div class="wca-team wca-away"><span>${m.away}</span>${crest(m.away, 22)}</div>
+      ${(m.note || m.date || m.venue) ? `<div class="wca-note">${[m.date, m.venue, m.note].filter(Boolean).join(' · ')}</div>` : ''}
+    </div>`;
 
-  // Days-to-kickoff calculation
-  const opener = new Date(WC_TOURNAMENT.openerUtc).getTime();
-  const now = Date.now();
-  const days = Math.max(0, Math.ceil((opener - now) / (24 * 60 * 60 * 1000)));
-  const daysEl = document.getElementById('wc-stat-days');
-  if (daysEl) daysEl.textContent = days > 0 ? days : t('wc.live');
-
-  // ===== OUTRIGHTS =====
-  const top6 = WC_OUTRIGHTS.filter(o => o.tier === 'fav').slice(0, 6);
-  const rest = WC_OUTRIGHTS.filter(o => o.tier !== 'fav');
-  const outrightsHtml = `
-    <section class="wc-section">
-      <h2>${t('wc.outright')}</h2>
-      <div class="wc-sub">${t('wc.outright.sub')}</div>
-      <div class="wc-featured">
-        ${top6.map(o => `
-          <div class="wc-fav-card" onclick="addWcOutright('${o.team.replace(/'/g, "\\'")}', '${o.american}')">
-            ${crest(o.team, 32)}
-            <div class="wc-team">${o.team}</div>
-            <div class="wc-odds">${o.american}</div>
-          </div>
-        `).join('')}
+  const finalHtml = `
+    <section class="wc-section wca-final">
+      <div class="wca-closed">${t('wc.arch.closed')}</div>
+      <h2>${t('wc.arch.final')}</h2>
+      <div class="wc-sub">${t('wc.arch.finalSub')} · ${A.final.attendance}</div>
+      <div class="wca-final-board">
+        <div class="wca-final-team">${crest(A.final.home, 56)}<b>${A.final.home}</b></div>
+        <div class="wca-final-score">${A.final.score}<small>${t('wc.arch.aet')}</small></div>
+        <div class="wca-final-team">${crest(A.final.away, 56)}<b>${A.final.away}</b></div>
       </div>
-      <div class="wc-outright-list">
-        ${rest.map(o => `
-          <div class="wc-outright-row tier-${o.tier}" onclick="addWcOutright('${o.team.replace(/'/g, "\\'")}', '${o.american}')">
-            <span class="wc-team-name">${crest(o.team, 18)} ${o.team}</span>
-            <span class="wc-odds">${o.american}</span>
-          </div>
-        `).join('')}
-      </div>
-    </section>
-  `;
+      <div class="wca-note" style="text-align:center;">⚽ ${A.final.scorers.map(s => s.text).join(', ')}</div>
+    </section>`;
 
-  // ===== GROUPS =====
-  const groupsHtml = `
+  const koHtml = `
     <section class="wc-section">
-      <h2>${t('wc.groups')}</h2>
-      <div class="wc-sub">${t('wc.groups.sub')}</div>
-      <div class="wc-groups-grid">
-        ${WC_GROUPS.map(g => {
-          const fav = g.teams.reduce((best, tt) => {
-            const dec = wcAmericanToDecimal(tt.groupWin);
-            const bestDec = best ? wcAmericanToDecimal(best.groupWin) : 999;
-            return dec < bestDec ? tt : best;
-          }, null);
-          return `
-            <div class="wc-group-card">
-              <div class="wc-group-head">
-                <span class="wc-group-id">${t('wc.groupPrefix')} ${g.id}</span>
-                <span class="wc-group-fav">${t('wc.favorite')}: <b>${fav.team}</b></span>
-              </div>
-              <div class="wc-group-teams">
-                ${g.teams.map(tt => `
-                  <div class="wc-group-team" onclick="addWcOutright('${tt.team.replace(/'/g, "\\'")}', '${tt.groupWin}')" title="${t('wc.toWinGroup')}">
-                    <span class="name">${crest(tt.team, 20)} ${tt.team}</span>
-                    <span class="odds">${tt.groupWin}</span>
-                  </div>
-                `).join('')}
-              </div>
-              <div class="wc-group-matches">
-                ${g.matches.map(m => {
-                  const hi = g.teams.findIndex(x => x.team === m.home);
-                  const ai = g.teams.findIndex(x => x.team === m.away);
-                  const probs = wcMatchProbs(g.teams[hi].groupWin, g.teams[ai].groupWin);
-                  // Convert each side's true probability to American odds with the
-                  // existing helper. The +/- prefix makes it instantly readable to
-                  // American bettors; decimal would force them to mentally convert.
-                  const dh = 1 / (probs.H * 1.04);
-                  const dd = 1 / (probs.D * 1.04);
-                  const da = 1 / (probs.A * 1.04);
-                  const ah = americanFromDecimal(dh);
-                  const ad = americanFromDecimal(dd);
-                  const aa = americanFromDecimal(da);
-                  // Color-code the prices: favorites (negative American) in white,
-                  // underdogs (positive American) in chartreuse — same convention as the league cards.
-                  const colH = ah.startsWith('-') ? 'var(--ink)' : 'var(--accent)';
-                  const colD = ad.startsWith('-') ? 'var(--ink)' : 'var(--accent)';
-                  const colA = aa.startsWith('-') ? 'var(--ink)' : 'var(--accent)';
-                  return `
-                    <div class="wc-group-match">
-                      <div class="wc-match-teams">${m.home} v ${m.away}${m.note ? `<span class="wc-match-note">${m.note}</span>` : ''}</div>
-                      <div class="wc-match-meta">${wcKickoffLabel(m.kickoffUtc)} · ${m.venue}</div>
-                      <div style="display:flex; gap:4px; margin-top:6px;">
-                        <button onclick="addWcMatchLeg('${g.id}', ${hi}, ${ai}, 'H')" style="flex:1; padding:6px 4px; background:var(--bg-2); border:1px solid var(--line); color:${colH}; font-family:var(--mono); font-size:10px; cursor:pointer; border-radius:3px; display:flex; flex-direction:column; gap:2px;"><span style="color:var(--ink-3); font-size:9px;">${m.home.slice(0,3).toUpperCase()}</span><span style="font-weight:700;">${ah}</span></button>
-                        <button onclick="addWcMatchLeg('${g.id}', ${hi}, ${ai}, 'D')" style="flex:0 0 56px; padding:6px 4px; background:var(--bg-2); border:1px solid var(--line); color:${colD}; font-family:var(--mono); font-size:10px; cursor:pointer; border-radius:3px; display:flex; flex-direction:column; gap:2px;"><span style="color:var(--ink-3); font-size:9px;">X</span><span style="font-weight:700;">${ad}</span></button>
-                        <button onclick="addWcMatchLeg('${g.id}', ${hi}, ${ai}, 'A')" style="flex:1; padding:6px 4px; background:var(--bg-2); border:1px solid var(--line); color:${colA}; font-family:var(--mono); font-size:10px; cursor:pointer; border-radius:3px; display:flex; flex-direction:column; gap:2px;"><span style="color:var(--ink-3); font-size:9px;">${m.away.slice(0,3).toUpperCase()}</span><span style="font-weight:700;">${aa}</span></button>
-                      </div>
-                    </div>
-                  `;
-                }).join('')}
-              </div>
-            </div>
-          `;
+      <h2>${t('wc.arch.ko')}</h2>
+      <div class="wc-sub">${t('wc.arch.koSub')}</div>
+      <h4 class="wca-round">${t('wc.arch.sf')}</h4>${A.semis.map(row).join('')}
+      <h4 class="wca-round">${t('wc.arch.third')}</h4>${row(A.third)}
+      <h4 class="wca-round">${t('wc.arch.qf')}</h4>${A.quarters.map(row).join('')}
+    </section>`;
+
+  const awardsHtml = `
+    <section class="wc-section">
+      <h2>${t('wc.arch.awards')}</h2>
+      <div class="wc-sub">${t('wc.arch.awardsSub')}</div>
+      <div class="wca-awards">
+        ${A.awards.map(a => `
+          <div class="wca-award">
+            <div class="wca-award-lbl">${t(a.key)}</div>
+            <div class="wca-award-who">${crest(a.team, 22)}<b>${a.who}</b></div>
+            <div class="wca-award-sub">${a.team}${a.extra ? ` · ${a.extra} ${t('wc.arch.goalsN')}` : ''}</div>
+          </div>`).join('')}
+      </div>
+    </section>`;
+
+  // How the pre-tournament outright prices (WC_OUTRIGHTS, captured late May 2026) settled.
+  const marketHtml = `
+    <section class="wc-section">
+      <h2>${t('wc.arch.market')}</h2>
+      <div class="wc-sub">${t('wc.arch.marketSub')}</div>
+      <div class="wca-market">
+        ${A.finish.map(([team, key], i) => {
+          const o = WC_OUTRIGHTS.find(x => x.team === team);
+          return `<div class="wca-mrow${i === 0 ? ' win' : ''}">
+            <span class="wca-team">${crest(team, 20)}<span>${team}</span></span>
+            <span class="wca-price">${o ? o.american : '—'}</span>
+            <span class="wca-finish">${t(key)}</span>
+          </div>`;
         }).join('')}
       </div>
-    </section>
-  `;
+    </section>`;
 
-  // ===== KNOCKOUTS =====
-  const knockoutsHtml = `
-    <section class="wc-section">
-      <h2>${t('wc.knockout')}</h2>
-      <div class="wc-sub">${t('wc.knockout.sub')}</div>
-      <div class="wc-knockouts">
-        ${WC_KNOCKOUT_ROUNDS.map(r => `
-          <div class="wc-knockout-card">
-            <div class="wc-ko-label">${r.label}</div>
-            <div class="wc-ko-date">${r.startDate}</div>
-            <div class="wc-ko-pending">${t('wc.pending')}</div>
-            <div class="wc-ko-count">${r.matchCount} ${r.matchCount === 1 ? t('wc.match') : t('wc.matches')}</div>
-          </div>
-        `).join('')}
-      </div>
-    </section>
-  `;
-
-  // ===== ANALYTICS =====
-  // Bracket pathway: per reporting, Spain and Argentina are drawn into opposite halves
-  // of the bracket — Spain (Group H) sits in the top half, Argentina (Group J) in the bottom.
-  const topHalfGroups = ['A','B','C','D','E','F'];
-  const botHalfGroups = ['G','H','I','J','K','L'];
-  const valuePicks = wcValuePicks();
-  const analyticsHtml = `
-    <section class="wc-section">
-      <h2>${t('wc.analytics')}</h2>
-      <div class="wc-sub">${t('wc.analytics.sub')}</div>
-      <div class="wc-analytics">
-        <div class="wc-ana-block">
-          <h3>${t('wc.pathway')}</h3>
-          <div class="wc-pathway">
-            <div class="wc-path-side">
-              <h4>${t('wc.topHalf')}</h4>
-              <ul>
-                ${topHalfGroups.map(gid => {
-                  const g = WC_GROUPS.find(x => x.id === gid);
-                  const fav = g.teams.reduce((b, tt) => !b || wcAmericanToDecimal(tt.groupWin) < wcAmericanToDecimal(b.groupWin) ? tt : b, null);
-                  return `<li>Group ${gid}: ${fav.team}</li>`;
-                }).join('')}
-              </ul>
-            </div>
-            <div class="wc-path-side">
-              <h4>${t('wc.botHalf')}</h4>
-              <ul>
-                ${botHalfGroups.map(gid => {
-                  const g = WC_GROUPS.find(x => x.id === gid);
-                  const fav = g.teams.reduce((b, tt) => !b || wcAmericanToDecimal(tt.groupWin) < wcAmericanToDecimal(b.groupWin) ? tt : b, null);
-                  return `<li>Group ${gid}: ${fav.team}</li>`;
-                }).join('')}
-              </ul>
-            </div>
-          </div>
-          <div style="margin-top:10px; font-family:var(--mono); font-size:9px; color:var(--ink-3); line-height:1.5;">
-            ${t('wc.pathwayNote')}
-          </div>
-        </div>
-        <div class="wc-ana-block">
-          <h3>${t('wc.valuePicks')}</h3>
-          ${valuePicks.length === 0
-            ? `<div style="font-family:var(--mono); font-size:10px; color:var(--ink-3); padding:14px 0;">${t('wc.noValue')}</div>`
-            : valuePicks.map(p => `
-                <div class="wc-value-row">
-                  <span class="team"><span class="wc-tier-badge ${p.tier}"></span>${p.team}</span>
-                  <span class="delta ${p.delta < 0 ? 'neg' : ''}">${p.impl.toFixed(1)}% · ${p.label}</span>
-                </div>
-              `).join('')
-          }
-        </div>
-        <div class="wc-ana-block" style="grid-column: 1 / -1;">
-          <h3>${t('wc.topScorer')}</h3>
-          <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:10px;">
-            ${[
-              { player:'Kylian Mbappé',    team:'France',    odds:'+600' },
-              { player:'Harry Kane',       team:'England',   odds:'+700' },
-              { player:'Lionel Messi',     team:'Argentina', odds:'+1200' },
-              { player:'Erling Haaland',   team:'Norway',    odds:'+1400' },
-              { player:'Lamine Yamal',     team:'Spain',     odds:'+1800' },
-              { player:'Ousmane Dembélé',  team:'France',    odds:'+2000' },
-              { player:'Cristiano Ronaldo',team:'Portugal',  odds:'+2000' },
-              { player:'Vinícius Jr.',     team:'Brazil',    odds:'+2500' },
-            ].map(s => `
-              <div style="background:var(--bg-2); border:1px solid var(--line); padding:10px; border-radius:3px;">
-                <div style="font-family:var(--serif); font-weight:600; font-size:12px; color:var(--ink);">${s.player}</div>
-                <div style="font-family:var(--mono); font-size:9px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.1em; margin:2px 0 6px;">${s.team}</div>
-                <div style="font-family:var(--mono); font-weight:700; font-size:13px; color:var(--accent);">${s.odds}</div>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-      </div>
-    </section>
-  `;
-
-  // ===== WC NEWS =====
-  // Show the "last sync" timestamp in human-friendly form. Mirrors the regular
-  // news section's pattern so the UI feels consistent across tabs.
-  // Reuse the same timeAgo helper the regular news section uses, so the
-  // "X minutes ago" / "just now" / "X hours ago" strings translate consistently.
-  const wcLastSyncLabel = timeAgo(wcNewsLastSyncMins);
-  const newsHtml = `
-    <section class="wc-section">
-      <h2>${t('wc.news')}</h2>
-      <div class="wc-sub">${t('wc.news.sub')}</div>
-      <div class="news-controls" id="wc-news-controls" style="margin-bottom:14px;">
-        <span class="lastsync"><span>${t('news.lastsync')}</span> <span>${wcLastSyncLabel}</span></span>
-        <button class="refresh-btn" id="wc-refresh-news-btn" onclick="manualRefreshWcNews()">
-          <svg class="arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="23 4 23 10 17 10"/>
-            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
-          </svg>
-          <span class="spin"></span>
-          <span>${t('news.refreshbtn')}</span>
-        </button>
-      </div>
-      <div style="display:flex; flex-direction:column; gap:12px;">
-        ${WC_NEWS.slice(0, 8).map(n => `
-          <article class="news-item ${n._justAdded ? 'fresh' : ''}" style="padding:16px;">
-            <div class="news-meta">
-              <span class="news-tag tag-${n.tag}">${t('tag.' + n.tag)}</span>
-              <span style="display:inline-flex; align-items:center; gap:6px;">${crest(n.team, 16)} ${n.team}</span>
-              <span style="color:var(--ink-3); font-family:var(--mono); font-size:9px; margin-left:auto;">${timeAgo(n.minutesAgo)}</span>
-            </div>
-            <div class="news-title" style="font-size:14px;">${n.title}</div>
-            <div class="news-body" style="font-size:12px;">${n.body}</div>
-            <div class="news-impact">
-              <span>${t('news.impact')}</span>
-              <span class="impact-arrow ${n.impact === 'down' ? 'down' : ''}">${n.impact === 'up' ? '▲' : '▼'} ${n.moveText}</span>
-            </div>
-          </article>
-        `).join('')}
-      </div>
-    </section>
-  `;
-
-  el.innerHTML = outrightsHtml + groupsHtml + knockoutsHtml + newsHtml + analyticsHtml;
+  el.innerHTML = finalHtml + koHtml + awardsHtml + marketHtml;
 }
 
 // Extend optName() to handle wcOutright templates
