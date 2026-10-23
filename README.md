@@ -1853,6 +1853,74 @@
     .wca-team { font-size:12px; } .wca-score { font-size:13px; }
     .wca-mrow { grid-template-columns:1fr 64px 76px; }
   }
+
+  /* ===== Predictor ===== */
+  .pred-chip { font-family:var(--mono); font-size:9px; letter-spacing:.1em; text-transform:uppercase; background:transparent;
+    color:var(--accent); border:1px solid var(--accent); border-radius:3px; padding:3px 7px; cursor:pointer; }
+  .pred-chip:hover { background:var(--accent); color:#000; }
+  #pred-body .wc-section { margin-bottom:16px; }
+  .pred-picker { display:flex; align-items:center; gap:10px; margin-bottom:16px; }
+  .pred-picker label { font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); }
+  .pred-picker select, .pred-value-in select, .pred-value-in input { background:var(--bg-2); color:var(--ink); border:1px solid var(--line);
+    border-radius:4px; padding:9px 10px; font-family:var(--mono); font-size:12px; min-width:0; }
+  .pred-picker select { flex:1; max-width:520px; }
+  .pred-grid { display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1.15fr); gap:16px; }
+  .pred-meta { display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-family:var(--mono); font-size:10px; color:var(--ink-3); letter-spacing:.08em; text-transform:uppercase; }
+  .pred-conf { margin-left:auto; padding:3px 8px; border-radius:3px; border:1px solid var(--line); }
+  .pred-conf.high { color:var(--accent); border-color:var(--accent); } .pred-conf.med { color:var(--ink); }
+  .pred-teams { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:10px; margin:18px 0 16px; }
+  .pred-team { display:flex; flex-direction:column; align-items:center; gap:6px; text-align:center; }
+  .pred-team b { font-family:var(--serif); font-size:16px; } .pred-team span { font-family:var(--mono); font-size:10px; color:var(--ink-3); }
+  .pred-xg { text-align:center; } .pred-xg-num { font-family:var(--display); font-size:34px; color:var(--accent); line-height:1; }
+  .pred-xg-num i { color:var(--ink-3); font-style:normal; } .pred-xg-lbl { font-family:var(--mono); font-size:9px; color:var(--ink-3); letter-spacing:.12em; text-transform:uppercase; margin-top:4px; }
+  .pred-bar { display:flex; height:30px; border-radius:4px; overflow:hidden; gap:2px; }
+  .pred-bar > div { display:flex; align-items:center; justify-content:center; min-width:34px; font-family:var(--mono); font-size:11px; }
+  .pred-bar .h { background:var(--accent); color:#000; } .pred-bar .d { background:var(--bg-3); color:var(--ink); } .pred-bar .a { background:#6ba3ff; color:#000; }
+  .pred-bar-lbl { display:flex; justify-content:space-between; gap:6px; font-family:var(--mono); font-size:10px; color:var(--ink-3); margin-top:6px; }
+  .pred-scores { display:grid; grid-template-columns:repeat(6,1fr); gap:6px; }
+  .pred-scores div { border:1px solid var(--line); border-radius:4px; padding:8px 4px; text-align:center; background:var(--bg-3); }
+  .pred-scores b { display:block; font-family:var(--mono); font-size:14px; } .pred-scores span { font-family:var(--mono); font-size:10px; color:var(--ink-3); }
+  .pred-table { display:flex; flex-direction:column; }
+  .pred-tr { display:grid; grid-template-columns:minmax(0,1.7fr) minmax(0,1.1fr) 92px 64px 74px; align-items:center; gap:8px; padding:8px 0; border-bottom:1px dashed var(--line); font-size:12px; }
+  .pred-th { font-family:var(--mono); font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); border-bottom:1px solid var(--line); }
+  .pred-lbl { min-width:0; overflow-wrap:anywhere; line-height:1.3; } .pred-lbl small { display:block; font-family:var(--mono); font-size:9px; color:var(--ink-3); letter-spacing:.06em; }
+  .pred-p { position:relative; height:18px; background:var(--bg-3); border-radius:3px; overflow:hidden; }
+  .pred-p i { position:absolute; left:0; top:0; bottom:0; background:rgba(212,255,60,.25); }
+  .pred-p b { position:relative; font-family:var(--mono); font-size:11px; padding-left:6px; line-height:18px; }
+  .pred-tr .mono { font-family:var(--mono); } .pred-tr small { color:var(--ink-3); font-size:10px; }
+  .pos { color:var(--win, #4ade80); } .neg { color:var(--loss, #f87171); }
+  .pred-add { font-family:var(--mono); font-size:10px; background:var(--bg-3); color:var(--ink); border:1px solid var(--line); border-radius:3px; padding:5px 6px; cursor:pointer; width:100%; }
+  .pred-add:hover { border-color:var(--accent); } .pred-add.on { background:var(--accent); color:#000; border-color:var(--accent); }
+  .pred-note { font-family:var(--mono); font-size:10px; color:var(--ink-3); margin-top:10px; line-height:1.6; }
+  .pred-value-in { display:grid; grid-template-columns:minmax(0,1fr) 130px; gap:8px; margin-bottom:12px; }
+  .pred-verdict { font-family:var(--display); font-size:22px; margin-bottom:8px; }
+  .pred-verdict.value { color:var(--accent); } .pred-verdict.fair { color:var(--ink); } .pred-verdict.none { color:var(--ink-3); font-size:14px; font-family:var(--mono); }
+  .pred-kv { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px dashed var(--line); font-size:12px; }
+  .pred-kv span { color:var(--ink-3); font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; } .pred-kv b { font-family:var(--mono); }
+  .pred-cmp-head { display:flex; justify-content:space-between; font-family:var(--serif); font-size:15px; margin-bottom:6px; }
+  .pred-cmp-row { display:grid; grid-template-columns:1fr 1.4fr 1fr; align-items:center; padding:7px 0; border-bottom:1px dashed var(--line); font-family:var(--mono); font-size:12px; }
+  .pred-cmp-row span:first-child { text-align:left; } .pred-cmp-row span:last-child { text-align:right; }
+  .pred-cmp-row em { font-style:normal; text-align:center; font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); }
+  .pred-cmp-row .best { color:var(--accent); font-weight:700; }
+  .pred-form { display:inline-flex; width:18px; height:18px; align-items:center; justify-content:center; border-radius:3px; font-size:9px; font-weight:700; margin-right:2px; }
+  .pred-form.W { background:var(--accent); color:#000; } .pred-form.D { background:var(--bg-3); color:var(--ink); border:1px solid var(--line); } .pred-form.L { background:#f87171; color:#000; }
+  .pred-last-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .pred-last { display:grid; grid-template-columns:22px 1fr auto; align-items:center; gap:6px; padding:5px 0; font-size:12px; border-bottom:1px dashed var(--line); }
+  .pred-last b { font-family:var(--mono); }
+  .pred-call { display:grid; grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) 56px; gap:10px; align-items:center; width:100%; text-align:left;
+    background:transparent; border:0; border-bottom:1px dashed var(--line); color:var(--ink); padding:10px 0; cursor:pointer; font-size:13px; }
+  .pred-call:hover, .pred-call.on { background:rgba(212,255,60,.05); }
+  .pred-call-m small { display:block; font-family:var(--mono); font-size:9px; color:var(--ink-3); margin-top:2px; }
+  .pred-call-pick { font-family:var(--mono); font-size:11px; color:var(--ink-2); } .pred-call b { font-family:var(--mono); color:var(--accent); text-align:right; }
+  .pred-method { font-size:13px; line-height:1.6; color:var(--ink-2); margin:0; }
+  @media (max-width: 900px) { .pred-grid { grid-template-columns:1fr; } }
+  @media (max-width: 480px) {
+    .pred-tr { grid-template-columns:minmax(0,1fr) 62px 54px 62px; font-size:11px; }
+    .pred-tr > span:nth-child(3) small { display:none; } .pred-tr > span:nth-child(4) { display:none; }
+    .pred-scores { grid-template-columns:repeat(3,1fr); } .pred-last-grid { grid-template-columns:1fr; }
+    .pred-team b { font-size:13px; } .pred-xg-num { font-size:26px; } .pred-value-in { grid-template-columns:1fr; }
+    .pred-call { grid-template-columns:minmax(0,1fr) 46px; } .pred-call-pick { grid-column:1; }
+  }
 </style>
 </head>
 <body>
@@ -1866,6 +1934,7 @@
       <nav class="tabs" id="tabs">
         <button data-tab="builder" class="active" data-i18n="tab.builder">Builder</button>
         <button data-tab="wc" data-i18n="tab.wc">World Cup</button>
+        <button data-tab="predict" data-i18n="tab.predict">Predictor</button>
         <button data-tab="news" data-i18n="tab.news">News</button>
         <button data-tab="analytics" data-i18n="tab.analytics">Analytics</button>
         <button data-tab="my" data-i18n="tab.my">My Slips</button>
@@ -1998,6 +2067,22 @@
       </div>
     </section>
 
+
+    <!-- ===== PREDICTOR ===== -->
+    <section id="tab-predict" class="hidden">
+      <div class="hero">
+        <h1 data-i18n="pred.title">Bet predictor. <em>Real results in.</em></h1>
+        <p class="sub" data-i18n="pred.sub"></p>
+        <div class="hero-meta">
+          <div><b id="pred-stat-results">—</b><span data-i18n="pred.stat.results">Results analysed</span></div>
+          <div><b id="pred-stat-fixtures">—</b><span data-i18n="pred.stat.fixtures">Fixtures priced</span></div>
+          <div><b>5</b><span data-i18n="pred.stat.leagues">Leagues</span></div>
+          <div><b id="pred-stat-thru">—</b><span data-i18n="pred.stat.thru">Data through</span></div>
+        </div>
+      </div>
+      <div id="pred-body"></div>
+    </section>
+
     <!-- ===== ANALYTICS ===== -->
     <section id="tab-analytics" class="hidden">
       <div class="hero">
@@ -2119,6 +2204,62 @@ const I18N = {
     'tagline': 'Soccer Bet Simulation Terminal',
     'tab.builder': 'Builder', 'tab.news': 'News',
     'tab.analytics': 'Analytics', 'tab.my': 'My Slips',
+    'tab.predict': 'Predictor',
+    'pred.title': 'Bet predictor. <em>Real results in.</em>',
+    'pred.sub': 'A goals model built from every 2026-27 league result so far in the top five leagues. It prices each fixture\'s result, goals and correct-score markets, and checks your sportsbook\'s price for value.',
+    'pred.stat.results': 'Results analysed',
+    'pred.stat.fixtures': 'Fixtures priced',
+    'pred.stat.leagues': 'Leagues',
+    'pred.stat.thru': 'Data through',
+    'pred.btn': 'Predict',
+    'pred.pick': 'Fixture',
+    'pred.conf': 'Confidence',
+    'pred.conf.low': 'Low',
+    'pred.conf.med': 'Medium',
+    'pred.conf.high': 'High',
+    'pred.xg': 'Expected goals',
+    'pred.scores': 'Most likely scores',
+    'pred.markets': 'Model prices',
+    'pred.col.market': 'Market',
+    'pred.col.prob': 'Model %',
+    'pred.col.fair': 'Fair odds',
+    'pred.col.app': 'App best',
+    'pred.add': '+ Slip',
+    'pred.inslip': '✓ In slip',
+    'pred.appNote': 'Fair odds have no bookmaker margin. App prices are the Builder\'s simulated books, which now start from this model and add each book\'s margin, so they will usually sit just below fair.',
+    'pred.value': 'Value checker',
+    'pred.valueSub': 'Pick a market and enter your sportsbook\'s odds (American like +150 or decimal like 2.50)',
+    'pred.v.enter': 'Enter odds to check value',
+    'pred.v.value': 'Value bet',
+    'pred.v.fair': 'Fair price',
+    'pred.v.none': 'No value',
+    'pred.implied': 'Implied probability',
+    'pred.edge': 'Edge',
+    'pred.ev': 'Expected value per 100 staked',
+    'pred.kelly': 'Quarter-Kelly stake',
+    'pred.compare': 'Team comparison',
+    'pred.row.pos': 'Position',
+    'pred.row.rec': 'W-D-L',
+    'pred.row.ppg': 'Points / game',
+    'pred.row.gf': 'Scored / game',
+    'pred.row.ga': 'Conceded / game',
+    'pred.row.venue': 'Home vs away (P · GF–GA)',
+    'pred.row.att': 'Attack rating',
+    'pred.row.def': 'Defence rating (lower = better)',
+    'pred.row.form': 'Form',
+    'pred.last5': 'Last 5 league results',
+    'pred.toWin': 'to win',
+    'pred.over25': 'Over 2.5 goals',
+    'pred.under25': 'Under 2.5 goals',
+    'pred.bttsYes': 'Both teams score',
+    'pred.bttsNo': 'Not both to score',
+    'pred.top': 'Strongest model calls this round',
+    'pred.topSub': 'Ranked by model probability · tap to open',
+    'pred.method': 'How the model works',
+    'pred.methodBody': 'Attack and defence ratings come from each team\'s goals scored and conceded per game this season, relative to its league\'s average, and are pulled toward average while samples are small. Expected goals pair the home side\'s attack with the away side\'s defence (and vice versa) using each league\'s real home and away scoring rates. A Poisson model with a Dixon-Coles low-score adjustment turns this into a probability for every scoreline, which add up to the result, goals and clean-sheet markets. The Builder\'s odds now use these same probabilities. Not modelled: injuries, suspensions, rotation, weather and motivation.',
+    'pred.matches': 'matches',
+    'pred.disclaimer': 'Model estimates for simulation only, not betting advice.',
+    'pred.none': 'No upcoming domestic fixtures to predict. European ties need cross-league ratings and are not modelled yet.',
     'live': 'Live odds',
     'hero.title': 'Test the parlay <em>before</em> you place it.',
     'hero.sub': "Build, stress-test, and price multi-leg soccer bets across the top five European leagues. Live lines from FanDuel and DraftKings, with implied probability, scenario modeling, and an injury-driven news feed.",
@@ -2394,6 +2535,62 @@ const I18N = {
     'tagline': 'Terminal de Simulación de Apuestas',
     'tab.builder': 'Constructor', 'tab.news': 'Noticias',
     'tab.analytics': 'Análisis', 'tab.my': 'Mis Boletos',
+    'tab.predict': 'Pronósticos',
+    'pred.title': 'Pronosticador. <em>Con resultados reales.</em>',
+    'pred.sub': 'Un modelo de goles construido con todos los resultados de 2026-27 de las cinco grandes ligas. Calcula resultado, goles y marcador exacto de cada partido y comprueba si la cuota de tu casa de apuestas tiene valor.',
+    'pred.stat.results': 'Resultados analizados',
+    'pred.stat.fixtures': 'Partidos calculados',
+    'pred.stat.leagues': 'Ligas',
+    'pred.stat.thru': 'Datos hasta',
+    'pred.btn': 'Pronóstico',
+    'pred.pick': 'Partido',
+    'pred.conf': 'Confianza',
+    'pred.conf.low': 'Baja',
+    'pred.conf.med': 'Media',
+    'pred.conf.high': 'Alta',
+    'pred.xg': 'Goles esperados',
+    'pred.scores': 'Marcadores más probables',
+    'pred.markets': 'Cuotas del modelo',
+    'pred.col.market': 'Mercado',
+    'pred.col.prob': 'Modelo %',
+    'pred.col.fair': 'Cuota justa',
+    'pred.col.app': 'Mejor app',
+    'pred.add': '+ Boleto',
+    'pred.inslip': '✓ En boleto',
+    'pred.appNote': 'La cuota justa no incluye margen. Las cuotas de la app son las casas simuladas del Constructor, que ahora parten de este modelo y añaden el margen de cada casa, así que suelen quedar algo por debajo de la justa.',
+    'pred.value': 'Comprobador de valor',
+    'pred.valueSub': 'Elige un mercado e introduce la cuota de tu casa (americana como +150 o decimal como 2.50)',
+    'pred.v.enter': 'Introduce una cuota para comprobar',
+    'pred.v.value': 'Apuesta de valor',
+    'pred.v.fair': 'Cuota justa',
+    'pred.v.none': 'Sin valor',
+    'pred.implied': 'Probabilidad implícita',
+    'pred.edge': 'Ventaja',
+    'pred.ev': 'Valor esperado por 100 apostados',
+    'pred.kelly': 'Apuesta ¼ Kelly',
+    'pred.compare': 'Comparativa',
+    'pred.row.pos': 'Posición',
+    'pred.row.rec': 'G-E-P',
+    'pred.row.ppg': 'Puntos / partido',
+    'pred.row.gf': 'Goles a favor / partido',
+    'pred.row.ga': 'Goles en contra / partido',
+    'pred.row.venue': 'Casa vs fuera (PJ · GF–GC)',
+    'pred.row.att': 'Índice de ataque',
+    'pred.row.def': 'Índice defensivo (menor = mejor)',
+    'pred.row.form': 'Racha',
+    'pred.last5': 'Últimos 5 en liga',
+    'pred.toWin': 'gana',
+    'pred.over25': 'Más de 2.5 goles',
+    'pred.under25': 'Menos de 2.5 goles',
+    'pred.bttsYes': 'Ambos marcan',
+    'pred.bttsNo': 'No marcan ambos',
+    'pred.top': 'Pronósticos más claros de la jornada',
+    'pred.topSub': 'Ordenados por probabilidad · toca para abrir',
+    'pred.method': 'Cómo funciona el modelo',
+    'pred.methodBody': 'Los índices de ataque y defensa salen de los goles marcados y recibidos por partido esta temporada, en relación con la media de su liga, y se acercan a la media mientras la muestra es pequeña. Los goles esperados combinan el ataque local con la defensa visitante (y viceversa) usando las tasas reales de goles en casa y fuera de cada liga. Un modelo de Poisson con ajuste Dixon-Coles para marcadores bajos da la probabilidad de cada marcador, que se suman en los mercados de resultado, goles y portería a cero. Las cuotas del Constructor usan ahora estas mismas probabilidades. No se modelan lesiones, sanciones, rotaciones, clima ni motivación.',
+    'pred.matches': 'partidos',
+    'pred.disclaimer': 'Estimaciones del modelo solo para simulación, no son consejos de apuesta.',
+    'pred.none': 'No hay partidos de liga próximos que pronosticar. Los cruces europeos necesitan índices entre ligas y aún no se modelan.',
     'live': 'Cuotas en vivo',
     'hero.title': 'Prueba el combinado <em>antes</em> de apostarlo.',
     'hero.sub': 'Construye, evalúa y cotiza apuestas múltiples en las cinco grandes ligas europeas. Cuotas en directo de FanDuel y DraftKings, con probabilidad implícita, modelado de escenarios y noticias de lesiones que mueven la línea.',
@@ -2668,6 +2865,62 @@ const I18N = {
     'tagline': 'Fußball-Wettsimulations-Terminal',
     'tab.builder': 'Builder', 'tab.news': 'News',
     'tab.analytics': 'Analyse', 'tab.my': 'Meine Tipps',
+    'tab.predict': 'Prognose',
+    'pred.title': 'Wett-Prognose. <em>Aus echten Ergebnissen.</em>',
+    'pred.sub': 'Ein Tormodell aus allen Ligaergebnissen der Saison 2026/27 in den fünf Topligen. Es berechnet Ergebnis-, Tor- und Resultatmärkte für jedes Spiel und prüft die Quote deines Buchmachers auf Value.',
+    'pred.stat.results': 'Ausgewertete Spiele',
+    'pred.stat.fixtures': 'Berechnete Spiele',
+    'pred.stat.leagues': 'Ligen',
+    'pred.stat.thru': 'Daten bis',
+    'pred.btn': 'Prognose',
+    'pred.pick': 'Spiel',
+    'pred.conf': 'Sicherheit',
+    'pred.conf.low': 'Niedrig',
+    'pred.conf.med': 'Mittel',
+    'pred.conf.high': 'Hoch',
+    'pred.xg': 'Erwartete Tore',
+    'pred.scores': 'Wahrscheinlichste Ergebnisse',
+    'pred.markets': 'Modellquoten',
+    'pred.col.market': 'Markt',
+    'pred.col.prob': 'Modell %',
+    'pred.col.fair': 'Faire Quote',
+    'pred.col.app': 'Beste App',
+    'pred.add': '+ Schein',
+    'pred.inslip': '✓ Im Schein',
+    'pred.appNote': 'Faire Quoten enthalten keine Buchmacher-Marge. App-Quoten stammen von den simulierten Buchmachern des Builders, die jetzt auf diesem Modell aufbauen und ihre Marge aufschlagen – sie liegen daher meist knapp unter fair.',
+    'pred.value': 'Value-Check',
+    'pred.valueSub': 'Markt wählen und die Quote deines Buchmachers eingeben (amerikanisch wie +150 oder dezimal wie 2.50)',
+    'pred.v.enter': 'Quote eingeben, um Value zu prüfen',
+    'pred.v.value': 'Value-Wette',
+    'pred.v.fair': 'Faire Quote',
+    'pred.v.none': 'Kein Value',
+    'pred.implied': 'Implizite Wahrscheinlichkeit',
+    'pred.edge': 'Vorteil',
+    'pred.ev': 'Erwartungswert pro 100 Einsatz',
+    'pred.kelly': '¼-Kelly-Einsatz',
+    'pred.compare': 'Teamvergleich',
+    'pred.row.pos': 'Platz',
+    'pred.row.rec': 'S-U-N',
+    'pred.row.ppg': 'Punkte / Spiel',
+    'pred.row.gf': 'Tore / Spiel',
+    'pred.row.ga': 'Gegentore / Spiel',
+    'pred.row.venue': 'Heim vs auswärts (Sp · T–GT)',
+    'pred.row.att': 'Angriffswert',
+    'pred.row.def': 'Abwehrwert (niedriger = besser)',
+    'pred.row.form': 'Form',
+    'pred.last5': 'Letzte 5 Ligaspiele',
+    'pred.toWin': 'gewinnt',
+    'pred.over25': 'Über 2,5 Tore',
+    'pred.under25': 'Unter 2,5 Tore',
+    'pred.bttsYes': 'Beide treffen',
+    'pred.bttsNo': 'Nicht beide treffen',
+    'pred.top': 'Stärkste Modelltipps der Runde',
+    'pred.topSub': 'Nach Wahrscheinlichkeit sortiert · antippen zum Öffnen',
+    'pred.method': 'So funktioniert das Modell',
+    'pred.methodBody': 'Angriffs- und Abwehrwerte basieren auf den Toren und Gegentoren pro Spiel in dieser Saison im Verhältnis zum Ligaschnitt und werden bei kleinen Stichproben zum Durchschnitt gezogen. Erwartete Tore kombinieren den Heimangriff mit der Auswärtsabwehr (und umgekehrt) anhand der echten Heim- und Auswärtstorquoten jeder Liga. Ein Poisson-Modell mit Dixon-Coles-Korrektur für knappe Ergebnisse liefert die Wahrscheinlichkeit jedes Resultats, die sich zu Ergebnis-, Tor- und Zu-null-Märkten summieren. Die Builder-Quoten nutzen jetzt dieselben Wahrscheinlichkeiten. Nicht modelliert: Verletzungen, Sperren, Rotation, Wetter und Motivation.',
+    'pred.matches': 'Spiele',
+    'pred.disclaimer': 'Modellschätzungen nur zur Simulation, keine Wettberatung.',
+    'pred.none': 'Keine anstehenden Ligaspiele für eine Prognose. Europapokalspiele brauchen ligaübergreifende Werte und sind noch nicht modelliert.',
     'live': 'Live-Quoten',
     'hero.title': 'Teste den Kombi-Schein, <em>bevor</em> du ihn abgibst.',
     'hero.sub': 'Erstelle, prüfe und kalkuliere Kombi-Wetten aus den fünf großen europäischen Ligen. Live-Quoten von FanDuel und DraftKings, mit impliziter Wahrscheinlichkeit, Szenarien-Modellierung und einem Verletzungsticker, der die Linie bewegt.',
@@ -2943,6 +3196,62 @@ const I18N = {
     'tagline': 'Terminale di Simulazione Scommesse',
     'tab.builder': 'Costruttore', 'tab.news': 'Notizie',
     'tab.analytics': 'Analisi', 'tab.my': 'Le Mie Schedine',
+    'tab.predict': 'Pronostici',
+    'pred.title': 'Pronostici. <em>Dai risultati reali.</em>',
+    'pred.sub': 'Un modello sui gol costruito su tutti i risultati 2026-27 dei cinque top campionati. Stima esito, gol e risultato esatto di ogni partita e controlla se la quota del tuo bookmaker ha valore.',
+    'pred.stat.results': 'Risultati analizzati',
+    'pred.stat.fixtures': 'Partite stimate',
+    'pred.stat.leagues': 'Campionati',
+    'pred.stat.thru': 'Dati fino al',
+    'pred.btn': 'Pronostico',
+    'pred.pick': 'Partita',
+    'pred.conf': 'Affidabilità',
+    'pred.conf.low': 'Bassa',
+    'pred.conf.med': 'Media',
+    'pred.conf.high': 'Alta',
+    'pred.xg': 'Gol attesi',
+    'pred.scores': 'Risultati più probabili',
+    'pred.markets': 'Quote del modello',
+    'pred.col.market': 'Mercato',
+    'pred.col.prob': 'Modello %',
+    'pred.col.fair': 'Quota equa',
+    'pred.col.app': 'Migliore app',
+    'pred.add': '+ Schedina',
+    'pred.inslip': '✓ In schedina',
+    'pred.appNote': 'La quota equa non include margine. Le quote dell\'app sono i bookmaker simulati del Builder, che ora partono da questo modello e aggiungono il proprio margine, quindi di solito restano poco sotto la quota equa.',
+    'pred.value': 'Verifica valore',
+    'pred.valueSub': 'Scegli un mercato e inserisci la quota del tuo bookmaker (americana come +150 o decimale come 2.50)',
+    'pred.v.enter': 'Inserisci una quota per verificare',
+    'pred.v.value': 'Scommessa di valore',
+    'pred.v.fair': 'Quota equa',
+    'pred.v.none': 'Nessun valore',
+    'pred.implied': 'Probabilità implicita',
+    'pred.edge': 'Margine',
+    'pred.ev': 'Valore atteso ogni 100 puntati',
+    'pred.kelly': 'Puntata ¼ Kelly',
+    'pred.compare': 'Confronto squadre',
+    'pred.row.pos': 'Posizione',
+    'pred.row.rec': 'V-N-P',
+    'pred.row.ppg': 'Punti / partita',
+    'pred.row.gf': 'Gol fatti / partita',
+    'pred.row.ga': 'Gol subiti / partita',
+    'pred.row.venue': 'Casa vs trasferta (G · GF–GS)',
+    'pred.row.att': 'Indice attacco',
+    'pred.row.def': 'Indice difesa (più basso = meglio)',
+    'pred.row.form': 'Forma',
+    'pred.last5': 'Ultime 5 in campionato',
+    'pred.toWin': 'vince',
+    'pred.over25': 'Over 2,5 gol',
+    'pred.under25': 'Under 2,5 gol',
+    'pred.bttsYes': 'Segnano entrambe',
+    'pred.bttsNo': 'Non segnano entrambe',
+    'pred.top': 'Pronostici più netti del turno',
+    'pred.topSub': 'Ordinati per probabilità · tocca per aprire',
+    'pred.method': 'Come funziona il modello',
+    'pred.methodBody': 'Gli indici di attacco e difesa derivano dai gol fatti e subiti a partita in questa stagione, rapportati alla media del campionato, e sono avvicinati alla media finché il campione è piccolo. I gol attesi combinano l\'attacco di casa con la difesa ospite (e viceversa) usando i tassi reali di gol in casa e in trasferta di ogni campionato. Un modello di Poisson con correzione Dixon-Coles per i punteggi bassi dà la probabilità di ogni risultato, che si sommano nei mercati esito, gol e porta inviolata. Le quote del Builder ora usano le stesse probabilità. Non modellati: infortuni, squalifiche, turnover, meteo e motivazioni.',
+    'pred.matches': 'partite',
+    'pred.disclaimer': 'Stime del modello solo per simulazione, non consigli di scommessa.',
+    'pred.none': 'Nessuna partita di campionato in arrivo da pronosticare. Le sfide europee richiedono indici tra campionati e non sono ancora modellate.',
     'live': 'Quote live',
     'hero.title': 'Prova la multipla <em>prima</em> di giocarla.',
     'hero.sub': 'Costruisci, testa e quota scommesse multiple sui cinque grandi campionati europei. Quote live da FanDuel e DraftKings, con probabilità implicita, simulazione di scenari e notizie su infortuni che muovono la linea.',
@@ -3218,6 +3527,62 @@ const I18N = {
     'tagline': 'Terminal de Simulation de Paris',
     'tab.builder': 'Constructeur', 'tab.news': 'Actus',
     'tab.analytics': 'Analyse', 'tab.my': 'Mes Tickets',
+    'tab.predict': 'Pronostics',
+    'pred.title': 'Pronostics. <em>À partir des vrais résultats.</em>',
+    'pred.sub': 'Un modèle de buts construit à partir de tous les résultats 2026-27 des cinq grands championnats. Il estime le résultat, les buts et le score exact de chaque match, et vérifie si la cote de votre bookmaker offre de la value.',
+    'pred.stat.results': 'Résultats analysés',
+    'pred.stat.fixtures': 'Matchs estimés',
+    'pred.stat.leagues': 'Championnats',
+    'pred.stat.thru': 'Données jusqu\'au',
+    'pred.btn': 'Pronostic',
+    'pred.pick': 'Match',
+    'pred.conf': 'Confiance',
+    'pred.conf.low': 'Faible',
+    'pred.conf.med': 'Moyenne',
+    'pred.conf.high': 'Élevée',
+    'pred.xg': 'Buts attendus',
+    'pred.scores': 'Scores les plus probables',
+    'pred.markets': 'Cotes du modèle',
+    'pred.col.market': 'Marché',
+    'pred.col.prob': 'Modèle %',
+    'pred.col.fair': 'Cote juste',
+    'pred.col.app': 'Meilleure app',
+    'pred.add': '+ Ticket',
+    'pred.inslip': '✓ Au ticket',
+    'pred.appNote': 'La cote juste n\'inclut aucune marge. Les cotes de l\'app sont les bookmakers simulés du Builder, qui partent désormais de ce modèle et ajoutent leur marge : elles restent donc en général un peu sous la cote juste.',
+    'pred.value': 'Détecteur de value',
+    'pred.valueSub': 'Choisissez un marché et saisissez la cote de votre bookmaker (américaine comme +150 ou décimale comme 2.50)',
+    'pred.v.enter': 'Saisissez une cote pour vérifier',
+    'pred.v.value': 'Pari value',
+    'pred.v.fair': 'Cote juste',
+    'pred.v.none': 'Pas de value',
+    'pred.implied': 'Probabilité implicite',
+    'pred.edge': 'Avantage',
+    'pred.ev': 'Espérance pour 100 misés',
+    'pred.kelly': 'Mise ¼ Kelly',
+    'pred.compare': 'Comparaison',
+    'pred.row.pos': 'Classement',
+    'pred.row.rec': 'V-N-D',
+    'pred.row.ppg': 'Points / match',
+    'pred.row.gf': 'Buts marqués / match',
+    'pred.row.ga': 'Buts encaissés / match',
+    'pred.row.venue': 'Domicile vs extérieur (J · BP–BC)',
+    'pred.row.att': 'Indice d\'attaque',
+    'pred.row.def': 'Indice défensif (plus bas = mieux)',
+    'pred.row.form': 'Forme',
+    'pred.last5': '5 derniers matchs de championnat',
+    'pred.toWin': 'gagne',
+    'pred.over25': 'Plus de 2,5 buts',
+    'pred.under25': 'Moins de 2,5 buts',
+    'pred.bttsYes': 'Les deux marquent',
+    'pred.bttsNo': 'Pas les deux',
+    'pred.top': 'Pronostics les plus nets de la journée',
+    'pred.topSub': 'Classés par probabilité · touchez pour ouvrir',
+    'pred.method': 'Fonctionnement du modèle',
+    'pred.methodBody': 'Les indices d\'attaque et de défense reposent sur les buts marqués et encaissés par match cette saison, rapportés à la moyenne du championnat, et sont ramenés vers la moyenne tant que l\'échantillon est petit. Les buts attendus combinent l\'attaque à domicile et la défense adverse (et inversement) à partir des taux réels de buts à domicile et à l\'extérieur de chaque championnat. Un modèle de Poisson avec correction Dixon-Coles pour les petits scores donne la probabilité de chaque score, qui s\'additionnent en marchés résultat, buts et clean sheet. Les cotes du Builder utilisent désormais ces probabilités. Non modélisés : blessures, suspensions, rotation, météo et motivation.',
+    'pred.matches': 'matchs',
+    'pred.disclaimer': 'Estimations du modèle pour simulation uniquement, pas des conseils de pari.',
+    'pred.none': 'Aucun match de championnat à venir à pronostiquer. Les rencontres européennes nécessitent des indices inter-championnats et ne sont pas encore modélisées.',
     'live': 'Cotes live',
     'hero.title': 'Teste le combiné <em>avant</em> de le jouer.',
     'hero.sub': 'Construis, évalue et chiffre des paris combinés sur les cinq grands championnats européens. Cotes live FanDuel et DraftKings, probabilité implicite, modélisation de scénarios et fil de blessures qui bouge la ligne.',
@@ -4349,7 +4714,7 @@ const REAL_FIXTURES = [
   { league:'seriea', home:'Lecce',        away:'Juventus',     kickoffUtc:'2026-10-25T17:00:00Z', homeStrength:0.75, awayStrength:1.30 },
   { league:'seriea', home:'Udinese',      away:'AC Milan',     kickoffUtc:'2026-10-25T19:45:00Z', homeStrength:0.90, awayStrength:1.30 },
 
-  // ===== Ligue 1 — Journée 9 (Oct 23-25) =====
+  // ===== Ligue 1 — Journée 8 (Oct 23-25) =====
   { league:'ligue1', home:'Brest',       away:'Nice',          kickoffUtc:'2026-10-23T18:45:00Z', homeStrength:0.95, awayStrength:1.00 },
   { league:'ligue1', home:'Toulouse',    away:'Troyes',        kickoffUtc:'2026-10-24T15:15:00Z', homeStrength:1.00, awayStrength:0.70 },
   { league:'ligue1', home:'Lens',        away:'Paris FC',      kickoffUtc:'2026-10-24T18:45:00Z', homeStrength:1.15, awayStrength:0.85 },
@@ -4403,6 +4768,55 @@ function genMatches() {
 function mulberry32(a) { return () => { let t = (a += 0x6D2B79F5); t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
 function shuffleSeed(arr, rng) { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(rng() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } }
 
+// ============= BET PREDICTOR — real-data goals model =============
+// PRED_DATA is built from every 2026-27 league result through the latest completed
+// round (346 matches). Each league's computed table was checked against the
+// published table (played, points, goal difference) for all 98 clubs.
+const PRED_DATA = {"epl":{"thru":"Matchweek 7","date":"2026-10-19","src":"VAVEL results; cross-checked with NBC Sports table","games":70,"homeGPG":1.614,"awayGPG":1.286,"teams":{"Arsenal":{"P":7,"W":6,"D":0,"L":1,"GF":11,"GA":5,"HP":3,"HGF":7,"HGA":2,"AP":4,"AGF":4,"AGA":3,"last":[["Chelsea","H","2-1","W"],["Sunderland","A","2-0","W"],["Brighton","A","0-3","L"],["Leeds","H","2-1","W"],["Nottingham F.","A","1-0","W"]],"Pts":18,"pos":2},"Coventry City":{"P":7,"W":2,"D":0,"L":5,"GF":6,"GA":14,"HP":3,"HGF":4,"HGA":7,"AP":4,"AGF":2,"AGA":7,"last":[["Manchester City","A","0-1","L"],["Brighton","H","0-5","L"],["Nottingham F.","A","1-0","W"],["Newcastle","H","4-1","W"],["Tottenham","A","1-3","L"]],"Pts":6,"pos":17},"Hull City":{"P":7,"W":2,"D":3,"L":2,"GF":8,"GA":7,"HP":3,"HGF":4,"HGA":2,"AP":4,"AGF":4,"AGA":5,"last":[["Aston Villa","H","0-0","D"],["Chelsea","A","2-2","D"],["Newcastle","A","1-2","L"],["Everton","H","2-2","D"],["Fulham","A","0-1","L"]],"Pts":9,"pos":9},"Manchester Utd":{"P":7,"W":1,"D":4,"L":2,"GF":10,"GA":10,"HP":3,"HGF":6,"HGA":4,"AP":4,"AGF":4,"AGA":6,"last":[["Everton","A","2-2","D"],["Manchester City","H","0-1","L"],["Fulham","A","1-1","D"],["Tottenham","H","1-1","D"],["Leeds","A","1-1","D"]],"Pts":7,"pos":13},"Nottingham F.":{"P":7,"W":1,"D":2,"L":4,"GF":5,"GA":9,"HP":4,"HGF":0,"HGA":3,"AP":3,"AGF":5,"AGA":6,"last":[["Tottenham","H","0-0","D"],["Aston Villa","A","2-1","W"],["Coventry City","H","0-1","L"],["Crystal Palace","A","1-3","L"],["Arsenal","H","0-1","L"]],"Pts":5,"pos":19},"Leeds":{"P":7,"W":2,"D":4,"L":1,"GF":9,"GA":6,"HP":4,"HGF":6,"HGA":3,"AP":3,"AGF":3,"AGA":3,"last":[["Brighton","A","1-1","D"],["Newcastle","H","4-1","W"],["Crystal Palace","H","0-0","D"],["Arsenal","A","1-2","L"],["Manchester Utd","H","1-1","D"]],"Pts":10,"pos":7},"Ipswich":{"P":7,"W":3,"D":0,"L":4,"GF":11,"GA":15,"HP":3,"HGF":4,"HGA":4,"AP":4,"AGF":7,"AGA":11,"last":[["Liverpool","H","0-2","L"],["Crystal Palace","A","3-2","W"],["Everton","A","0-1","L"],["Fulham","H","2-1","W"],["Manchester City","A","2-3","L"]],"Pts":9,"pos":10},"Sunderland":{"P":7,"W":1,"D":1,"L":5,"GF":6,"GA":14,"HP":3,"HGF":1,"HGA":4,"AP":4,"AGF":5,"AGA":10,"last":[["Brentford","A","1-1","D"],["Arsenal","H","0-2","L"],["Manchester City","A","3-5","L"],["Brighton","H","0-2","L"],["Bournemouth","A","0-2","L"]],"Pts":4,"pos":20},"Everton":{"P":7,"W":2,"D":4,"L":1,"GF":8,"GA":7,"HP":4,"HGF":5,"HGA":4,"AP":3,"AGF":3,"AGA":3,"last":[["Manchester Utd","H","2-2","D"],["Tottenham","A","0-0","D"],["Ipswich","H","1-0","W"],["Hull City","A","2-2","D"],["Chelsea","H","0-2","L"]],"Pts":10,"pos":8},"Crystal Palace":{"P":7,"W":2,"D":1,"L":4,"GF":9,"GA":17,"HP":3,"HGF":6,"HGA":8,"AP":4,"AGF":3,"AGA":9,"last":[["Fulham","A","3-2","W"],["Ipswich","H","2-3","L"],["Leeds","A","0-0","D"],["Nottingham F.","H","3-1","W"],["Brighton","A","0-5","L"]],"Pts":7,"pos":14},"Brentford":{"P":7,"W":2,"D":4,"L":1,"GF":13,"GA":8,"HP":4,"HGF":8,"HGA":3,"AP":3,"AGF":5,"AGA":5,"last":[["Sunderland","H","1-1","D"],["Bournemouth","A","2-2","D"],["Chelsea","H","3-0","W"],["Aston Villa","A","2-2","D"],["Liverpool","H","1-2","L"]],"Pts":10,"pos":6},"Tottenham":{"P":7,"W":1,"D":3,"L":3,"GF":6,"GA":10,"HP":4,"HGF":5,"HGA":6,"AP":3,"AGF":1,"AGA":4,"last":[["Nottingham F.","A","0-0","D"],["Everton","H","0-0","D"],["Aston Villa","H","2-3","L"],["Manchester Utd","A","1-1","D"],["Coventry City","H","3-1","W"]],"Pts":6,"pos":16},"Manchester City":{"P":7,"W":7,"D":0,"L":0,"GF":19,"GA":7,"HP":4,"HGF":11,"HGA":6,"AP":3,"AGF":8,"AGA":1,"last":[["Coventry City","H","1-0","W"],["Manchester Utd","A","1-0","W"],["Sunderland","H","5-3","W"],["Liverpool","A","3-0","W"],["Ipswich","H","3-2","W"]],"Pts":21,"pos":1},"Bournemouth":{"P":7,"W":1,"D":3,"L":3,"GF":9,"GA":13,"HP":4,"HGF":5,"HGA":4,"AP":3,"AGF":4,"AGA":9,"last":[["Newcastle","A","2-2","D"],["Brentford","H","2-2","D"],["Liverpool","H","0-1","L"],["Chelsea","A","1-5","L"],["Sunderland","H","2-0","W"]],"Pts":6,"pos":15},"Brighton":{"P":7,"W":5,"D":1,"L":1,"GF":23,"GA":5,"HP":4,"HGF":13,"HGA":1,"AP":3,"AGF":10,"AGA":4,"last":[["Leeds","H","1-1","D"],["Coventry City","A","5-0","W"],["Arsenal","H","3-0","W"],["Sunderland","A","2-0","W"],["Crystal Palace","H","5-0","W"]],"Pts":16,"pos":3},"Aston Villa":{"P":7,"W":2,"D":2,"L":3,"GF":7,"GA":11,"HP":3,"HGF":3,"HGA":5,"AP":4,"AGF":4,"AGA":6,"last":[["Hull City","A","0-0","D"],["Nottingham F.","H","1-2","L"],["Tottenham","A","3-2","W"],["Brentford","H","2-2","D"],["Newcastle","A","1-0","W"]],"Pts":8,"pos":12},"Newcastle":{"P":7,"W":2,"D":2,"L":3,"GF":10,"GA":14,"HP":4,"HGF":6,"HGA":6,"AP":3,"AGF":4,"AGA":8,"last":[["Bournemouth","H","2-2","D"],["Leeds","A","1-4","L"],["Hull City","H","2-1","W"],["Coventry City","A","1-4","L"],["Aston Villa","H","0-1","L"]],"Pts":8,"pos":11},"Liverpool":{"P":7,"W":3,"D":3,"L":1,"GF":9,"GA":8,"HP":3,"HGF":2,"HGA":5,"AP":4,"AGF":7,"AGA":3,"last":[["Ipswich","A","2-0","W"],["Fulham","H","0-0","D"],["Bournemouth","A","1-0","W"],["Manchester City","H","0-3","L"],["Brentford","A","2-1","W"]],"Pts":12,"pos":5},"Fulham":{"P":7,"W":1,"D":2,"L":4,"GF":7,"GA":10,"HP":4,"HGF":6,"HGA":7,"AP":3,"AGF":1,"AGA":3,"last":[["Crystal Palace","H","2-3","L"],["Liverpool","A","0-0","D"],["Manchester Utd","H","1-1","D"],["Ipswich","A","1-2","L"],["Hull City","H","1-0","W"]],"Pts":5,"pos":18},"Chelsea":{"P":7,"W":4,"D":1,"L":2,"GF":17,"GA":13,"HP":3,"HGF":11,"HGA":6,"AP":4,"AGF":6,"AGA":7,"last":[["Arsenal","A","1-2","L"],["Hull City","H","2-2","D"],["Brentford","A","0-3","L"],["Bournemouth","H","5-1","W"],["Everton","A","2-0","W"]],"Pts":13,"pos":4}}},"laliga":{"thru":"Jornada 9","date":"2026-10-21","src":"VAVEL results; cross-checked with LaLiga.com table","games":89,"homeGPG":1.73,"awayGPG":1.348,"teams":{"Sevilla":{"P":9,"W":4,"D":2,"L":3,"GF":14,"GA":16,"HP":4,"HGF":5,"HGA":7,"AP":5,"AGF":9,"AGA":9,"last":[["Valencia","H","1-0","W"],["Deportivo","A","1-0","W"],["Barcelona","H","1-3","L"],["Levante","A","3-3","D"],["Real Madrid","A","1-4","L"]],"Pts":14,"pos":6},"Rayo Vallecano":{"P":8,"W":2,"D":3,"L":3,"GF":12,"GA":17,"HP":3,"HGF":6,"HGA":4,"AP":5,"AGF":6,"AGA":13,"last":[["Racing Santander","H","3-2","W"],["Real Madrid","A","1-4","L"],["Espanyol","H","2-1","W"],["Osasuna","A","1-1","D"],["Getafe","A","1-1","D"]],"Pts":9,"pos":14},"Alaves":{"P":9,"W":3,"D":2,"L":4,"GF":13,"GA":10,"HP":5,"HGF":10,"HGA":5,"AP":4,"AGF":3,"AGA":5,"last":[["Racing Santander","A","1-2","L"],["Valencia","H","0-1","L"],["Athletic Bilbao","A","0-0","D"],["Atletico Madrid","H","1-2","L"],["Celta Vigo","A","1-2","L"]],"Pts":11,"pos":7},"Getafe":{"P":9,"W":2,"D":3,"L":4,"GF":5,"GA":11,"HP":5,"HGF":5,"HGA":3,"AP":4,"AGF":0,"AGA":8,"last":[["Deportivo","H","1-1","D"],["Real Betis","A","0-1","L"],["Malaga","H","1-0","W"],["Barcelona","A","0-3","L"],["Rayo Vallecano","H","1-1","D"]],"Pts":9,"pos":15},"Espanyol":{"P":9,"W":2,"D":2,"L":5,"GF":11,"GA":12,"HP":5,"HGF":6,"HGA":7,"AP":4,"AGF":5,"AGA":5,"last":[["Osasuna","A","2-0","W"],["Rayo Vallecano","A","1-2","L"],["Elche","H","1-3","L"],["Malaga","A","1-1","D"],["Atletico Madrid","H","0-1","L"]],"Pts":8,"pos":16},"Levante":{"P":9,"W":2,"D":4,"L":3,"GF":15,"GA":17,"HP":4,"HGF":13,"HGA":10,"AP":5,"AGF":2,"AGA":7,"last":[["Barcelona","H","2-4","L"],["Athletic Bilbao","H","3-1","W"],["Villarreal","A","1-3","L"],["Sevilla","H","3-3","D"],["Deportivo","A","1-1","D"]],"Pts":10,"pos":11},"Racing Santander":{"P":9,"W":2,"D":2,"L":5,"GF":13,"GA":25,"HP":4,"HGF":9,"HGA":7,"AP":5,"AGF":4,"AGA":18,"last":[["Alaves","H","2-1","W"],["Barcelona","A","2-7","L"],["Celta Vigo","A","0-5","L"],["Valencia","H","2-2","D"],["Osasuna","A","0-2","L"]],"Pts":8,"pos":17},"Villarreal":{"P":9,"W":2,"D":3,"L":4,"GF":13,"GA":13,"HP":4,"HGF":6,"HGA":6,"AP":5,"AGF":7,"AGA":7,"last":[["Real Betis","H","1-2","L"],["Malaga","A","3-1","W"],["Levante","H","3-1","W"],["Real Madrid","A","0-1","L"],["Elche","H","0-0","D"]],"Pts":9,"pos":12},"Deportivo":{"P":9,"W":2,"D":5,"L":2,"GF":13,"GA":12,"HP":5,"HGF":6,"HGA":5,"AP":4,"AGF":7,"AGA":7,"last":[["Getafe","A","1-1","D"],["Sevilla","H","0-1","L"],["Real Betis","H","1-1","D"],["Real Sociedad","A","2-3","L"],["Levante","H","1-1","D"]],"Pts":11,"pos":9},"Elche":{"P":9,"W":1,"D":4,"L":4,"GF":11,"GA":17,"HP":4,"HGF":4,"HGA":11,"AP":5,"AGF":7,"AGA":6,"last":[["Athletic Bilbao","A","1-1","D"],["Real Madrid","H","2-3","L"],["Espanyol","A","3-1","W"],["Celta Vigo","H","0-0","D"],["Villarreal","A","0-0","D"]],"Pts":7,"pos":18},"Atletico Madrid":{"P":9,"W":7,"D":1,"L":1,"GF":19,"GA":8,"HP":4,"HGF":10,"HGA":3,"AP":5,"AGF":9,"AGA":5,"last":[["Real Sociedad","A","3-0","W"],["Osasuna","H","4-0","W"],["Real Madrid","H","2-1","W"],["Alaves","A","2-1","W"],["Espanyol","A","1-0","W"]],"Pts":22,"pos":2},"Malaga":{"P":9,"W":0,"D":4,"L":5,"GF":6,"GA":18,"HP":5,"HGF":5,"HGA":10,"AP":4,"AGF":1,"AGA":8,"last":[["Celta Vigo","A","1-1","D"],["Villarreal","H","1-3","L"],["Getafe","A","0-1","L"],["Espanyol","H","1-1","D"],["Real Sociedad","H","2-5","L"]],"Pts":4,"pos":20},"Valencia":{"P":9,"W":1,"D":3,"L":5,"GF":6,"GA":15,"HP":5,"HGF":2,"HGA":9,"AP":4,"AGF":4,"AGA":6,"last":[["Sevilla","A","0-1","L"],["Alaves","A","1-0","W"],["Real Sociedad","H","2-3","L"],["Racing Santander","A","2-2","D"],["Athletic Bilbao","H","0-0","D"]],"Pts":6,"pos":19},"Real Betis":{"P":9,"W":6,"D":1,"L":2,"GF":16,"GA":14,"HP":5,"HGF":10,"HGA":7,"AP":4,"AGF":6,"AGA":7,"last":[["Villarreal","A","2-1","W"],["Getafe","H","1-0","W"],["Deportivo","A","1-1","D"],["Osasuna","H","5-2","W"],["Barcelona","H","2-5","L"]],"Pts":19,"pos":4},"Real Madrid":{"P":9,"W":7,"D":0,"L":2,"GF":23,"GA":9,"HP":5,"HGF":17,"HGA":3,"AP":4,"AGF":6,"AGA":6,"last":[["Rayo Vallecano","H","4-1","W"],["Elche","A","3-2","W"],["Atletico Madrid","A","1-2","L"],["Villarreal","H","1-0","W"],["Sevilla","H","4-1","W"]],"Pts":21,"pos":3},"Real Sociedad":{"P":9,"W":5,"D":1,"L":3,"GF":17,"GA":17,"HP":4,"HGF":5,"HGA":6,"AP":5,"AGF":12,"AGA":11,"last":[["Atletico Madrid","H","0-3","L"],["Celta Vigo","H","0-0","D"],["Valencia","A","3-2","W"],["Deportivo","H","3-2","W"],["Malaga","A","5-2","W"]],"Pts":16,"pos":5},"Barcelona":{"P":9,"W":9,"D":0,"L":0,"GF":39,"GA":9,"HP":4,"HGF":17,"HGA":4,"AP":5,"AGF":22,"AGA":5,"last":[["Levante","A","4-2","W"],["Racing Santander","H","7-2","W"],["Sevilla","A","3-1","W"],["Getafe","H","3-0","W"],["Real Betis","A","5-2","W"]],"Pts":27,"pos":1},"Athletic Bilbao":{"P":8,"W":2,"D":3,"L":3,"GF":8,"GA":9,"HP":4,"HGF":5,"HGA":4,"AP":4,"AGF":3,"AGA":5,"last":[["Atletico Madrid","H","3-0","W"],["Elche","H","1-1","D"],["Levante","A","1-3","L"],["Alaves","H","0-0","D"],["Valencia","A","0-0","D"]],"Pts":9,"pos":13},"Celta Vigo":{"P":9,"W":2,"D":5,"L":2,"GF":10,"GA":7,"HP":5,"HGF":9,"HGA":6,"AP":4,"AGF":1,"AGA":1,"last":[["Malaga","H","1-1","D"],["Real Sociedad","A","0-0","D"],["Racing Santander","H","5-0","W"],["Elche","A","0-0","D"],["Alaves","H","2-1","W"]],"Pts":11,"pos":8},"Osasuna":{"P":9,"W":3,"D":2,"L":4,"GF":10,"GA":18,"HP":5,"HGF":4,"HGA":3,"AP":4,"AGF":6,"AGA":15,"last":[["Espanyol","H","0-2","L"],["Atletico Madrid","A","0-4","L"],["Rayo Vallecano","H","1-1","D"],["Real Betis","A","2-5","L"],["Racing Santander","H","2-0","W"]],"Pts":11,"pos":10}}},"bundes":{"thru":"Matchday 6","date":"2026-10-18","src":"hessenschau.de results and table","games":54,"homeGPG":2.278,"awayGPG":1.407,"teams":{"Bayern Munich":{"P":6,"W":4,"D":2,"L":0,"GF":22,"GA":5,"HP":3,"HGF":18,"HGA":2,"AP":3,"AGF":4,"AGA":3,"last":[["Schalke 04","A","0-0","D"],["SV Elversberg","A","2-1","W"],["Union Berlin","H","7-0","W"],["Augsburg","A","2-2","D"],["RB Leipzig","H","6-1","W"]],"Pts":14,"pos":1},"Stuttgart":{"P":6,"W":2,"D":0,"L":4,"GF":8,"GA":10,"HP":2,"HGF":4,"HGA":2,"AP":4,"AGF":4,"AGA":8,"last":[["FC Köln","H","4-1","W"],["Hoffenheim","A","1-2","L"],["Borussia Dortmund","H","0-1","L"],["SC Paderborn","A","2-0","W"],["Hamburg","A","0-1","L"]],"Pts":6,"pos":13},"RB Leipzig":{"P":6,"W":3,"D":0,"L":3,"GF":16,"GA":11,"HP":3,"HGF":14,"HGA":0,"AP":3,"AGF":2,"AGA":11,"last":[["Werder Bremen","A","1-3","L"],["Hamburg","H","5-0","W"],["Bayer Leverkusen","A","0-2","L"],["Eintracht Frankfurt","H","6-0","W"],["Bayern Munich","A","1-6","L"]],"Pts":9,"pos":7},"Borussia M.Gladbach":{"P":6,"W":0,"D":0,"L":6,"GF":8,"GA":20,"HP":3,"HGF":7,"HGA":10,"AP":3,"AGF":1,"AGA":10,"last":[["SV Elversberg","H","3-4","L"],["Freiburg","A","0-5","L"],["Mainz","H","3-4","L"],["FC Köln","A","1-2","L"],["Hoffenheim","H","1-2","L"]],"Pts":0,"pos":18},"Union Berlin":{"P":6,"W":1,"D":2,"L":3,"GF":5,"GA":17,"HP":4,"HGF":5,"HGA":6,"AP":2,"AGF":0,"AGA":11,"last":[["Bayer Leverkusen","A","0-4","L"],["Schalke 04","H","1-3","L"],["Bayern Munich","A","0-7","L"],["SV Elversberg","H","1-0","W"],["Borussia Dortmund","H","0-0","D"]],"Pts":5,"pos":17},"Eintracht Frankfurt":{"P":6,"W":2,"D":2,"L":2,"GF":10,"GA":16,"HP":3,"HGF":4,"HGA":6,"AP":3,"AGF":6,"AGA":10,"last":[["Augsburg","H","1-4","L"],["Mainz","A","3-1","W"],["Freiburg","H","2-2","D"],["RB Leipzig","A","0-6","L"],["FC Köln","H","1-0","W"]],"Pts":8,"pos":11},"FC Köln":{"P":6,"W":2,"D":1,"L":3,"GF":8,"GA":11,"HP":3,"HGF":6,"HGA":4,"AP":3,"AGF":2,"AGA":7,"last":[["Stuttgart","A","1-4","L"],["Werder Bremen","H","1-1","D"],["Hamburg","A","1-2","L"],["Borussia M.Gladbach","H","2-1","W"],["Eintracht Frankfurt","A","0-1","L"]],"Pts":7,"pos":12},"Hoffenheim":{"P":6,"W":2,"D":0,"L":4,"GF":11,"GA":14,"HP":3,"HGF":6,"HGA":7,"AP":3,"AGF":5,"AGA":7,"last":[["Borussia Dortmund","H","2-3","L"],["Stuttgart","H","2-1","W"],["SC Paderborn","A","1-3","L"],["Hamburg","H","2-3","L"],["Borussia M.Gladbach","A","2-1","W"]],"Pts":6,"pos":14},"SV Elversberg":{"P":6,"W":3,"D":1,"L":2,"GF":12,"GA":11,"HP":3,"HGF":8,"HGA":7,"AP":3,"AGF":4,"AGA":4,"last":[["Borussia M.Gladbach","A","4-3","W"],["Bayern Munich","H","1-2","L"],["Schalke 04","A","0-0","D"],["Union Berlin","A","0-1","L"],["Augsburg","H","4-3","W"]],"Pts":10,"pos":6},"Bayer Leverkusen":{"P":6,"W":4,"D":1,"L":1,"GF":16,"GA":9,"HP":3,"HGF":8,"HGA":1,"AP":3,"AGF":8,"AGA":8,"last":[["Union Berlin","H","4-0","W"],["Augsburg","A","2-2","D"],["RB Leipzig","H","2-0","W"],["Mainz","A","4-3","W"],["Freiburg","H","2-1","W"]],"Pts":13,"pos":4},"Mainz":{"P":6,"W":3,"D":1,"L":2,"GF":14,"GA":10,"HP":3,"HGF":4,"HGA":7,"AP":3,"AGF":10,"AGA":3,"last":[["Hamburg","A","5-0","W"],["Eintracht Frankfurt","H","1-3","L"],["Borussia M.Gladbach","A","4-3","W"],["Bayer Leverkusen","H","3-4","L"],["Schalke 04","A","1-0","W"]],"Pts":10,"pos":5},"SC Paderborn":{"P":6,"W":1,"D":2,"L":3,"GF":5,"GA":9,"HP":3,"HGF":3,"HGA":4,"AP":3,"AGF":2,"AGA":5,"last":[["Freiburg","H","0-1","L"],["Borussia Dortmund","A","0-3","L"],["Hoffenheim","H","3-1","W"],["Stuttgart","H","0-2","L"],["Werder Bremen","A","2-2","D"]],"Pts":5,"pos":16},"Borussia Dortmund":{"P":6,"W":4,"D":2,"L":0,"GF":11,"GA":4,"HP":3,"HGF":7,"HGA":2,"AP":3,"AGF":4,"AGA":2,"last":[["Hoffenheim","A","3-2","W"],["SC Paderborn","H","3-0","W"],["Stuttgart","A","1-0","W"],["Werder Bremen","H","2-2","D"],["Union Berlin","A","0-0","D"]],"Pts":14,"pos":2},"Hamburg":{"P":6,"W":3,"D":0,"L":3,"GF":6,"GA":15,"HP":3,"HGF":3,"HGA":6,"AP":3,"AGF":3,"AGA":9,"last":[["Mainz","H","0-5","L"],["RB Leipzig","A","0-5","L"],["FC Köln","H","2-1","W"],["Hoffenheim","A","3-2","W"],["Stuttgart","H","1-0","W"]],"Pts":9,"pos":9},"Freiburg":{"P":6,"W":4,"D":1,"L":1,"GF":15,"GA":6,"HP":3,"HGF":11,"HGA":2,"AP":3,"AGF":4,"AGA":4,"last":[["SC Paderborn","A","1-0","W"],["Borussia M.Gladbach","H","5-0","W"],["Eintracht Frankfurt","A","2-2","D"],["Schalke 04","H","2-1","W"],["Bayer Leverkusen","A","1-2","L"]],"Pts":13,"pos":3},"Werder Bremen":{"P":6,"W":2,"D":3,"L":1,"GF":12,"GA":12,"HP":3,"HGF":8,"HGA":5,"AP":3,"AGF":4,"AGA":7,"last":[["RB Leipzig","H","3-1","W"],["FC Köln","A","1-1","D"],["Augsburg","H","3-2","W"],["Borussia Dortmund","A","2-2","D"],["SC Paderborn","H","2-2","D"]],"Pts":9,"pos":8},"Augsburg":{"P":6,"W":2,"D":2,"L":2,"GF":16,"GA":12,"HP":3,"HGF":7,"HGA":4,"AP":3,"AGF":9,"AGA":8,"last":[["Eintracht Frankfurt","A","4-1","W"],["Bayer Leverkusen","H","2-2","D"],["Werder Bremen","A","2-3","L"],["Bayern Munich","H","2-2","D"],["SV Elversberg","A","3-4","L"]],"Pts":8,"pos":10},"Schalke 04":{"P":6,"W":1,"D":2,"L":3,"GF":4,"GA":7,"HP":3,"HGF":0,"HGA":1,"AP":3,"AGF":4,"AGA":6,"last":[["Bayern Munich","H","0-0","D"],["Union Berlin","A","3-1","W"],["SV Elversberg","H","0-0","D"],["Freiburg","A","1-2","L"],["Mainz","H","0-1","L"]],"Pts":5,"pos":15}}},"seriea":{"thru":"Giornata 7","date":"2026-10-19","src":"Sky Italia results and table","games":70,"homeGPG":1.557,"awayGPG":1.4,"teams":{"Inter Milan":{"P":7,"W":6,"D":1,"L":0,"GF":21,"GA":9,"HP":4,"HGF":15,"HGA":6,"AP":3,"AGF":6,"AGA":3,"last":[["Napoli","H","3-2","W"],["Udinese","H","5-3","W"],["Roma","A","2-2","D"],["Parma","H","3-0","W"],["Bologna","A","3-1","W"]],"Pts":19,"pos":1},"Monza":{"P":7,"W":2,"D":1,"L":4,"GF":13,"GA":15,"HP":3,"HGF":8,"HGA":4,"AP":4,"AGF":5,"AGA":11,"last":[["Parma","A","1-1","D"],["Lecce","A","2-3","L"],["Sassuolo","H","2-1","W"],["Lazio","A","1-3","L"],["Cagliari","H","4-0","W"]],"Pts":7,"pos":14},"Udinese":{"P":7,"W":1,"D":1,"L":5,"GF":9,"GA":16,"HP":4,"HGF":2,"HGA":7,"AP":3,"AGF":7,"AGA":9,"last":[["Lazio","H","1-2","L"],["Inter Milan","A","3-5","L"],["Cagliari","H","0-1","L"],["Torino","A","1-2","L"],["Lecce","H","0-3","L"]],"Pts":4,"pos":16},"Como":{"P":7,"W":4,"D":2,"L":1,"GF":12,"GA":7,"HP":2,"HGF":2,"HGA":1,"AP":5,"AGF":10,"AGA":6,"last":[["Genoa","A","4-1","W"],["Parma","H","2-1","W"],["Frosinone","A","0-2","L"],["Roma","H","0-0","D"],["Fiorentina","A","3-1","W"]],"Pts":14,"pos":5},"Genoa":{"P":7,"W":1,"D":1,"L":5,"GF":5,"GA":13,"HP":4,"HGF":4,"HGA":8,"AP":3,"AGF":1,"AGA":5,"last":[["Como","H","1-4","L"],["Frosinone","H","1-1","D"],["Parma","A","1-2","L"],["Fiorentina","H","2-1","W"],["Roma","A","0-2","L"]],"Pts":4,"pos":17},"Napoli":{"P":7,"W":3,"D":1,"L":3,"GF":10,"GA":7,"HP":3,"HGF":5,"HGA":2,"AP":4,"AGF":5,"AGA":5,"last":[["Inter Milan","A","2-3","L"],["Bologna","H","1-0","W"],["Fiorentina","A","1-1","D"],["Frosinone","H","3-0","W"],["Venezia","A","0-1","L"]],"Pts":10,"pos":9},"Parma":{"P":7,"W":1,"D":1,"L":5,"GF":4,"GA":13,"HP":4,"HGF":3,"HGA":6,"AP":3,"AGF":1,"AGA":7,"last":[["Monza","H","1-1","D"],["Como","A","1-2","L"],["Genoa","H","2-1","W"],["Inter Milan","A","0-3","L"],["Torino","H","0-3","L"]],"Pts":4,"pos":19},"Cagliari":{"P":7,"W":4,"D":1,"L":2,"GF":6,"GA":7,"HP":3,"HGF":2,"HGA":2,"AP":4,"AGF":4,"AGA":5,"last":[["Lecce","H","1-0","W"],["Atalanta","A","2-1","W"],["Udinese","A","1-0","W"],["Juventus","H","1-1","D"],["Monza","A","0-4","L"]],"Pts":13,"pos":7},"Frosinone":{"P":7,"W":4,"D":1,"L":2,"GF":13,"GA":9,"HP":4,"HGF":9,"HGA":5,"AP":3,"AGF":4,"AGA":4,"last":[["Venezia","H","3-2","W"],["Genoa","A","1-1","D"],["Como","H","2-0","W"],["Napoli","A","0-3","L"],["Sassuolo","H","4-2","W"]],"Pts":13,"pos":6},"Juventus":{"P":7,"W":3,"D":2,"L":2,"GF":9,"GA":8,"HP":4,"HGF":5,"HGA":4,"AP":3,"AGF":4,"AGA":4,"last":[["AC Milan","H","1-1","D"],["Sassuolo","A","2-3","L"],["Atalanta","H","2-0","W"],["Cagliari","A","1-1","D"],["Lazio","H","0-3","L"]],"Pts":11,"pos":8},"Venezia":{"P":7,"W":1,"D":0,"L":6,"GF":6,"GA":16,"HP":4,"HGF":3,"HGA":8,"AP":3,"AGF":3,"AGA":8,"last":[["Frosinone","A","2-3","L"],["Fiorentina","H","2-4","L"],["Lazio","H","0-2","L"],["Atalanta","A","1-3","L"],["Napoli","H","1-0","W"]],"Pts":3,"pos":20},"Lecce":{"P":7,"W":3,"D":0,"L":4,"GF":9,"GA":12,"HP":3,"HGF":4,"HGA":8,"AP":4,"AGF":5,"AGA":4,"last":[["Cagliari","A","0-1","L"],["Monza","H","3-2","W"],["AC Milan","A","0-3","L"],["Bologna","H","1-2","L"],["Udinese","A","3-0","W"]],"Pts":9,"pos":12},"Atalanta":{"P":7,"W":3,"D":0,"L":4,"GF":10,"GA":11,"HP":4,"HGF":7,"HGA":4,"AP":3,"AGF":3,"AGA":7,"last":[["Roma","A","1-2","L"],["Cagliari","H","1-2","L"],["Juventus","A","0-2","L"],["Venezia","H","3-1","W"],["AC Milan","A","2-3","L"]],"Pts":9,"pos":11},"Sassuolo":{"P":7,"W":2,"D":2,"L":3,"GF":12,"GA":14,"HP":3,"HGF":6,"HGA":4,"AP":4,"AGF":6,"AGA":10,"last":[["Bologna","A","2-2","D"],["Juventus","H","3-2","W"],["Monza","A","1-2","L"],["AC Milan","H","1-1","D"],["Frosinone","A","2-4","L"]],"Pts":8,"pos":13},"Torino":{"P":7,"W":3,"D":1,"L":3,"GF":10,"GA":9,"HP":3,"HGF":3,"HGA":5,"AP":4,"AGF":7,"AGA":4,"last":[["Fiorentina","A","2-1","W"],["Roma","H","0-2","L"],["Bologna","A","1-1","D"],["Udinese","H","2-1","W"],["Parma","A","3-0","W"]],"Pts":10,"pos":10},"AC Milan":{"P":7,"W":4,"D":3,"L":0,"GF":14,"GA":7,"HP":3,"HGF":8,"HGA":2,"AP":4,"AGF":6,"AGA":5,"last":[["Juventus","A","1-1","D"],["Lazio","A","2-2","D"],["Lecce","H","3-0","W"],["Sassuolo","A","1-1","D"],["Atalanta","H","3-2","W"]],"Pts":15,"pos":4},"Bologna":{"P":7,"W":1,"D":2,"L":4,"GF":6,"GA":10,"HP":4,"HGF":4,"HGA":7,"AP":3,"AGF":2,"AGA":3,"last":[["Sassuolo","H","2-2","D"],["Napoli","A","0-1","L"],["Torino","H","1-1","D"],["Lecce","A","2-1","W"],["Inter Milan","H","1-3","L"]],"Pts":5,"pos":15},"Lazio":{"P":7,"W":6,"D":1,"L":0,"GF":14,"GA":4,"HP":3,"HGF":6,"HGA":3,"AP":4,"AGF":8,"AGA":1,"last":[["Udinese","A","2-1","W"],["AC Milan","H","2-2","D"],["Venezia","A","2-0","W"],["Monza","H","3-1","W"],["Juventus","A","3-0","W"]],"Pts":19,"pos":2},"Roma":{"P":7,"W":5,"D":2,"L":0,"GF":16,"GA":3,"HP":4,"HGF":10,"HGA":3,"AP":3,"AGF":6,"AGA":0,"last":[["Atalanta","H","2-1","W"],["Torino","A","2-0","W"],["Inter Milan","H","2-2","D"],["Como","A","0-0","D"],["Genoa","H","2-0","W"]],"Pts":17,"pos":3},"Fiorentina":{"P":7,"W":1,"D":1,"L":5,"GF":8,"GA":17,"HP":4,"HGF":3,"HGA":9,"AP":3,"AGF":5,"AGA":8,"last":[["Torino","H","1-2","L"],["Venezia","A","4-2","W"],["Napoli","H","1-1","D"],["Genoa","A","1-2","L"],["Como","H","1-3","L"]],"Pts":4,"pos":18}}},"ligue1":{"thru":"Journée 7","date":"2026-10-18","src":"VAVEL results; cross-checked with Foot Mercato table","games":63,"homeGPG":1.635,"awayGPG":1.413,"teams":{"Marseille":{"P":7,"W":3,"D":0,"L":4,"GF":14,"GA":10,"HP":3,"HGF":7,"HGA":5,"AP":4,"AGF":7,"AGA":5,"last":[["Paris FC","H","2-3","L"],["Rennes","A","0-1","L"],["Paris SG","H","1-2","L"],["Troyes","A","2-0","W"],["Angers","A","5-2","W"]],"Pts":9,"pos":9},"Strasbourg":{"P":7,"W":2,"D":1,"L":4,"GF":12,"GA":15,"HP":3,"HGF":4,"HGA":5,"AP":4,"AGF":8,"AGA":10,"last":[["Troyes","A","6-2","W"],["Monaco","H","1-1","D"],["Paris FC","A","1-2","L"],["Nice","A","1-2","L"],["Paris SG","H","1-3","L"]],"Pts":7,"pos":14},"Toulouse":{"P":7,"W":2,"D":3,"L":2,"GF":12,"GA":11,"HP":3,"HGF":3,"HGA":5,"AP":4,"AGF":9,"AGA":6,"last":[["Lille","H","0-1","L"],["Lorient","A","2-2","D"],["Le Havre","H","3-2","W"],["Monaco","A","2-2","D"],["Le Mans","A","3-0","W"]],"Pts":9,"pos":11},"Lyon":{"P":7,"W":4,"D":2,"L":1,"GF":13,"GA":5,"HP":4,"HGF":10,"HGA":3,"AP":3,"AGF":3,"AGA":2,"last":[["Auxerre","H","3-1","W"],["Paris FC","A","0-0","D"],["Rennes","H","4-0","W"],["Lens","A","1-2","L"],["Nice","H","2-1","W"]],"Pts":14,"pos":1},"Le Mans":{"P":7,"W":1,"D":3,"L":3,"GF":10,"GA":15,"HP":4,"HGF":6,"HGA":8,"AP":3,"AGF":4,"AGA":7,"last":[["Nice","A","1-1","D"],["Lens","H","2-2","D"],["Lorient","H","2-1","W"],["Paris SG","A","1-3","L"],["Toulouse","H","0-3","L"]],"Pts":6,"pos":16},"Brest":{"P":7,"W":2,"D":3,"L":2,"GF":13,"GA":10,"HP":3,"HGF":7,"HGA":4,"AP":4,"AGF":6,"AGA":6,"last":[["Le Havre","A","2-1","W"],["Paris SG","H","0-1","L"],["Auxerre","A","1-2","L"],["Angers","H","5-1","W"],["Lille","A","1-1","D"]],"Pts":9,"pos":10},"Nice":{"P":7,"W":2,"D":2,"L":3,"GF":6,"GA":9,"HP":4,"HGF":5,"HGA":3,"AP":3,"AGF":1,"AGA":6,"last":[["Le Mans","H","1-1","D"],["Auxerre","A","0-1","L"],["Lille","H","2-1","W"],["Strasbourg","H","2-1","W"],["Lyon","A","1-2","L"]],"Pts":8,"pos":13},"Lorient":{"P":7,"W":3,"D":2,"L":2,"GF":7,"GA":6,"HP":4,"HGF":5,"HGA":4,"AP":3,"AGF":2,"AGA":2,"last":[["Lens","A","1-0","W"],["Toulouse","H","2-2","D"],["Le Mans","A","1-2","L"],["Paris FC","H","1-0","W"],["Monaco","H","1-0","W"]],"Pts":11,"pos":7},"Troyes":{"P":7,"W":1,"D":1,"L":5,"GF":5,"GA":16,"HP":4,"HGF":3,"HGA":11,"AP":3,"AGF":2,"AGA":5,"last":[["Strasbourg","H","2-6","L"],["Lille","A","0-2","L"],["Angers","A","0-2","L"],["Marseille","H","0-2","L"],["Lens","H","1-3","L"]],"Pts":4,"pos":17},"Paris FC":{"P":7,"W":4,"D":2,"L":1,"GF":12,"GA":7,"HP":4,"HGF":9,"HGA":4,"AP":3,"AGF":3,"AGA":3,"last":[["Marseille","A","3-2","W"],["Lyon","H","0-0","D"],["Strasbourg","H","2-1","W"],["Lorient","A","0-1","L"],["Rennes","H","4-3","W"]],"Pts":14,"pos":3},"Lens":{"P":7,"W":3,"D":1,"L":3,"GF":14,"GA":11,"HP":3,"HGF":7,"HGA":4,"AP":4,"AGF":7,"AGA":7,"last":[["Lorient","H","0-1","L"],["Le Mans","A","2-2","D"],["Monaco","A","1-2","L"],["Lyon","H","2-1","W"],["Troyes","A","3-1","W"]],"Pts":10,"pos":8},"Auxerre":{"P":7,"W":3,"D":0,"L":4,"GF":11,"GA":17,"HP":3,"HGF":4,"HGA":4,"AP":4,"AGF":7,"AGA":13,"last":[["Lyon","A","1-3","L"],["Nice","H","1-0","W"],["Brest","H","2-1","W"],["Rennes","A","1-4","L"],["Le Havre","A","3-1","W"]],"Pts":9,"pos":12},"Rennes":{"P":7,"W":4,"D":1,"L":2,"GF":15,"GA":14,"HP":4,"HGF":10,"HGA":5,"AP":3,"AGF":5,"AGA":9,"last":[["Angers","A","2-1","W"],["Marseille","H","1-0","W"],["Lyon","A","0-4","L"],["Auxerre","H","4-1","W"],["Paris FC","A","3-4","L"]],"Pts":13,"pos":6},"Paris SG":{"P":7,"W":4,"D":2,"L":1,"GF":14,"GA":9,"HP":2,"HGF":4,"HGA":3,"AP":5,"AGF":10,"AGA":6,"last":[["Monaco","H","1-2","L"],["Brest","A","1-0","W"],["Marseille","A","2-1","W"],["Le Mans","H","3-1","W"],["Strasbourg","A","3-1","W"]],"Pts":14,"pos":2},"Le Havre":{"P":7,"W":0,"D":2,"L":5,"GF":5,"GA":11,"HP":4,"HGF":2,"HGA":6,"AP":3,"AGF":3,"AGA":5,"last":[["Brest","H","1-2","L"],["Angers","H","0-0","D"],["Toulouse","A","2-3","L"],["Lille","A","0-1","L"],["Auxerre","H","1-3","L"]],"Pts":2,"pos":18},"Monaco":{"P":7,"W":4,"D":2,"L":1,"GF":10,"GA":6,"HP":3,"HGF":6,"HGA":3,"AP":4,"AGF":4,"AGA":3,"last":[["Paris SG","A","2-1","W"],["Strasbourg","A","1-1","D"],["Lens","H","2-1","W"],["Toulouse","H","2-2","D"],["Lorient","A","0-1","L"]],"Pts":14,"pos":5},"Angers":{"P":7,"W":2,"D":1,"L":4,"GF":9,"GA":15,"HP":4,"HGF":5,"HGA":9,"AP":3,"AGF":4,"AGA":6,"last":[["Rennes","H","1-2","L"],["Le Havre","A","0-0","D"],["Troyes","H","2-0","W"],["Brest","A","1-5","L"],["Marseille","H","2-5","L"]],"Pts":7,"pos":15},"Lille":{"P":7,"W":4,"D":2,"L":1,"GF":10,"GA":5,"HP":4,"HGF":6,"HGA":3,"AP":3,"AGF":4,"AGA":2,"last":[["Toulouse","A","1-0","W"],["Troyes","H","2-0","W"],["Nice","A","1-2","L"],["Le Havre","H","1-0","W"],["Brest","H","1-1","D"]],"Pts":14,"pos":4}}}};
+const PRED_RHO = -0.08;    // Dixon-Coles low-score correlation
+const PRED_SHRINK = 8;     // games of "average" prior blended into each rating (early-season caution)
+const PRED_MAXG = 10;
+const _predCache = {};
+function poissonPmf(k, l) { let p = Math.exp(-l); for (let i = 1; i <= k; i++) p *= l / i; return p; }
+function predRatings(team, L) {
+  const avg = (L.homeGPG + L.awayGPG) / 2;
+  const shrink = (goals) => (team.P * ((goals / team.P) / avg) + PRED_SHRINK) / (team.P + PRED_SHRINK);
+  return { att: shrink(team.GF), def: shrink(team.GA) };
+}
+function predictMatch(m) {
+  if (!m) return null;
+  const key = m.league + '|' + m.home + '|' + m.away;
+  if (key in _predCache) return _predCache[key];
+  const L = PRED_DATA[m.league];
+  const H = L && L.teams[m.home], A = L && L.teams[m.away];
+  if (!H || !A) return (_predCache[key] = null);
+  const rh = predRatings(H, L), ra = predRatings(A, L);
+  const clamp = x => Math.min(4.5, Math.max(0.15, x));
+  const lh = clamp(L.homeGPG * rh.att * ra.def);
+  const la = clamp(L.awayGPG * ra.att * rh.def);
+  const grid = []; let total = 0;
+  for (let i = 0; i <= PRED_MAXG; i++) for (let j = 0; j <= PRED_MAXG; j++) {
+    let q = poissonPmf(i, lh) * poissonPmf(j, la);
+    if (i === 0 && j === 0) q *= 1 - lh * la * PRED_RHO;
+    else if (i === 0 && j === 1) q *= 1 + lh * PRED_RHO;
+    else if (i === 1 && j === 0) q *= 1 + la * PRED_RHO;
+    else if (i === 1 && j === 1) q *= 1 - PRED_RHO;
+    total += q; grid.push([i, j, q]);
+  }
+  const r = { pH:0, pD:0, pA:0, btts:0, o15:0, o25:0, o35:0, csH:0, csA:0 };
+  grid.forEach(g => {
+    g[2] /= total; const [i, j, q] = g;
+    if (i > j) r.pH += q; else if (i === j) r.pD += q; else r.pA += q;
+    if (i > 0 && j > 0) r.btts += q;
+    const n = i + j; if (n > 1) r.o15 += q; if (n > 2) r.o25 += q; if (n > 3) r.o35 += q;
+    if (j === 0) r.csH += q; if (i === 0) r.csA += q;
+  });
+  grid.sort((a, b) => b[2] - a[2]);
+  const top = Math.max(r.pH, r.pD, r.pA);
+  const conf = Math.min(H.P, A.P) < 5 ? 'low' : top >= 0.6 ? 'high' : top >= 0.45 ? 'med' : 'low';
+  return (_predCache[key] = Object.assign(r, { lh, la, scores: grid.slice(0, 6), H, A, rh, ra, L, conf }));
+}
+
 // ============= MARKETS / ODDS =============
 // Six representative sportsbooks. Each has a typical hold rate (book margin)
 // and a "spread" — how much its line tends to differ from the consensus.
@@ -4440,6 +4854,9 @@ function genOdds(match, seed) {
   const pD = 0.18 + closeness * 0.14;
   const remaining = 1 - pD;
   const probs = { H: pHraw * remaining, D: pD, A: pAraw * remaining };
+  // Real-data model overrides the hand-set strengths whenever both clubs are covered.
+  const pm = predictMatch(match);
+  if (pm) { probs.H = pm.pH; probs.D = pm.pD; probs.A = pm.pA; }
 
   function withMargin(p, holdPct) {
     // book hold: shrink probability by holdPct then convert to decimal odds
@@ -4465,19 +4882,19 @@ function genOdds(match, seed) {
     { key: 'A', tpl: { kind:'team', team: match.away }, odds: bookSplit(probs.A) },
   ];
   // Both Teams to Score
-  const pBTTS_yes = 0.52 + (rng() - 0.5) * 0.18;
+  const pBTTS_yes = pm ? (rng(), pm.btts) : 0.52 + (rng() - 0.5) * 0.18;
   o.btts = [
     { key: 'Y', tpl: { kind:'i18n', i18n: 'opt.yes' }, odds: bookSplit(pBTTS_yes) },
     { key: 'N', tpl: { kind:'i18n', i18n: 'opt.no' },  odds: bookSplit(1 - pBTTS_yes) },
   ];
   // Total Goals (Over/Under 2.5)
-  const pOver25 = 0.50 + (rng() - 0.5) * 0.22;
+  const pOver25 = pm ? (rng(), pm.o25) : 0.50 + (rng() - 0.5) * 0.22;
   o.totals = [
     { key: 'O25', tpl: { kind:'overunder', side:'over',  value:'2.5' }, odds: bookSplit(pOver25) },
     { key: 'U25', tpl: { kind:'overunder', side:'under', value:'2.5' }, odds: bookSplit(1 - pOver25) },
   ];
   // Total Goals 3.5
-  const pOver35 = 0.32 + (rng() - 0.5) * 0.16;
+  const pOver35 = pm ? (rng(), pm.o35) : 0.32 + (rng() - 0.5) * 0.16;
   o.totals35 = [
     { key: 'O35', tpl: { kind:'overunder', side:'over',  value:'3.5' }, odds: bookSplit(pOver35) },
     { key: 'U35', tpl: { kind:'overunder', side:'under', value:'3.5' }, odds: bookSplit(1 - pOver35) },
@@ -4524,8 +4941,8 @@ function genOdds(match, seed) {
     { key: 'DNBA', tpl: { kind:'team', team: match.away }, odds: bookSplit(pAwayDNB * 0.97) },
   ];
   // Clean Sheet
-  const pHCS = 0.34 + (rng() - 0.5) * 0.16;
-  const pACS = 0.28 + (rng() - 0.5) * 0.14;
+  const pHCS = pm ? (rng(), pm.csH) : 0.34 + (rng() - 0.5) * 0.16;
+  const pACS = pm ? (rng(), pm.csA) : 0.28 + (rng() - 0.5) * 0.14;
   o.cs = [
     { key: 'HCSY', tpl: { kind:'teamCleanSheet', team: match.home }, odds: bookSplit(pHCS) },
     { key: 'ACSY', tpl: { kind:'teamCleanSheet', team: match.away }, odds: bookSplit(pACS) },
@@ -5322,7 +5739,7 @@ function renderMatches() {
     div.innerHTML = `
       <div class="match-head">
         <span style="display:inline-flex; align-items:center; gap:7px;"><span class="flag" style="width:18px; height:13px;">${lg.flag}</span> ${lg.name}</span>
-        <span class="ko">${m.ko}</span>
+        <span style="display:inline-flex; align-items:center; gap:8px;">${predictMatch(m) ? `<button class="pred-chip" onclick="openPredictor('${m.id}')">${t('pred.btn')}</button>` : ''}<span class="ko">${m.ko}</span></span>
       </div>
       <div class="match-teams">
         <div class="team home">
@@ -6223,54 +6640,59 @@ function computeRecord() {
 const NEWS_SEED = [
   { league:'laliga', tag:'form', team:'Barcelona',
     title:'Perfect Barcelona host Real Madrid in Sunday\'s Clásico',
-    body:'Hansi Flick\'s side are nine from nine in LaLiga (27 points) after winning 5-2 at Betis on October 17, and then lost 4-2 at PSG in the Champions League on Tuesday. The first Clásico of the season kicks off at Spotify Camp Nou on Sunday October 25 at 21:00 CET, with both clubs coming off midweek Champions League dates.',
-    impact:'up', moveText:'Barcelona to win LaLiga firmed on table lead',
-    minutesAgo: 40 },
-  { league:'ucl', tag:'tactics', team:'Arsenal',
-    title:'Arsenal travel to Bayern in Wednesday\'s Champions League headliner',
-    body:'Arsenal head to Munich on Matchday 3 after a 3-0 home win over Lille. Bayern were held 3-3 away at Viking last week, so the Allianz Arena meeting is an early test of both sides\' league-phase position. Kickoff is 21:00 CET.',
-    impact:'neutral', moveText:'Bayern v Arsenal BTTS priced short after Bayern\'s 3-3 at Viking',
-    minutesAgo: 95 },
+    body:'Hansi Flick\'s side are nine from nine in LaLiga (27 points, 39 goals scored) after winning 5-2 at Betis, though they lost 4-2 at PSG in the Champions League on Tuesday. Real Madrid are third on 21. The first Clásico of the season kicks off at Spotify Camp Nou on Sunday at 21:00 CET.',
+    impact:'up', moveText:'Model: Barcelona 64% to win at home',
+    minutesAgo: 60 },
+  { league:'ucl', tag:'form', team:'Arsenal',
+    title:'Arsenal hold Bayern 2-2 in Munich',
+    body:'Arsenal drew 2-2 at the Allianz Arena on Champions League Matchday 3, after beating Lille 3-0 last time out. Mikel Arteta\'s side are second in the Premier League on 18 points, three behind unbeaten Manchester City, and host Everton on Saturday.',
+    impact:'neutral', moveText:'Arsenal v Everton: home win favored',
+    minutesAgo: 2350 },
   { league:'ucl', tag:'form', team:'Paris SG',
     title:'Holders PSG beat Barcelona 4-2 after hitting four at the Etihad',
     body:'The two-time defending champions beat Manchester City 4-2 in Manchester on Matchday 2, then beat Barcelona 4-2 at the Parc des Princes on Tuesday. City bounced back with a 5-1 win over AEK Athens and Liverpool edged Villarreal 4-3. PSG return to Ligue 1 on Sunday with a home match against Lyon.',
     impact:'up', moveText:'PSG to win Champions League remain favorites',
     minutesAgo: 180 },
   { league:'ucl', tag:'form', team:'Aston Villa',
-    title:'Aston Villa face Viking after 6-0 rout of Fenerbahçe',
-    body:'Villa posted the biggest win of Matchday 2, beating Fenerbahçe 6-0. They host Norway\'s Viking on Wednesday, then welcome Manchester City to Villa Park in Saturday\'s early Premier League kickoff.',
-    impact:'up', moveText:'Aston Villa -1.5 handicap vs Viking shortened',
-    minutesAgo: 260 },
+    title:'Villa beat Viking 3-1 before Manchester City visit',
+    body:'Aston Villa followed their 6-0 win over Fenerbahçe with a 3-1 home win over Viking. League leaders Manchester City visit Villa Park in Saturday\'s early kickoff; Villa are 12th on 8 points.',
+    impact:'neutral', moveText:'Model: Man City 53% to win at Villa Park',
+    minutesAgo: 2380 },
   { league:'ucl', tag:'form', team:'Real Madrid',
-    title:'Real Madrid edge Roma 4-3, now host Leipzig before the Clásico',
-    body:'José Mourinho\'s side won a seven-goal thriller in Rome on Matchday 2. They host RB Leipzig at the Bernabéu on Wednesday, four days before visiting Barcelona. Kylian Mbappé has 9 league goals, second in the Pichichi race behind Raphinha (12).',
-    impact:'neutral', moveText:'Real Madrid v Leipzig over 2.5 firmed',
-    minutesAgo: 330 },
+    title:'Real Madrid beat Leipzig 4-1 before the Clásico',
+    body:'José Mourinho\'s side won 4-1 against RB Leipzig at the Bernabéu on Wednesday. Madrid are third in LaLiga, six points behind Barcelona, ahead of Sunday\'s trip to Spotify Camp Nou. Kylian Mbappé has 9 league goals, second to Raphinha (12).',
+    impact:'up', moveText:'Real Madrid +0.5 handicap at Barcelona priced short',
+    minutesAgo: 2300 },
   { league:'ucl', tag:'form', team:'Inter Milan',
-    title:'Inter look to recover from 4-3 home loss to Club Brugge',
-    body:'Inter were beaten 4-3 at San Siro by Club Brugge on Matchday 2. They host Shakhtar Donetsk on Wednesday, then Fiorentina in Sunday\'s Serie A lunchtime kickoff.',
-    impact:'down', moveText:'Inter to win league phase drifted after Brugge loss',
-    minutesAgo: 410 },
-  { league:'ucl', tag:'tactics', team:'Manchester Utd',
-    title:'Manchester United visit Como after defeat in Madrid',
-    body:'United lost 2-0 at Atlético Madrid on Matchday 2 and travel to Como for an 18:45 CET kickoff on Wednesday. Bournemouth visit Old Trafford on Sunday.',
-    impact:'down', moveText:'Como v Manchester Utd draw shortened',
-    minutesAgo: 470 },
-  { league:'uel', tag:'form', team:'AC Milan',
-    title:'Milan bring 4-0 Salzburg win to Bournemouth',
-    body:'Milan won 4-0 in Salzburg on Europa League Matchday 2 and visit Bournemouth on Thursday night. Bournemouth beat Sturm Graz 3-0 in their last European outing.',
-    impact:'up', moveText:'AC Milan draw no bet at Bournemouth shortened',
-    minutesAgo: 540 },
+    title:'Inter edge Shakhtar 1-0 and top Serie A on goal difference',
+    body:'Inter bounced back from the 4-3 home defeat to Club Brugge with a 1-0 win over Shakhtar Donetsk. Cristian Chivu\'s side lead Serie A on goal difference from Lazio (both 19 points) and host Fiorentina, 18th, on Sunday lunchtime.',
+    impact:'up', moveText:'Inter -1 handicap vs Fiorentina shortened',
+    minutesAgo: 2320 },
+  { league:'ucl', tag:'form', team:'Manchester Utd',
+    title:'Como beat Manchester United 4-1',
+    body:'Cesc Fàbregas\'s Como beat Manchester United 4-1 on Champions League Matchday 3, after United lost 2-0 at Atlético Madrid on Matchday 2. Michael Carrick\'s side are 13th in the Premier League and host Bournemouth on Sunday.',
+    impact:'down', moveText:'Manchester Utd to win vs Bournemouth eased',
+    minutesAgo: 2290 },
+  { league:'uel', tag:'form', team:'Bournemouth',
+    title:'Bournemouth beat Milan 3-0',
+    body:'Justin Kluivert and Marcus Tavernier scored penalties and Amine Adli added a free-kick as Bournemouth beat Rúben Amorim\'s Milan 3-0 on Europa League Matchday 3. Bournemouth visit Manchester United on Sunday; Milan go to Udinese.',
+    impact:'up', moveText:'Bournemouth double chance at Old Trafford shortened',
+    minutesAgo: 900 },
   { league:'uel', tag:'form', team:'Sunderland',
-    title:'Sunderland head to Poznań after win in Portugal',
-    body:'Sunderland won 2-1 at Torreense on Matchday 2 and face Lech Poznań on Thursday. Lech lost 4-0 at home to Leverkusen last time out.',
-    impact:'up', moveText:'Sunderland to win at Lech Poznań eased',
-    minutesAgo: 610 },
+    title:'Sunderland draw 1-1 at Lech Poznań',
+    body:'Timur Tutierov scored for Sunderland in a 1-1 draw in Poznań. Sunderland are bottom of the Premier League on 4 points and host Leeds on Sunday.',
+    impact:'neutral', moveText:'Sunderland v Leeds draw priced short',
+    minutesAgo: 960 },
   { league:'uel', tag:'form', team:'Crystal Palace',
-    title:'Crystal Palace visit Beşiktaş after defeat in Lyon',
-    body:'Palace lost 3-2 at Lyon on Matchday 2 and travel to Istanbul to face Beşiktaş, who won 3-2 at Hoffenheim. Palace host Newcastle in the Premier League on Sunday.',
-    impact:'neutral', moveText:'Beşiktaş v Crystal Palace BTTS priced short',
-    minutesAgo: 700 },
+    title:'Crystal Palace draw 2-2 in Istanbul',
+    body:'Yeremy Pino and Jean-Philippe Mateta scored as Crystal Palace drew 2-2 at Beşiktaş, with Wilfred Ndidi and Junior Olaitan replying. Palace host Newcastle on Sunday.',
+    impact:'neutral', moveText:'Palace v Newcastle BTTS priced short',
+    minutesAgo: 930 },
+  { league:'uel', tag:'form', team:'Real Sociedad',
+    title:'Real Sociedad hit six in Norway; Benfica win 4-1 in Cyprus',
+    body:'Sergio Gómez and Luka Sučić scored twice each as Real Sociedad won 6-0 at Lillestrøm on Europa League Matchday 3. Benfica won 4-1 at Omonia, Union SG beat Hapoel Beer-Sheva 4-0, and Juventus drew 2-2 with Rennes.',
+    impact:'up', moveText:'Real Sociedad v Levante: home win favored',
+    minutesAgo: 880 },
   { league:'epl', tag:'tactics', team:'Chelsea',
     title:'London derby headlines Saturday: Chelsea v Tottenham',
     body:'Matchweek 8 features Aston Villa v Manchester City in the early kickoff, Arsenal v Everton at 3pm and Chelsea v Tottenham at Stamford Bridge in the evening slot. Liverpool host Brighton on Sunday.',
@@ -6287,28 +6709,28 @@ const NEWS_SEED = [
     impact:'neutral', moveText:'Bayern -1 handicap at Freiburg priced near even',
     minutesAgo: 1010 },
   { league:'ligue1', tag:'tactics', team:'Paris SG',
-    title:'PSG close journée 9 against Lyon',
-    body:'PSG host Lyon on Sunday night at the Parc des Princes, three days after Lyon play Hoffenheim in the Europa League. Monaco v Lille and Marseille v Le Havre are also on Sunday.',
-    impact:'up', moveText:'PSG -1 handicap vs Lyon shortened',
-    minutesAgo: 1120 },
+    title:'Leaders Lyon visit PSG after defeat at Hoffenheim',
+    body:'Lyon top Ligue 1 on goal difference, level on 14 points with PSG, Paris FC, Lille and Monaco, but lost 3-0 at Hoffenheim in the Europa League on Thursday. They visit the Parc des Princes on Sunday night.',
+    impact:'neutral', moveText:'Model: over 2.5 goals 54% in PSG v Lyon',
+    minutesAgo: 820 },
 ];
 
 // Each mover carries a 12-point price history (one reading every 30 minutes for the
 // last 6 hours) so we can render a sparkline showing the line's trajectory.
 // The history ends with the current price (last entry == `to`).
 const MOVERS_SEED = [
-  { match:'Barcelona v Real Madrid',  market:'Barcelona to win',          from:2.20, to:2.05, dir:'up',
-    history:[2.20,2.19,2.17,2.15,2.14,2.12,2.10,2.09,2.08,2.07,2.06,2.05] },
-  { match:'Bayern Munich v Arsenal',  market:'Both teams to score',       from:1.62, to:1.50, dir:'up',
-    history:[1.62,1.61,1.60,1.58,1.57,1.56,1.55,1.54,1.53,1.52,1.51,1.50] },
-  { match:'Aston Villa v Man City',   market:'Aston Villa to win',        from:3.60, to:3.25, dir:'up',
-    history:[3.60,3.58,3.55,3.50,3.46,3.42,3.38,3.35,3.32,3.30,3.27,3.25] },
-  { match:'Como v Manchester Utd',    market:'Manchester Utd to win',     from:2.40, to:2.65, dir:'down',
-    history:[2.40,2.42,2.44,2.46,2.49,2.52,2.55,2.58,2.60,2.62,2.64,2.65] },
-  { match:'Napoli v Roma',            market:'Under 2.5 goals',           from:1.85, to:1.72, dir:'up',
-    history:[1.85,1.84,1.83,1.81,1.80,1.79,1.77,1.76,1.75,1.74,1.73,1.72] },
-  { match:'Bournemouth v AC Milan',   market:'AC Milan to win',           from:2.30, to:2.15, dir:'up',
-    history:[2.30,2.29,2.28,2.26,2.25,2.23,2.21,2.20,2.19,2.17,2.16,2.15] },
+  { match:'Barcelona v Real Madrid',  market:'Barcelona to win',      from:1.62, to:1.49, dir:'up',
+    history:[1.62,1.61,1.60,1.58,1.57,1.55,1.54,1.53,1.52,1.51,1.50,1.49] },
+  { match:'Aston Villa v Man City',   market:'Manchester City to win', from:1.95, to:1.80, dir:'up',
+    history:[1.95,1.94,1.92,1.91,1.89,1.88,1.86,1.85,1.83,1.82,1.81,1.80] },
+  { match:'Napoli v Roma',            market:'Roma to win',            from:2.10, to:2.03, dir:'up',
+    history:[2.10,2.10,2.09,2.08,2.08,2.07,2.06,2.05,2.05,2.04,2.04,2.03] },
+  { match:'Freiburg v Bayern Munich', market:'Both teams to score',    from:1.42, to:1.36, dir:'up',
+    history:[1.42,1.42,1.41,1.40,1.40,1.39,1.39,1.38,1.38,1.37,1.37,1.36] },
+  { match:'Chelsea v Tottenham',      market:'Chelsea to win',         from:1.70, to:1.65, dir:'up',
+    history:[1.70,1.70,1.69,1.69,1.68,1.68,1.67,1.67,1.66,1.66,1.65,1.65] },
+  { match:'Paris SG v Lyon',          market:'Over 2.5 goals',         from:1.70, to:1.76, dir:'down',
+    history:[1.70,1.70,1.71,1.71,1.72,1.72,1.73,1.74,1.74,1.75,1.75,1.76] },
 ];
 // Left empty until verified team news is published for this round — better an
 // honest empty state than invented absences.
@@ -6492,7 +6914,7 @@ const NEWS_ROTATION = [
   { league:'epl', tag:'transfer', team:'Aston Villa',
     title:'Villa rebuilt the attack after selling Watkins to Al Hilal',
     body:'Aston Villa sold Ollie Watkins to Saudi club Al Hilal at the end of August for a reported £50m, and Morgan Rogers left for Chelsea. Nicolas Jackson, signed from Chelsea, has 3 Champions League goals, with Tammy Abraham and Ross Barkley also on the scoresheet. Unai Emery remains in charge and John McGinn is captain.',
-    impact:'neutral', moveText:'Nicolas Jackson anytime vs Viking priced short' },
+    impact:'neutral', moveText:'Nicolas Jackson anytime vs Man City priced long' },
   { league:'epl', tag:'tactics', team:'Manchester City',
     title:'Maresca\'s City top the table in the post-Guardiola era',
     body:'Enzo Maresca succeeded Pep Guardiola, who stepped down in the summer after a decade in charge. City led the Premier League with 21 points from 7 games as of October 18, with Erling Haaland on 8 league goals and Rayan Cherki on 4.',
@@ -6531,11 +6953,11 @@ const NEWS_ROTATION = [
     impact:'neutral', moveText:'Clásico draw priced around 3.20' },
   { league:'ucl', tag:'form', team:'Stuttgart',
     title:'Four players share the Champions League scoring lead',
-    body:'Per UEFA on October 20, Stuttgart\'s Ermedin Demirović, Dortmund\'s Serhou Guirassy, Manchester City\'s Erling Haaland and Club Brugge\'s Nicolò Tresoldi each have 4 Champions League goals. Brugge host Lens on Wednesday.',
-    impact:'neutral', moveText:'Tresoldi anytime vs Lens priced short' },
+    body:'Per UEFA on October 20, Stuttgart\'s Ermedin Demirović, Dortmund\'s Serhou Guirassy, Manchester City\'s Erling Haaland and Club Brugge\'s Nicolò Tresoldi each have 4 Champions League goals. Brugge then beat Lens 3-0 on Wednesday.',
+    impact:'neutral', moveText:'Tresoldi scored-in-next-UCL-game market open' },
   { league:'uel', tag:'form', team:'Benfica',
     title:'Jhon Durán on target for Benfica in Europa League rout of Celtic',
-    body:'Former Aston Villa striker Jhon Durán scored twice, including a Panenka penalty, as Benfica beat Celtic 4-1 on Matchday 2. Benfica visit Omonia on Thursday.',
+    body:'Former Aston Villa striker Jhon Durán scored twice, including a Panenka penalty, as Benfica beat Celtic 4-1 on Matchday 2. Benfica then won 4-1 at Omonia on Matchday 3.',
     impact:'up', moveText:'Benfica -1 handicap at Omonia shortened' },
 ];
 
@@ -7090,6 +7512,193 @@ function wcValuePicks() {
   return picks.sort((a, b) => b.delta - a.delta).slice(0, 8);
 }
 
+
+// ============= PREDICTOR UI =============
+function predPct(p) { return (p * 100).toFixed(p >= 0.995 || p < 0.1 ? 1 : 0) + '%'; }
+function predFair(p) { const d = 1 / Math.max(p, 0.001); return { dec: d.toFixed(2), am: americanFromDecimal(d) }; }
+function predParseOdds(s) {
+  s = String(s || '').trim().replace(/\s/g, '');
+  if (!s) return null;
+  const n = parseFloat(s);
+  if (!isFinite(n)) return null;
+  if (/^[+-]/.test(s) || Math.abs(n) >= 100) {
+    if (n >= 100) return 1 + n / 100;
+    if (n <= -100) return 1 + 100 / Math.abs(n);
+    return null;
+  }
+  return n > 1 ? n : null;
+}
+function predMarkets(m, pm) {
+  const o = state.oddsByMatch[m.id] || {};
+  const rows = [
+    ['result','H',pm.pH], ['result','D',pm.pD], ['result','A',pm.pA],
+    ['dc','1X',pm.pH + pm.pD], ['dc','X2',pm.pD + pm.pA], ['dc','12',pm.pH + pm.pA],
+    ['btts','Y',pm.btts], ['btts','N',1 - pm.btts],
+    ['totals','O25',pm.o25], ['totals','U25',1 - pm.o25],
+    ['totals35','O35',pm.o35], ['totals35','U35',1 - pm.o35],
+  ];
+  return rows.map(([mk, key, p]) => {
+    const opt = (o[mk] || []).find(x => x.key === key);
+    const def = MARKETS_DEF.find(d => d.key === mk);
+    const best = opt ? Math.max(...Object.values(opt.odds)) : null;
+    const pick = opt ? optName(opt.tpl) : key, mkt = def ? t(def.labelKey) : '';
+    return { mk, key, p, opt, def, best, pick, mkt, label: (mkt ? mkt + ' · ' : '') + pick };
+  });
+}
+function predUpcoming() { return state.matches.filter(m => predictMatch(m)); }
+
+window.openPredictor = function (matchId) { state.predMatchId = matchId; setTab('predict'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+window.predSelect = function (id) { state.predMatchId = id; state.predValueKey = null; renderPredictor(); };
+window.predAdd = function (mk, key) {
+  const m = state.matches.find(x => x.id === state.predMatchId); if (!m) return;
+  const opt = (state.oddsByMatch[m.id][mk] || []).find(x => x.key === key);
+  const def = MARKETS_DEF.find(d => d.key === mk);
+  if (opt && def) toggleSlipLeg(m, def, opt);
+  renderPredictor();
+};
+window.predValue = function () {
+  const sel = document.getElementById('pred-v-mkt'), inp = document.getElementById('pred-v-odds'), out = document.getElementById('pred-v-out');
+  if (!sel || !inp || !out) return;
+  state.predValueKey = sel.value; state.predValueOdds = inp.value;
+  const m = state.matches.find(x => x.id === state.predMatchId); const pm = predictMatch(m);
+  const row = predMarkets(m, pm).find(r => r.mk + ':' + r.key === sel.value);
+  const dec = predParseOdds(inp.value);
+  if (!row || !dec) { out.innerHTML = `<div class="pred-verdict none">${t('pred.v.enter')}</div>`; return; }
+  const implied = 1 / dec, ev = row.p * dec - 1, edge = row.p - implied;
+  const b = dec - 1, kelly = Math.max(0, (b * row.p - (1 - row.p)) / b) / 4;
+  const v = ev > 0.02 ? 'value' : ev > -0.02 ? 'fair' : 'none';
+  out.innerHTML = `
+    <div class="pred-verdict ${v}">${t('pred.v.' + v)}</div>
+    <div class="pred-kv"><span>${t('pred.col.prob')}</span><b>${predPct(row.p)}</b></div>
+    <div class="pred-kv"><span>${t('pred.implied')}</span><b>${predPct(implied)}</b></div>
+    <div class="pred-kv"><span>${t('pred.edge')}</span><b class="${edge >= 0 ? 'pos' : 'neg'}">${edge >= 0 ? '+' : ''}${(edge * 100).toFixed(1)} pts</b></div>
+    <div class="pred-kv"><span>${t('pred.ev')}</span><b class="${ev >= 0 ? 'pos' : 'neg'}">${ev >= 0 ? '+' : '−'}${fmtMoney(Math.abs(ev) * 100 / fx().rate)}</b></div>
+    <div class="pred-kv"><span>${t('pred.kelly')}</span><b>${kelly > 0 ? fmtMoney(state.bankrollUsd * kelly) : '—'}</b></div>`;
+};
+
+function renderPredictor() {
+  const el = document.getElementById('pred-body'); if (!el) return;
+  const games = Object.values(PRED_DATA).reduce((s, L) => s + L.games, 0);
+  const latest = Object.values(PRED_DATA).map(L => L.date).sort().pop();
+  const up = predUpcoming();
+  const setTxt = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
+  setTxt('pred-stat-results', games); setTxt('pred-stat-fixtures', up.length);
+  setTxt('pred-stat-thru', new Date(latest + 'T12:00:00Z').toLocaleDateString(currentLang === 'en' ? 'en-CA' : currentLang, { month:'short', day:'numeric' }));
+  if (!up.length) { el.innerHTML = `<section class="wc-section"><div class="wc-sub">${t('pred.none')}</div></section>`; return; }
+  if (!up.find(m => m.id === state.predMatchId)) state.predMatchId = up[0].id;
+  const m = up.find(x => x.id === state.predMatchId), pm = predictMatch(m);
+  const lg = LEAGUES.find(l => l.id === m.league);
+
+  // fixture picker grouped by league
+  const groups = LEAGUES.map(L => ({ L, ms: up.filter(x => x.league === L.id) })).filter(g => g.ms.length);
+  const picker = `<div class="pred-picker"><label for="pred-select">${t('pred.pick')}</label>
+    <select id="pred-select" onchange="predSelect(this.value)">${groups.map(g => `<optgroup label="${g.L.name}">${g.ms.map(x =>
+      `<option value="${x.id}"${x.id === m.id ? ' selected' : ''}>${x.ko} · ${x.home} v ${x.away}</option>`).join('')}</optgroup>`).join('')}</select></div>`;
+
+  const f1 = predFair(pm.pH), fX = predFair(pm.pD), f2 = predFair(pm.pA);
+  const head = `
+    <section class="wc-section pred-card">
+      <div class="pred-meta"><span class="flag" style="width:18px;height:13px;">${lg.flag}</span> ${lg.name} · ${m.ko}
+        <span class="pred-conf ${pm.conf}">${t('pred.conf')}: ${t('pred.conf.' + pm.conf)}</span></div>
+      <div class="pred-teams">
+        <div class="pred-team">${crest(m.home, 44)}<b>${m.home}</b><span>#${pm.H.pos} · ${pm.H.Pts} pts</span></div>
+        <div class="pred-xg"><div class="pred-xg-num">${pm.lh.toFixed(2)} <i>–</i> ${pm.la.toFixed(2)}</div><div class="pred-xg-lbl">${t('pred.xg')}</div></div>
+        <div class="pred-team">${crest(m.away, 44)}<b>${m.away}</b><span>#${pm.A.pos} · ${pm.A.Pts} pts</span></div>
+      </div>
+      <div class="pred-bar">
+        <div style="flex:${pm.pH}" class="h"><b>${predPct(pm.pH)}</b></div>
+        <div style="flex:${pm.pD}" class="d"><b>${predPct(pm.pD)}</b></div>
+        <div style="flex:${pm.pA}" class="a"><b>${predPct(pm.pA)}</b></div>
+      </div>
+      <div class="pred-bar-lbl"><span>${m.home} ${f1.am}</span><span>${t('opt.draw')} ${fX.am}</span><span>${m.away} ${f2.am}</span></div>
+      <h4 class="wca-round">${t('pred.scores')}</h4>
+      <div class="pred-scores">${pm.scores.map(s => `<div><b>${s[0]}–${s[1]}</b><span>${predPct(s[2])}</span></div>`).join('')}</div>
+    </section>`;
+
+  const rows = predMarkets(m, pm);
+  const inSlip = (r) => state.slip.some(l => l.matchId === m.id && l.marketKey === r.mk && l.key === r.key);
+  const markets = `
+    <section class="wc-section">
+      <h2>${t('pred.markets')}</h2>
+      <div class="pred-table">
+        <div class="pred-tr pred-th"><span>${t('pred.col.market')}</span><span>${t('pred.col.prob')}</span><span>${t('pred.col.fair')}</span><span>${t('pred.col.app')}</span><span></span></div>
+        ${rows.map(r => { const f = predFair(r.p); const s = inSlip(r); return `
+        <div class="pred-tr">
+          <span class="pred-lbl">${r.pick}<small>${r.mkt}</small></span>
+          <span class="pred-p"><i style="width:${(r.p * 100).toFixed(0)}%"></i><b>${predPct(r.p)}</b></span>
+          <span class="mono">${f.dec} <small>${f.am}</small></span>
+          <span class="mono${r.best && r.best > 1 / r.p ? ' pos' : ''}">${r.best ? r.best.toFixed(2) : '—'}</span>
+          <span>${r.opt ? `<button class="pred-add${s ? ' on' : ''}" onclick="predAdd('${r.mk}','${r.key}')">${s ? t('pred.inslip') : t('pred.add')}</button>` : ''}</span>
+        </div>`; }).join('')}
+      </div>
+      <div class="pred-note">${t('pred.appNote')}</div>
+    </section>`;
+
+  const valueBox = `
+    <section class="wc-section">
+      <h2>${t('pred.value')}</h2>
+      <div class="wc-sub">${t('pred.valueSub')}</div>
+      <div class="pred-value-in">
+        <select id="pred-v-mkt" onchange="predValue()">${rows.map(r => `<option value="${r.mk}:${r.key}"${state.predValueKey === r.mk + ':' + r.key ? ' selected' : ''}>${r.label}</option>`).join('')}</select>
+        <input id="pred-v-odds" type="text" inputmode="decimal" placeholder="+150 / 2.50" value="${state.predValueOdds || ''}" oninput="predValue()" />
+      </div>
+      <div id="pred-v-out"></div>
+    </section>`;
+
+  const venue = (tm, home) => { const P = home ? tm.HP : tm.AP; const GF = home ? tm.HGF : tm.AGF, GA = home ? tm.HGA : tm.AGA;
+    return P ? `${home ? 'H' : 'A'} ${P} · ${GF}–${GA}` : '—'; };
+  const cmpRow = (lbl, a, b, better) => `<div class="pred-cmp-row"><span class="${better === 1 ? 'best' : ''}">${a}</span><em>${lbl}</em><span class="${better === 2 ? 'best' : ''}">${b}</span></div>`;
+  const H = pm.H, A = pm.A;
+  const ppg = x => (x.Pts / x.P).toFixed(2), gpg = (g, x) => (g / x.P).toFixed(2);
+  const better = (a, b, lowGood) => a === b ? 0 : ((lowGood ? a < b : a > b) ? 1 : 2);
+  const formChips = tm => tm.last.map(g => `<span class="pred-form ${g[3]}" title="${g[1] === 'H' ? 'vs' : '@'} ${g[0]} ${g[2]}">${g[3]}</span>`).join('');
+  const lastList = tm => tm.last.slice().reverse().map(g => `<div class="pred-last"><span class="pred-form ${g[3]}">${g[3]}</span><span>${g[1] === 'H' ? 'vs' : '@'} ${g[0]}</span><b>${g[2]}</b></div>`).join('');
+  const compare = `
+    <section class="wc-section">
+      <h2>${t('pred.compare')}</h2>
+      <div class="wc-sub">${t('pred.stat.thru')} ${pm.L.thru} · ${pm.L.src}</div>
+      <div class="pred-cmp-head"><b>${m.home}</b><b>${m.away}</b></div>
+      ${cmpRow(t('pred.row.pos'), '#' + H.pos, '#' + A.pos, better(H.pos, A.pos, true))}
+      ${cmpRow(t('pred.row.rec'), `${H.W}-${H.D}-${H.L}`, `${A.W}-${A.D}-${A.L}`, 0)}
+      ${cmpRow(t('pred.row.ppg'), ppg(H), ppg(A), better(+ppg(H), +ppg(A)))}
+      ${cmpRow(t('pred.row.gf'), gpg(H.GF, H), gpg(A.GF, A), better(H.GF / H.P, A.GF / A.P))}
+      ${cmpRow(t('pred.row.ga'), gpg(H.GA, H), gpg(A.GA, A), better(H.GA / H.P, A.GA / A.P, true))}
+      ${cmpRow(t('pred.row.venue'), venue(H, true), venue(A, false), 0)}
+      ${cmpRow(t('pred.row.att'), pm.rh.att.toFixed(2), pm.ra.att.toFixed(2), better(pm.rh.att, pm.ra.att))}
+      ${cmpRow(t('pred.row.def'), pm.rh.def.toFixed(2), pm.ra.def.toFixed(2), better(pm.rh.def, pm.ra.def, true))}
+      <div class="pred-cmp-row"><span>${formChips(H)}</span><em>${t('pred.row.form')}</em><span>${formChips(A)}</span></div>
+      <h4 class="wca-round">${t('pred.last5')}</h4>
+      <div class="pred-last-grid"><div>${lastList(H)}</div><div>${lastList(A)}</div></div>
+    </section>`;
+
+  // strongest calls across all covered fixtures
+  const calls = [];
+  up.forEach(x => { const q = predictMatch(x);
+    const opts = [[q.pH, x.home + ' ' + t('pred.toWin')], [q.pA, x.away + ' ' + t('pred.toWin')],
+      [q.o25, t('pred.over25')], [1 - q.o25, t('pred.under25')], [q.btts, t('pred.bttsYes')], [1 - q.btts, t('pred.bttsNo')]];
+    opts.sort((a, b) => b[0] - a[0]); calls.push({ m: x, p: opts[0][0], label: opts[0][1] }); });
+  calls.sort((a, b) => b.p - a.p);
+  const top = `
+    <section class="wc-section">
+      <h2>${t('pred.top')}</h2>
+      <div class="wc-sub">${t('pred.topSub')}</div>
+      ${calls.slice(0, 10).map(cl => `<button class="pred-call${cl.m.id === m.id ? ' on' : ''}" onclick="predSelect('${cl.m.id}')">
+        <span class="pred-call-m">${cl.m.home} v ${cl.m.away}<small>${cl.m.ko}</small></span>
+        <span class="pred-call-pick">${cl.label}</span><b>${predPct(cl.p)}</b></button>`).join('')}
+    </section>`;
+
+  const method = `
+    <section class="wc-section">
+      <h2>${t('pred.method')}</h2>
+      <p class="pred-method">${t('pred.methodBody')}</p>
+      <div class="pred-note">${Object.entries(PRED_DATA).map(([id, L]) => `${(LEAGUES.find(x => x.id === id) || {}).name}: ${L.games} ${t('pred.matches')} (${L.thru}) — ${L.src}`).join('<br>')}</div>
+      <div class="pred-note" style="margin-top:8px;">${t('pred.disclaimer')}</div>
+    </section>`;
+
+  el.innerHTML = picker + `<div class="pred-grid"><div>${head}${valueBox}</div><div>${markets}</div></div>` + compare + top + method;
+  if (state.predValueOdds) predValue();
+}
+
 // ============= WORLD CUP 2026 ARCHIVE =============
 // Tournament concluded July 19, 2026. All betting on the WC tab is closed; this
 // renders a read-only results archive. Sources: FIFA / Wikipedia (final, awards,
@@ -7260,10 +7869,11 @@ function renderAnalytics() {
 function setTab(t) {
   state.tab = t;
   document.querySelectorAll('#tabs button').forEach(b => b.classList.toggle('active', b.dataset.tab === t));
-  ['builder','wc','news','analytics','my'].forEach(name => {
+  ['builder','wc','predict','news','analytics','my'].forEach(name => {
     document.getElementById('tab-' + name).classList.toggle('hidden', name !== t);
   });
   if (t === 'wc') renderWorldCup();
+  if (t === 'predict') renderPredictor();
   if (t === 'analytics') renderAnalytics();
   if (t === 'my') renderMySlips();
   if (t === 'news') renderNews();
