@@ -6,7 +6,7 @@
 <title>PARLAY LABS — Soccer Bet Builder</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800;9..144,900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Archivo+Narrow:wght@500;600;700&display=swap" rel="stylesheet">
 <!-- Supabase JS SDK — loaded from CDN. The library exposes window.supabase
      globally and we initialize a client once you fill in your project URL and
      anon key in the SUPABASE_CONFIG block in the JS below. Until those are filled
@@ -22,7 +22,7 @@
     --ink: #f5f5f0;
     --ink-2: #b8b8b0;
     --ink-3: #6c6c66;
-    --accent: #d4ff3c;       /* electric chartreuse */
+    --accent: var(--accent);       /* electric chartreuse */
     --accent-2: #ff4d2e;     /* signal orange */
     --accent-3: #4287f5;     /* deep blue */
     --win: #4ade80;
@@ -46,7 +46,7 @@
   body::before {
     content: '';
     position: fixed; inset: 0;
-    background-image: radial-gradient(circle at 20% 10%, rgba(212,255,60,.04), transparent 40%),
+    background-image: radial-gradient(circle at 20% 10%, rgba(29,190,138,.04), transparent 40%),
                       radial-gradient(circle at 80% 80%, rgba(66,135,245,.04), transparent 40%);
     pointer-events: none;
     z-index: 0;
@@ -87,7 +87,7 @@
   .brand .logo span { color: var(--accent); }
   .brand .tag {
     font-family: var(--mono);
-    font-size: 10px;
+    font-size: 12px;
     color: var(--ink-3);
     text-transform: uppercase;
     letter-spacing: .15em;
@@ -100,7 +100,7 @@
   }
   nav.tabs button {
     background: transparent; border: 0; color: var(--ink);
-    font-family: var(--mono); font-size: 11px; font-weight: 600;
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
     text-transform: uppercase; letter-spacing: .1em;
     padding: 8px 16px; border-radius: 999px; cursor: pointer;
     transition: all .2s;
@@ -112,7 +112,7 @@
   .top-right { display: flex; align-items: center; gap: 14px; }
   .live-dot {
     display: inline-flex; align-items: center; gap: 6px;
-    font-family: var(--mono); font-size: 10px;
+    font-family: var(--mono); font-size: 12px;
     color: var(--ink-2); text-transform: uppercase; letter-spacing: .12em;
   }
   .live-dot::before {
@@ -123,7 +123,7 @@
   @keyframes pulse { 50% { opacity: .35; } }
   .lang-select {
     background: var(--bg-3); border: 1px solid var(--line);
-    color: var(--ink); font-family: var(--mono); font-size: 11px;
+    color: var(--ink); font-family: var(--mono); font-size: 12px;
     padding: 7px 10px; border-radius: 6px; cursor: pointer;
   }
   .lang-select:focus { outline: 1px solid var(--accent); }
@@ -135,15 +135,15 @@
      prefix and an accent dot appears. */
   .auth-btn {
     background: var(--bg-3); border: 1px solid var(--line);
-    color: var(--ink); font-family: var(--mono); font-size: 11px;
+    color: var(--ink); font-family: var(--mono); font-size: 12px;
     padding: 7px 12px; border-radius: 6px; cursor: pointer;
     display: inline-flex; align-items: center; gap: 6px;
     transition: all .15s;
   }
   .auth-btn:hover { background: var(--bg-2); border-color: var(--ink-3); }
   .auth-btn.signed-in {
-    background: rgba(212,255,60,.08);
-    border-color: rgba(212,255,60,.3);
+    background: rgba(29,190,138,.08);
+    border-color: rgba(29,190,138,.3);
     color: var(--accent);
   }
   .auth-btn.signed-in svg { color: var(--accent); }
@@ -210,7 +210,7 @@
     margin: 0 0 6px; color: var(--ink); letter-spacing: .02em;
   }
   .auth-modal .auth-sub {
-    font-family: var(--mono); font-size: 10px;
+    font-family: var(--mono); font-size: 12px;
     color: var(--ink-3); text-transform: uppercase; letter-spacing: .12em;
     margin-bottom: 24px;
   }
@@ -219,7 +219,7 @@
     margin-bottom: 14px;
   }
   .auth-field label {
-    display: block; font-family: var(--mono); font-size: 10px;
+    display: block; font-family: var(--mono); font-size: 12px;
     color: var(--ink-3); text-transform: uppercase; letter-spacing: .12em;
     margin-bottom: 6px;
   }
@@ -246,7 +246,7 @@
   .auth-link {
     display: block; text-align: center;
     background: transparent; border: none;
-    color: var(--ink-2); font-family: var(--mono); font-size: 11px;
+    color: var(--ink-2); font-family: var(--mono); font-size: 12px;
     cursor: pointer; padding: 8px 4px;
     text-decoration: underline; text-decoration-color: var(--line);
     text-underline-offset: 3px; transition: color .15s;
@@ -255,7 +255,7 @@
 
   .auth-msg {
     padding: 10px 12px; border-radius: 4px;
-    font-family: var(--mono); font-size: 11px; line-height: 1.5;
+    font-family: var(--mono); font-size: 12px; line-height: 1.5;
     margin-bottom: 14px;
   }
   .auth-msg.error {
@@ -263,8 +263,8 @@
     border: 1px solid rgba(255,107,107,.25);
   }
   .auth-msg.info {
-    background: rgba(212,255,60,.08); color: var(--accent);
-    border: 1px solid rgba(212,255,60,.25);
+    background: rgba(29,190,138,.08); color: var(--accent);
+    border: 1px solid rgba(29,190,138,.25);
   }
 
   .auth-divider {
@@ -279,21 +279,21 @@
   }
   .auth-profile-row .lbl {
     color: var(--ink-3); text-transform: uppercase;
-    font-size: 10px; letter-spacing: .12em;
+    font-size: 12px; letter-spacing: .12em;
   }
   .auth-profile-row .v { color: var(--ink); font-weight: 600; }
 
   .auth-mode-pill {
     display: inline-flex; align-items: center; gap: 6px;
     padding: 3px 10px; border-radius: 12px;
-    font-family: var(--mono); font-size: 9px; font-weight: 700;
+    font-family: var(--mono); font-size: 12px; font-weight: 700;
     text-transform: uppercase; letter-spacing: .12em;
   }
   .auth-mode-pill.local {
     background: rgba(255,255,255,.06); color: var(--ink-3);
   }
   .auth-mode-pill.cloud {
-    background: rgba(212,255,60,.12); color: var(--accent);
+    background: rgba(29,190,138,.12); color: var(--accent);
   }
   .auth-mode-pill .dot {
     width: 6px; height: 6px; border-radius: 50%;
@@ -381,10 +381,10 @@
       width: 100%;
       justify-content: space-between;
     }
-    nav.tabs button { padding: 7px 12px; font-size: 10px; }
+    nav.tabs button { padding: 7px 12px; font-size: 12px; }
     .top-right { gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
     .live-dot { display: none; } /* save space; the live timestamp is in the hero */
-    .lang-select, .auth-btn { font-size: 10px; padding: 6px 8px; }
+    .lang-select, .auth-btn { font-size: 12px; padding: 6px 8px; }
 
     /* Main padding tightens */
     main { padding: 16px 14px 90px; }
@@ -399,8 +399,8 @@
 
     /* Match cards: looser line-height for two-row team display */
     .team-name { font-size: 15px; }
-    .vs { font-size: 10px; }
-    .match-head { font-size: 11px; }
+    .vs { font-size: 12px; }
+    .match-head { font-size: 12px; }
   }
 
   /* ============== PHONE PORTRAIT (≤480px) ============== */
@@ -412,7 +412,7 @@
     nav.tabs { padding: 2px; }
     nav.tabs button { padding: 6px 9px; font-size: 9.5px; letter-spacing: .06em; }
     .top-right { gap: 6px; width: 100%; justify-content: space-between; order: 4; }
-    .lang-select, .auth-btn { font-size: 10px; padding: 5px 7px; }
+    .lang-select, .auth-btn { font-size: 12px; padding: 5px 7px; }
     .auth-btn span { display: inline; } /* keep label visible */
 
     /* Hero gets compact */
@@ -422,7 +422,7 @@
     .hero-meta {
       display: grid; grid-template-columns: 1fr 1fr; gap: 14px 18px;
     }
-    .hero-meta div { font-size: 9px; }
+    .hero-meta div { font-size: 12px; }
     .hero-meta b { font-size: 13px; }
     .hero::before { font-size: 100px; }
 
@@ -434,12 +434,12 @@
       scrollbar-width: none;
     }
     .leagues::-webkit-scrollbar { display: none; }
-    .league-pill { flex-shrink: 0; padding: 8px 12px 8px 8px; font-size: 10px; }
+    .league-pill { flex-shrink: 0; padding: 8px 12px 8px 8px; font-size: 12px; }
     .league-pill .flag { width: 18px; height: 13px; }
 
     /* Fixture filter pills too */
     .fixture-filter { gap: 4px; }
-    .fixture-filter-btn { padding: 5px 9px; font-size: 9px; letter-spacing: .08em; }
+    .fixture-filter-btn { padding: 5px 9px; font-size: 12px; letter-spacing: .08em; }
 
     /* News category tabs scroll horizontally if they overflow */
     .news-cat-tabs {
@@ -448,15 +448,15 @@
       margin: 0 -10px 14px; padding: 0 10px 10px;
     }
     .news-cat-tabs::-webkit-scrollbar { display: none; }
-    .news-cat-tab { flex-shrink: 0; padding: 5px 9px; font-size: 9px; }
+    .news-cat-tab { flex-shrink: 0; padding: 5px 9px; font-size: 12px; }
 
     /* Match cards: stack teams + crests with consistent gaps. The crests
        and stars need touch-friendly tap targets even when compact. */
     .match { padding: 14px; }
-    .match-head { font-size: 10px; flex-wrap: wrap; gap: 4px; }
+    .match-head { font-size: 12px; flex-wrap: wrap; gap: 4px; }
     .match-teams { gap: 8px; }
     .team-name { font-size: 14px; }
-    .vs { font-size: 9px; padding: 0 4px; }
+    .vs { font-size: 12px; padding: 0 4px; }
     .fav-star { font-size: 18px; padding: 6px; min-width: 32px; min-height: 32px; }
 
     /* Odds buttons — force 3 per row on phones via flex-basis math (the original
@@ -465,28 +465,28 @@
        gap gives a clean 3-up grid. */
     .odds-row { gap: 4px !important; }
     .odd { flex: 1 1 calc(33.333% - 4px) !important; padding: 8px 6px !important; }
-    .odd-meta { font-size: 9px !important; }
-    .odd-name { font-size: 10px !important; }
-    .odd-book { font-size: 8px !important; }
-    .book-tag { padding: 1px 4px !important; font-size: 8px !important; }
+    .odd-meta { font-size: 12px !important; }
+    .odd-name { font-size: 12px !important; }
+    .odd-book { font-size: 12px !important; }
+    .book-tag { padding: 1px 4px !important; font-size: 12px !important; }
     .odd-val { font-size: 12px !important; }
-    .odd-american { font-size: 9px !important; }
-    .market-label { font-size: 10px !important; padding: 8px 12px !important; }
+    .odd-american { font-size: 12px !important; }
+    .market-label { font-size: 12px !important; padding: 8px 12px !important; }
 
     /* Slip drawer takes more vertical room on phones */
     .slip-col .slip { max-height: 85vh; }
     .slip-head h3 { font-size: 16px; }
     .slip-leg { padding: 10px; }
-    .leg-match { font-size: 9px; }
+    .leg-match { font-size: 12px; }
     .leg-pick { font-size: 13px; }
-    .leg-market { font-size: 9px; }
+    .leg-market { font-size: 12px; }
     .leg-odds { font-size: 13px; }
-    .calc-row { font-size: 11px; padding: 7px 0; }
+    .calc-row { font-size: 12px; padding: 7px 0; }
     .stake-row { grid-template-columns: 1fr 1fr; gap: 10px; }
-    .stake-input label { font-size: 9px; }
+    .stake-input label { font-size: 12px; }
     .stake-input input, .stake-input output { font-size: 14px; padding: 8px 10px; }
     .place-btn { font-size: 16px; padding: 12px; }
-    .share-btn { font-size: 10px; padding: 9px; }
+    .share-btn { font-size: 12px; padding: 9px; }
 
     /* Bankroll input row inside slip — keep number input readable */
     #bankroll-in { font-size: 12px !important; padding: 6px 8px !important; }
@@ -511,36 +511,36 @@
     .news-item { padding: 14px; }
     .news-title { font-size: 14px; line-height: 1.3; }
     .news-body { font-size: 12px; line-height: 1.5; }
-    .news-meta { font-size: 9px; gap: 8px; flex-wrap: wrap; }
+    .news-meta { font-size: 12px; gap: 8px; flex-wrap: wrap; }
     .news-controls { padding: 8px 12px; }
-    .news-controls .lastsync { font-size: 9px; }
-    .refresh-btn { padding: 6px 10px; font-size: 9px; }
+    .news-controls .lastsync { font-size: 12px; }
+    .refresh-btn { padding: 6px 10px; font-size: 12px; }
 
     /* Sidebar tickers: ensure sparklines don't push values off-screen */
     .ticker-row { padding: 10px 12px; gap: 8px; }
-    .ticker-row .lbl div:first-child { font-size: 11px; }
-    .ticker-row .val { font-size: 11px; }
+    .ticker-row .lbl div:first-child { font-size: 12px; }
+    .ticker-row .val { font-size: 12px; }
 
     /* Match preview cards stack and shrink */
     .match-preview { gap: 12px; padding: 12px 0 4px; }
     .preview-block { padding: 12px; }
-    .preview-block h5 { font-size: 9px; margin-bottom: 8px; }
-    .form-dot { width: 16px; height: 16px; font-size: 9px; }
-    .h2h-row { grid-template-columns: 60px 1fr auto; font-size: 9px; gap: 6px; }
-    .splits-grid { font-size: 10px; gap: 6px 10px; }
+    .preview-block h5 { font-size: 12px; margin-bottom: 8px; }
+    .form-dot { width: 16px; height: 16px; font-size: 12px; }
+    .h2h-row { grid-template-columns: 60px 1fr auto; font-size: 12px; gap: 6px; }
+    .splits-grid { font-size: 12px; gap: 6px 10px; }
 
     /* Saved scenarios — let the metrics grid breathe */
     #my-slips > div { padding: 16px !important; }
 
     /* Buttons in saved-slip headers wrap rather than overflow */
-    #my-slips button { font-size: 9px !important; padding: 5px 8px !important; }
+    #my-slips button { font-size: 12px !important; padding: 5px 8px !important; }
 
     /* Section headings get pulled in */
     .sec-head h2 { font-size: 28px; }
-    .sec-head .sub { font-size: 11px; }
+    .sec-head .sub { font-size: 12px; }
 
     /* Footer disclaimer */
-    footer { padding: 24px 14px; font-size: 10px; }
+    footer { padding: 24px 14px; font-size: 12px; }
   }
 
   /* ============== TOUCH-FRIENDLY TARGETS (any width with coarse pointer) ============== */
@@ -569,7 +569,7 @@
     line-height: 1;
   }
   .wc-section-head .sub {
-    font-family: var(--mono); font-size: 10px;
+    font-family: var(--mono); font-size: 12px;
     color: var(--ink-3); text-transform: uppercase; letter-spacing: .12em;
   }
 
@@ -586,7 +586,7 @@
     cursor: pointer; transition: all .15s;
   }
   .wc-outright:hover { border-color: var(--ink-3); background: var(--bg-3); }
-  .wc-outright.tier-fav { border-color: rgba(212,255,60,.4); }
+  .wc-outright.tier-fav { border-color: rgba(29,190,138,.4); }
   .wc-outright.tier-fav:hover { border-color: var(--accent); }
   .wc-outright .team {
     display: flex; align-items: center; gap: 10px; min-width: 0;
@@ -602,7 +602,7 @@
   .wc-outright.tier-fav .price { color: var(--accent); }
   .wc-outright.tier-longshot { opacity: .65; padding: 9px 12px; }
   .wc-outright.tier-longshot .team-name { font-size: 13px; }
-  .wc-outright.tier-longshot .price { font-size: 11px; color: var(--ink-3); }
+  .wc-outright.tier-longshot .price { font-size: 12px; color: var(--ink-3); }
 
   /* Group cards — one per group with teams and matches inside */
   .wc-groups-grid {
@@ -623,7 +623,7 @@
     font-family: var(--display); font-size: 22px; letter-spacing: .02em;
   }
   .wc-group-head .label {
-    font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: .14em;
+    font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .14em;
     opacity: .7;
   }
   .wc-group-teams {
@@ -643,7 +643,7 @@
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   }
   .wc-group-team-row .win-price {
-    font-family: var(--mono); font-size: 11px; font-weight: 700;
+    font-family: var(--mono); font-size: 12px; font-weight: 700;
     color: var(--ink); cursor: pointer;
     padding: 4px 8px; border: 1px solid var(--line); border-radius: 3px;
     background: var(--bg-3);
@@ -656,7 +656,7 @@
     padding: 12px 16px;
   }
   .wc-group-matches h6 {
-    font-family: var(--mono); font-size: 9px; text-transform: uppercase;
+    font-family: var(--mono); font-size: 12px; text-transform: uppercase;
     letter-spacing: .12em; color: var(--ink-3); margin: 0 0 8px;
   }
   .wc-match {
@@ -673,15 +673,15 @@
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   }
   .wc-match-meta {
-    font-family: var(--mono); font-size: 9px; color: var(--ink-3);
+    font-family: var(--mono); font-size: 12px; color: var(--ink-3);
     text-transform: uppercase; letter-spacing: .08em;
     display: flex; flex-direction: column; gap: 2px;
   }
   .wc-match-note {
     display: inline-block;
-    background: rgba(212,255,60,.12); color: var(--accent);
+    background: rgba(29,190,138,.12); color: var(--accent);
     padding: 2px 7px; border-radius: 8px;
-    font-family: var(--mono); font-size: 8px; font-weight: 700;
+    font-family: var(--mono); font-size: 12px; font-weight: 700;
     text-transform: uppercase; letter-spacing: .1em;
     margin-top: 4px;
   }
@@ -692,14 +692,14 @@
   .wc-match-odd {
     background: var(--bg-3); border: 1px solid var(--line);
     color: var(--ink); padding: 6px 4px;
-    font-family: var(--mono); font-size: 11px; font-weight: 700;
+    font-family: var(--mono); font-size: 12px; font-weight: 700;
     cursor: pointer; border-radius: 3px;
     text-align: center;
     transition: all .15s;
   }
   .wc-match-odd:hover { border-color: var(--accent); color: var(--accent); }
   .wc-match-odd .lbl {
-    display: block; font-size: 8px; font-weight: 600;
+    display: block; font-size: 12px; font-weight: 600;
     color: var(--ink-3); text-transform: uppercase; letter-spacing: .1em;
     margin-bottom: 2px;
   }
@@ -719,22 +719,22 @@
     margin-bottom: 4px;
   }
   .wc-knockout .date {
-    font-family: var(--mono); font-size: 10px; color: var(--ink-3);
+    font-family: var(--mono); font-size: 12px; color: var(--ink-3);
     text-transform: uppercase; letter-spacing: .12em; margin-bottom: 12px;
   }
   .wc-knockout .pending-pill {
     display: inline-block;
     background: rgba(255,255,255,.04); color: var(--ink-3);
     padding: 4px 12px; border-radius: 12px;
-    font-family: var(--mono); font-size: 9px; font-weight: 700;
+    font-family: var(--mono); font-size: 12px; font-weight: 700;
     text-transform: uppercase; letter-spacing: .14em;
     margin-bottom: 10px;
   }
   .wc-knockout .desc {
-    font-size: 11px; color: var(--ink-2); line-height: 1.5;
+    font-size: 12px; color: var(--ink-2); line-height: 1.5;
   }
   .wc-knockout .count {
-    font-family: var(--mono); font-size: 9px; color: var(--ink-3);
+    font-family: var(--mono); font-size: 12px; color: var(--ink-3);
     text-transform: uppercase; letter-spacing: .12em; margin-top: 8px;
   }
 
@@ -749,7 +749,7 @@
     letter-spacing: .02em;
   }
   .wc-analytics .sub {
-    font-family: var(--mono); font-size: 10px; color: var(--ink-3);
+    font-family: var(--mono); font-size: 12px; color: var(--ink-3);
     text-transform: uppercase; letter-spacing: .12em; margin-bottom: 18px;
   }
   .wc-pathway-grid {
@@ -763,7 +763,7 @@
     padding: 14px; border-radius: 4px;
   }
   .wc-pathway-head {
-    font-family: var(--mono); font-size: 10px; text-transform: uppercase;
+    font-family: var(--mono); font-size: 12px; text-transform: uppercase;
     letter-spacing: .12em; color: var(--accent); margin-bottom: 10px;
   }
   .wc-pathway-team {
@@ -772,7 +772,7 @@
   }
   .wc-pathway-team .name { font-family: var(--serif); font-weight: 600; }
   .wc-pathway-team .price {
-    font-family: var(--mono); font-size: 10px; color: var(--ink-2);
+    font-family: var(--mono); font-size: 12px; color: var(--ink-2);
   }
 
   /* ============== HERO STRIP ============== */
@@ -803,7 +803,7 @@
   }
   .hero-meta {
     display: flex; gap: 32px; margin-top: 24px;
-    font-family: var(--mono); font-size: 10px;
+    font-family: var(--mono); font-size: 12px;
     color: var(--ink-3); text-transform: uppercase; letter-spacing: .12em;
   }
   .hero-meta b { color: var(--ink); font-weight: 500; display: block; font-size: 16px; font-family: var(--sans); margin-bottom: 2px; letter-spacing: 0; text-transform: none; }
@@ -816,7 +816,7 @@
   .league-pill {
     background: var(--bg-2); border: 1px solid var(--line);
     color: var(--ink); padding: 9px 14px 9px 9px;
-    font-family: var(--mono); font-size: 11px; font-weight: 600;
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
     text-transform: uppercase; letter-spacing: .08em;
     cursor: pointer; transition: all .15s;
     display: flex; align-items: center; gap: 9px;
@@ -842,7 +842,7 @@
   .news-cat-tab {
     background: transparent; border: 1px solid var(--line);
     color: var(--ink-2); padding: 6px 11px;
-    font-family: var(--mono); font-size: 10px; font-weight: 600;
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
     text-transform: uppercase; letter-spacing: .1em;
     cursor: pointer; transition: all .15s;
     border-radius: 3px;
@@ -855,7 +855,7 @@
   }
   .news-cat-tab .count {
     background: rgba(0,0,0,.18); color: inherit;
-    padding: 1px 5px; border-radius: 8px; font-size: 9px;
+    padding: 1px 5px; border-radius: 8px; font-size: 12px;
     font-weight: 700;
   }
   .news-cat-tab:not(.active) .count {
@@ -866,7 +866,7 @@
     padding: 40px 20px; text-align: center;
     border: 1px dashed var(--line); background: var(--bg-2);
     color: var(--ink-3); font-family: var(--mono);
-    font-size: 11px; text-transform: uppercase; letter-spacing: .1em;
+    font-size: 12px; text-transform: uppercase; letter-spacing: .1em;
   }
   /* shared flag util — works anywhere on the page */
   .flag {
@@ -889,7 +889,7 @@
     letter-spacing: .02em; line-height: 1;
   }
   .sec-head .sub {
-    font-family: var(--mono); font-size: 10px;
+    font-family: var(--mono); font-size: 12px;
     color: var(--ink-3); text-transform: uppercase; letter-spacing: .15em;
   }
 
@@ -905,7 +905,7 @@
   .match-head {
     display: flex; justify-content: space-between; align-items: center;
     margin-bottom: 14px;
-    font-family: var(--mono); font-size: 10px;
+    font-family: var(--mono); font-size: 12px;
     color: var(--ink-3); text-transform: uppercase; letter-spacing: .12em;
   }
   .match-head .ko { color: var(--accent); }
@@ -934,7 +934,7 @@
     transition: all .15s; line-height: 1;
   }
   .fav-star:hover { color: var(--ink); transform: scale(1.15); }
-  .fav-star.active { color: var(--accent); text-shadow: 0 0 8px rgba(212,255,60,.4); }
+  .fav-star.active { color: var(--accent); text-shadow: 0 0 8px rgba(29,190,138,.4); }
   /* Match cards involving a favorited team get a subtle accent border on the left edge */
   .match.match-fav {
     border-left: 2px solid var(--accent);
@@ -948,7 +948,7 @@
   .fixture-filter-btn {
     background: transparent; border: 1px solid var(--line);
     color: var(--ink-2); padding: 6px 11px;
-    font-family: var(--mono); font-size: 10px; font-weight: 600;
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
     text-transform: uppercase; letter-spacing: .1em;
     cursor: pointer; transition: all .15s;
     border-radius: 3px;
@@ -967,7 +967,7 @@
   .preview-toggle {
     width: 100%; background: transparent; border: none;
     color: var(--ink-3); padding: 10px 0;
-    font-family: var(--mono); font-size: 10px; font-weight: 600;
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
     text-transform: uppercase; letter-spacing: .12em;
     cursor: pointer;
     display: flex; align-items: center; justify-content: space-between;
@@ -989,14 +989,14 @@
   }
   .preview-block h5 {
     margin: 0 0 10px; font-family: var(--mono);
-    font-size: 10px; font-weight: 600; text-transform: uppercase;
+    font-size: 12px; font-weight: 600; text-transform: uppercase;
     letter-spacing: .12em; color: var(--ink-3);
   }
   .form-dots { display: inline-flex; gap: 4px; }
   .form-dot {
     width: 18px; height: 18px; border-radius: 50%;
     display: inline-flex; align-items: center; justify-content: center;
-    font-family: var(--mono); font-size: 10px; font-weight: 700;
+    font-family: var(--mono); font-size: 12px; font-weight: 700;
   }
   .form-dot.W { background: var(--win); color: #000; }
   .form-dot.D { background: var(--ink-3); color: #000; }
@@ -1009,7 +1009,7 @@
   .h2h-row {
     display: grid; grid-template-columns: 70px 1fr auto;
     gap: 8px; padding: 5px 0;
-    font-family: var(--mono); font-size: 10px;
+    font-family: var(--mono); font-size: 12px;
     border-bottom: 1px dashed var(--line);
   }
   .h2h-row:last-child { border-bottom: none; }
@@ -1017,12 +1017,12 @@
   .h2h-score { font-weight: 700; color: var(--ink); }
   .splits-grid {
     display: grid; grid-template-columns: auto 1fr 1fr; gap: 8px 14px;
-    font-family: var(--mono); font-size: 11px;
+    font-family: var(--mono); font-size: 12px;
   }
   .splits-grid .lbl { color: var(--ink-3); }
   .splits-grid .v { font-weight: 700; color: var(--ink); }
   .vs {
-    font-family: var(--mono); font-size: 11px;
+    font-family: var(--mono); font-size: 12px;
     color: var(--ink-3); padding: 0 4px;
   }
   .markets {
@@ -1035,7 +1035,7 @@
     align-items: center;
   }
   .market-label {
-    font-family: var(--mono); font-size: 10px;
+    font-family: var(--mono); font-size: 12px;
     color: var(--ink-3); text-transform: uppercase; letter-spacing: .1em;
   }
   .odds-row { display: flex; gap: 6px; flex-wrap: wrap; }
@@ -1067,18 +1067,18 @@
     display: flex; flex-direction: column; align-items: flex-end; gap: 2px;
   }
   .odd-american {
-    font-family: var(--mono); font-size: 10px; font-weight: 600;
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
     letter-spacing: .04em;
   }
   /* Underdog (+) shown in chartreuse — payout is favorable */
-  .odd-american.underdog { color: #d4ff3c; }
+  .odd-american.underdog { color: var(--accent); }
   /* Favorite (−) shown in muted red — line is short */
   .odd-american.favorite { color: #ff6b6b; }
   /* When the row is selected (chartreuse background), use dark text for legibility */
   .odd.selected .odd-american.underdog { color: #1a4d00; }
   .odd.selected .odd-american.favorite { color: #7d0000; }
   .odd-book {
-    font-family: var(--mono); font-size: 9px;
+    font-family: var(--mono); font-size: 12px;
     color: var(--ink-3); text-transform: uppercase;
     letter-spacing: .08em;
     margin-top: 1px;
@@ -1088,7 +1088,7 @@
   /* book badge */
   .book-tag {
     display: inline-block;
-    font-family: var(--mono); font-size: 8px;
+    font-family: var(--mono); font-size: 12px;
     padding: 2px 5px;
     background: rgba(255,255,255,.06);
     color: var(--ink-2);
@@ -1101,13 +1101,13 @@
   /* book toggle */
   .book-toggle {
     display: flex; gap: 4px; align-items: center; flex-wrap: wrap;
-    font-family: var(--mono); font-size: 10px;
+    font-family: var(--mono); font-size: 12px;
     color: var(--ink-3); text-transform: uppercase; letter-spacing: .12em;
   }
   .book-toggle button {
     background: var(--bg-3); border: 1px solid var(--line);
     color: var(--ink); padding: 6px 10px;
-    font-family: var(--mono); font-size: 10px; font-weight: 600;
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
     cursor: pointer;
     border-radius: 3px;
     text-transform: uppercase; letter-spacing: .1em;
@@ -1142,7 +1142,7 @@
   }
   .slip-count {
     background: #000; color: var(--accent);
-    font-family: var(--mono); font-size: 11px; font-weight: 700;
+    font-family: var(--mono); font-size: 12px; font-weight: 700;
     padding: 4px 8px; border-radius: 999px;
   }
   /* slip body holds the legs + the calc; wraps in a scrollable container */
@@ -1178,7 +1178,7 @@
   }
   .leg-info { min-width: 0; }
   .leg-match {
-    font-family: var(--mono); font-size: 9px;
+    font-family: var(--mono); font-size: 12px;
     color: var(--ink-3); text-transform: uppercase; letter-spacing: .1em;
     margin-bottom: 3px;
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
@@ -1188,7 +1188,7 @@
     line-height: 1.2;
   }
   .leg-market {
-    font-size: 11px; color: var(--ink-2); margin-top: 2px;
+    font-size: 12px; color: var(--ink-2); margin-top: 2px;
   }
   .leg-right {
     display: flex; flex-direction: column; align-items: flex-end; gap: 4px;
@@ -1214,7 +1214,7 @@
     display: flex; flex-direction: column;
   }
   .stake-input label {
-    font-family: var(--mono); font-size: 9px; color: var(--ink-3);
+    font-family: var(--mono); font-size: 12px; color: var(--ink-3);
     text-transform: uppercase; letter-spacing: .12em; margin-bottom: 4px;
   }
   .stake-input input, .stake-input output {
@@ -1249,7 +1249,7 @@
     padding: 6px 0;
     font-size: 12px;
   }
-  .calc-row span:first-child { color: var(--ink-3); font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: .1em; }
+  .calc-row span:first-child { color: var(--ink-3); font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .1em; }
   .calc-row span:last-child { font-family: var(--mono); font-weight: 700; }
 
   /* probability bar */
@@ -1257,7 +1257,7 @@
     margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line);
   }
   .prob-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
-  .prob-label { font-family: var(--mono); font-size: 9px; color: var(--ink-3); text-transform: uppercase; letter-spacing: .12em; }
+  .prob-label { font-family: var(--mono); font-size: 12px; color: var(--ink-3); text-transform: uppercase; letter-spacing: .12em; }
   .prob-val { font-family: var(--display); font-size: 24px; line-height: 1; }
   .prob-bar {
     height: 6px; background: var(--bg); border-radius: 3px; overflow: hidden;
@@ -1268,7 +1268,7 @@
     transition: width .4s ease;
   }
   .prob-msg {
-    font-size: 11px; color: var(--ink-2); margin-top: 6px; line-height: 1.4;
+    font-size: 12px; color: var(--ink-2); margin-top: 6px; line-height: 1.4;
   }
 
   /* parlay presets */
@@ -1279,7 +1279,7 @@
   .preset {
     background: var(--bg); border: 1px solid var(--line);
     color: var(--ink-2); padding: 9px 6px;
-    font-family: var(--mono); font-size: 9px; font-weight: 500;
+    font-family: var(--mono); font-size: 12px; font-weight: 500;
     text-transform: uppercase; letter-spacing: .08em;
     cursor: pointer; transition: all .15s; text-align: center;
     border-radius: 3px;
@@ -1302,7 +1302,7 @@
   .share-btn {
     width: 100%; margin-top: 8px;
     background: var(--bg-3); color: var(--ink); border: 1px solid var(--line);
-    padding: 11px; font-family: var(--mono); font-size: 11px;
+    padding: 11px; font-family: var(--mono); font-size: 12px;
     letter-spacing: .12em; text-transform: uppercase; font-weight: 600;
     cursor: pointer; transition: all .15s;
   }
@@ -1311,7 +1311,7 @@
   .clear-btn {
     width: 100%; margin-top: 8px;
     background: transparent; color: var(--ink-3); border: 1px solid var(--line);
-    padding: 9px; font-family: var(--mono); font-size: 10px;
+    padding: 9px; font-family: var(--mono); font-size: 12px;
     text-transform: uppercase; letter-spacing: .12em;
     cursor: pointer; border-radius: 3px;
   }
@@ -1329,7 +1329,7 @@
     flex-wrap: wrap; gap: 10px;
   }
   .news-controls .lastsync {
-    font-family: var(--mono); font-size: 10px;
+    font-family: var(--mono); font-size: 12px;
     color: var(--ink-2);
     text-transform: uppercase; letter-spacing: .12em;
     display: flex; align-items: center; gap: 8px;
@@ -1345,7 +1345,7 @@
   .refresh-btn {
     background: var(--bg-3); border: 1px solid var(--line);
     color: var(--ink); padding: 7px 14px;
-    font-family: var(--mono); font-size: 10px; font-weight: 600;
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
     text-transform: uppercase; letter-spacing: .12em;
     cursor: pointer; border-radius: 3px;
     display: inline-flex; align-items: center; gap: 8px;
@@ -1370,7 +1370,7 @@
     height: 0;
     overflow: hidden;
     display: flex; align-items: center; justify-content: center;
-    font-family: var(--mono); font-size: 10px;
+    font-family: var(--mono); font-size: 12px;
     color: var(--ink-3);
     text-transform: uppercase; letter-spacing: .12em;
     transition: height .2s ease, opacity .2s ease;
@@ -1393,25 +1393,25 @@
     border-color: var(--accent);
   }
   @keyframes freshFlash {
-    0% { background: rgba(212,255,60,.15); }
+    0% { background: rgba(29,190,138,.15); }
     100% { background: var(--bg-2); }
   }
 
   /* live clock pill in header */
   .clock {
     display: inline-flex; align-items: center; gap: 6px;
-    font-family: var(--mono); font-size: 11px; font-weight: 600;
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
     color: var(--ink);
     background: var(--bg-3); border: 1px solid var(--line);
     padding: 6px 10px; border-radius: 4px;
     letter-spacing: .04em;
   }
   .clock .clock-time { color: var(--accent); }
-  .clock .clock-date { color: var(--ink-2); font-size: 10px; }
+  .clock .clock-date { color: var(--ink-2); font-size: 12px; }
 
   /* news timestamp pill */
   .news-time {
-    font-family: var(--mono); font-size: 9px;
+    font-family: var(--mono); font-size: 12px;
     color: var(--ink-3);
     text-transform: uppercase; letter-spacing: .12em;
     margin-left: auto;
@@ -1437,7 +1437,7 @@
     margin: 0 0 4px; letter-spacing: .02em;
   }
   .wc-section .wc-sub {
-    font-family: var(--mono); font-size: 10px;
+    font-family: var(--mono); font-size: 12px;
     color: var(--ink-3); text-transform: uppercase; letter-spacing: .12em;
     margin-bottom: 18px;
   }
@@ -1451,11 +1451,11 @@
   @media (max-width: 480px) { .wc-featured { grid-template-columns: repeat(2, 1fr); } }
   .wc-fav-card {
     border: 1px solid var(--accent); border-radius: 4px;
-    background: rgba(212,255,60,.04);
+    background: rgba(29,190,138,.04);
     padding: 14px 10px; text-align: center;
     cursor: pointer; transition: all .15s;
   }
-  .wc-fav-card:hover { background: rgba(212,255,60,.10); transform: translateY(-2px); }
+  .wc-fav-card:hover { background: rgba(29,190,138,.10); transform: translateY(-2px); }
   .wc-fav-card .wc-team {
     font-family: var(--serif); font-weight: 600; font-size: 14px;
     margin-top: 8px; color: var(--ink);
@@ -1484,7 +1484,7 @@
     min-width: 0; flex: 1;
   }
   .wc-outright-row .wc-odds {
-    font-family: var(--mono); font-weight: 700; font-size: 11px;
+    font-family: var(--mono); font-weight: 700; font-size: 12px;
     flex-shrink: 0;
   }
   .wc-outright-row.tier-contender .wc-team-name { color: var(--ink); }
@@ -1520,7 +1520,7 @@
     font-weight: 700;
   }
   .wc-group-card .wc-group-fav {
-    font-family: var(--mono); font-size: 9px;
+    font-family: var(--mono); font-size: 12px;
     color: rgba(0,0,0,.75);
     text-transform: uppercase; letter-spacing: .12em;
     text-align: right;
@@ -1542,7 +1542,7 @@
     display: flex; align-items: center; gap: 8px;
   }
   .wc-group-team .odds {
-    font-family: var(--mono); font-weight: 700; font-size: 11px;
+    font-family: var(--mono); font-weight: 700; font-size: 12px;
     color: var(--accent);
   }
   .wc-group-matches {
@@ -1559,14 +1559,14 @@
     color: var(--ink); margin-bottom: 3px;
   }
   .wc-group-match .wc-match-meta {
-    font-family: var(--mono); font-size: 9px;
+    font-family: var(--mono); font-size: 12px;
     color: var(--ink-3); text-transform: uppercase; letter-spacing: .08em;
     line-height: 1.4;
   }
   .wc-group-match .wc-match-note {
     display: inline-block; margin-left: 6px;
-    background: rgba(212,255,60,.12); color: var(--accent);
-    padding: 1px 6px; border-radius: 8px; font-size: 8px;
+    background: rgba(29,190,138,.12); color: var(--accent);
+    padding: 1px 6px; border-radius: 8px; font-size: 12px;
     text-transform: uppercase; letter-spacing: .1em;
   }
 
@@ -1586,18 +1586,18 @@
     color: var(--ink); margin-bottom: 4px;
   }
   .wc-knockout-card .wc-ko-date {
-    font-family: var(--mono); font-size: 9px;
+    font-family: var(--mono); font-size: 12px;
     color: var(--ink-3); text-transform: uppercase; letter-spacing: .12em;
     margin-bottom: 8px;
   }
   .wc-knockout-card .wc-ko-pending {
     background: rgba(255,255,255,.06);
     padding: 6px 8px; border-radius: 3px;
-    font-family: var(--mono); font-size: 9px;
+    font-family: var(--mono); font-size: 12px;
     color: var(--ink-3); text-transform: uppercase; letter-spacing: .1em;
   }
   .wc-knockout-card .wc-ko-count {
-    font-family: var(--mono); font-size: 10px;
+    font-family: var(--mono); font-size: 12px;
     color: var(--ink-2); margin-top: 6px;
   }
 
@@ -1611,7 +1611,7 @@
     border-radius: 4px; padding: 16px;
   }
   .wc-ana-block h3 {
-    font-family: var(--mono); font-size: 10px; font-weight: 600;
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
     text-transform: uppercase; letter-spacing: .12em;
     color: var(--ink-3); margin: 0 0 12px;
   }
@@ -1628,13 +1628,13 @@
   }
   .wc-path-side ul {
     list-style: none; margin: 0; padding: 0;
-    font-family: var(--mono); font-size: 10px; line-height: 1.7;
+    font-family: var(--mono); font-size: 12px; line-height: 1.7;
   }
   .wc-path-side li { color: var(--ink-2); }
   .wc-value-row {
     display: flex; justify-content: space-between;
     padding: 6px 0; border-bottom: 1px dashed var(--line);
-    font-family: var(--mono); font-size: 11px;
+    font-family: var(--mono); font-size: 12px;
   }
   .wc-value-row:last-child { border-bottom: none; }
   .wc-value-row .team {
@@ -1665,7 +1665,7 @@
   .news-item:hover { border-color: var(--line-2); }
   .news-meta {
     display: flex; align-items: center; gap: 10px;
-    font-family: var(--mono); font-size: 9px;
+    font-family: var(--mono); font-size: 12px;
     color: var(--ink-3); text-transform: uppercase; letter-spacing: .12em;
   }
   .news-tag {
@@ -1677,7 +1677,7 @@
   .tag-transfer { background: rgba(66,135,245,.15); color: #93c5fd; }
   .tag-form { background: rgba(74,222,128,.12); color: #86efac; }
   .tag-suspension { background: rgba(255,77,46,.15); color: #ff8569; }
-  .tag-tactics { background: rgba(212,255,60,.15); color: #d4ff3c; }
+  .tag-tactics { background: rgba(29,190,138,.15); color: var(--accent); }
   .news-title {
     font-family: var(--serif); font-weight: 600; font-size: 19px;
     line-height: 1.25; letter-spacing: -.005em;
@@ -1686,7 +1686,7 @@
   .news-impact {
     display: flex; align-items: center; gap: 8px;
     margin-top: 6px; padding-top: 10px; border-top: 1px dashed var(--line);
-    font-family: var(--mono); font-size: 10px;
+    font-family: var(--mono); font-size: 12px;
     color: var(--ink-3); text-transform: uppercase; letter-spacing: .1em;
   }
   .impact-arrow { color: var(--accent); font-weight: 700; }
@@ -1715,7 +1715,7 @@
     font-family: var(--mono); font-weight: 700;
     display: flex; align-items: center; gap: 4px;
   }
-  .ticker-row .delta { font-size: 10px; }
+  .ticker-row .delta { font-size: 12px; }
   .delta.up { color: var(--win); }
   .delta.down { color: var(--loss); }
 
@@ -1730,7 +1730,7 @@
     padding: 22px;
   }
   .stat-card .lbl {
-    font-family: var(--mono); font-size: 9px;
+    font-family: var(--mono); font-size: 12px;
     color: var(--ink-3); text-transform: uppercase;
     letter-spacing: .14em; margin-bottom: 10px;
   }
@@ -1741,7 +1741,7 @@
   .stat-card .val.acc { color: var(--accent); }
   .stat-card .val.warn { color: var(--accent-2); }
   .stat-card .delta {
-    font-family: var(--mono); font-size: 11px; font-weight: 700;
+    font-family: var(--mono); font-size: 12px; font-weight: 700;
     margin-top: 6px;
   }
   .scenarios {
@@ -1763,7 +1763,7 @@
   }
   .scenario-row:last-child { border: 0; }
   .scenario-row .legs {
-    font-family: var(--mono); font-size: 11px; color: var(--ink-2);
+    font-family: var(--mono); font-size: 12px; color: var(--ink-2);
   }
   .scenario-bar {
     height: 4px; background: var(--bg-3); border-radius: 2px; overflow: hidden;
@@ -1777,7 +1777,7 @@
   /* footer */
   footer {
     border-top: 1px solid var(--line); padding: 20px 28px;
-    color: var(--ink-3); font-family: var(--mono); font-size: 10px;
+    color: var(--ink-3); font-family: var(--mono); font-size: 12px;
     display: flex; justify-content: space-between;
     text-transform: uppercase; letter-spacing: .12em;
   }
@@ -1824,30 +1824,30 @@
   }
 
   /* ===== World Cup 2026 archive ===== */
-  .wca-closed { display:inline-block; font-family:var(--mono); font-size:9px; letter-spacing:.14em; text-transform:uppercase;
+  .wca-closed { display:inline-block; font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase;
     color:var(--ink-3); border:1px solid var(--line); border-radius:3px; padding:3px 8px; margin-bottom:12px; }
   .wca-final { text-align:center; }
   .wca-final-board { display:flex; align-items:center; justify-content:center; gap:28px; margin:18px 0 12px; }
   .wca-final-team { display:flex; flex-direction:column; align-items:center; gap:8px; min-width:110px; }
   .wca-final-team b { font-family:var(--serif); font-size:18px; }
   .wca-final-score { font-family:var(--display); font-size:56px; line-height:1; color:var(--accent); display:flex; flex-direction:column; align-items:center; }
-  .wca-final-score small { font-family:var(--mono); font-size:10px; color:var(--ink-3); letter-spacing:.12em; margin-top:4px; }
-  .wca-round { font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); margin:18px 0 6px; }
+  .wca-final-score small { font-family:var(--mono); font-size:12px; color:var(--ink-3); letter-spacing:.12em; margin-top:4px; }
+  .wca-round { font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); margin:18px 0 6px; }
   .wca-row { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:12px; padding:10px 0; border-bottom:1px dashed var(--line); }
   .wca-team { display:flex; align-items:center; gap:8px; font-family:var(--serif); font-weight:600; font-size:14px; min-width:0; }
   .wca-away { justify-content:flex-end; text-align:right; }
   .wca-score { font-family:var(--mono); font-weight:700; font-size:15px; white-space:nowrap; }
-  .wca-aet { font-size:9px; color:var(--ink-3); font-weight:500; }
-  .wca-note { grid-column:1 / -1; font-family:var(--mono); font-size:10px; color:var(--ink-3); }
+  .wca-aet { font-size:12px; color:var(--ink-3); font-weight:500; }
+  .wca-note { grid-column:1 / -1; font-family:var(--mono); font-size:12px; color:var(--ink-3); }
   .wca-awards { display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:10px; }
   .wca-award { border:1px solid var(--line); border-radius:4px; padding:14px; background:var(--bg-3); }
-  .wca-award-lbl { font-family:var(--mono); font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
+  .wca-award-lbl { font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
   .wca-award-who { display:flex; align-items:center; gap:8px; font-size:15px; }
-  .wca-award-sub { font-family:var(--mono); font-size:10px; color:var(--ink-3); margin-top:6px; }
+  .wca-award-sub { font-family:var(--mono); font-size:12px; color:var(--ink-3); margin-top:6px; }
   .wca-mrow { display:grid; grid-template-columns:1fr 80px 90px; align-items:center; padding:9px 0; border-bottom:1px dashed var(--line); }
   .wca-mrow.win .wca-price, .wca-mrow.win .wca-finish { color:var(--accent); }
   .wca-price { font-family:var(--mono); font-weight:700; text-align:right; }
-  .wca-finish { font-family:var(--mono); font-size:11px; text-align:right; color:var(--ink-2); }
+  .wca-finish { font-family:var(--mono); font-size:12px; text-align:right; color:var(--ink-2); }
   @media (max-width: 480px) {
     .wca-final-board { gap:14px; } .wca-final-team { min-width:80px; } .wca-final-score { font-size:40px; }
     .wca-team { font-size:12px; } .wca-score { font-size:13px; }
@@ -1855,72 +1855,346 @@
   }
 
   /* ===== Predictor ===== */
-  .pred-chip { font-family:var(--mono); font-size:9px; letter-spacing:.1em; text-transform:uppercase; background:transparent;
+  .pred-chip { font-family:var(--mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase; background:transparent;
     color:var(--accent); border:1px solid var(--accent); border-radius:3px; padding:3px 7px; cursor:pointer; }
   .pred-chip:hover { background:var(--accent); color:#000; }
   #pred-body .wc-section { margin-bottom:16px; }
   .pred-picker { display:flex; align-items:center; gap:10px; margin-bottom:16px; }
-  .pred-picker label { font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); }
+  .pred-picker label { font-family:var(--mono); font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); }
   .pred-picker select, .pred-value-in select, .pred-value-in input { background:var(--bg-2); color:var(--ink); border:1px solid var(--line);
     border-radius:4px; padding:9px 10px; font-family:var(--mono); font-size:12px; min-width:0; }
   .pred-picker select { flex:1; max-width:520px; }
   .pred-grid { display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1.15fr); gap:16px; }
-  .pred-meta { display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-family:var(--mono); font-size:10px; color:var(--ink-3); letter-spacing:.08em; text-transform:uppercase; }
+  .pred-meta { display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-family:var(--mono); font-size:12px; color:var(--ink-3); letter-spacing:.08em; text-transform:uppercase; }
   .pred-conf { margin-left:auto; padding:3px 8px; border-radius:3px; border:1px solid var(--line); }
   .pred-conf.high { color:var(--accent); border-color:var(--accent); } .pred-conf.med { color:var(--ink); }
   .pred-teams { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:10px; margin:18px 0 16px; }
   .pred-team { display:flex; flex-direction:column; align-items:center; gap:6px; text-align:center; }
-  .pred-team b { font-family:var(--serif); font-size:16px; } .pred-team span { font-family:var(--mono); font-size:10px; color:var(--ink-3); }
+  .pred-team b { font-family:var(--serif); font-size:16px; } .pred-team span { font-family:var(--mono); font-size:12px; color:var(--ink-3); }
   .pred-xg { text-align:center; } .pred-xg-num { font-family:var(--display); font-size:34px; color:var(--accent); line-height:1; }
-  .pred-xg-num i { color:var(--ink-3); font-style:normal; } .pred-xg-lbl { font-family:var(--mono); font-size:9px; color:var(--ink-3); letter-spacing:.12em; text-transform:uppercase; margin-top:4px; }
+  .pred-xg-num i { color:var(--ink-3); font-style:normal; } .pred-xg-lbl { font-family:var(--mono); font-size:12px; color:var(--ink-3); letter-spacing:.12em; text-transform:uppercase; margin-top:4px; }
   .pred-bar { display:flex; height:30px; border-radius:4px; overflow:hidden; gap:2px; }
-  .pred-bar > div { display:flex; align-items:center; justify-content:center; min-width:34px; font-family:var(--mono); font-size:11px; }
+  .pred-bar > div { display:flex; align-items:center; justify-content:center; min-width:34px; font-family:var(--mono); font-size:12px; }
   .pred-bar .h { background:var(--accent); color:#000; } .pred-bar .d { background:var(--bg-3); color:var(--ink); } .pred-bar .a { background:#6ba3ff; color:#000; }
-  .pred-bar-lbl { display:flex; justify-content:space-between; gap:6px; font-family:var(--mono); font-size:10px; color:var(--ink-3); margin-top:6px; }
+  .pred-bar-lbl { display:flex; justify-content:space-between; gap:6px; font-family:var(--mono); font-size:12px; color:var(--ink-3); margin-top:6px; }
   .pred-scores { display:grid; grid-template-columns:repeat(6,1fr); gap:6px; }
   .pred-scores div { border:1px solid var(--line); border-radius:4px; padding:8px 4px; text-align:center; background:var(--bg-3); }
-  .pred-scores b { display:block; font-family:var(--mono); font-size:14px; } .pred-scores span { font-family:var(--mono); font-size:10px; color:var(--ink-3); }
+  .pred-scores b { display:block; font-family:var(--mono); font-size:14px; } .pred-scores span { font-family:var(--mono); font-size:12px; color:var(--ink-3); }
   .pred-table { display:flex; flex-direction:column; }
   .pred-tr { display:grid; grid-template-columns:minmax(0,1.7fr) minmax(0,1.1fr) 92px 64px 74px; align-items:center; gap:8px; padding:8px 0; border-bottom:1px dashed var(--line); font-size:12px; }
-  .pred-th { font-family:var(--mono); font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); border-bottom:1px solid var(--line); }
-  .pred-lbl { min-width:0; overflow-wrap:anywhere; line-height:1.3; } .pred-lbl small { display:block; font-family:var(--mono); font-size:9px; color:var(--ink-3); letter-spacing:.06em; }
+  .pred-th { font-family:var(--mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); border-bottom:1px solid var(--line); }
+  .pred-lbl { min-width:0; overflow-wrap:anywhere; line-height:1.3; } .pred-lbl small { display:block; font-family:var(--mono); font-size:12px; color:var(--ink-3); letter-spacing:.06em; }
   .pred-p { position:relative; height:18px; background:var(--bg-3); border-radius:3px; overflow:hidden; }
-  .pred-p i { position:absolute; left:0; top:0; bottom:0; background:rgba(212,255,60,.25); }
-  .pred-p b { position:relative; font-family:var(--mono); font-size:11px; padding-left:6px; line-height:18px; }
-  .pred-tr .mono { font-family:var(--mono); } .pred-tr small { color:var(--ink-3); font-size:10px; }
+  .pred-p i { position:absolute; left:0; top:0; bottom:0; background:rgba(29,190,138,.25); }
+  .pred-p b { position:relative; font-family:var(--mono); font-size:12px; padding-left:6px; line-height:18px; }
+  .pred-tr .mono { font-family:var(--mono); } .pred-tr small { color:var(--ink-3); font-size:12px; }
   .pos { color:var(--win, #4ade80); } .neg { color:var(--loss, #f87171); }
-  .pred-add { font-family:var(--mono); font-size:10px; background:var(--bg-3); color:var(--ink); border:1px solid var(--line); border-radius:3px; padding:5px 6px; cursor:pointer; width:100%; }
+  .pred-add { font-family:var(--mono); font-size:12px; background:var(--bg-3); color:var(--ink); border:1px solid var(--line); border-radius:3px; padding:5px 6px; cursor:pointer; width:100%; }
   .pred-add:hover { border-color:var(--accent); } .pred-add.on { background:var(--accent); color:#000; border-color:var(--accent); }
-  .pred-note { font-family:var(--mono); font-size:10px; color:var(--ink-3); margin-top:10px; line-height:1.6; }
+  .pred-note { font-family:var(--mono); font-size:12px; color:var(--ink-3); margin-top:10px; line-height:1.6; }
   .pred-value-in { display:grid; grid-template-columns:minmax(0,1fr) 130px; gap:8px; margin-bottom:12px; }
   .pred-verdict { font-family:var(--display); font-size:22px; margin-bottom:8px; }
   .pred-verdict.value { color:var(--accent); } .pred-verdict.fair { color:var(--ink); } .pred-verdict.none { color:var(--ink-3); font-size:14px; font-family:var(--mono); }
   .pred-kv { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px dashed var(--line); font-size:12px; }
-  .pred-kv span { color:var(--ink-3); font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; } .pred-kv b { font-family:var(--mono); }
+  .pred-kv span { color:var(--ink-3); font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; } .pred-kv b { font-family:var(--mono); }
   .pred-cmp-head { display:flex; justify-content:space-between; font-family:var(--serif); font-size:15px; margin-bottom:6px; }
   .pred-cmp-row { display:grid; grid-template-columns:1fr 1.4fr 1fr; align-items:center; padding:7px 0; border-bottom:1px dashed var(--line); font-family:var(--mono); font-size:12px; }
   .pred-cmp-row span:first-child { text-align:left; } .pred-cmp-row span:last-child { text-align:right; }
-  .pred-cmp-row em { font-style:normal; text-align:center; font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); }
+  .pred-cmp-row em { font-style:normal; text-align:center; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); }
   .pred-cmp-row .best { color:var(--accent); font-weight:700; }
-  .pred-form { display:inline-flex; width:18px; height:18px; align-items:center; justify-content:center; border-radius:3px; font-size:9px; font-weight:700; margin-right:2px; }
+  .pred-form { display:inline-flex; width:18px; height:18px; align-items:center; justify-content:center; border-radius:3px; font-size:12px; font-weight:700; margin-right:2px; }
   .pred-form.W { background:var(--accent); color:#000; } .pred-form.D { background:var(--bg-3); color:var(--ink); border:1px solid var(--line); } .pred-form.L { background:#f87171; color:#000; }
   .pred-last-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
   .pred-last { display:grid; grid-template-columns:22px 1fr auto; align-items:center; gap:6px; padding:5px 0; font-size:12px; border-bottom:1px dashed var(--line); }
   .pred-last b { font-family:var(--mono); }
   .pred-call { display:grid; grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) 56px; gap:10px; align-items:center; width:100%; text-align:left;
     background:transparent; border:0; border-bottom:1px dashed var(--line); color:var(--ink); padding:10px 0; cursor:pointer; font-size:13px; }
-  .pred-call:hover, .pred-call.on { background:rgba(212,255,60,.05); }
-  .pred-call-m small { display:block; font-family:var(--mono); font-size:9px; color:var(--ink-3); margin-top:2px; }
-  .pred-call-pick { font-family:var(--mono); font-size:11px; color:var(--ink-2); } .pred-call b { font-family:var(--mono); color:var(--accent); text-align:right; }
+  .pred-call:hover, .pred-call.on { background:rgba(29,190,138,.05); }
+  .pred-call-m small { display:block; font-family:var(--mono); font-size:12px; color:var(--ink-3); margin-top:2px; }
+  .pred-call-pick { font-family:var(--mono); font-size:12px; color:var(--ink-2); } .pred-call b { font-family:var(--mono); color:var(--accent); text-align:right; }
   .pred-method { font-size:13px; line-height:1.6; color:var(--ink-2); margin:0; }
   @media (max-width: 900px) { .pred-grid { grid-template-columns:1fr; } }
   @media (max-width: 480px) {
-    .pred-tr { grid-template-columns:minmax(0,1fr) 62px 54px 62px; font-size:11px; }
+    .pred-tr { grid-template-columns:minmax(0,1fr) 62px 54px 62px; font-size:12px; }
     .pred-tr > span:nth-child(3) small { display:none; } .pred-tr > span:nth-child(4) { display:none; }
     .pred-scores { grid-template-columns:repeat(3,1fr); } .pred-last-grid { grid-template-columns:1fr; }
     .pred-team b { font-size:13px; } .pred-xg-num { font-size:26px; } .pred-value-in { grid-template-columns:1fr; }
     .pred-call { grid-template-columns:minmax(0,1fr) 46px; } .pred-call-pick { grid-column:1; }
   }
+
+  /* =====================================================================
+     2026-10 REDESIGN — predictions-first. Palette taken from the logo:
+     navy ink #0A121F and emerald #009D6D, with amber for the away side.
+     One family (Archivo) in two widths: Narrow for numbers, regular for text.
+     ===================================================================== */
+  :root {
+    --bg: #0A121F; --bg-2: #0F1A2B; --bg-3: #16233A;
+    --line: #1F2E46; --line-2: #2B3D5B;
+    --ink: #EEF2F7; --ink-2: #A9B5C6; --ink-3: #74839A;
+    --accent: #1DBE8A; --accent-ink: #03140D;
+    --home: #1DBE8A; --draw: #7E8BA0; --away: #F0B54A;
+    --win: #34D399; --loss: #F87171; --warn: #FBBF24;
+    --accent-2: #F0B54A; --accent-3: #60A5FA;
+    --display: 'Archivo Narrow', 'Archivo', system-ui, sans-serif;
+    --serif: 'Archivo', system-ui, sans-serif;
+    --mono: 'Archivo', system-ui, sans-serif;
+    --sans: 'Archivo', system-ui, sans-serif;
+    --num: 'Archivo Narrow', 'Archivo', system-ui, sans-serif;
+    --r-lg: 18px; --r-md: 12px; --r-sm: 8px;
+  }
+  html, body { font-size: 15px; line-height: 1.55; font-variant-numeric: tabular-nums; }
+  body::before {
+    background-image: radial-gradient(1200px 500px at 50% -200px, rgba(29,190,138,.10), transparent 70%);
+  }
+  body::after { display: none; }
+  /* Retire the terminal look: no forced capitals or tracked-out labels anywhere. */
+  #app *:not(svg):not(svg *) { text-transform: none !important; letter-spacing: normal !important; }
+  #app :is(h1,h2,h3):not(svg):not(svg *) { font-family: var(--serif); font-stretch: 110%; letter-spacing: -0.015em !important; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+  /* Header */
+  header.top { background: rgba(10,18,31,.88); border-bottom-color: var(--line); }
+  .top-inner { padding: 12px 28px; max-width: 1440px; margin: 0 auto; }
+  .brand .tag { font-family: var(--sans); font-size: 12px; color: var(--ink-3); max-width: 170px; line-height: 1.3; }
+  nav.tabs { background: transparent; border: 0; padding: 0; gap: 4px; }
+  nav.tabs button { font-family: var(--sans); font-size: 14px; font-weight: 500; color: var(--ink-2); padding: 8px 14px; }
+  nav.tabs button:hover { color: var(--ink); background: var(--bg-3); }
+  nav.tabs button.active { background: var(--bg-3); color: var(--ink); font-weight: 600; box-shadow: inset 0 -2px 0 var(--accent); border-radius: 10px; }
+  nav.tabs button[data-tab="predict"].active { background: var(--accent); color: var(--accent-ink); box-shadow: none; }
+  .lang-select, .auth-btn { font-family: var(--sans); font-size: 13px; border-radius: 10px; background: var(--bg-2); }
+  .clock { display: none !important; }
+  .live-dot { display: none !important; }
+
+  main { max-width: 1440px; margin: 0 auto; }
+
+  /* Heroes on secondary tabs: quieter, left aligned, no watermark */
+  .hero { border: 0; background: none; padding: 28px 0 8px; margin-bottom: 18px; overflow: visible; }
+  .hero::before { content: none; }
+  .hero h1 { font-size: 38px; font-weight: 800; line-height: 1.08; max-width: 18ch; }
+  .hero h1 em { font-style: normal; color: inherit; }
+  .hero .sub { font-size: 16px; max-width: 62ch; }
+  .hero-meta { font-family: var(--sans); font-size: 12px; color: var(--ink-3); gap: 28px; }
+  .hero-meta b { font-family: var(--num); font-size: 22px; font-weight: 700; }
+
+  .league-pill { font-family: var(--sans); font-size: 13px; font-weight: 500; border-radius: 999px; padding: 7px 14px 7px 8px; background: var(--bg-2); }
+  .league-pill.active { background: var(--ink); color: var(--bg); }
+  .leagues .lg-group { width: 100%; font-size: 12px; color: var(--ink-3); margin: 6px 0 -2px 2px; }
+  .leagues .lg-group:first-child { margin-top: 0; }
+
+  .pred-chip { font-family: var(--sans) !important; border-radius: 999px !important; border-color: var(--accent) !important; color: var(--accent) !important; padding: 3px 10px !important; font-size: 12px !important; }
+
+  /* ================= PREDICTIONS ================= */
+  #tab-predict { padding-top: 22px; }
+  .pv-intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin-bottom: 14px; flex-wrap: wrap; }
+  .pv-intro h1 { font-size: 30px; font-weight: 800; line-height: 1.1; }
+  .pv-intro p { color: var(--ink-2); font-size: 14px; max-width: 60ch; margin-top: 4px; }
+  .pv-stamp { font-size: 13px; color: var(--ink-3); text-align: right; }
+  .pv-stamp b { color: var(--ink); font-weight: 600; }
+
+  .pv-feature { background: linear-gradient(180deg, var(--bg-2), var(--bg)); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 22px 24px 20px; margin-bottom: 26px; position: relative; overflow: hidden; }
+  .pv-feature::after { content: ''; position: absolute; inset: auto -10% -60% auto; width: 60%; height: 120%; background: radial-gradient(closest-side, rgba(240,181,74,.07), transparent); pointer-events: none; }
+  .pv-kicker { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--ink-2); flex-wrap: wrap; }
+  .pv-kicker .flag { width: 18px; height: 13px; }
+  .pv-kicker .pv-label { color: var(--accent); font-weight: 600; }
+  .pv-teams { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; margin: 18px 0 16px; }
+  .pv-team { display: flex; align-items: center; gap: 12px; min-width: 0; }
+  .pv-team.away { flex-direction: row-reverse; text-align: right; }
+  .pv-team b { display: block; font-size: 24px; font-weight: 800; font-stretch: 110%; line-height: 1.1; overflow-wrap: anywhere; }
+  .pv-team small { display: block; color: var(--ink-3); font-size: 13px; margin-top: 2px; }
+  .pv-vs { color: var(--ink-3); font-size: 14px; }
+
+  /* The bar: home | draw | away. The signature element of the product. */
+  .pv-bar { display: flex; height: 60px; border-radius: 12px; overflow: hidden; gap: 3px; }
+  .pv-bar > div { display: flex; align-items: center; padding: 0 14px; min-width: 0; position: relative; }
+  .pv-bar .h { background: var(--home); color: var(--accent-ink); }
+  .pv-bar .d { background: var(--draw); color: #0A121F; justify-content: center; }
+  .pv-bar .a { background: var(--away); color: #1F1404; justify-content: flex-end; }
+  .pv-bar b { font-family: var(--num); font-size: 30px; font-weight: 700; line-height: 1; }
+  .pv-bar.sm { height: 34px; border-radius: 8px; gap: 2px; }
+  .pv-bar.sm b { font-size: 17px; }
+  .pv-bar.sm > div { padding: 0 8px; }
+  .pv-bar-key { display: flex; justify-content: space-between; font-size: 13px; color: var(--ink-2); margin-top: 8px; gap: 8px; }
+  .pv-bar-key span:nth-child(2) { text-align: center; }
+  .pv-bar-key span:last-child { text-align: right; }
+  .pv-bar-key i { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 6px; vertical-align: 1px; }
+  .pv-facts { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 18px; align-items: center; }
+  .pv-fact { font-size: 13px; color: var(--ink-3); }
+  .pv-fact b { display: block; font-family: var(--num); font-size: 22px; font-weight: 700; color: var(--ink); }
+  .pv-open { margin-left: auto; background: var(--ink); color: var(--bg); border: 0; border-radius: 999px; padding: 11px 18px; font: 600 14px var(--sans); cursor: pointer; }
+  .pv-open:hover { background: #fff; }
+
+  .pv-layout { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 28px; align-items: start; }
+  .pv-filters { display: flex; flex-direction: column; gap: 10px; margin-bottom: 8px; position: sticky; top: 64px; z-index: 5; background: var(--bg); padding: 8px 0 10px; }
+  .pv-seg { display: inline-flex; background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px; padding: 3px; align-self: flex-start; max-width: 100%; overflow-x: auto; }
+  .pv-seg button { background: none; border: 0; color: var(--ink-2); font: 500 14px var(--sans); padding: 7px 14px; border-radius: 9px; cursor: pointer; white-space: nowrap; }
+  .pv-seg button span { color: var(--ink-3); margin-left: 4px; font-size: 12px; }
+  .pv-seg button.on { background: var(--bg-3); color: var(--ink); font-weight: 600; }
+  .pv-chips { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+  .pv-chips::-webkit-scrollbar { display: none; }
+  .pv-chip { display: inline-flex; align-items: center; gap: 7px; background: none; border: 1px solid var(--line); color: var(--ink-2); border-radius: 999px; padding: 5px 12px 5px 7px; font: 500 13px var(--sans); cursor: pointer; white-space: nowrap; }
+  .pv-chip .flag { width: 16px; height: 12px; }
+  .pv-chip.on { border-color: var(--ink); color: var(--ink); background: var(--bg-3); }
+
+  .pv-day { font-size: 14px; font-weight: 700; color: var(--ink); margin: 22px 0 6px; display: flex; gap: 10px; align-items: baseline; }
+  .pv-day span { font-weight: 400; color: var(--ink-3); font-size: 13px; }
+  .pv-row { display: grid; grid-template-columns: 52px minmax(0, 1.25fr) minmax(170px, 1fr) 92px; gap: 14px; align-items: center; width: 100%; text-align: left; background: none; border: 0; border-top: 1px solid var(--line); padding: 12px 6px; color: var(--ink); cursor: pointer; font: inherit; border-radius: 0; }
+  .pv-row:hover { background: var(--bg-2); }
+  .pv-row:last-child { border-bottom: 1px solid var(--line); }
+  .pv-time { font-family: var(--num); font-size: 16px; font-weight: 600; color: var(--ink-2); }
+  .pv-time small { display: block; font-family: var(--sans); font-size: 12px; color: var(--ink-3); font-weight: 400; margin-top: 2px; }
+  .pv-match { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+  .pv-t { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pv-t.fav { font-weight: 700; }
+  .pv-comp-line { font-size: 12px; color: var(--ink-3); display: flex; align-items: center; gap: 6px; }
+  .pv-comp-line .flag { width: 14px; height: 10px; }
+  .pv-mini { display: flex; flex-direction: column; gap: 5px; }
+  .pv-minibar { display: flex; height: 8px; border-radius: 4px; overflow: hidden; gap: 2px; }
+  .pv-minibar i { display: block; }
+  .pv-minibar .h { background: var(--home); } .pv-minibar .d { background: var(--draw); } .pv-minibar .a { background: var(--away); }
+  .pv-mininums { display: flex; justify-content: space-between; font-family: var(--num); font-size: 14px; color: var(--ink-2); }
+  .pv-mininums b { color: var(--ink); font-weight: 700; }
+  .pv-call { text-align: right; }
+  .pv-call b { display: block; font-family: var(--num); font-size: 22px; font-weight: 700; line-height: 1; }
+  .pv-call small { display: block; font-size: 12px; color: var(--ink-3); margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pv-conf { display: inline-flex; gap: 2px; align-items: flex-end; height: 10px; margin-left: 6px; vertical-align: 0; }
+  .pv-conf i { width: 3px; background: var(--line-2); border-radius: 1px; }
+  .pv-conf i:nth-child(1) { height: 4px; } .pv-conf i:nth-child(2) { height: 7px; } .pv-conf i:nth-child(3) { height: 10px; }
+  .pv-conf.low i:nth-child(1), .pv-conf.med i:nth-child(-n+2), .pv-conf.high i { background: var(--ink-2); }
+  .pv-empty { padding: 40px 0; color: var(--ink-3); }
+
+  .pv-side { display: flex; flex-direction: column; gap: 18px; position: sticky; top: 76px; }
+  .pv-card { background: var(--bg-2); border: 1px solid var(--line); border-radius: var(--r-md); padding: 16px 18px; }
+  .pv-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .pv-card .pv-sub { font-size: 13px; color: var(--ink-3); margin-bottom: 10px; }
+  .pv-callrow { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; width: 100%; background: none; border: 0; border-top: 1px solid var(--line); padding: 10px 0; color: var(--ink); text-align: left; cursor: pointer; font: inherit; }
+  .pv-callrow:first-of-type { border-top: 0; }
+  .pv-callrow span { font-size: 14px; font-weight: 600; }
+  .pv-callrow small { grid-column: 1; font-size: 12px; color: var(--ink-3); }
+  .pv-callrow b { grid-row: 1 / span 2; grid-column: 2; align-self: center; font-family: var(--num); font-size: 22px; color: var(--accent); }
+  .pv-cup { display: grid; grid-template-columns: 22px 1fr auto; gap: 2px 10px; align-items: center; width: 100%; padding: 9px 0; border-top: 1px solid var(--line); background: none; border-left: 0; border-right: 0; border-bottom: 0; color: var(--ink); text-align: left; font: inherit; cursor: default; }
+  .pv-cup.has { cursor: pointer; }
+  .pv-cup.has:hover span { color: var(--accent); }
+  .pv-cup:first-of-type { border-top: 0; }
+  .pv-cup .flag { width: 18px; height: 13px; grid-row: 1 / span 2; }
+  .pv-cup span { font-size: 14px; font-weight: 600; }
+  .pv-cup small { grid-column: 2; font-size: 12px; color: var(--ink-3); }
+  .pv-cup em { grid-row: 1 / span 2; grid-column: 3; font-style: normal; font-size: 12px; color: var(--ink-2); text-align: right; }
+  .pv-cup.has em { color: var(--accent); font-weight: 600; }
+  .pv-card details summary { cursor: pointer; font-weight: 700; font-size: 16px; list-style: none; display: flex; justify-content: space-between; }
+  .pv-card details summary::after { content: '+'; color: var(--ink-3); }
+  .pv-card details[open] summary::after { content: '–'; }
+  .pv-card details p, .pv-card details .pred-note { font-size: 13px; color: var(--ink-2); margin-top: 10px; line-height: 1.55; }
+
+  /* Detail sheet */
+  .pv-sheet { position: fixed; inset: 0; z-index: 400; display: flex; justify-content: flex-end; background: rgba(4,8,15,.62); backdrop-filter: blur(3px); }
+  .pv-sheet[hidden] { display: none; }
+  .pv-panel { width: min(680px, 100%); height: 100%; overflow-y: auto; background: var(--bg); border-left: 1px solid var(--line); padding: 0 26px 120px; animation: pvIn .22s ease-out; overscroll-behavior: contain; }
+  @keyframes pvIn { from { transform: translateX(28px); opacity: .4; } to { transform: none; opacity: 1; } }
+  .pv-panel-head { position: sticky; top: 0; background: var(--bg); display: flex; justify-content: space-between; align-items: center; padding: 16px 0 12px; z-index: 2; border-bottom: 1px solid var(--line); margin-bottom: 18px; }
+  .pv-close { background: var(--bg-3); border: 1px solid var(--line); color: var(--ink); border-radius: 999px; padding: 7px 14px; font: 500 14px var(--sans); cursor: pointer; }
+  .pv-block { margin-top: 28px; }
+  .pv-block h3 { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+  .pv-block .pv-sub { font-size: 13px; color: var(--ink-3); margin-bottom: 12px; }
+  .pv-scores { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
+  .pv-scores div { background: var(--bg-2); border: 1px solid var(--line); border-radius: 10px; padding: 8px 4px; text-align: center; }
+  .pv-scores b { display: block; font-family: var(--num); font-size: 20px; }
+  .pv-scores span { font-size: 12px; color: var(--ink-3); }
+  .pv-adv { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
+  .pv-adv div { border-radius: 10px; padding: 10px 12px; background: var(--bg-2); border: 1px solid var(--line); }
+  .pv-adv div:first-child { border-left: 4px solid var(--home); }
+  .pv-adv div:last-child { border-left: 4px solid var(--away); text-align: right; border-right: 0; }
+  .pv-adv b { font-family: var(--num); font-size: 24px; display: block; }
+  .pv-adv small { font-size: 12px; color: var(--ink-3); }
+  .pv-note { font-size: 12px; color: var(--ink-3); margin-top: 10px; line-height: 1.5; }
+  .pv-mkt { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .pv-mkt th { text-align: left; font-weight: 500; color: var(--ink-3); font-size: 12px; padding: 0 6px 6px; }
+  .pv-mkt th:not(:first-child), .pv-mkt td:not(:first-child) { text-align: right; }
+  .pv-mkt td { padding: 9px 6px; border-top: 1px solid var(--line); vertical-align: middle; }
+  .pv-mkt td small { display: block; color: var(--ink-3); font-size: 12px; }
+  .pv-mkt .num { font-family: var(--num); font-size: 16px; font-weight: 600; }
+  .pv-mkt .pos { color: var(--win); }
+  .pv-add { background: none; border: 1px solid var(--line-2); color: var(--ink); border-radius: 999px; padding: 5px 11px; font: 500 12px var(--sans); cursor: pointer; white-space: nowrap; }
+  .pv-add.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .pv-value { display: grid; grid-template-columns: 1fr 140px; gap: 8px; }
+  .pv-value select, .pv-value input { background: var(--bg-2); border: 1px solid var(--line-2); color: var(--ink); border-radius: 10px; padding: 10px 12px; font: 15px var(--sans); min-width: 0; }
+  #pred-v-out { margin-top: 12px; }
+  .pred-verdict { display: inline-block; font-weight: 700; border-radius: 999px; padding: 4px 12px; margin-bottom: 8px; font-family: var(--sans) !important; }
+  .pred-verdict.value { background: var(--accent); color: var(--accent-ink); }
+  .pred-verdict.fair { background: var(--bg-3); color: var(--ink); }
+  .pred-verdict.none { background: rgba(248,113,113,.14); color: var(--loss); }
+  .pred-kv { display: flex; justify-content: space-between; padding: 6px 0; border-top: 1px solid var(--line); font-size: 14px; }
+  .pred-kv span { color: var(--ink-2); }
+  .pred-kv .pos { color: var(--win); } .pred-kv .neg { color: var(--loss); }
+  .pv-cmp { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .pv-cmp td { padding: 8px 4px; border-top: 1px solid var(--line); text-align: center; }
+  .pv-cmp td:first-child, .pv-cmp td:last-child { width: 32%; font-family: var(--num); font-size: 16px; font-weight: 600; }
+  .pv-cmp td:nth-child(2) { color: var(--ink-3); font-size: 12px; }
+  .pv-cmp td.best { color: var(--accent); }
+  .pv-cmp th { font-size: 14px; padding-bottom: 6px; }
+  .pred-form { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 5px; font-size: 12px; font-weight: 700; margin: 0 1px; font-family: var(--sans) !important; }
+  .pred-form.W { background: rgba(52,211,153,.18); color: var(--win); }
+  .pred-form.D { background: var(--bg-3); color: var(--ink-2); }
+  .pred-form.L { background: rgba(248,113,113,.16); color: var(--loss); }
+  .pv-last { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 20px; font-size: 13px; }
+  .pv-last div { display: flex; gap: 8px; align-items: center; }
+  .pv-last div b { margin-left: auto; font-family: var(--num); }
+  .pv-rate { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .pv-rate td { padding: 8px 4px; border-top: 1px solid var(--line); }
+  .pv-rate td:not(:first-child) { text-align: right; font-family: var(--num); font-size: 15px; }
+
+  /* News */
+  .news-item { border-radius: var(--r-md); }
+  .news-title { font-family: var(--serif) !important; font-stretch: 105%; font-weight: 700 !important; }
+  .news-model { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-2); }
+  .news-model .pv-minibar { width: 120px; }
+  .news-model button { margin-left: auto; background: none; border: 1px solid var(--line-2); color: var(--ink); border-radius: 999px; padding: 4px 11px; font: 500 12px var(--sans); cursor: pointer; }
+  .news-background { color: var(--ink-3); font-size: 12px; }
+
+  .pv-layout > * { min-width: 0; }
+  @media (max-width: 1100px) {
+    .pv-layout { grid-template-columns: minmax(0, 1fr); }
+    .pv-side { position: static; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  }
+  @media (max-width: 760px) {
+    .top-inner { padding: 10px 16px; }
+    nav.tabs { overflow-x: auto; scrollbar-width: none; flex-wrap: nowrap; max-width: 100%; }
+    nav.tabs::-webkit-scrollbar { display: none; }
+    nav.tabs button { font-size: 14px; padding: 8px 12px; white-space: nowrap; }
+    .brand .tag { display: none; }
+    .hero h1 { font-size: 28px; }
+    .hero .sub { font-size: 15px; }
+    #tab-predict { padding-top: 14px; }
+    .pv-intro h1 { font-size: 24px; }
+    .pv-stamp { text-align: left; }
+    .pv-feature { padding: 16px 16px 16px; border-radius: 14px; }
+    .pv-team { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .pv-team.away { flex-direction: column; align-items: flex-end; }
+    .pv-team b { font-size: 18px; }
+    .pv-bar { height: 48px; }
+    .pv-bar b { font-size: 22px; }
+    .pv-bar > div { padding: 0 8px; }
+    .pv-facts { gap: 10px 20px; }
+    .pv-open { width: 100%; margin-left: 0; }
+    .pv-filters { top: 56px; }
+    .pv-row { grid-template-columns: 46px minmax(0, 1fr) 74px; grid-template-areas: "time match call" "time mini mini"; row-gap: 10px; padding: 12px 2px; }
+    .pv-time { grid-area: time; align-self: start; font-size: 15px; }
+    .pv-match { grid-area: match; }
+    .pv-mini { grid-area: mini; }
+    .pv-call { grid-area: call; align-self: start; }
+    .pv-t { font-size: 15px; }
+    .pv-panel { padding: 0 16px 140px; border-left: 0; }
+    .pv-scores { grid-template-columns: repeat(3, 1fr); }
+    .pv-value { grid-template-columns: 1fr; }
+    .pv-mkt { font-size: 13px; }
+    .pv-mkt .hide-sm { display: none; }
+    .pv-last { grid-template-columns: 1fr; }
+  }
+
+  #app .news-tag, #app .news-cat-tab > span:first-child { text-transform: lowercase !important; display: inline-block; }
+  #app .news-tag::first-letter, #app .news-cat-tab > span:first-child::first-letter { text-transform: uppercase; }
+  nav.tabs button, .auth-btn, .lang-select { white-space: nowrap; }
+  @media (max-width: 1400px) { .brand .tag { display: none; } }
 </style>
 </head>
 <body>
@@ -1932,12 +2206,11 @@
         <div class="tag" data-i18n="tagline">Soccer Bet Simulation Terminal</div>
       </div>
       <nav class="tabs" id="tabs">
-        <button data-tab="builder" class="active" data-i18n="tab.builder">Builder</button>
-        <button data-tab="wc" data-i18n="tab.wc">World Cup</button>
-        <button data-tab="predict" data-i18n="tab.predict">Predictor</button>
+        <button data-tab="predict" class="active" data-i18n="tab.predict">Predictions</button>
+        <button data-tab="builder" data-i18n="tab.builder">Odds &amp; slip</button>
         <button data-tab="news" data-i18n="tab.news">News</button>
-        <button data-tab="analytics" data-i18n="tab.analytics">Analytics</button>
         <button data-tab="my" data-i18n="tab.my">My Slips</button>
+        <button data-tab="analytics" data-i18n="tab.analytics">Scenario lab</button>
       </nav>
       <div class="top-right">
         <span class="clock" id="clock" aria-label="Current time">
@@ -1974,7 +2247,7 @@
 
   <main>
     <!-- ===== BUILDER ===== -->
-    <section id="tab-builder">
+    <section id="tab-builder" class="hidden">
       <div class="hero">
         <h1 data-i18n="hero.title">Test the parlay <em>before</em> you place it.</h1>
         <p class="sub" data-i18n="hero.sub">Build, stress-test, and price multi-leg soccer bets across the top five European leagues. Live lines from FanDuel and DraftKings, with implied probability, scenario modeling, and an injury-driven news feed.</p>
@@ -1982,7 +2255,6 @@
           <div><b id="stat-matches">38</b><span data-i18n="meta.matches">Matches loaded</span></div>
           <div><b id="stat-markets">14</b><span data-i18n="meta.markets">Market types</span></div>
           <div><b>2</b><span data-i18n="meta.books">Sportsbooks</span></div>
-          <div><b id="stat-updated">14s</b><span data-i18n="meta.updated">Last refresh</span></div>
         </div>
       </div>
 
@@ -1992,7 +2264,7 @@
         <div class="book-toggle" id="book-toggle">
           <span data-i18n="book.compare">Compare books:</span>
         </div>
-        <div style="font-family: var(--mono); font-size:10px; color: var(--ink-3); letter-spacing:.12em; text-transform:uppercase;" data-i18n="oddsformat">
+        <div style="font-family: var(--mono); font-size:12px; color: var(--ink-3); letter-spacing:.12em; text-transform:uppercase;" data-i18n="oddsformat">
           Decimal odds · American available in My Slips
         </div>
       </div>
@@ -2007,21 +2279,6 @@
           <div class="matches" id="matches"></div>
         </div>
       </div>
-    </section>
-
-    <!-- ===== WORLD CUP ===== -->
-    <section id="tab-wc" class="hidden">
-      <div class="hero">
-        <h1 data-i18n="wc.title">World Cup <em>2026</em> archive.</h1>
-        <p class="sub" data-i18n="wc.sub">Spain are world champions. Final results, the knockout bracket, the awards, and how the pre-tournament futures market settled.</p>
-        <div class="hero-meta" id="wc-hero-meta">
-          <div><b data-i18n="wc.arch.spain">Spain</b><span data-i18n="wc.stat.champion">Champion</span></div>
-          <div><b>104</b><span data-i18n="wc.stat.matches">Matches</span></div>
-          <div><b>308</b><span data-i18n="wc.stat.goals">Goals</span></div>
-          <div><b>6.81M</b><span data-i18n="wc.stat.attendance">Attendance</span></div>
-        </div>
-      </div>
-      <div class="wc-body" id="wc-body"><!-- populated by renderWorldCup() --></div>
     </section>
 
     <!-- ===== NEWS ===== -->
@@ -2068,19 +2325,15 @@
     </section>
 
 
-    <!-- ===== PREDICTOR ===== -->
-    <section id="tab-predict" class="hidden">
-      <div class="hero">
-        <h1 data-i18n="pred.title">Bet predictor. <em>Real results in.</em></h1>
-        <p class="sub" data-i18n="pred.sub"></p>
-        <div class="hero-meta">
-          <div><b id="pred-stat-results">—</b><span data-i18n="pred.stat.results">Results analysed</span></div>
-          <div><b id="pred-stat-fixtures">—</b><span data-i18n="pred.stat.fixtures">Fixtures priced</span></div>
-          <div><b>5</b><span data-i18n="pred.stat.leagues">Leagues</span></div>
-          <div><b id="pred-stat-thru">—</b><span data-i18n="pred.stat.thru">Data through</span></div>
+    <!-- ===== PREDICTIONS (home) ===== -->
+    <section id="tab-predict">
+      <div id="pred-body"></div>
+      <div class="pv-sheet" id="pred-sheet" hidden onclick="if(event.target===this) predClose()">
+        <div class="pv-panel" role="dialog" aria-modal="true" aria-label="Prediction">
+          <div class="pv-panel-head"><button class="pv-close" onclick="predClose()" data-i18n="pv.close">Close</button></div>
+          <div id="pred-detail"></div>
         </div>
       </div>
-      <div id="pred-body"></div>
     </section>
 
     <!-- ===== ANALYTICS ===== -->
@@ -2135,7 +2388,7 @@
     <div class="disclaim" data-i18n="disclaim">
       Simulation tool only · No real wagers placed · Odds shown reflect representative live pricing from FanDuel and DraftKings · 18+ where applicable · Gamble responsibly
     </div>
-    <div>v1.0.0 · PARLAY LABS</div>
+    <div>v2.0 · PARLAY LABS</div>
   </footer>
 </div>
 
@@ -2200,16 +2453,58 @@ const authState = {
 // ============= I18N =============
 const I18N = {
   en: {
+    'hero.sub': 'Every fixture from the predictions, priced by six simulated sportsbooks that start from the model and add their usual margin. Tap a price to add it to your slip; the slip stays with you on every tab.',
+    'news.background': 'Season background',
+    'news.model': 'Model',
+    'news.openPred': 'Open prediction',
+    'pv.h1': 'Who wins, by the numbers',
+    'pv.lede': 'Win, draw and loss chances for every fixture in the five leagues, the domestic cups and Europe, worked out from this season\'s results.',
+    'pv.stamp': 'Built from {n} league results<br>through {d}',
+    'pv.featTitle': 'Match of the round',
+    'pv.full': 'Open full prediction',
+    'pv.likely': 'Most likely score',
+    'pv.g.all': 'All',
+    'pv.g.leagues': 'Leagues',
+    'pv.g.cups': 'Cups',
+    'pv.g.europe': 'Europe',
+    'pv.today': 'Today',
+    'pv.tomorrow': 'Tomorrow',
+    'pv.pts': 'pts',
+    'pv.empty': 'No fixtures match this filter.',
+    'pv.toAdvance': 'to go through',
+    'pv.advNote': 'Chance of winning the tie, with extra time and penalties shared out by the two sides\' strength.',
+    'pv.cupsTitle': 'Cup calendar',
+    'pv.cupsSub': 'The next round in each domestic cup',
+    'pv.ties': 'ties',
+    'pv.later': 'Later',
+    'pv.cleanSheets': 'Clean sheet chance, home / away',
+    'pv.close': 'Close',
+    'pv.at': 'at',
+    'pv.neutral': 'Neutral venue',
+    'pv.rating': 'How each side is rated',
+    'pv.att': 'Attack',
+    'pv.def': 'Defence',
+    'pv.strength': 'Strength',
+    'pv.src.data': 'Rated from this season\'s league results',
+    'pv.src.data2': 'Rated from the 2. Bundesliga table',
+    'pv.src.prior': 'No league data here, so this is an estimate',
+    'pv.crossNote': 'Clubs from different leagues or divisions are put on one scale: strength is set by UEFA\'s association coefficients and a division factor, then attack is multiplied and defence divided by it. Treat these ties as a rough guide.',
+    'cup.stage.facup': 'First round (Premier League clubs join in round three)',
+    'cup.stage.eflcup': 'Fourth round',
+    'cup.stage.copadelrey': 'First round',
+    'cup.stage.dfbpokal': 'Second round',
+    'cup.stage.coppaitalia': 'Round of 16',
+    'cup.stage.cdf': 'Round of 64 (Ligue 1 clubs join)',
     'brand': 'PARLAY LABS',
-    'tagline': 'Soccer Bet Simulation Terminal',
-    'tab.builder': 'Builder', 'tab.news': 'News',
-    'tab.analytics': 'Analytics', 'tab.my': 'My Slips',
-    'tab.predict': 'Predictor',
+    'tagline': 'Football predictions from real results',
+    'tab.builder': 'Odds & slip', 'tab.news': 'News',
+    'tab.analytics': 'Scenario lab', 'tab.my': 'My Slips',
+    'tab.predict': 'Predictions',
     'pred.title': 'Bet predictor. <em>Real results in.</em>',
     'pred.sub': 'A goals model built from every 2026-27 league result so far in the top five leagues. It prices each fixture\'s result, goals and correct-score markets, and checks your sportsbook\'s price for value.',
     'pred.stat.results': 'Results analysed',
     'pred.stat.fixtures': 'Fixtures priced',
-    'pred.stat.leagues': 'Leagues',
+    'pred.stat.leagues': 'Competitions',
     'pred.stat.thru': 'Data through',
     'pred.btn': 'Predict',
     'pred.pick': 'Fixture',
@@ -2224,9 +2519,9 @@ const I18N = {
     'pred.col.prob': 'Model %',
     'pred.col.fair': 'Fair odds',
     'pred.col.app': 'App best',
-    'pred.add': '+ Slip',
-    'pred.inslip': '✓ In slip',
-    'pred.appNote': 'Fair odds have no bookmaker margin. App prices are the Builder\'s simulated books, which now start from this model and add each book\'s margin, so they will usually sit just below fair.',
+    'pred.add': 'Add',
+    'pred.inslip': 'In slip',
+    'pred.appNote': 'Fair odds have no bookmaker margin. App prices are the simulated sportsbooks, which start from this model and add a margin, so they usually sit just below fair.',
     'pred.value': 'Value checker',
     'pred.valueSub': 'Pick a market and enter your sportsbook\'s odds (American like +150 or decimal like 2.50)',
     'pred.v.enter': 'Enter odds to check value',
@@ -2253,16 +2548,16 @@ const I18N = {
     'pred.under25': 'Under 2.5 goals',
     'pred.bttsYes': 'Both teams score',
     'pred.bttsNo': 'Not both to score',
-    'pred.top': 'Strongest model calls this round',
-    'pred.topSub': 'Ranked by model probability · tap to open',
+    'pred.top': 'Strongest calls',
+    'pred.topSub': 'The highest-probability outcome in each upcoming fixture',
     'pred.method': 'How the model works',
-    'pred.methodBody': 'Attack and defence ratings come from each team\'s goals scored and conceded per game this season, relative to its league\'s average, and are pulled toward average while samples are small. Expected goals pair the home side\'s attack with the away side\'s defence (and vice versa) using each league\'s real home and away scoring rates. A Poisson model with a Dixon-Coles low-score adjustment turns this into a probability for every scoreline, which add up to the result, goals and clean-sheet markets. The Builder\'s odds now use these same probabilities. Not modelled: injuries, suspensions, rotation, weather and motivation.',
+    'pred.methodBody': 'Attack and defence ratings come from each team\'s goals scored and conceded per game this season, relative to its league\'s average, and are pulled toward average while samples are small. Expected goals pair one side\'s attack with the other\'s defence using each league\'s real home and away scoring rates. A Poisson model with a Dixon-Coles low-score adjustment turns this into a probability for every scoreline, which add up to the result, goals and clean-sheet markets. The simulated sportsbook prices start from these same probabilities. Not modelled: injuries, suspensions, rotation, weather and motivation.',
     'pred.matches': 'matches',
     'pred.disclaimer': 'Model estimates for simulation only, not betting advice.',
-    'pred.none': 'No upcoming domestic fixtures to predict. European ties need cross-league ratings and are not modelled yet.',
+    'pred.none': 'No upcoming fixtures to predict right now. The next round is added as soon as it is confirmed.',
     'live': 'Live odds',
-    'hero.title': 'Test the parlay <em>before</em> you place it.',
-    'hero.sub': "Build, stress-test, and price multi-leg soccer bets across the top five European leagues. Live lines from FanDuel and DraftKings, with implied probability, scenario modeling, and an injury-driven news feed.",
+    'hero.title': 'Compare prices and build your slip.',
+    
     'meta.matches': 'Matches loaded', 'meta.markets': 'Market types',
     'meta.books': 'Sportsbooks', 'meta.updated': 'Last refresh',
     'sec.matches': 'This Matchday', 'sec.matches.sub': 'Tap any market to add to slip',
@@ -2283,9 +2578,9 @@ const I18N = {
     'prob.med': 'Reasonable risk-reward profile.',
     'prob.low': 'Long-shot territory. High variance.',
     'prob.veryLow': 'Statistical lottery ticket.',
-    'news.title': 'News that <em>moves</em> the line.',
-    'news.sub': 'Curated injury reports, lineup news, and tactical shifts across the Premier League, La Liga, Bundesliga, Serie A, and Ligue 1 — each tagged with its likely impact on market prices.',
-    'news.movers': 'Top Line Movers',
+    'news.title': 'What changed since the last round.',
+    'news.sub': 'Results, cup upsets and team news from the five leagues, the domestic cups and Europe. Each story shows what the model now expects for the related fixture.',
+    'news.movers': 'Model\'s strongest calls',
     'news.suspensions': 'Suspensions',
     'news.weather': 'Weather Watch',
     'news.impact': 'Likely market impact:',
@@ -2297,7 +2592,7 @@ const I18N = {
     'news.hourago': 'h ago',
     'news.dayago': 'd ago',
     'news.lastsync': 'Last sync',
-    'ana.title': 'Scenario lab. <em>Run the numbers.</em>',
+    'ana.title': 'Run the numbers on a slip.',
     'ana.sub': "Stress-test parlay configurations, compare expected value against book hold, and simulate 10,000 outcomes for any slip you've built.",
     'ana.s1': 'Parlay size vs. hit rate',
     'ana.s2': 'Recommended preset structures',
@@ -2305,11 +2600,11 @@ const I18N = {
     'my.sub': 'Every slip you simulate is stored in this session. Compare structures and see which configurations have the highest projected return.',
     'my.empty': "You haven't saved any scenarios yet. Build a slip in the Builder tab and hit Save scenario.",
     'my.stake': 'Stake', 'my.return': 'Return', 'my.prob': 'Hit %', 'my.legs': 'Legs',
-    'disclaim': 'Simulation tool only · No real wagers placed · Odds shown reflect representative live pricing from FanDuel and DraftKings · 18+ where applicable · Gamble responsibly',
+    'disclaim': 'Simulation and analysis tool. No real wagers are placed. Sportsbook prices are simulated from the model plus typical margins, so always check your own sportsbook. 18+. Gamble responsibly.',
     'tag.injury': 'INJURY', 'tag.lineup': 'LINEUP', 'tag.transfer': 'TRANSFER',
     'tag.form': 'FORM', 'tag.suspension': 'SUSPENSION', 'tag.tactics': 'TACTICS',
-    'tab.wc': 'World Cup',
-    'wc.title': 'World Cup <em>2026</em> archive.',
+    'tab.wc': 'World Cup 2026',
+    'wc.title': 'World Cup 2026 archive.',
     'wc.sub': 'Spain are world champions. Final results, the knockout bracket, the awards, and how the pre-tournament futures market settled.',
     'wc.stat.days': 'Days to kickoff',
     'wc.stat.teams': 'Teams',
@@ -2531,16 +2826,57 @@ const I18N = {
     'ana.preset.cross': 'Cross-league (5 legs · 2.1 each)',
   },
   es: {
+    'news.background': 'Contexto de la temporada',
+    'news.model': 'Modelo',
+    'news.openPred': 'Ver pronóstico',
+    'pv.h1': 'Quién gana, según los datos',
+    'pv.lede': 'Probabilidades de victoria, empate y derrota para cada partido de las cinco ligas, las copas y Europa, calculadas con los resultados de esta temporada.',
+    'pv.stamp': 'Basado en {n} resultados de liga<br>hasta el {d}',
+    'pv.featTitle': 'Partido de la jornada',
+    'pv.full': 'Ver pronóstico completo',
+    'pv.likely': 'Marcador más probable',
+    'pv.g.all': 'Todo',
+    'pv.g.leagues': 'Ligas',
+    'pv.g.cups': 'Copas',
+    'pv.g.europe': 'Europa',
+    'pv.today': 'Hoy',
+    'pv.tomorrow': 'Mañana',
+    'pv.pts': 'pts',
+    'pv.empty': 'Ningún partido coincide con este filtro.',
+    'pv.toAdvance': 'pasa',
+    'pv.advNote': 'Probabilidad de ganar la eliminatoria, repartiendo prórroga y penaltis según la fuerza de cada equipo.',
+    'pv.cupsTitle': 'Calendario de copas',
+    'pv.cupsSub': 'La próxima ronda de cada copa nacional',
+    'pv.ties': 'partidos',
+    'pv.later': 'Más adelante',
+    'pv.cleanSheets': 'Portería a cero, local / visitante',
+    'pv.close': 'Cerrar',
+    'pv.at': 'en',
+    'pv.neutral': 'Campo neutral',
+    'pv.rating': 'Cómo se valora a cada equipo',
+    'pv.att': 'Ataque',
+    'pv.def': 'Defensa',
+    'pv.strength': 'Fuerza',
+    'pv.src.data': 'Valorado con los resultados de liga de esta temporada',
+    'pv.src.data2': 'Valorado con la tabla de la 2. Bundesliga',
+    'pv.src.prior': 'Sin datos de liga: es una estimación',
+    'pv.crossNote': 'Los clubes de distintas ligas o divisiones se ponen en una misma escala: la fuerza sale de los coeficientes de asociación de la UEFA y un factor de división, que multiplica el ataque y divide la defensa. Toma estas eliminatorias como una guía aproximada.',
+    'cup.stage.facup': 'Primera ronda (los clubes de la Premier entran en la tercera)',
+    'cup.stage.eflcup': 'Cuarta ronda',
+    'cup.stage.copadelrey': 'Primera ronda',
+    'cup.stage.dfbpokal': 'Segunda ronda',
+    'cup.stage.coppaitalia': 'Octavos de final',
+    'cup.stage.cdf': 'Treintaidosavos (entran los de Ligue 1)',
     'brand': 'PARLAY LABS',
-    'tagline': 'Terminal de Simulación de Apuestas',
-    'tab.builder': 'Constructor', 'tab.news': 'Noticias',
-    'tab.analytics': 'Análisis', 'tab.my': 'Mis Boletos',
+    'tagline': 'Pronósticos de fútbol con resultados reales',
+    'tab.builder': 'Cuotas y boleto', 'tab.news': 'Noticias',
+    'tab.analytics': 'Escenarios', 'tab.my': 'Mis Boletos',
     'tab.predict': 'Pronósticos',
     'pred.title': 'Pronosticador. <em>Con resultados reales.</em>',
     'pred.sub': 'Un modelo de goles construido con todos los resultados de 2026-27 de las cinco grandes ligas. Calcula resultado, goles y marcador exacto de cada partido y comprueba si la cuota de tu casa de apuestas tiene valor.',
     'pred.stat.results': 'Resultados analizados',
     'pred.stat.fixtures': 'Partidos calculados',
-    'pred.stat.leagues': 'Ligas',
+    'pred.stat.leagues': 'Competiciones',
     'pred.stat.thru': 'Datos hasta',
     'pred.btn': 'Pronóstico',
     'pred.pick': 'Partido',
@@ -2555,9 +2891,9 @@ const I18N = {
     'pred.col.prob': 'Modelo %',
     'pred.col.fair': 'Cuota justa',
     'pred.col.app': 'Mejor app',
-    'pred.add': '+ Boleto',
-    'pred.inslip': '✓ En boleto',
-    'pred.appNote': 'La cuota justa no incluye margen. Las cuotas de la app son las casas simuladas del Constructor, que ahora parten de este modelo y añaden el margen de cada casa, así que suelen quedar algo por debajo de la justa.',
+    'pred.add': 'Añadir',
+    'pred.inslip': 'En boleto',
+    'pred.appNote': 'Las cuotas justas no tienen margen. Las de la app son las casas simuladas, que parten del modelo y añaden margen, así que suelen quedar algo por debajo.',
     'pred.value': 'Comprobador de valor',
     'pred.valueSub': 'Elige un mercado e introduce la cuota de tu casa (americana como +150 o decimal como 2.50)',
     'pred.v.enter': 'Introduce una cuota para comprobar',
@@ -2584,16 +2920,16 @@ const I18N = {
     'pred.under25': 'Menos de 2.5 goles',
     'pred.bttsYes': 'Ambos marcan',
     'pred.bttsNo': 'No marcan ambos',
-    'pred.top': 'Pronósticos más claros de la jornada',
-    'pred.topSub': 'Ordenados por probabilidad · toca para abrir',
+    'pred.top': 'Pronósticos más claros',
+    'pred.topSub': 'El resultado más probable de cada partido próximo',
     'pred.method': 'Cómo funciona el modelo',
-    'pred.methodBody': 'Los índices de ataque y defensa salen de los goles marcados y recibidos por partido esta temporada, en relación con la media de su liga, y se acercan a la media mientras la muestra es pequeña. Los goles esperados combinan el ataque local con la defensa visitante (y viceversa) usando las tasas reales de goles en casa y fuera de cada liga. Un modelo de Poisson con ajuste Dixon-Coles para marcadores bajos da la probabilidad de cada marcador, que se suman en los mercados de resultado, goles y portería a cero. Las cuotas del Constructor usan ahora estas mismas probabilidades. No se modelan lesiones, sanciones, rotaciones, clima ni motivación.',
+    'pred.methodBody': 'Los ratings de ataque y defensa salen de los goles a favor y en contra por partido de cada equipo esta temporada, relativos a la media de su liga, y se acercan a la media mientras la muestra es pequeña. Los goles esperados cruzan el ataque de un equipo con la defensa del otro usando las tasas reales de goles en casa y fuera de cada liga. Un modelo de Poisson con el ajuste Dixon-Coles da la probabilidad de cada marcador, que se suman en los mercados de resultado, goles y portería a cero. Las cuotas simuladas parten de estas mismas probabilidades. No se modelan: lesiones, sanciones, rotaciones, clima ni motivación.',
     'pred.matches': 'partidos',
     'pred.disclaimer': 'Estimaciones del modelo solo para simulación, no son consejos de apuesta.',
-    'pred.none': 'No hay partidos de liga próximos que pronosticar. Los cruces europeos necesitan índices entre ligas y aún no se modelan.',
+    'pred.none': 'No hay partidos próximos para pronosticar. La siguiente jornada se añade en cuanto se confirma.',
     'live': 'Cuotas en vivo',
-    'hero.title': 'Prueba el combinado <em>antes</em> de apostarlo.',
-    'hero.sub': 'Construye, evalúa y cotiza apuestas múltiples en las cinco grandes ligas europeas. Cuotas en directo de FanDuel y DraftKings, con probabilidad implícita, modelado de escenarios y noticias de lesiones que mueven la línea.',
+    'hero.title': 'Compara cuotas y arma tu boleto.',
+    'hero.sub': 'Todos los partidos de los pronósticos, con precios de seis casas simuladas que parten del modelo y añaden su margen habitual. Toca una cuota para añadirla al boleto; el boleto te acompaña en todas las pestañas.',
     'meta.matches': 'Partidos cargados', 'meta.markets': 'Tipos de mercado',
     'meta.books': 'Casas de apuestas', 'meta.updated': 'Última actualización',
     'sec.matches': 'Esta Jornada', 'sec.matches.sub': 'Toca cualquier mercado para añadirlo',
@@ -2613,9 +2949,9 @@ const I18N = {
     'prob.med': 'Perfil riesgo-recompensa razonable.',
     'prob.low': 'Territorio de riesgo. Alta varianza.',
     'prob.veryLow': 'Boleto de lotería estadística.',
-    'news.title': 'Noticias que <em>mueven</em> la línea.',
-    'news.sub': 'Reportes seleccionados de lesiones, alineaciones y cambios tácticos en Premier League, LaLiga, Bundesliga, Serie A y Ligue 1, etiquetados según su impacto previsto en las cuotas.',
-    'news.movers': 'Mayores Movimientos',
+    'news.title': 'Qué cambió desde la última jornada.',
+    'news.sub': 'Resultados, sorpresas de copa y noticias de equipos de las cinco ligas, las copas nacionales y Europa. Cada noticia muestra lo que el modelo espera ahora para el partido relacionado.',
+    'news.movers': 'Apuestas más claras del modelo',
     'news.suspensions': 'Sanciones',
     'news.weather': 'Pronóstico Climático',
     'news.impact': 'Impacto probable:',
@@ -2627,7 +2963,7 @@ const I18N = {
     'news.hourago': 'h',
     'news.dayago': 'd',
     'news.lastsync': 'Sincronizado',
-    'ana.title': 'Laboratorio de escenarios. <em>Calcula los números.</em>',
+    'ana.title': 'Haz números con tu boleto.',
     'ana.sub': 'Evalúa configuraciones de combinadas, compara el valor esperado contra el margen de la casa y simula 10.000 resultados para cualquier boleto.',
     'ana.s1': 'Tamaño del combinado vs. tasa de acierto',
     'ana.s2': 'Estructuras predefinidas recomendadas',
@@ -2635,11 +2971,11 @@ const I18N = {
     'my.sub': 'Cada boleto que simulas se almacena en esta sesión. Compara estructuras y descubre cuáles tienen el mayor retorno proyectado.',
     'my.empty': 'Aún no has guardado escenarios. Construye un boleto en la pestaña Constructor y pulsa Guardar.',
     'my.stake': 'Apuesta', 'my.return': 'Devolución', 'my.prob': '% Acierto', 'my.legs': 'Selec.',
-    'disclaim': 'Herramienta de simulación · Sin apuestas reales · Las cuotas reflejan precios representativos de FanDuel y DraftKings · +18 · Juega con responsabilidad',
+    'disclaim': 'Herramienta de simulación y análisis. No se realizan apuestas reales. Las cuotas de las casas son simuladas a partir del modelo más márgenes típicos: consulta siempre tu casa de apuestas. +18. Juega con responsabilidad.',
     'tag.injury': 'LESIÓN', 'tag.lineup': 'ALINEACIÓN', 'tag.transfer': 'FICHAJE',
     'tag.form': 'FORMA', 'tag.suspension': 'SANCIÓN', 'tag.tactics': 'TÁCTICA',
-    'tab.wc': 'Mundial',
-    'wc.title': 'Archivo del Mundial <em>2026</em>.',
+    'tab.wc': 'Mundial 2026',
+    'wc.title': 'Archivo del Mundial 2026.',
     'wc.sub': 'España es campeona del mundo. Resultados finales, el cuadro eliminatorio, los premios y cómo se resolvió el mercado de ganador previo al torneo.',
     'wc.stat.days': 'Días al inicio',
     'wc.stat.teams': 'Selecciones',
@@ -2861,16 +3197,57 @@ const I18N = {
     'ana.preset.cross': 'Multi-liga (5 sel · 2.1 c/u)',
   },
   de: {
+    'news.background': 'Saison-Hintergrund',
+    'news.model': 'Modell',
+    'news.openPred': 'Prognose öffnen',
+    'pv.h1': 'Wer gewinnt, in Zahlen',
+    'pv.lede': 'Sieg-, Remis- und Niederlagenchancen für jedes Spiel der fünf Ligen, der Pokale und Europas, berechnet aus den Ergebnissen dieser Saison.',
+    'pv.stamp': 'Aus {n} Ligaergebnissen<br>bis {d}',
+    'pv.featTitle': 'Spiel der Runde',
+    'pv.full': 'Ganze Prognose öffnen',
+    'pv.likely': 'Wahrscheinlichstes Ergebnis',
+    'pv.g.all': 'Alle',
+    'pv.g.leagues': 'Ligen',
+    'pv.g.cups': 'Pokale',
+    'pv.g.europe': 'Europa',
+    'pv.today': 'Heute',
+    'pv.tomorrow': 'Morgen',
+    'pv.pts': 'Pkt.',
+    'pv.empty': 'Keine Spiele für diesen Filter.',
+    'pv.toAdvance': 'kommt weiter',
+    'pv.advNote': 'Chance aufs Weiterkommen; Verlängerung und Elfmeterschießen nach Stärke der Teams verteilt.',
+    'pv.cupsTitle': 'Pokal-Kalender',
+    'pv.cupsSub': 'Die nächste Runde in jedem nationalen Pokal',
+    'pv.ties': 'Spiele',
+    'pv.later': 'Später',
+    'pv.cleanSheets': 'Zu-null-Chance, Heim / Gast',
+    'pv.close': 'Schließen',
+    'pv.at': 'in',
+    'pv.neutral': 'Neutraler Platz',
+    'pv.rating': 'Wie jedes Team bewertet wird',
+    'pv.att': 'Angriff',
+    'pv.def': 'Abwehr',
+    'pv.strength': 'Stärke',
+    'pv.src.data': 'Bewertet aus den Ligaergebnissen dieser Saison',
+    'pv.src.data2': 'Bewertet aus der Tabelle der 2. Bundesliga',
+    'pv.src.prior': 'Keine Ligadaten, daher eine Schätzung',
+    'pv.crossNote': 'Klubs aus verschiedenen Ligen oder Spielklassen kommen auf eine Skala: Die Stärke ergibt sich aus den UEFA-Verbandskoeffizienten und einem Ligafaktor, der den Angriff multipliziert und die Abwehr teilt. Diese Spiele nur als grobe Orientierung nehmen.',
+    'cup.stage.facup': '1. Runde (Premier-League-Klubs ab Runde 3)',
+    'cup.stage.eflcup': '4. Runde',
+    'cup.stage.copadelrey': '1. Runde',
+    'cup.stage.dfbpokal': '2. Runde',
+    'cup.stage.coppaitalia': 'Achtelfinale',
+    'cup.stage.cdf': 'Runde der letzten 64 (Ligue-1-Klubs steigen ein)',
     'brand': 'PARLAY LABS',
-    'tagline': 'Fußball-Wettsimulations-Terminal',
-    'tab.builder': 'Builder', 'tab.news': 'News',
-    'tab.analytics': 'Analyse', 'tab.my': 'Meine Tipps',
-    'tab.predict': 'Prognose',
+    'tagline': 'Fußballprognosen aus echten Ergebnissen',
+    'tab.builder': 'Quoten & Schein', 'tab.news': 'News',
+    'tab.analytics': 'Szenarien', 'tab.my': 'Meine Tipps',
+    'tab.predict': 'Prognosen',
     'pred.title': 'Wett-Prognose. <em>Aus echten Ergebnissen.</em>',
     'pred.sub': 'Ein Tormodell aus allen Ligaergebnissen der Saison 2026/27 in den fünf Topligen. Es berechnet Ergebnis-, Tor- und Resultatmärkte für jedes Spiel und prüft die Quote deines Buchmachers auf Value.',
     'pred.stat.results': 'Ausgewertete Spiele',
     'pred.stat.fixtures': 'Berechnete Spiele',
-    'pred.stat.leagues': 'Ligen',
+    'pred.stat.leagues': 'Wettbewerbe',
     'pred.stat.thru': 'Daten bis',
     'pred.btn': 'Prognose',
     'pred.pick': 'Spiel',
@@ -2885,9 +3262,9 @@ const I18N = {
     'pred.col.prob': 'Modell %',
     'pred.col.fair': 'Faire Quote',
     'pred.col.app': 'Beste App',
-    'pred.add': '+ Schein',
-    'pred.inslip': '✓ Im Schein',
-    'pred.appNote': 'Faire Quoten enthalten keine Buchmacher-Marge. App-Quoten stammen von den simulierten Buchmachern des Builders, die jetzt auf diesem Modell aufbauen und ihre Marge aufschlagen – sie liegen daher meist knapp unter fair.',
+    'pred.add': 'Hinzufügen',
+    'pred.inslip': 'Auf Schein',
+    'pred.appNote': 'Faire Quoten enthalten keine Marge. App-Quoten stammen von den simulierten Buchmachern, die vom Modell ausgehen und eine Marge aufschlagen, sie liegen daher meist knapp darunter.',
     'pred.value': 'Value-Check',
     'pred.valueSub': 'Markt wählen und die Quote deines Buchmachers eingeben (amerikanisch wie +150 oder dezimal wie 2.50)',
     'pred.v.enter': 'Quote eingeben, um Value zu prüfen',
@@ -2914,16 +3291,16 @@ const I18N = {
     'pred.under25': 'Unter 2,5 Tore',
     'pred.bttsYes': 'Beide treffen',
     'pred.bttsNo': 'Nicht beide treffen',
-    'pred.top': 'Stärkste Modelltipps der Runde',
-    'pred.topSub': 'Nach Wahrscheinlichkeit sortiert · antippen zum Öffnen',
+    'pred.top': 'Klarste Tipps',
+    'pred.topSub': 'Das wahrscheinlichste Ergebnis jedes anstehenden Spiels',
     'pred.method': 'So funktioniert das Modell',
-    'pred.methodBody': 'Angriffs- und Abwehrwerte basieren auf den Toren und Gegentoren pro Spiel in dieser Saison im Verhältnis zum Ligaschnitt und werden bei kleinen Stichproben zum Durchschnitt gezogen. Erwartete Tore kombinieren den Heimangriff mit der Auswärtsabwehr (und umgekehrt) anhand der echten Heim- und Auswärtstorquoten jeder Liga. Ein Poisson-Modell mit Dixon-Coles-Korrektur für knappe Ergebnisse liefert die Wahrscheinlichkeit jedes Resultats, die sich zu Ergebnis-, Tor- und Zu-null-Märkten summieren. Die Builder-Quoten nutzen jetzt dieselben Wahrscheinlichkeiten. Nicht modelliert: Verletzungen, Sperren, Rotation, Wetter und Motivation.',
+    'pred.methodBody': 'Angriffs- und Abwehrwerte stammen aus den Toren und Gegentoren pro Spiel jedes Teams in dieser Saison, relativ zum Ligaschnitt, und werden bei kleinen Stichproben zum Schnitt gezogen. Erwartete Tore kombinieren den Angriff der einen mit der Abwehr der anderen Mannschaft anhand der echten Heim- und Auswärtstorquoten jeder Liga. Ein Poisson-Modell mit Dixon-Coles-Korrektur liefert die Wahrscheinlichkeit jedes Ergebnisses, daraus ergeben sich Sieg-, Tore- und Zu-null-Märkte. Die simulierten Buchmacherquoten gehen von denselben Wahrscheinlichkeiten aus. Nicht modelliert: Verletzungen, Sperren, Rotation, Wetter und Motivation.',
     'pred.matches': 'Spiele',
     'pred.disclaimer': 'Modellschätzungen nur zur Simulation, keine Wettberatung.',
-    'pred.none': 'Keine anstehenden Ligaspiele für eine Prognose. Europapokalspiele brauchen ligaübergreifende Werte und sind noch nicht modelliert.',
+    'pred.none': 'Gerade keine anstehenden Spiele. Die nächste Runde wird ergänzt, sobald sie feststeht.',
     'live': 'Live-Quoten',
-    'hero.title': 'Teste den Kombi-Schein, <em>bevor</em> du ihn abgibst.',
-    'hero.sub': 'Erstelle, prüfe und kalkuliere Kombi-Wetten aus den fünf großen europäischen Ligen. Live-Quoten von FanDuel und DraftKings, mit impliziter Wahrscheinlichkeit, Szenarien-Modellierung und einem Verletzungsticker, der die Linie bewegt.',
+    'hero.title': 'Quoten vergleichen, Schein bauen.',
+    'hero.sub': 'Alle Spiele aus den Prognosen, bepreist von sechs simulierten Buchmachern, die vom Modell ausgehen und ihre übliche Marge aufschlagen. Tippe auf eine Quote, um sie auf den Schein zu legen; der Schein bleibt auf jedem Tab.',
     'meta.matches': 'Geladene Spiele', 'meta.markets': 'Markttypen',
     'meta.books': 'Buchmacher', 'meta.updated': 'Aktualisiert',
     'sec.matches': 'Dieser Spieltag', 'sec.matches.sub': 'Tippe einen Markt zum Hinzufügen',
@@ -2944,9 +3321,9 @@ const I18N = {
     'prob.med': 'Vernünftiges Risiko-Ertrags-Profil.',
     'prob.low': 'Risikobereich. Hohe Varianz.',
     'prob.veryLow': 'Statistisches Lotterielos.',
-    'news.title': 'News, die <em>die Linie bewegen</em>.',
-    'news.sub': 'Kuratierte Verletzungsberichte, Aufstellungen und taktische Veränderungen aus Premier League, LaLiga, Bundesliga, Serie A und Ligue 1 — jeweils mit erwarteter Auswirkung auf die Quoten.',
-    'news.movers': 'Größte Quotenbewegungen',
+    'news.title': 'Was sich seit dem letzten Spieltag geändert hat.',
+    'news.sub': 'Ergebnisse, Pokal-Überraschungen und Teamnews aus den fünf Ligen, den nationalen Pokalen und Europa. Jede Meldung zeigt, was das Modell für das zugehörige Spiel erwartet.',
+    'news.movers': 'Klarste Modell-Tipps',
     'news.suspensions': 'Sperren',
     'news.weather': 'Wetter-Watch',
     'news.impact': 'Erwartete Marktauswirkung:',
@@ -2958,7 +3335,7 @@ const I18N = {
     'news.hourago': 'Std',
     'news.dayago': 'T',
     'news.lastsync': 'Aktualisiert',
-    'ana.title': 'Szenario-Labor. <em>Lass die Zahlen sprechen.</em>',
+    'ana.title': 'Rechne deinen Schein durch.',
     'ana.sub': 'Teste Kombi-Konfigurationen, vergleiche Expected Value mit der Marge und simuliere 10.000 Outcomes für jeden Schein.',
     'ana.s1': 'Kombigröße vs. Trefferquote',
     'ana.s2': 'Empfohlene Voreinstellungen',
@@ -2966,11 +3343,11 @@ const I18N = {
     'my.sub': 'Jeder simulierte Schein wird in dieser Session gespeichert. Vergleiche Strukturen und finde die mit dem höchsten projizierten Return.',
     'my.empty': 'Noch keine gespeicherten Szenarien. Erstelle einen Schein im Builder und drücke Speichern.',
     'my.stake': 'Einsatz', 'my.return': 'Auszahlung', 'my.prob': 'Trefferquote', 'my.legs': 'Tipps',
-    'disclaim': 'Simulations-Tool · Keine echten Wetten · Quoten zeigen repräsentative Live-Preise von FanDuel und DraftKings · 18+ · Verantwortungsvoll spielen',
+    'disclaim': 'Simulations- und Analysetool. Es werden keine echten Wetten platziert. Buchmacherquoten sind aus dem Modell plus üblicher Marge simuliert, prüfe immer deinen eigenen Anbieter. 18+. Spiele verantwortungsvoll.',
     'tag.injury': 'VERLETZUNG', 'tag.lineup': 'AUFSTELLUNG', 'tag.transfer': 'TRANSFER',
     'tag.form': 'FORM', 'tag.suspension': 'SPERRE', 'tag.tactics': 'TAKTIK',
-    'tab.wc': 'WM',
-    'wc.title': 'WM <em>2026</em> Archiv.',
+    'tab.wc': 'WM 2026',
+    'wc.title': 'WM-2026-Archiv.',
     'wc.sub': 'Spanien ist Weltmeister. Endergebnisse, die K.o.-Runde, die Auszeichnungen und wie der Siegermarkt vor dem Turnier abgerechnet wurde.',
     'wc.stat.days': 'Tage bis Anpfiff',
     'wc.stat.teams': 'Teams',
@@ -3192,16 +3569,57 @@ const I18N = {
     'ana.preset.cross': 'Liga-übergreifend (5 Tipps · 2.1 je)',
   },
   it: {
+    'news.background': 'Contesto stagionale',
+    'news.model': 'Modello',
+    'news.openPred': 'Apri pronostico',
+    'pv.h1': 'Chi vince, secondo i numeri',
+    'pv.lede': 'Probabilità di vittoria, pareggio e sconfitta per ogni partita delle cinque leghe, delle coppe e d\'Europa, calcolate dai risultati di questa stagione.',
+    'pv.stamp': 'Da {n} risultati di campionato<br>fino al {d}',
+    'pv.featTitle': 'Partita del turno',
+    'pv.full': 'Apri il pronostico completo',
+    'pv.likely': 'Risultato più probabile',
+    'pv.g.all': 'Tutte',
+    'pv.g.leagues': 'Campionati',
+    'pv.g.cups': 'Coppe',
+    'pv.g.europe': 'Europa',
+    'pv.today': 'Oggi',
+    'pv.tomorrow': 'Domani',
+    'pv.pts': 'pt',
+    'pv.empty': 'Nessuna partita per questo filtro.',
+    'pv.toAdvance': 'passa il turno',
+    'pv.advNote': 'Probabilità di passare il turno, con supplementari e rigori ripartiti in base alla forza delle squadre.',
+    'pv.cupsTitle': 'Calendario coppe',
+    'pv.cupsSub': 'Il prossimo turno di ogni coppa nazionale',
+    'pv.ties': 'gare',
+    'pv.later': 'Più avanti',
+    'pv.cleanSheets': 'Porta inviolata, casa / trasferta',
+    'pv.close': 'Chiudi',
+    'pv.at': 'a',
+    'pv.neutral': 'Campo neutro',
+    'pv.rating': 'Come viene valutata ogni squadra',
+    'pv.att': 'Attacco',
+    'pv.def': 'Difesa',
+    'pv.strength': 'Forza',
+    'pv.src.data': 'Valutata dai risultati di campionato di questa stagione',
+    'pv.src.data2': 'Valutata dalla classifica della 2. Bundesliga',
+    'pv.src.prior': 'Nessun dato di campionato: è una stima',
+    'pv.crossNote': 'I club di campionati o categorie diverse sono messi sulla stessa scala: la forza deriva dai coefficienti UEFA delle federazioni e da un fattore di categoria, che moltiplica l\'attacco e divide la difesa. Considera queste gare una guida approssimativa.',
+    'cup.stage.facup': 'Primo turno (i club di Premier entrano al terzo)',
+    'cup.stage.eflcup': 'Quarto turno',
+    'cup.stage.copadelrey': 'Primo turno',
+    'cup.stage.dfbpokal': 'Secondo turno',
+    'cup.stage.coppaitalia': 'Ottavi di finale',
+    'cup.stage.cdf': 'Trentaduesimi (entrano i club di Ligue 1)',
     'brand': 'PARLAY LABS',
-    'tagline': 'Terminale di Simulazione Scommesse',
-    'tab.builder': 'Costruttore', 'tab.news': 'Notizie',
-    'tab.analytics': 'Analisi', 'tab.my': 'Le Mie Schedine',
+    'tagline': 'Pronostici di calcio dai risultati reali',
+    'tab.builder': 'Quote e schedina', 'tab.news': 'Notizie',
+    'tab.analytics': 'Scenari', 'tab.my': 'Le Mie Schedine',
     'tab.predict': 'Pronostici',
     'pred.title': 'Pronostici. <em>Dai risultati reali.</em>',
     'pred.sub': 'Un modello sui gol costruito su tutti i risultati 2026-27 dei cinque top campionati. Stima esito, gol e risultato esatto di ogni partita e controlla se la quota del tuo bookmaker ha valore.',
     'pred.stat.results': 'Risultati analizzati',
     'pred.stat.fixtures': 'Partite stimate',
-    'pred.stat.leagues': 'Campionati',
+    'pred.stat.leagues': 'Competizioni',
     'pred.stat.thru': 'Dati fino al',
     'pred.btn': 'Pronostico',
     'pred.pick': 'Partita',
@@ -3216,9 +3634,9 @@ const I18N = {
     'pred.col.prob': 'Modello %',
     'pred.col.fair': 'Quota equa',
     'pred.col.app': 'Migliore app',
-    'pred.add': '+ Schedina',
-    'pred.inslip': '✓ In schedina',
-    'pred.appNote': 'La quota equa non include margine. Le quote dell\'app sono i bookmaker simulati del Builder, che ora partono da questo modello e aggiungono il proprio margine, quindi di solito restano poco sotto la quota equa.',
+    'pred.add': 'Aggiungi',
+    'pred.inslip': 'In schedina',
+    'pred.appNote': 'Le quote eque non hanno margine. Le quote dell\'app sono i bookmaker simulati, che partono dal modello e aggiungono un margine, quindi di solito sono appena sotto.',
     'pred.value': 'Verifica valore',
     'pred.valueSub': 'Scegli un mercato e inserisci la quota del tuo bookmaker (americana come +150 o decimale come 2.50)',
     'pred.v.enter': 'Inserisci una quota per verificare',
@@ -3245,16 +3663,16 @@ const I18N = {
     'pred.under25': 'Under 2,5 gol',
     'pred.bttsYes': 'Segnano entrambe',
     'pred.bttsNo': 'Non segnano entrambe',
-    'pred.top': 'Pronostici più netti del turno',
-    'pred.topSub': 'Ordinati per probabilità · tocca per aprire',
+    'pred.top': 'Pronostici più netti',
+    'pred.topSub': 'L\'esito più probabile di ogni partita in arrivo',
     'pred.method': 'Come funziona il modello',
-    'pred.methodBody': 'Gli indici di attacco e difesa derivano dai gol fatti e subiti a partita in questa stagione, rapportati alla media del campionato, e sono avvicinati alla media finché il campione è piccolo. I gol attesi combinano l\'attacco di casa con la difesa ospite (e viceversa) usando i tassi reali di gol in casa e in trasferta di ogni campionato. Un modello di Poisson con correzione Dixon-Coles per i punteggi bassi dà la probabilità di ogni risultato, che si sommano nei mercati esito, gol e porta inviolata. Le quote del Builder ora usano le stesse probabilità. Non modellati: infortuni, squalifiche, turnover, meteo e motivazioni.',
+    'pred.methodBody': 'I rating di attacco e difesa derivano dai gol fatti e subiti a partita di ogni squadra in questa stagione, rispetto alla media del campionato, e vengono avvicinati alla media finché il campione è piccolo. I gol attesi incrociano l\'attacco di una squadra con la difesa dell\'altra usando i tassi reali di gol in casa e in trasferta di ogni campionato. Un modello di Poisson con correzione Dixon-Coles dà la probabilità di ogni risultato, che si sommano nei mercati di esito, gol e porta inviolata. Le quote simulate partono da queste stesse probabilità. Non modellati: infortuni, squalifiche, turnover, meteo e motivazioni.',
     'pred.matches': 'partite',
     'pred.disclaimer': 'Stime del modello solo per simulazione, non consigli di scommessa.',
-    'pred.none': 'Nessuna partita di campionato in arrivo da pronosticare. Le sfide europee richiedono indici tra campionati e non sono ancora modellate.',
+    'pred.none': 'Nessuna partita in arrivo da pronosticare. Il turno successivo viene aggiunto appena confermato.',
     'live': 'Quote live',
-    'hero.title': 'Prova la multipla <em>prima</em> di giocarla.',
-    'hero.sub': 'Costruisci, testa e quota scommesse multiple sui cinque grandi campionati europei. Quote live da FanDuel e DraftKings, con probabilità implicita, simulazione di scenari e notizie su infortuni che muovono la linea.',
+    'hero.title': 'Confronta le quote e crea la schedina.',
+    'hero.sub': 'Tutte le partite dei pronostici, quotate da sei bookmaker simulati che partono dal modello e aggiungono il loro margine abituale. Tocca una quota per aggiungerla alla schedina; la schedina resta su ogni scheda.',
     'meta.matches': 'Partite caricate', 'meta.markets': 'Tipi di mercato',
     'meta.books': 'Bookmaker', 'meta.updated': 'Aggiornato',
     'sec.matches': 'Questa Giornata', 'sec.matches.sub': 'Tocca un mercato per aggiungerlo',
@@ -3275,9 +3693,9 @@ const I18N = {
     'prob.med': 'Profilo rischio-rendimento ragionevole.',
     'prob.low': 'Zona ad alto rischio. Varianza elevata.',
     'prob.veryLow': 'Biglietto della lotteria statistico.',
-    'news.title': 'Notizie che <em>muovono</em> la linea.',
-    'news.sub': 'Report selezionati su infortuni, formazioni e cambi tattici da Premier League, LaLiga, Bundesliga, Serie A e Ligue 1, classificati per impatto sulle quote.',
-    'news.movers': 'Maggiori Variazioni',
+    'news.title': 'Cosa è cambiato dall\'ultima giornata.',
+    'news.sub': 'Risultati, sorprese di coppa e notizie dalle cinque leghe, dalle coppe nazionali e dall\'Europa. Ogni notizia mostra cosa prevede ora il modello per la partita collegata.',
+    'news.movers': 'Pronostici più netti del modello',
     'news.suspensions': 'Squalifiche',
     'news.weather': 'Meteo',
     'news.impact': 'Impatto previsto:',
@@ -3289,7 +3707,7 @@ const I18N = {
     'news.hourago': 'h fa',
     'news.dayago': 'g fa',
     'news.lastsync': 'Aggiornato',
-    'ana.title': 'Laboratorio scenari. <em>Calcola i numeri.</em>',
+    'ana.title': 'Fai i conti sulla schedina.',
     'ana.sub': 'Testa configurazioni di multipla, confronta il valore atteso con il margine del bookmaker e simula 10.000 esiti per qualunque schedina.',
     'ana.s1': 'Numero selezioni vs. tasso di successo',
     'ana.s2': 'Strutture predefinite consigliate',
@@ -3297,11 +3715,11 @@ const I18N = {
     'my.sub': 'Ogni schedina simulata è salvata in questa sessione. Confronta le strutture e trova quella con il miglior ritorno previsto.',
     'my.empty': 'Nessuno scenario salvato. Costruisci una schedina e premi Salva.',
     'my.stake': 'Puntata', 'my.return': 'Vincita', 'my.prob': '% Success.', 'my.legs': 'Sel.',
-    'disclaim': 'Strumento di simulazione · Nessuna scommessa reale · Le quote riflettono prezzi rappresentativi di FanDuel e DraftKings · +18 · Gioca responsabilmente',
+    'disclaim': 'Strumento di simulazione e analisi. Nessuna scommessa reale. Le quote dei bookmaker sono simulate dal modello più i margini tipici: controlla sempre il tuo bookmaker. 18+. Gioca responsabilmente.',
     'tag.injury': 'INFORTUNIO', 'tag.lineup': 'FORMAZIONE', 'tag.transfer': 'MERCATO',
     'tag.form': 'FORMA', 'tag.suspension': 'SQUALIFICA', 'tag.tactics': 'TATTICA',
-    'tab.wc': 'Mondiale',
-    'wc.title': 'Archivio Mondiale <em>2026</em>.',
+    'tab.wc': 'Mondiali 2026',
+    'wc.title': 'Archivio Mondiali 2026.',
     'wc.sub': 'La Spagna è campione del mondo. Risultati finali, il tabellone a eliminazione, i premi e come si è chiuso il mercato del vincitore.',
     'wc.stat.days': 'Giorni al via',
     'wc.stat.teams': 'Squadre',
@@ -3523,16 +3941,59 @@ const I18N = {
     'ana.preset.cross': 'Multi-campionato (5 sel · 2.1 ciasc.)',
   },
   fr: {
+    'news.sub': 'Résultats, surprises en coupe et infos d\'équipes des cinq ligues, des coupes nationales et de l\'Europe. Chaque article montre ce que le modèle prévoit pour le match concerné.',
+    'news.background': 'Contexte de la saison',
+    'news.model': 'Modèle',
+    'news.openPred': 'Voir le pronostic',
+    'disclaim': 'Outil de simulation et d\'analyse. Aucun pari réel n\'est placé. Les cotes des bookmakers sont simulées à partir du modèle plus les marges habituelles : vérifie toujours ton bookmaker. 18+. Joue de manière responsable.',
+    'pv.h1': 'Qui gagne, en chiffres',
+    'pv.lede': 'Chances de victoire, de nul et de défaite pour chaque match des cinq ligues, des coupes et de l\'Europe, calculées à partir des résultats de cette saison.',
+    'pv.stamp': 'À partir de {n} résultats de ligue<br>jusqu\'au {d}',
+    'pv.featTitle': 'Match de la journée',
+    'pv.full': 'Voir le pronostic complet',
+    'pv.likely': 'Score le plus probable',
+    'pv.g.all': 'Tout',
+    'pv.g.leagues': 'Championnats',
+    'pv.g.cups': 'Coupes',
+    'pv.g.europe': 'Europe',
+    'pv.today': 'Aujourd\'hui',
+    'pv.tomorrow': 'Demain',
+    'pv.pts': 'pts',
+    'pv.empty': 'Aucun match pour ce filtre.',
+    'pv.toAdvance': 'se qualifie',
+    'pv.advNote': 'Chance de se qualifier, prolongation et tirs au but répartis selon la force des deux équipes.',
+    'pv.cupsTitle': 'Calendrier des coupes',
+    'pv.cupsSub': 'Le prochain tour de chaque coupe nationale',
+    'pv.ties': 'matchs',
+    'pv.later': 'Plus tard',
+    'pv.cleanSheets': 'Clean sheet, domicile / extérieur',
+    'pv.close': 'Fermer',
+    'pv.at': 'à',
+    'pv.neutral': 'Terrain neutre',
+    'pv.rating': 'Comment chaque équipe est évaluée',
+    'pv.att': 'Attaque',
+    'pv.def': 'Défense',
+    'pv.strength': 'Force',
+    'pv.src.data': 'Évaluée sur les résultats de ligue de cette saison',
+    'pv.src.data2': 'Évaluée sur le classement de 2. Bundesliga',
+    'pv.src.prior': 'Pas de données de ligue : c\'est une estimation',
+    'pv.crossNote': 'Les clubs de ligues ou divisions différentes sont placés sur une même échelle : la force vient des coefficients UEFA des associations et d\'un facteur de division, qui multiplie l\'attaque et divise la défense. Ces matchs sont à prendre comme une indication.',
+    'cup.stage.facup': '1er tour (les clubs de Premier League entrent au 3e)',
+    'cup.stage.eflcup': '4e tour',
+    'cup.stage.copadelrey': '1er tour',
+    'cup.stage.dfbpokal': '2e tour',
+    'cup.stage.coppaitalia': 'Huitièmes de finale',
+    'cup.stage.cdf': '32es de finale (entrée des clubs de Ligue 1)',
     'brand': 'PARLAY LABS',
-    'tagline': 'Terminal de Simulation de Paris',
-    'tab.builder': 'Constructeur', 'tab.news': 'Actus',
-    'tab.analytics': 'Analyse', 'tab.my': 'Mes Tickets',
+    'tagline': 'Pronostics foot issus des vrais résultats',
+    'tab.builder': 'Cotes et ticket', 'tab.news': 'Actus',
+    'tab.analytics': 'Scénarios', 'tab.my': 'Mes Tickets',
     'tab.predict': 'Pronostics',
     'pred.title': 'Pronostics. <em>À partir des vrais résultats.</em>',
     'pred.sub': 'Un modèle de buts construit à partir de tous les résultats 2026-27 des cinq grands championnats. Il estime le résultat, les buts et le score exact de chaque match, et vérifie si la cote de votre bookmaker offre de la value.',
     'pred.stat.results': 'Résultats analysés',
     'pred.stat.fixtures': 'Matchs estimés',
-    'pred.stat.leagues': 'Championnats',
+    'pred.stat.leagues': 'Compétitions',
     'pred.stat.thru': 'Données jusqu\'au',
     'pred.btn': 'Pronostic',
     'pred.pick': 'Match',
@@ -3547,9 +4008,9 @@ const I18N = {
     'pred.col.prob': 'Modèle %',
     'pred.col.fair': 'Cote juste',
     'pred.col.app': 'Meilleure app',
-    'pred.add': '+ Ticket',
-    'pred.inslip': '✓ Au ticket',
-    'pred.appNote': 'La cote juste n\'inclut aucune marge. Les cotes de l\'app sont les bookmakers simulés du Builder, qui partent désormais de ce modèle et ajoutent leur marge : elles restent donc en général un peu sous la cote juste.',
+    'pred.add': 'Ajouter',
+    'pred.inslip': 'Au ticket',
+    'pred.appNote': 'Les cotes justes n\'ont pas de marge. Les cotes de l\'app viennent des bookmakers simulés, qui partent du modèle et ajoutent une marge, elles sont donc en général un peu en dessous.',
     'pred.value': 'Détecteur de value',
     'pred.valueSub': 'Choisissez un marché et saisissez la cote de votre bookmaker (américaine comme +150 ou décimale comme 2.50)',
     'pred.v.enter': 'Saisissez une cote pour vérifier',
@@ -3576,16 +4037,16 @@ const I18N = {
     'pred.under25': 'Moins de 2,5 buts',
     'pred.bttsYes': 'Les deux marquent',
     'pred.bttsNo': 'Pas les deux',
-    'pred.top': 'Pronostics les plus nets de la journée',
-    'pred.topSub': 'Classés par probabilité · touchez pour ouvrir',
+    'pred.top': 'Pronostics les plus nets',
+    'pred.topSub': 'L\'issue la plus probable de chaque match à venir',
     'pred.method': 'Fonctionnement du modèle',
-    'pred.methodBody': 'Les indices d\'attaque et de défense reposent sur les buts marqués et encaissés par match cette saison, rapportés à la moyenne du championnat, et sont ramenés vers la moyenne tant que l\'échantillon est petit. Les buts attendus combinent l\'attaque à domicile et la défense adverse (et inversement) à partir des taux réels de buts à domicile et à l\'extérieur de chaque championnat. Un modèle de Poisson avec correction Dixon-Coles pour les petits scores donne la probabilité de chaque score, qui s\'additionnent en marchés résultat, buts et clean sheet. Les cotes du Builder utilisent désormais ces probabilités. Non modélisés : blessures, suspensions, rotation, météo et motivation.',
+    'pred.methodBody': 'Les notes d\'attaque et de défense viennent des buts marqués et encaissés par match de chaque équipe cette saison, rapportés à la moyenne de sa ligue, et sont ramenées vers la moyenne tant que l\'échantillon est petit. Les buts attendus croisent l\'attaque d\'une équipe avec la défense de l\'autre selon les taux réels de buts à domicile et à l\'extérieur de chaque ligue. Un modèle de Poisson avec correction Dixon-Coles donne la probabilité de chaque score, qui s\'additionnent pour les marchés résultat, buts et clean sheet. Les cotes simulées partent de ces mêmes probabilités. Non modélisés : blessures, suspensions, rotation, météo et motivation.',
     'pred.matches': 'matchs',
     'pred.disclaimer': 'Estimations du modèle pour simulation uniquement, pas des conseils de pari.',
-    'pred.none': 'Aucun match de championnat à venir à pronostiquer. Les rencontres européennes nécessitent des indices inter-championnats et ne sont pas encore modélisées.',
+    'pred.none': 'Aucun match à venir pour le moment. La prochaine journée est ajoutée dès qu\'elle est confirmée.',
     'live': 'Cotes live',
-    'hero.title': 'Teste le combiné <em>avant</em> de le jouer.',
-    'hero.sub': 'Construis, évalue et chiffre des paris combinés sur les cinq grands championnats européens. Cotes live FanDuel et DraftKings, probabilité implicite, modélisation de scénarios et fil de blessures qui bouge la ligne.',
+    'hero.title': 'Compare les cotes et compose ton ticket.',
+    'hero.sub': 'Tous les matchs des pronostics, cotés par six bookmakers simulés qui partent du modèle et ajoutent leur marge habituelle. Touche une cote pour l\'ajouter au ticket ; le ticket te suit sur chaque onglet.',
     'meta.matches': 'Matchs chargés', 'meta.markets': 'Types de marché',
     'meta.books': 'Bookmakers', 'meta.updated': 'Mis à jour',
     'sec.matches': 'Cette Journée', 'sec.matches.sub': "Touchez un marché pour l'ajouter",
@@ -3606,9 +4067,9 @@ const I18N = {
     'prob.med': 'Profil risque-rendement raisonnable.',
     'prob.low': 'Zone à risque. Forte variance.',
     'prob.veryLow': 'Billet de loterie statistique.',
-    'news.title': 'Actus qui <em>bougent</em> la ligne.',
-    'news.sub': "Rapports de blessures, compositions et ajustements tactiques de Premier League, LaLiga, Bundesliga, Serie A et Ligue 1, étiquetés selon leur impact attendu sur les cotes.",
-    'news.movers': 'Plus Gros Mouvements',
+    'news.title': 'Ce qui a changé depuis la dernière journée.',
+    
+    'news.movers': 'Pronostics les plus nets du modèle',
     'news.suspensions': 'Suspensions',
     'news.weather': 'Météo',
     'news.impact': 'Impact prévu:',
@@ -3620,7 +4081,7 @@ const I18N = {
     'news.hourago': 'h',
     'news.dayago': 'j',
     'news.lastsync': 'Sync.',
-    'ana.title': 'Labo de scénarios. <em>Fais parler les chiffres.</em>',
+    'ana.title': 'Fais les comptes de ton ticket.',
     'ana.sub': "Teste des configurations de combinés, compare la valeur espérée à la marge du book, et simule 10 000 résultats pour n'importe quel ticket.",
     'ana.s1': 'Taille du combiné vs. taux de réussite',
     'ana.s2': 'Structures prédéfinies recommandées',
@@ -3628,11 +4089,11 @@ const I18N = {
     'my.sub': 'Chaque ticket simulé est stocké dans cette session. Compare les structures et identifie celle au meilleur rendement projeté.',
     'my.empty': 'Aucun scénario sauvegardé. Construis un ticket dans le Constructeur et appuie sur Sauvegarder.',
     'my.stake': 'Mise', 'my.return': 'Gain', 'my.prob': '% Réussite', 'my.legs': 'Sél.',
-    'disclaim': "Outil de simulation · Aucun pari réel · Les cotes reflètent des prix représentatifs FanDuel et DraftKings · +18 · Jouez avec modération",
+    
     'tag.injury': 'BLESSURE', 'tag.lineup': 'COMPO', 'tag.transfer': 'TRANSFERT',
     'tag.form': 'FORME', 'tag.suspension': 'SUSPENSION', 'tag.tactics': 'TACTIQUE',
-    'tab.wc': 'Coupe du Monde',
-    'wc.title': 'Archives Coupe du Monde <em>2026</em>.',
+    'tab.wc': 'Mondial 2026',
+    'wc.title': 'Archives du Mondial 2026.',
     'wc.sub': 'L\'Espagne est championne du monde. Résultats, tableau final, récompenses et dénouement du marché vainqueur d\'avant tournoi.',
     'wc.stat.days': 'Jours avant le coup d\'envoi',
     'wc.stat.teams': 'Équipes',
@@ -3926,7 +4387,28 @@ const LEAGUES = [
   { id: 'ligue1', name: 'Ligue 1',        short: 'L1',     flag: FLAGS.france,  country: 'France' },
   { id: 'ucl',    name: 'Champions League', short: 'UCL',  flag: FLAGS.ucl,     country: 'Europe' },
   { id: 'uel',    name: 'Europa League',  short: 'UEL',    flag: FLAGS.uel,     country: 'Europe' },
+  // Domestic cups — knockout ties. `cup:true` adds the "to advance" line in the predictor.
+  { id: 'facup',      name: 'FA Cup',          short: 'FA Cup', flag: FLAGS.england, country: 'England', cup: true },
+  { id: 'eflcup',     name: 'Carabao Cup',     short: 'EFL Cup',flag: FLAGS.england, country: 'England', cup: true },
+  { id: 'copadelrey', name: 'Copa del Rey',    short: 'Copa',   flag: FLAGS.spain,   country: 'Spain',   cup: true },
+  { id: 'dfbpokal',   name: 'DFB-Pokal',       short: 'Pokal',  flag: FLAGS.germany, country: 'Germany', cup: true },
+  { id: 'coppaitalia',name: 'Coppa Italia',    short: 'Coppa',  flag: FLAGS.italy,   country: 'Italy',   cup: true },
+  { id: 'cdf',        name: 'Coupe de France', short: 'CdF',    flag: FLAGS.france,  country: 'France',  cup: true },
 ];
+const LEAGUE_GROUPS = [
+  { key: 'leagues', ids: ['epl','laliga','bundes','seriea','ligue1'] },
+  { key: 'cups',    ids: ['facup','eflcup','copadelrey','dfbpokal','coppaitalia','cdf'] },
+  { key: 'europe',  ids: ['ucl','uel'] },
+];
+// Upcoming rounds for every domestic cup (official competition calendars).
+const CUP_CALENDAR = {
+  facup:      { stage: 'First round (Premier League clubs enter in round three)', next: '2026-11-07', later: [['Round 2','2026-12-05'],['Round 3','2027-01-09'],['Final','2027-05-22']], src: 'The FA' },
+  eflcup:     { stage: 'Fourth round', next: '2026-10-28', later: [], src: 'EFL' },
+  copadelrey: { stage: 'First round', next: '2026-10-28', later: [], src: 'RFEF' },
+  dfbpokal:   { stage: 'Second round', next: '2026-10-27', later: [], src: 'DFB' },
+  coppaitalia:{ stage: 'Round of 16', next: '2026-12-02', later: [['Quarter-finals','2027-02-03'],['Semi-finals','2027-03-03'],['Final','2027-05-19']], src: 'Lega Serie A' },
+  cdf:        { stage: 'Round of 64 (Ligue 1 clubs enter)', next: '2026-12-20', later: [['Round of 32','2027-01-09'],['Round of 16','2027-02-03'],['Final','2027-05-15']], src: 'FFF' },
+};
 
 // ============= TEAMS / MATCHES =============
 // Team colors for monogram badges. Each entry has {bg, ink} — the primary color
@@ -4116,6 +4598,7 @@ function teamFlagKey(teamName, leagueId) {
   if (lg.id === 'ligue1') return 'france';
   // European competitions mix clubs from every country — any named club is valid.
   if (lg.id === 'ucl' || lg.id === 'uel') return 'europe';
+  if (lg.cup) return ({ England:'england', Spain:'spain', Germany:'germany', Italy:'italy', France:'france' })[lg.country] || null;
   return null;
 }
 
@@ -4629,101 +5112,137 @@ function crest(name, size, leagueHint) {
 // To add a future round, just append more fixtures with later kickoffUtc values.
 const REAL_FIXTURES = [
   // ============================================================
-  // WEEK OF OCTOBER 21-26, 2026 — 2026-27 season
-  // Kickoffs stored in UTC. CEST (UTC+2) and BST (UTC+1) end on Sun Oct 25,
-  // so Sunday/Monday European kickoffs convert at UTC+1 / UTC+0.
-  // Sources: UEFA.com, premierleague (via legz / live-footballontv), LaLiga.com,
-  // fussballdaten.de, calcionapoli24, footmercato.
+  // WINDOW OCT 28 – NOV 5, 2026 — 2026-27 season. Kickoffs stored in UTC
+  // (Europe on CET = UTC+1, UK on GMT since Oct 25).
+  // Sources: premierleague.com / legz (PL MW9), LaLiga via lagrada.org + eldesmarque (J11),
+  // hessenschau.de (Bundesliga MD8), calcioefinanza.it (Serie A 9-10), ligue1.com (J9),
+  // UEFA.com (UCL/UEL MD4), EFL / DFB / RFEF cup draws.
+  // Prices and predictions come from the real-data model (predictMatch); the
+  // strength fields are legacy fallbacks only.
   // ============================================================
+  // ===== EFL Cup (Carabao Cup) — Fourth round =====
+  { league:'eflcup', home:'Manchester City', away:'Brighton', kickoffUtc:'2026-10-28T19:30:00Z', homeStrength:1, awayStrength:1 },
+  { league:'eflcup', home:'Sunderland', away:'Brentford', kickoffUtc:'2026-10-28T19:45:00Z', homeStrength:1, awayStrength:1 },
+  { league:'eflcup', home:'Fulham', away:'Crystal Palace', kickoffUtc:'2026-10-28T19:45:00Z', homeStrength:1, awayStrength:1 },
+  { league:'eflcup', home:'Bournemouth', away:'Aston Villa', kickoffUtc:'2026-10-28T19:45:00Z', homeStrength:1, awayStrength:1 },
+  { league:'eflcup', home:'Liverpool', away:'Chelsea', kickoffUtc:'2026-10-28T20:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'eflcup', home:'Everton', away:'Newcastle', kickoffUtc:'2026-10-29T19:45:00Z', homeStrength:1, awayStrength:1 },
 
-  // ===== UEFA Champions League — League phase Matchday 3 (Wed Oct 21) =====
-  { league:'ucl', home:'Lille',            away:'Galatasaray',       kickoffUtc:'2026-10-21T16:45:00Z', homeStrength:1.15, awayStrength:1.05 },
-  { league:'ucl', home:'Como',             away:'Manchester Utd',    kickoffUtc:'2026-10-21T16:45:00Z', homeStrength:1.05, awayStrength:1.15 },
-  { league:'ucl', home:'Bayern Munich',    away:'Arsenal',           kickoffUtc:'2026-10-21T19:00:00Z', homeStrength:1.60, awayStrength:1.50 },
-  { league:'ucl', home:'Real Madrid',      away:'RB Leipzig',        kickoffUtc:'2026-10-21T19:00:00Z', homeStrength:1.50, awayStrength:1.10 },
-  { league:'ucl', home:'Aston Villa',      away:'Viking',            kickoffUtc:'2026-10-21T19:00:00Z', homeStrength:1.35, awayStrength:0.70 },
-  { league:'ucl', home:'Real Betis',       away:'Feyenoord',         kickoffUtc:'2026-10-21T19:00:00Z', homeStrength:1.15, awayStrength:1.00 },
-  { league:'ucl', home:'Club Brugge',      away:'Lens',              kickoffUtc:'2026-10-21T19:00:00Z', homeStrength:1.05, awayStrength:1.00 },
-  { league:'ucl', home:'Inter Milan',      away:'Shakhtar Donetsk',  kickoffUtc:'2026-10-21T19:00:00Z', homeStrength:1.50, awayStrength:0.85 },
-  { league:'ucl', home:'Sporting CP',      away:'LASK',              kickoffUtc:'2026-10-21T19:00:00Z', homeStrength:1.30, awayStrength:0.75 },
+  // ===== DFB-Pokal — Second round =====
+  { league:'dfbpokal', home:'Jeddeloh II', away:'Hertha BSC', kickoffUtc:'2026-10-28T17:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'dfbpokal', home:'Dynamo Dresden', away:'Schalke 04', kickoffUtc:'2026-10-28T17:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'dfbpokal', home:'SC Paderborn', away:'Stuttgart', kickoffUtc:'2026-10-28T17:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'dfbpokal', home:'Freiburg', away:'VfL Wolfsburg', kickoffUtc:'2026-10-28T17:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'dfbpokal', home:'Holstein Kiel', away:'Hoffenheim', kickoffUtc:'2026-10-28T19:45:00Z', homeStrength:1, awayStrength:1 },
+  { league:'dfbpokal', home:'Bayer Leverkusen', away:'1. FC Nürnberg', kickoffUtc:'2026-10-28T19:45:00Z', homeStrength:1, awayStrength:1 },
+  { league:'dfbpokal', home:'Hannover 96', away:'1. FC Kaiserslautern', kickoffUtc:'2026-10-28T19:45:00Z', homeStrength:1, awayStrength:1 },
+  { league:'dfbpokal', home:'Bayern Munich', away:'1. FC Magdeburg', kickoffUtc:'2026-10-28T19:45:00Z', homeStrength:1, awayStrength:1 },
 
-  // ===== UEFA Europa League — League phase Matchday 3 (Thu Oct 22) =====
-  { league:'uel', home:'Juventus',         away:'Rennes',            kickoffUtc:'2026-10-22T16:45:00Z', homeStrength:1.35, awayStrength:1.00 },
-  { league:'uel', home:'Lech Poznań',      away:'Sunderland',        kickoffUtc:'2026-10-22T16:45:00Z', homeStrength:0.95, awayStrength:1.00 },
-  { league:'uel', home:'OFI Crete',        away:'Bayer Leverkusen',  kickoffUtc:'2026-10-22T16:45:00Z', homeStrength:0.65, awayStrength:1.40 },
-  { league:'uel', home:'Sturm Graz',       away:'Marseille',         kickoffUtc:'2026-10-22T16:45:00Z', homeStrength:0.90, awayStrength:1.20 },
-  { league:'uel', home:'Ararat-Armenia',   away:'AZ Alkmaar',        kickoffUtc:'2026-10-22T16:45:00Z', homeStrength:0.65, awayStrength:1.15 },
-  { league:'uel', home:'Dinamo Zagreb',    away:'NEC Nijmegen',      kickoffUtc:'2026-10-22T16:45:00Z', homeStrength:1.05, awayStrength:0.95 },
-  { league:'uel', home:'Bournemouth',      away:'AC Milan',          kickoffUtc:'2026-10-22T19:00:00Z', homeStrength:1.10, awayStrength:1.30 },
-  { league:'uel', home:'Beşiktaş',         away:'Crystal Palace',    kickoffUtc:'2026-10-22T19:00:00Z', homeStrength:1.10, awayStrength:1.05 },
-  { league:'uel', home:'Celtic',           away:'Celta Vigo',        kickoffUtc:'2026-10-22T19:00:00Z', homeStrength:1.10, awayStrength:1.00 },
-  { league:'uel', home:'Hoffenheim',       away:'Lyon',              kickoffUtc:'2026-10-22T19:00:00Z', homeStrength:1.05, awayStrength:1.15 },
-  { league:'uel', home:'Omonia',           away:'Benfica',           kickoffUtc:'2026-10-22T19:00:00Z', homeStrength:0.75, awayStrength:1.35 },
-  { league:'uel', home:'Olympiacos',       away:'Sparta Praha',      kickoffUtc:'2026-10-22T19:00:00Z', homeStrength:1.15, awayStrength:0.95 },
-  { league:'uel', home:'Lillestrøm',       away:'Real Sociedad',     kickoffUtc:'2026-10-22T19:00:00Z', homeStrength:0.70, awayStrength:1.20 },
-  { league:'uel', home:'Celje',            away:'Salzburg',          kickoffUtc:'2026-10-22T19:00:00Z', homeStrength:0.80, awayStrength:1.05 },
-  { league:'uel', home:'Ferencváros',      away:'Torreense',         kickoffUtc:'2026-10-22T16:45:00Z', homeStrength:1.10, awayStrength:0.70 },
-  { league:'uel', home:'Union SG',         away:'Hapoel Beer-Sheva', kickoffUtc:'2026-10-22T16:45:00Z', homeStrength:1.05, awayStrength:0.85 },
-  { league:'uel', home:'Viktoria Plzeň',   away:'Levski Sofia',      kickoffUtc:'2026-10-22T19:00:00Z', homeStrength:1.00, awayStrength:0.80 },
-  { league:'uel', home:'Jagiellonia',      away:'Anderlecht',        kickoffUtc:'2026-10-22T19:00:00Z', homeStrength:0.95, awayStrength:1.00 },
+  // ===== Copa del Rey — First round (LaLiga clubs away) =====
+  { league:'copadelrey', home:'Anaitasuna', away:'Alaves', kickoffUtc:'2026-10-28T18:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'copadelrey', home:'Tarancón', away:'Levante', kickoffUtc:'2026-10-28T18:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'copadelrey', home:'Navalcarnero', away:'Real Betis', kickoffUtc:'2026-10-28T20:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'copadelrey', home:'Salamanca CF UDS', away:'Celta Vigo', kickoffUtc:'2026-10-28T20:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'copadelrey', home:'Tavernes', away:'Valencia', kickoffUtc:'2026-10-28T20:00:00Z', homeStrength:1, awayStrength:1, swapHome:true, venue:'Mestalla' },
+  { league:'copadelrey', home:'Lebrijana', away:'Getafe', kickoffUtc:'2026-10-29T18:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'copadelrey', home:'Atlético Calatayud', away:'Osasuna', kickoffUtc:'2026-10-29T18:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'copadelrey', home:'AE Prat', away:'Athletic Bilbao', kickoffUtc:'2026-10-29T20:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'copadelrey', home:'Sporting Hortaleza', away:'Sevilla', kickoffUtc:'2026-10-29T20:00:00Z', homeStrength:1, awayStrength:1, neutral:true },
+  { league:'copadelrey', home:'Ribadesella', away:'Racing Santander', kickoffUtc:'2026-10-29T20:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'copadelrey', home:'Auriense', away:'Deportivo', kickoffUtc:'2026-10-29T20:00:00Z', homeStrength:1, awayStrength:1 },
 
-  // ===== Premier League — Matchweek 8 (Oct 23-25) =====
-  { league:'epl', home:'Ipswich',          away:'Nottingham F.',     kickoffUtc:'2026-10-23T19:00:00Z', homeStrength:0.85, awayStrength:1.00 },
-  { league:'epl', home:'Aston Villa',      away:'Manchester City',   kickoffUtc:'2026-10-24T11:30:00Z', homeStrength:1.20, awayStrength:1.45 },
-  { league:'epl', home:'Arsenal',          away:'Everton',           kickoffUtc:'2026-10-24T14:00:00Z', homeStrength:1.60, awayStrength:0.85 },
-  { league:'epl', home:'Coventry City',    away:'Fulham',            kickoffUtc:'2026-10-24T14:00:00Z', homeStrength:0.85, awayStrength:0.95 },
-  { league:'epl', home:'Chelsea',          away:'Tottenham',         kickoffUtc:'2026-10-24T16:30:00Z', homeStrength:1.30, awayStrength:1.10 },
-  { league:'epl', home:'Manchester Utd',   away:'Bournemouth',       kickoffUtc:'2026-10-25T14:00:00Z', homeStrength:1.15, awayStrength:1.00 },
-  { league:'epl', home:'Crystal Palace',   away:'Newcastle',         kickoffUtc:'2026-10-25T14:00:00Z', homeStrength:1.00, awayStrength:1.15 },
-  { league:'epl', home:'Hull City',        away:'Brentford',         kickoffUtc:'2026-10-25T14:00:00Z', homeStrength:0.80, awayStrength:1.00 },
-  { league:'epl', home:'Liverpool',        away:'Brighton',          kickoffUtc:'2026-10-25T14:00:00Z', homeStrength:1.45, awayStrength:1.05 },
-  { league:'epl', home:'Sunderland',       away:'Leeds',             kickoffUtc:'2026-10-25T16:30:00Z', homeStrength:0.95, awayStrength:0.90 },
+  // ===== Serie A =====
+  { league:'seriea', home:'AC Milan', away:'Bologna', kickoffUtc:'2026-10-28T17:30:00Z', homeStrength:1, awayStrength:1 },
+  { league:'seriea', home:'Venezia', away:'Inter Milan', kickoffUtc:'2026-10-28T17:30:00Z', homeStrength:1, awayStrength:1 },
+  { league:'seriea', home:'Parma', away:'Udinese', kickoffUtc:'2026-10-28T17:30:00Z', homeStrength:1, awayStrength:1 },
+  { league:'seriea', home:'Genoa', away:'Juventus', kickoffUtc:'2026-10-28T19:45:00Z', homeStrength:1, awayStrength:1 },
+  { league:'seriea', home:'Monza', away:'Napoli', kickoffUtc:'2026-10-28T19:45:00Z', homeStrength:1, awayStrength:1 },
+  { league:'seriea', home:'Frosinone', away:'Lecce', kickoffUtc:'2026-10-29T17:30:00Z', homeStrength:1, awayStrength:1 },
+  { league:'seriea', home:'Fiorentina', away:'Atalanta', kickoffUtc:'2026-10-29T19:45:00Z', homeStrength:1, awayStrength:1 },
 
-  // ===== LaLiga — Jornada 10 (Oct 23-26) — El Clásico Sunday =====
-  { league:'laliga', home:'Alaves',          away:'Malaga',          kickoffUtc:'2026-10-23T19:00:00Z', homeStrength:0.95, awayStrength:0.80 },
-  { league:'laliga', home:'Rayo Vallecano',  away:'Elche',           kickoffUtc:'2026-10-24T12:00:00Z', homeStrength:0.95, awayStrength:0.85 },
-  { league:'laliga', home:'Racing Santander',away:'Espanyol',        kickoffUtc:'2026-10-24T14:15:00Z', homeStrength:0.85, awayStrength:0.90 },
-  { league:'laliga', home:'Valencia',        away:'Villarreal',      kickoffUtc:'2026-10-24T16:30:00Z', homeStrength:0.95, awayStrength:1.15 },
-  { league:'laliga', home:'Atletico Madrid', away:'Deportivo',       kickoffUtc:'2026-10-24T19:00:00Z', homeStrength:1.45, awayStrength:0.75 },
-  { league:'laliga', home:'Athletic Bilbao', away:'Getafe',          kickoffUtc:'2026-10-25T13:00:00Z', homeStrength:1.20, awayStrength:0.85 },
-  { league:'laliga', home:'Celta Vigo',      away:'Real Betis',      kickoffUtc:'2026-10-25T15:15:00Z', homeStrength:1.00, awayStrength:1.20 },
-  { league:'laliga', home:'Real Sociedad',   away:'Levante',         kickoffUtc:'2026-10-25T17:30:00Z', homeStrength:1.10, awayStrength:0.80 },
-  { league:'laliga', home:'Barcelona',       away:'Real Madrid',     kickoffUtc:'2026-10-25T20:00:00Z', homeStrength:1.55, awayStrength:1.45 },
-  { league:'laliga', home:'Sevilla',         away:'Osasuna',         kickoffUtc:'2026-10-26T20:00:00Z', homeStrength:0.95, awayStrength:0.90 },
+  // ===== Premier League — Matchweek 9 =====
+  { league:'epl', home:'Chelsea', away:'Manchester Utd', kickoffUtc:'2026-10-31T12:30:00Z', homeStrength:1, awayStrength:1 },
+  { league:'epl', home:'Bournemouth', away:'Leeds', kickoffUtc:'2026-10-31T15:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'epl', home:'Brentford', away:'Nottingham F.', kickoffUtc:'2026-10-31T15:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'epl', home:'Coventry City', away:'Sunderland', kickoffUtc:'2026-10-31T15:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'epl', home:'Hull City', away:'Ipswich', kickoffUtc:'2026-10-31T15:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'epl', home:'Manchester City', away:'Brighton', kickoffUtc:'2026-10-31T15:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'epl', home:'Tottenham', away:'Crystal Palace', kickoffUtc:'2026-10-31T17:30:00Z', homeStrength:1, awayStrength:1 },
+  { league:'epl', home:'Aston Villa', away:'Fulham', kickoffUtc:'2026-10-31T20:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'epl', home:'Liverpool', away:'Arsenal', kickoffUtc:'2026-11-01T16:30:00Z', homeStrength:1, awayStrength:1 },
+  { league:'epl', home:'Newcastle', away:'Everton', kickoffUtc:'2026-11-02T20:00:00Z', homeStrength:1, awayStrength:1 },
 
-  // ===== Bundesliga — Matchday 7 (Oct 23-25) =====
-  { league:'bundes', home:'Stuttgart',          away:'Borussia M.Gladbach', kickoffUtc:'2026-10-23T18:30:00Z', homeStrength:1.20, awayStrength:0.90 },
-  { league:'bundes', home:'RB Leipzig',         away:'SV Elversberg',       kickoffUtc:'2026-10-24T13:30:00Z', homeStrength:1.30, awayStrength:0.70 },
-  { league:'bundes', home:'Augsburg',           away:'Union Berlin',        kickoffUtc:'2026-10-24T13:30:00Z', homeStrength:0.90, awayStrength:0.90 },
-  { league:'bundes', home:'Mainz',              away:'Werder Bremen',       kickoffUtc:'2026-10-24T13:30:00Z', homeStrength:0.95, awayStrength:0.95 },
-  { league:'bundes', home:'FC Köln',            away:'Schalke 04',          kickoffUtc:'2026-10-24T13:30:00Z', homeStrength:0.95, awayStrength:0.85 },
-  { league:'bundes', home:'SC Paderborn',       away:'Hamburg',             kickoffUtc:'2026-10-24T13:30:00Z', homeStrength:0.80, awayStrength:0.90 },
-  { league:'bundes', home:'Borussia Dortmund',  away:'Eintracht Frankfurt', kickoffUtc:'2026-10-24T16:30:00Z', homeStrength:1.35, awayStrength:1.10 },
-  { league:'bundes', home:'Hoffenheim',         away:'Bayer Leverkusen',    kickoffUtc:'2026-10-25T14:30:00Z', homeStrength:1.00, awayStrength:1.30 },
-  { league:'bundes', home:'Freiburg',           away:'Bayern Munich',       kickoffUtc:'2026-10-25T16:30:00Z', homeStrength:1.00, awayStrength:1.65 },
+  // ===== LaLiga — Jornada 11 =====
+  { league:'laliga', home:'Villarreal', away:'Espanyol', kickoffUtc:'2026-10-30T20:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'laliga', home:'Levante', away:'Atletico Madrid', kickoffUtc:'2026-10-31T13:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'laliga', home:'Rayo Vallecano', away:'Celta Vigo', kickoffUtc:'2026-10-31T15:15:00Z', homeStrength:1, awayStrength:1 },
+  { league:'laliga', home:'Real Betis', away:'Malaga', kickoffUtc:'2026-10-31T17:30:00Z', homeStrength:1, awayStrength:1 },
+  { league:'laliga', home:'Barcelona', away:'Alaves', kickoffUtc:'2026-10-31T20:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'laliga', home:'Getafe', away:'Sevilla', kickoffUtc:'2026-11-01T13:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'laliga', home:'Racing Santander', away:'Real Madrid', kickoffUtc:'2026-11-01T15:15:00Z', homeStrength:1, awayStrength:1 },
+  { league:'laliga', home:'Elche', away:'Valencia', kickoffUtc:'2026-11-01T17:30:00Z', homeStrength:1, awayStrength:1 },
+  { league:'laliga', home:'Athletic Bilbao', away:'Real Sociedad', kickoffUtc:'2026-11-01T20:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'laliga', home:'Deportivo', away:'Osasuna', kickoffUtc:'2026-11-02T20:00:00Z', homeStrength:1, awayStrength:1 },
 
-  // ===== Serie A — Giornata 8 (Oct 23-25) =====
-  { league:'seriea', home:'Torino',       away:'Monza',        kickoffUtc:'2026-10-23T18:45:00Z', homeStrength:0.95, awayStrength:0.75 },
-  { league:'seriea', home:'Cagliari',     away:'Bologna',      kickoffUtc:'2026-10-24T13:00:00Z', homeStrength:0.85, awayStrength:1.10 },
-  { league:'seriea', home:'Como',         away:'Sassuolo',     kickoffUtc:'2026-10-24T13:00:00Z', homeStrength:1.15, awayStrength:0.85 },
-  { league:'seriea', home:'Napoli',       away:'Roma',         kickoffUtc:'2026-10-24T16:00:00Z', homeStrength:1.35, awayStrength:1.20 },
-  { league:'seriea', home:'Lazio',        away:'Parma',        kickoffUtc:'2026-10-24T18:45:00Z', homeStrength:1.15, awayStrength:0.80 },
-  { league:'seriea', home:'Inter Milan',  away:'Fiorentina',   kickoffUtc:'2026-10-25T11:30:00Z', homeStrength:1.50, awayStrength:1.00 },
-  { league:'seriea', home:'Atalanta',     away:'Frosinone',    kickoffUtc:'2026-10-25T14:00:00Z', homeStrength:1.35, awayStrength:0.65 },
-  { league:'seriea', home:'Genoa',        away:'Venezia',      kickoffUtc:'2026-10-25T14:00:00Z', homeStrength:0.90, awayStrength:0.80 },
-  { league:'seriea', home:'Lecce',        away:'Juventus',     kickoffUtc:'2026-10-25T17:00:00Z', homeStrength:0.75, awayStrength:1.30 },
-  { league:'seriea', home:'Udinese',      away:'AC Milan',     kickoffUtc:'2026-10-25T19:45:00Z', homeStrength:0.90, awayStrength:1.30 },
+  // ===== Bundesliga — Matchday 8 =====
+  { league:'bundes', home:'SV Elversberg', away:'Mainz', kickoffUtc:'2026-10-30T19:30:00Z', homeStrength:1, awayStrength:1 },
+  { league:'bundes', home:'Augsburg', away:'Freiburg', kickoffUtc:'2026-10-31T14:30:00Z', homeStrength:1, awayStrength:1 },
+  { league:'bundes', home:'Schalke 04', away:'RB Leipzig', kickoffUtc:'2026-10-31T14:30:00Z', homeStrength:1, awayStrength:1 },
+  { league:'bundes', home:'Bayer Leverkusen', away:'Stuttgart', kickoffUtc:'2026-10-31T14:30:00Z', homeStrength:1, awayStrength:1 },
+  { league:'bundes', home:'Borussia M.Gladbach', away:'SC Paderborn', kickoffUtc:'2026-10-31T14:30:00Z', homeStrength:1, awayStrength:1 },
+  { league:'bundes', home:'Werder Bremen', away:'Hoffenheim', kickoffUtc:'2026-10-31T14:30:00Z', homeStrength:1, awayStrength:1 },
+  { league:'bundes', home:'Bayern Munich', away:'Borussia Dortmund', kickoffUtc:'2026-10-31T17:30:00Z', homeStrength:1, awayStrength:1 },
+  { league:'bundes', home:'Union Berlin', away:'FC Köln', kickoffUtc:'2026-11-01T14:30:00Z', homeStrength:1, awayStrength:1 },
+  { league:'bundes', home:'Eintracht Frankfurt', away:'Hamburg', kickoffUtc:'2026-11-01T16:30:00Z', homeStrength:1, awayStrength:1 },
 
-  // ===== Ligue 1 — Journée 8 (Oct 23-25) =====
-  { league:'ligue1', home:'Brest',       away:'Nice',          kickoffUtc:'2026-10-23T18:45:00Z', homeStrength:0.95, awayStrength:1.00 },
-  { league:'ligue1', home:'Toulouse',    away:'Troyes',        kickoffUtc:'2026-10-24T15:15:00Z', homeStrength:1.00, awayStrength:0.70 },
-  { league:'ligue1', home:'Lens',        away:'Paris FC',      kickoffUtc:'2026-10-24T18:45:00Z', homeStrength:1.15, awayStrength:0.85 },
-  { league:'ligue1', home:'Monaco',      away:'Lille',         kickoffUtc:'2026-10-25T14:00:00Z', homeStrength:1.20, awayStrength:1.15 },
-  { league:'ligue1', home:'Angers',      away:'Lorient',       kickoffUtc:'2026-10-25T16:15:00Z', homeStrength:0.85, awayStrength:0.85 },
-  { league:'ligue1', home:'Rennes',      away:'Strasbourg',    kickoffUtc:'2026-10-25T16:15:00Z', homeStrength:1.05, awayStrength:1.00 },
-  { league:'ligue1', home:'Auxerre',     away:'Le Mans',       kickoffUtc:'2026-10-25T16:15:00Z', homeStrength:0.90, awayStrength:0.70 },
-  { league:'ligue1', home:'Marseille',   away:'Le Havre',      kickoffUtc:'2026-10-25T16:15:00Z', homeStrength:1.35, awayStrength:0.75 },
-  { league:'ligue1', home:'Paris SG',    away:'Lyon',          kickoffUtc:'2026-10-25T19:45:00Z', homeStrength:1.65, awayStrength:1.10 },
+  // ===== Serie A =====
+  { league:'seriea', home:'Bologna', away:'Monza', kickoffUtc:'2026-10-31T14:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'seriea', home:'Udinese', away:'Roma', kickoffUtc:'2026-10-31T17:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'seriea', home:'AC Milan', away:'Inter Milan', kickoffUtc:'2026-10-31T19:45:00Z', homeStrength:1, awayStrength:1 },
+  { league:'seriea', home:'Como', away:'Venezia', kickoffUtc:'2026-11-01T11:30:00Z', homeStrength:1, awayStrength:1 },
+  { league:'seriea', home:'Frosinone', away:'Torino', kickoffUtc:'2026-11-01T14:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'seriea', home:'Lazio', away:'Cagliari', kickoffUtc:'2026-11-01T14:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'seriea', home:'Lecce', away:'Genoa', kickoffUtc:'2026-11-01T17:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'seriea', home:'Juventus', away:'Napoli', kickoffUtc:'2026-11-01T19:45:00Z', homeStrength:1, awayStrength:1 },
+  { league:'seriea', home:'Sassuolo', away:'Fiorentina', kickoffUtc:'2026-11-02T17:30:00Z', homeStrength:1, awayStrength:1 },
+  { league:'seriea', home:'Atalanta', away:'Parma', kickoffUtc:'2026-11-02T19:45:00Z', homeStrength:1, awayStrength:1 },
+
+  // ===== Ligue 1 — Journée 9 =====
+  { league:'ligue1', home:'Le Havre', away:'Paris SG', kickoffUtc:'2026-10-30T18:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'ligue1', home:'Lille', away:'Lens', kickoffUtc:'2026-10-30T20:05:00Z', homeStrength:1, awayStrength:1 },
+  { league:'ligue1', home:'Nice', away:'Rennes', kickoffUtc:'2026-10-31T16:15:00Z', homeStrength:1, awayStrength:1 },
+  { league:'ligue1', home:'Lyon', away:'Angers', kickoffUtc:'2026-10-31T19:45:00Z', homeStrength:1, awayStrength:1 },
+  { league:'ligue1', home:'Lorient', away:'Brest', kickoffUtc:'2026-10-31T19:45:00Z', homeStrength:1, awayStrength:1 },
+  { league:'ligue1', home:'Troyes', away:'Le Mans', kickoffUtc:'2026-10-31T19:45:00Z', homeStrength:1, awayStrength:1 },
+  { league:'ligue1', home:'Strasbourg', away:'Auxerre', kickoffUtc:'2026-11-01T14:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'ligue1', home:'Paris FC', away:'Monaco', kickoffUtc:'2026-11-01T16:15:00Z', homeStrength:1, awayStrength:1 },
+  { league:'ligue1', home:'Marseille', away:'Toulouse', kickoffUtc:'2026-11-01T19:45:00Z', homeStrength:1, awayStrength:1 },
+
+  // ===== Champions League — League phase MD4 (ties with a top-five-league club) =====
+  { league:'ucl', home:'Galatasaray', away:'Stuttgart', kickoffUtc:'2026-11-03T17:45:00Z', homeStrength:1, awayStrength:1 },
+  { league:'ucl', home:'Barcelona', away:'Aston Villa', kickoffUtc:'2026-11-03T20:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'ucl', home:'Atletico Madrid', away:'Bayern Munich', kickoffUtc:'2026-11-03T20:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'ucl', home:'Feyenoord', away:'Inter Milan', kickoffUtc:'2026-11-03T20:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'ucl', home:'Bodø/Glimt', away:'Lille', kickoffUtc:'2026-11-03T20:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'ucl', home:'Manchester Utd', away:'Roma', kickoffUtc:'2026-11-03T20:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'ucl', home:'Villarreal', away:'Paris SG', kickoffUtc:'2026-11-03T20:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'ucl', home:'AEK Athens', away:'Real Madrid', kickoffUtc:'2026-11-04T17:45:00Z', homeStrength:1, awayStrength:1 },
+  { league:'ucl', home:'Fenerbahçe', away:'Liverpool', kickoffUtc:'2026-11-04T17:45:00Z', homeStrength:1, awayStrength:1 },
+  { league:'ucl', home:'Slavia Praha', away:'Arsenal', kickoffUtc:'2026-11-04T20:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'ucl', home:'Borussia Dortmund', away:'Real Betis', kickoffUtc:'2026-11-04T20:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'ucl', home:'Lens', away:'Como', kickoffUtc:'2026-11-04T20:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'ucl', home:'RB Leipzig', away:'Manchester City', kickoffUtc:'2026-11-04T20:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'ucl', home:'Porto', away:'Napoli', kickoffUtc:'2026-11-04T20:00:00Z', homeStrength:1, awayStrength:1 },
+
+  // ===== Europa League — League phase MD4 (ties with a top-five-league club) =====
+  { league:'uel', home:'AC Milan', away:'Ferencváros', kickoffUtc:'2026-11-05T17:45:00Z', homeStrength:1, awayStrength:1 },
+  { league:'uel', home:'Sparta Praha', away:'Bournemouth', kickoffUtc:'2026-11-05T17:45:00Z', homeStrength:1, awayStrength:1 },
+  { league:'uel', home:'Crystal Palace', away:'Hoffenheim', kickoffUtc:'2026-11-05T17:45:00Z', homeStrength:1, awayStrength:1 },
+  { league:'uel', home:'Real Sociedad', away:'Lyon', kickoffUtc:'2026-11-05T17:45:00Z', homeStrength:1, awayStrength:1 },
+  { league:'uel', home:'AZ Alkmaar', away:'Juventus', kickoffUtc:'2026-11-05T20:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'uel', home:'Bayer Leverkusen', away:'Marseille', kickoffUtc:'2026-11-05T20:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'uel', home:'Celta Vigo', away:'Union SG', kickoffUtc:'2026-11-05T20:00:00Z', homeStrength:1, awayStrength:1 },
+  { league:'uel', home:'Sunderland', away:'Dinamo Zagreb', kickoffUtc:'2026-11-05T20:00:00Z', homeStrength:1, awayStrength:1 },
 ];
 
 // Format a UTC ISO datetime as a kickoff display string in the user's local timezone.
@@ -4732,8 +5251,8 @@ const REAL_FIXTURES = [
 function formatKickoff(isoUtc) {
   const d = new Date(isoUtc);
   if (isNaN(d.getTime())) return '—';
-  const dayShort = d.toLocaleDateString('en-US', { weekday: 'short', timeZone: 'America/Toronto' }).toUpperCase();
-  const time     = d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'America/Toronto' });
+  const dayShort = d.toLocaleDateString('en-US', { weekday: 'short' });
+  const time     = d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false });
   return `${dayShort} ${time}`;
 }
 
@@ -4756,6 +5275,7 @@ function genMatches() {
 
   return active.map((f, i) => ({
     id: 'm' + (i + 1),
+    neutral: !!f.neutral, swapHome: !!f.swapHome, venue: f.venue || null,
     league: f.league,
     home: f.home,
     away: f.away,
@@ -4770,9 +5290,9 @@ function shuffleSeed(arr, rng) { for (let i = arr.length - 1; i > 0; i--) { cons
 
 // ============= BET PREDICTOR — real-data goals model =============
 // PRED_DATA is built from every 2026-27 league result through the latest completed
-// round (346 matches). Each league's computed table was checked against the
+// round (397 matches). Each league's computed table was checked against the
 // published table (played, points, goal difference) for all 98 clubs.
-const PRED_DATA = {"epl":{"thru":"Matchweek 7","date":"2026-10-19","src":"VAVEL results; cross-checked with NBC Sports table","games":70,"homeGPG":1.614,"awayGPG":1.286,"teams":{"Arsenal":{"P":7,"W":6,"D":0,"L":1,"GF":11,"GA":5,"HP":3,"HGF":7,"HGA":2,"AP":4,"AGF":4,"AGA":3,"last":[["Chelsea","H","2-1","W"],["Sunderland","A","2-0","W"],["Brighton","A","0-3","L"],["Leeds","H","2-1","W"],["Nottingham F.","A","1-0","W"]],"Pts":18,"pos":2},"Coventry City":{"P":7,"W":2,"D":0,"L":5,"GF":6,"GA":14,"HP":3,"HGF":4,"HGA":7,"AP":4,"AGF":2,"AGA":7,"last":[["Manchester City","A","0-1","L"],["Brighton","H","0-5","L"],["Nottingham F.","A","1-0","W"],["Newcastle","H","4-1","W"],["Tottenham","A","1-3","L"]],"Pts":6,"pos":17},"Hull City":{"P":7,"W":2,"D":3,"L":2,"GF":8,"GA":7,"HP":3,"HGF":4,"HGA":2,"AP":4,"AGF":4,"AGA":5,"last":[["Aston Villa","H","0-0","D"],["Chelsea","A","2-2","D"],["Newcastle","A","1-2","L"],["Everton","H","2-2","D"],["Fulham","A","0-1","L"]],"Pts":9,"pos":9},"Manchester Utd":{"P":7,"W":1,"D":4,"L":2,"GF":10,"GA":10,"HP":3,"HGF":6,"HGA":4,"AP":4,"AGF":4,"AGA":6,"last":[["Everton","A","2-2","D"],["Manchester City","H","0-1","L"],["Fulham","A","1-1","D"],["Tottenham","H","1-1","D"],["Leeds","A","1-1","D"]],"Pts":7,"pos":13},"Nottingham F.":{"P":7,"W":1,"D":2,"L":4,"GF":5,"GA":9,"HP":4,"HGF":0,"HGA":3,"AP":3,"AGF":5,"AGA":6,"last":[["Tottenham","H","0-0","D"],["Aston Villa","A","2-1","W"],["Coventry City","H","0-1","L"],["Crystal Palace","A","1-3","L"],["Arsenal","H","0-1","L"]],"Pts":5,"pos":19},"Leeds":{"P":7,"W":2,"D":4,"L":1,"GF":9,"GA":6,"HP":4,"HGF":6,"HGA":3,"AP":3,"AGF":3,"AGA":3,"last":[["Brighton","A","1-1","D"],["Newcastle","H","4-1","W"],["Crystal Palace","H","0-0","D"],["Arsenal","A","1-2","L"],["Manchester Utd","H","1-1","D"]],"Pts":10,"pos":7},"Ipswich":{"P":7,"W":3,"D":0,"L":4,"GF":11,"GA":15,"HP":3,"HGF":4,"HGA":4,"AP":4,"AGF":7,"AGA":11,"last":[["Liverpool","H","0-2","L"],["Crystal Palace","A","3-2","W"],["Everton","A","0-1","L"],["Fulham","H","2-1","W"],["Manchester City","A","2-3","L"]],"Pts":9,"pos":10},"Sunderland":{"P":7,"W":1,"D":1,"L":5,"GF":6,"GA":14,"HP":3,"HGF":1,"HGA":4,"AP":4,"AGF":5,"AGA":10,"last":[["Brentford","A","1-1","D"],["Arsenal","H","0-2","L"],["Manchester City","A","3-5","L"],["Brighton","H","0-2","L"],["Bournemouth","A","0-2","L"]],"Pts":4,"pos":20},"Everton":{"P":7,"W":2,"D":4,"L":1,"GF":8,"GA":7,"HP":4,"HGF":5,"HGA":4,"AP":3,"AGF":3,"AGA":3,"last":[["Manchester Utd","H","2-2","D"],["Tottenham","A","0-0","D"],["Ipswich","H","1-0","W"],["Hull City","A","2-2","D"],["Chelsea","H","0-2","L"]],"Pts":10,"pos":8},"Crystal Palace":{"P":7,"W":2,"D":1,"L":4,"GF":9,"GA":17,"HP":3,"HGF":6,"HGA":8,"AP":4,"AGF":3,"AGA":9,"last":[["Fulham","A","3-2","W"],["Ipswich","H","2-3","L"],["Leeds","A","0-0","D"],["Nottingham F.","H","3-1","W"],["Brighton","A","0-5","L"]],"Pts":7,"pos":14},"Brentford":{"P":7,"W":2,"D":4,"L":1,"GF":13,"GA":8,"HP":4,"HGF":8,"HGA":3,"AP":3,"AGF":5,"AGA":5,"last":[["Sunderland","H","1-1","D"],["Bournemouth","A","2-2","D"],["Chelsea","H","3-0","W"],["Aston Villa","A","2-2","D"],["Liverpool","H","1-2","L"]],"Pts":10,"pos":6},"Tottenham":{"P":7,"W":1,"D":3,"L":3,"GF":6,"GA":10,"HP":4,"HGF":5,"HGA":6,"AP":3,"AGF":1,"AGA":4,"last":[["Nottingham F.","A","0-0","D"],["Everton","H","0-0","D"],["Aston Villa","H","2-3","L"],["Manchester Utd","A","1-1","D"],["Coventry City","H","3-1","W"]],"Pts":6,"pos":16},"Manchester City":{"P":7,"W":7,"D":0,"L":0,"GF":19,"GA":7,"HP":4,"HGF":11,"HGA":6,"AP":3,"AGF":8,"AGA":1,"last":[["Coventry City","H","1-0","W"],["Manchester Utd","A","1-0","W"],["Sunderland","H","5-3","W"],["Liverpool","A","3-0","W"],["Ipswich","H","3-2","W"]],"Pts":21,"pos":1},"Bournemouth":{"P":7,"W":1,"D":3,"L":3,"GF":9,"GA":13,"HP":4,"HGF":5,"HGA":4,"AP":3,"AGF":4,"AGA":9,"last":[["Newcastle","A","2-2","D"],["Brentford","H","2-2","D"],["Liverpool","H","0-1","L"],["Chelsea","A","1-5","L"],["Sunderland","H","2-0","W"]],"Pts":6,"pos":15},"Brighton":{"P":7,"W":5,"D":1,"L":1,"GF":23,"GA":5,"HP":4,"HGF":13,"HGA":1,"AP":3,"AGF":10,"AGA":4,"last":[["Leeds","H","1-1","D"],["Coventry City","A","5-0","W"],["Arsenal","H","3-0","W"],["Sunderland","A","2-0","W"],["Crystal Palace","H","5-0","W"]],"Pts":16,"pos":3},"Aston Villa":{"P":7,"W":2,"D":2,"L":3,"GF":7,"GA":11,"HP":3,"HGF":3,"HGA":5,"AP":4,"AGF":4,"AGA":6,"last":[["Hull City","A","0-0","D"],["Nottingham F.","H","1-2","L"],["Tottenham","A","3-2","W"],["Brentford","H","2-2","D"],["Newcastle","A","1-0","W"]],"Pts":8,"pos":12},"Newcastle":{"P":7,"W":2,"D":2,"L":3,"GF":10,"GA":14,"HP":4,"HGF":6,"HGA":6,"AP":3,"AGF":4,"AGA":8,"last":[["Bournemouth","H","2-2","D"],["Leeds","A","1-4","L"],["Hull City","H","2-1","W"],["Coventry City","A","1-4","L"],["Aston Villa","H","0-1","L"]],"Pts":8,"pos":11},"Liverpool":{"P":7,"W":3,"D":3,"L":1,"GF":9,"GA":8,"HP":3,"HGF":2,"HGA":5,"AP":4,"AGF":7,"AGA":3,"last":[["Ipswich","A","2-0","W"],["Fulham","H","0-0","D"],["Bournemouth","A","1-0","W"],["Manchester City","H","0-3","L"],["Brentford","A","2-1","W"]],"Pts":12,"pos":5},"Fulham":{"P":7,"W":1,"D":2,"L":4,"GF":7,"GA":10,"HP":4,"HGF":6,"HGA":7,"AP":3,"AGF":1,"AGA":3,"last":[["Crystal Palace","H","2-3","L"],["Liverpool","A","0-0","D"],["Manchester Utd","H","1-1","D"],["Ipswich","A","1-2","L"],["Hull City","H","1-0","W"]],"Pts":5,"pos":18},"Chelsea":{"P":7,"W":4,"D":1,"L":2,"GF":17,"GA":13,"HP":3,"HGF":11,"HGA":6,"AP":4,"AGF":6,"AGA":7,"last":[["Arsenal","A","1-2","L"],["Hull City","H","2-2","D"],["Brentford","A","0-3","L"],["Bournemouth","H","5-1","W"],["Everton","A","2-0","W"]],"Pts":13,"pos":4}}},"laliga":{"thru":"Jornada 9","date":"2026-10-21","src":"VAVEL results; cross-checked with LaLiga.com table","games":89,"homeGPG":1.73,"awayGPG":1.348,"teams":{"Sevilla":{"P":9,"W":4,"D":2,"L":3,"GF":14,"GA":16,"HP":4,"HGF":5,"HGA":7,"AP":5,"AGF":9,"AGA":9,"last":[["Valencia","H","1-0","W"],["Deportivo","A","1-0","W"],["Barcelona","H","1-3","L"],["Levante","A","3-3","D"],["Real Madrid","A","1-4","L"]],"Pts":14,"pos":6},"Rayo Vallecano":{"P":8,"W":2,"D":3,"L":3,"GF":12,"GA":17,"HP":3,"HGF":6,"HGA":4,"AP":5,"AGF":6,"AGA":13,"last":[["Racing Santander","H","3-2","W"],["Real Madrid","A","1-4","L"],["Espanyol","H","2-1","W"],["Osasuna","A","1-1","D"],["Getafe","A","1-1","D"]],"Pts":9,"pos":14},"Alaves":{"P":9,"W":3,"D":2,"L":4,"GF":13,"GA":10,"HP":5,"HGF":10,"HGA":5,"AP":4,"AGF":3,"AGA":5,"last":[["Racing Santander","A","1-2","L"],["Valencia","H","0-1","L"],["Athletic Bilbao","A","0-0","D"],["Atletico Madrid","H","1-2","L"],["Celta Vigo","A","1-2","L"]],"Pts":11,"pos":7},"Getafe":{"P":9,"W":2,"D":3,"L":4,"GF":5,"GA":11,"HP":5,"HGF":5,"HGA":3,"AP":4,"AGF":0,"AGA":8,"last":[["Deportivo","H","1-1","D"],["Real Betis","A","0-1","L"],["Malaga","H","1-0","W"],["Barcelona","A","0-3","L"],["Rayo Vallecano","H","1-1","D"]],"Pts":9,"pos":15},"Espanyol":{"P":9,"W":2,"D":2,"L":5,"GF":11,"GA":12,"HP":5,"HGF":6,"HGA":7,"AP":4,"AGF":5,"AGA":5,"last":[["Osasuna","A","2-0","W"],["Rayo Vallecano","A","1-2","L"],["Elche","H","1-3","L"],["Malaga","A","1-1","D"],["Atletico Madrid","H","0-1","L"]],"Pts":8,"pos":16},"Levante":{"P":9,"W":2,"D":4,"L":3,"GF":15,"GA":17,"HP":4,"HGF":13,"HGA":10,"AP":5,"AGF":2,"AGA":7,"last":[["Barcelona","H","2-4","L"],["Athletic Bilbao","H","3-1","W"],["Villarreal","A","1-3","L"],["Sevilla","H","3-3","D"],["Deportivo","A","1-1","D"]],"Pts":10,"pos":11},"Racing Santander":{"P":9,"W":2,"D":2,"L":5,"GF":13,"GA":25,"HP":4,"HGF":9,"HGA":7,"AP":5,"AGF":4,"AGA":18,"last":[["Alaves","H","2-1","W"],["Barcelona","A","2-7","L"],["Celta Vigo","A","0-5","L"],["Valencia","H","2-2","D"],["Osasuna","A","0-2","L"]],"Pts":8,"pos":17},"Villarreal":{"P":9,"W":2,"D":3,"L":4,"GF":13,"GA":13,"HP":4,"HGF":6,"HGA":6,"AP":5,"AGF":7,"AGA":7,"last":[["Real Betis","H","1-2","L"],["Malaga","A","3-1","W"],["Levante","H","3-1","W"],["Real Madrid","A","0-1","L"],["Elche","H","0-0","D"]],"Pts":9,"pos":12},"Deportivo":{"P":9,"W":2,"D":5,"L":2,"GF":13,"GA":12,"HP":5,"HGF":6,"HGA":5,"AP":4,"AGF":7,"AGA":7,"last":[["Getafe","A","1-1","D"],["Sevilla","H","0-1","L"],["Real Betis","H","1-1","D"],["Real Sociedad","A","2-3","L"],["Levante","H","1-1","D"]],"Pts":11,"pos":9},"Elche":{"P":9,"W":1,"D":4,"L":4,"GF":11,"GA":17,"HP":4,"HGF":4,"HGA":11,"AP":5,"AGF":7,"AGA":6,"last":[["Athletic Bilbao","A","1-1","D"],["Real Madrid","H","2-3","L"],["Espanyol","A","3-1","W"],["Celta Vigo","H","0-0","D"],["Villarreal","A","0-0","D"]],"Pts":7,"pos":18},"Atletico Madrid":{"P":9,"W":7,"D":1,"L":1,"GF":19,"GA":8,"HP":4,"HGF":10,"HGA":3,"AP":5,"AGF":9,"AGA":5,"last":[["Real Sociedad","A","3-0","W"],["Osasuna","H","4-0","W"],["Real Madrid","H","2-1","W"],["Alaves","A","2-1","W"],["Espanyol","A","1-0","W"]],"Pts":22,"pos":2},"Malaga":{"P":9,"W":0,"D":4,"L":5,"GF":6,"GA":18,"HP":5,"HGF":5,"HGA":10,"AP":4,"AGF":1,"AGA":8,"last":[["Celta Vigo","A","1-1","D"],["Villarreal","H","1-3","L"],["Getafe","A","0-1","L"],["Espanyol","H","1-1","D"],["Real Sociedad","H","2-5","L"]],"Pts":4,"pos":20},"Valencia":{"P":9,"W":1,"D":3,"L":5,"GF":6,"GA":15,"HP":5,"HGF":2,"HGA":9,"AP":4,"AGF":4,"AGA":6,"last":[["Sevilla","A","0-1","L"],["Alaves","A","1-0","W"],["Real Sociedad","H","2-3","L"],["Racing Santander","A","2-2","D"],["Athletic Bilbao","H","0-0","D"]],"Pts":6,"pos":19},"Real Betis":{"P":9,"W":6,"D":1,"L":2,"GF":16,"GA":14,"HP":5,"HGF":10,"HGA":7,"AP":4,"AGF":6,"AGA":7,"last":[["Villarreal","A","2-1","W"],["Getafe","H","1-0","W"],["Deportivo","A","1-1","D"],["Osasuna","H","5-2","W"],["Barcelona","H","2-5","L"]],"Pts":19,"pos":4},"Real Madrid":{"P":9,"W":7,"D":0,"L":2,"GF":23,"GA":9,"HP":5,"HGF":17,"HGA":3,"AP":4,"AGF":6,"AGA":6,"last":[["Rayo Vallecano","H","4-1","W"],["Elche","A","3-2","W"],["Atletico Madrid","A","1-2","L"],["Villarreal","H","1-0","W"],["Sevilla","H","4-1","W"]],"Pts":21,"pos":3},"Real Sociedad":{"P":9,"W":5,"D":1,"L":3,"GF":17,"GA":17,"HP":4,"HGF":5,"HGA":6,"AP":5,"AGF":12,"AGA":11,"last":[["Atletico Madrid","H","0-3","L"],["Celta Vigo","H","0-0","D"],["Valencia","A","3-2","W"],["Deportivo","H","3-2","W"],["Malaga","A","5-2","W"]],"Pts":16,"pos":5},"Barcelona":{"P":9,"W":9,"D":0,"L":0,"GF":39,"GA":9,"HP":4,"HGF":17,"HGA":4,"AP":5,"AGF":22,"AGA":5,"last":[["Levante","A","4-2","W"],["Racing Santander","H","7-2","W"],["Sevilla","A","3-1","W"],["Getafe","H","3-0","W"],["Real Betis","A","5-2","W"]],"Pts":27,"pos":1},"Athletic Bilbao":{"P":8,"W":2,"D":3,"L":3,"GF":8,"GA":9,"HP":4,"HGF":5,"HGA":4,"AP":4,"AGF":3,"AGA":5,"last":[["Atletico Madrid","H","3-0","W"],["Elche","H","1-1","D"],["Levante","A","1-3","L"],["Alaves","H","0-0","D"],["Valencia","A","0-0","D"]],"Pts":9,"pos":13},"Celta Vigo":{"P":9,"W":2,"D":5,"L":2,"GF":10,"GA":7,"HP":5,"HGF":9,"HGA":6,"AP":4,"AGF":1,"AGA":1,"last":[["Malaga","H","1-1","D"],["Real Sociedad","A","0-0","D"],["Racing Santander","H","5-0","W"],["Elche","A","0-0","D"],["Alaves","H","2-1","W"]],"Pts":11,"pos":8},"Osasuna":{"P":9,"W":3,"D":2,"L":4,"GF":10,"GA":18,"HP":5,"HGF":4,"HGA":3,"AP":4,"AGF":6,"AGA":15,"last":[["Espanyol","H","0-2","L"],["Atletico Madrid","A","0-4","L"],["Rayo Vallecano","H","1-1","D"],["Real Betis","A","2-5","L"],["Racing Santander","H","2-0","W"]],"Pts":11,"pos":10}}},"bundes":{"thru":"Matchday 6","date":"2026-10-18","src":"hessenschau.de results and table","games":54,"homeGPG":2.278,"awayGPG":1.407,"teams":{"Bayern Munich":{"P":6,"W":4,"D":2,"L":0,"GF":22,"GA":5,"HP":3,"HGF":18,"HGA":2,"AP":3,"AGF":4,"AGA":3,"last":[["Schalke 04","A","0-0","D"],["SV Elversberg","A","2-1","W"],["Union Berlin","H","7-0","W"],["Augsburg","A","2-2","D"],["RB Leipzig","H","6-1","W"]],"Pts":14,"pos":1},"Stuttgart":{"P":6,"W":2,"D":0,"L":4,"GF":8,"GA":10,"HP":2,"HGF":4,"HGA":2,"AP":4,"AGF":4,"AGA":8,"last":[["FC Köln","H","4-1","W"],["Hoffenheim","A","1-2","L"],["Borussia Dortmund","H","0-1","L"],["SC Paderborn","A","2-0","W"],["Hamburg","A","0-1","L"]],"Pts":6,"pos":13},"RB Leipzig":{"P":6,"W":3,"D":0,"L":3,"GF":16,"GA":11,"HP":3,"HGF":14,"HGA":0,"AP":3,"AGF":2,"AGA":11,"last":[["Werder Bremen","A","1-3","L"],["Hamburg","H","5-0","W"],["Bayer Leverkusen","A","0-2","L"],["Eintracht Frankfurt","H","6-0","W"],["Bayern Munich","A","1-6","L"]],"Pts":9,"pos":7},"Borussia M.Gladbach":{"P":6,"W":0,"D":0,"L":6,"GF":8,"GA":20,"HP":3,"HGF":7,"HGA":10,"AP":3,"AGF":1,"AGA":10,"last":[["SV Elversberg","H","3-4","L"],["Freiburg","A","0-5","L"],["Mainz","H","3-4","L"],["FC Köln","A","1-2","L"],["Hoffenheim","H","1-2","L"]],"Pts":0,"pos":18},"Union Berlin":{"P":6,"W":1,"D":2,"L":3,"GF":5,"GA":17,"HP":4,"HGF":5,"HGA":6,"AP":2,"AGF":0,"AGA":11,"last":[["Bayer Leverkusen","A","0-4","L"],["Schalke 04","H","1-3","L"],["Bayern Munich","A","0-7","L"],["SV Elversberg","H","1-0","W"],["Borussia Dortmund","H","0-0","D"]],"Pts":5,"pos":17},"Eintracht Frankfurt":{"P":6,"W":2,"D":2,"L":2,"GF":10,"GA":16,"HP":3,"HGF":4,"HGA":6,"AP":3,"AGF":6,"AGA":10,"last":[["Augsburg","H","1-4","L"],["Mainz","A","3-1","W"],["Freiburg","H","2-2","D"],["RB Leipzig","A","0-6","L"],["FC Köln","H","1-0","W"]],"Pts":8,"pos":11},"FC Köln":{"P":6,"W":2,"D":1,"L":3,"GF":8,"GA":11,"HP":3,"HGF":6,"HGA":4,"AP":3,"AGF":2,"AGA":7,"last":[["Stuttgart","A","1-4","L"],["Werder Bremen","H","1-1","D"],["Hamburg","A","1-2","L"],["Borussia M.Gladbach","H","2-1","W"],["Eintracht Frankfurt","A","0-1","L"]],"Pts":7,"pos":12},"Hoffenheim":{"P":6,"W":2,"D":0,"L":4,"GF":11,"GA":14,"HP":3,"HGF":6,"HGA":7,"AP":3,"AGF":5,"AGA":7,"last":[["Borussia Dortmund","H","2-3","L"],["Stuttgart","H","2-1","W"],["SC Paderborn","A","1-3","L"],["Hamburg","H","2-3","L"],["Borussia M.Gladbach","A","2-1","W"]],"Pts":6,"pos":14},"SV Elversberg":{"P":6,"W":3,"D":1,"L":2,"GF":12,"GA":11,"HP":3,"HGF":8,"HGA":7,"AP":3,"AGF":4,"AGA":4,"last":[["Borussia M.Gladbach","A","4-3","W"],["Bayern Munich","H","1-2","L"],["Schalke 04","A","0-0","D"],["Union Berlin","A","0-1","L"],["Augsburg","H","4-3","W"]],"Pts":10,"pos":6},"Bayer Leverkusen":{"P":6,"W":4,"D":1,"L":1,"GF":16,"GA":9,"HP":3,"HGF":8,"HGA":1,"AP":3,"AGF":8,"AGA":8,"last":[["Union Berlin","H","4-0","W"],["Augsburg","A","2-2","D"],["RB Leipzig","H","2-0","W"],["Mainz","A","4-3","W"],["Freiburg","H","2-1","W"]],"Pts":13,"pos":4},"Mainz":{"P":6,"W":3,"D":1,"L":2,"GF":14,"GA":10,"HP":3,"HGF":4,"HGA":7,"AP":3,"AGF":10,"AGA":3,"last":[["Hamburg","A","5-0","W"],["Eintracht Frankfurt","H","1-3","L"],["Borussia M.Gladbach","A","4-3","W"],["Bayer Leverkusen","H","3-4","L"],["Schalke 04","A","1-0","W"]],"Pts":10,"pos":5},"SC Paderborn":{"P":6,"W":1,"D":2,"L":3,"GF":5,"GA":9,"HP":3,"HGF":3,"HGA":4,"AP":3,"AGF":2,"AGA":5,"last":[["Freiburg","H","0-1","L"],["Borussia Dortmund","A","0-3","L"],["Hoffenheim","H","3-1","W"],["Stuttgart","H","0-2","L"],["Werder Bremen","A","2-2","D"]],"Pts":5,"pos":16},"Borussia Dortmund":{"P":6,"W":4,"D":2,"L":0,"GF":11,"GA":4,"HP":3,"HGF":7,"HGA":2,"AP":3,"AGF":4,"AGA":2,"last":[["Hoffenheim","A","3-2","W"],["SC Paderborn","H","3-0","W"],["Stuttgart","A","1-0","W"],["Werder Bremen","H","2-2","D"],["Union Berlin","A","0-0","D"]],"Pts":14,"pos":2},"Hamburg":{"P":6,"W":3,"D":0,"L":3,"GF":6,"GA":15,"HP":3,"HGF":3,"HGA":6,"AP":3,"AGF":3,"AGA":9,"last":[["Mainz","H","0-5","L"],["RB Leipzig","A","0-5","L"],["FC Köln","H","2-1","W"],["Hoffenheim","A","3-2","W"],["Stuttgart","H","1-0","W"]],"Pts":9,"pos":9},"Freiburg":{"P":6,"W":4,"D":1,"L":1,"GF":15,"GA":6,"HP":3,"HGF":11,"HGA":2,"AP":3,"AGF":4,"AGA":4,"last":[["SC Paderborn","A","1-0","W"],["Borussia M.Gladbach","H","5-0","W"],["Eintracht Frankfurt","A","2-2","D"],["Schalke 04","H","2-1","W"],["Bayer Leverkusen","A","1-2","L"]],"Pts":13,"pos":3},"Werder Bremen":{"P":6,"W":2,"D":3,"L":1,"GF":12,"GA":12,"HP":3,"HGF":8,"HGA":5,"AP":3,"AGF":4,"AGA":7,"last":[["RB Leipzig","H","3-1","W"],["FC Köln","A","1-1","D"],["Augsburg","H","3-2","W"],["Borussia Dortmund","A","2-2","D"],["SC Paderborn","H","2-2","D"]],"Pts":9,"pos":8},"Augsburg":{"P":6,"W":2,"D":2,"L":2,"GF":16,"GA":12,"HP":3,"HGF":7,"HGA":4,"AP":3,"AGF":9,"AGA":8,"last":[["Eintracht Frankfurt","A","4-1","W"],["Bayer Leverkusen","H","2-2","D"],["Werder Bremen","A","2-3","L"],["Bayern Munich","H","2-2","D"],["SV Elversberg","A","3-4","L"]],"Pts":8,"pos":10},"Schalke 04":{"P":6,"W":1,"D":2,"L":3,"GF":4,"GA":7,"HP":3,"HGF":0,"HGA":1,"AP":3,"AGF":4,"AGA":6,"last":[["Bayern Munich","H","0-0","D"],["Union Berlin","A","3-1","W"],["SV Elversberg","H","0-0","D"],["Freiburg","A","1-2","L"],["Mainz","H","0-1","L"]],"Pts":5,"pos":15}}},"seriea":{"thru":"Giornata 7","date":"2026-10-19","src":"Sky Italia results and table","games":70,"homeGPG":1.557,"awayGPG":1.4,"teams":{"Inter Milan":{"P":7,"W":6,"D":1,"L":0,"GF":21,"GA":9,"HP":4,"HGF":15,"HGA":6,"AP":3,"AGF":6,"AGA":3,"last":[["Napoli","H","3-2","W"],["Udinese","H","5-3","W"],["Roma","A","2-2","D"],["Parma","H","3-0","W"],["Bologna","A","3-1","W"]],"Pts":19,"pos":1},"Monza":{"P":7,"W":2,"D":1,"L":4,"GF":13,"GA":15,"HP":3,"HGF":8,"HGA":4,"AP":4,"AGF":5,"AGA":11,"last":[["Parma","A","1-1","D"],["Lecce","A","2-3","L"],["Sassuolo","H","2-1","W"],["Lazio","A","1-3","L"],["Cagliari","H","4-0","W"]],"Pts":7,"pos":14},"Udinese":{"P":7,"W":1,"D":1,"L":5,"GF":9,"GA":16,"HP":4,"HGF":2,"HGA":7,"AP":3,"AGF":7,"AGA":9,"last":[["Lazio","H","1-2","L"],["Inter Milan","A","3-5","L"],["Cagliari","H","0-1","L"],["Torino","A","1-2","L"],["Lecce","H","0-3","L"]],"Pts":4,"pos":16},"Como":{"P":7,"W":4,"D":2,"L":1,"GF":12,"GA":7,"HP":2,"HGF":2,"HGA":1,"AP":5,"AGF":10,"AGA":6,"last":[["Genoa","A","4-1","W"],["Parma","H","2-1","W"],["Frosinone","A","0-2","L"],["Roma","H","0-0","D"],["Fiorentina","A","3-1","W"]],"Pts":14,"pos":5},"Genoa":{"P":7,"W":1,"D":1,"L":5,"GF":5,"GA":13,"HP":4,"HGF":4,"HGA":8,"AP":3,"AGF":1,"AGA":5,"last":[["Como","H","1-4","L"],["Frosinone","H","1-1","D"],["Parma","A","1-2","L"],["Fiorentina","H","2-1","W"],["Roma","A","0-2","L"]],"Pts":4,"pos":17},"Napoli":{"P":7,"W":3,"D":1,"L":3,"GF":10,"GA":7,"HP":3,"HGF":5,"HGA":2,"AP":4,"AGF":5,"AGA":5,"last":[["Inter Milan","A","2-3","L"],["Bologna","H","1-0","W"],["Fiorentina","A","1-1","D"],["Frosinone","H","3-0","W"],["Venezia","A","0-1","L"]],"Pts":10,"pos":9},"Parma":{"P":7,"W":1,"D":1,"L":5,"GF":4,"GA":13,"HP":4,"HGF":3,"HGA":6,"AP":3,"AGF":1,"AGA":7,"last":[["Monza","H","1-1","D"],["Como","A","1-2","L"],["Genoa","H","2-1","W"],["Inter Milan","A","0-3","L"],["Torino","H","0-3","L"]],"Pts":4,"pos":19},"Cagliari":{"P":7,"W":4,"D":1,"L":2,"GF":6,"GA":7,"HP":3,"HGF":2,"HGA":2,"AP":4,"AGF":4,"AGA":5,"last":[["Lecce","H","1-0","W"],["Atalanta","A","2-1","W"],["Udinese","A","1-0","W"],["Juventus","H","1-1","D"],["Monza","A","0-4","L"]],"Pts":13,"pos":7},"Frosinone":{"P":7,"W":4,"D":1,"L":2,"GF":13,"GA":9,"HP":4,"HGF":9,"HGA":5,"AP":3,"AGF":4,"AGA":4,"last":[["Venezia","H","3-2","W"],["Genoa","A","1-1","D"],["Como","H","2-0","W"],["Napoli","A","0-3","L"],["Sassuolo","H","4-2","W"]],"Pts":13,"pos":6},"Juventus":{"P":7,"W":3,"D":2,"L":2,"GF":9,"GA":8,"HP":4,"HGF":5,"HGA":4,"AP":3,"AGF":4,"AGA":4,"last":[["AC Milan","H","1-1","D"],["Sassuolo","A","2-3","L"],["Atalanta","H","2-0","W"],["Cagliari","A","1-1","D"],["Lazio","H","0-3","L"]],"Pts":11,"pos":8},"Venezia":{"P":7,"W":1,"D":0,"L":6,"GF":6,"GA":16,"HP":4,"HGF":3,"HGA":8,"AP":3,"AGF":3,"AGA":8,"last":[["Frosinone","A","2-3","L"],["Fiorentina","H","2-4","L"],["Lazio","H","0-2","L"],["Atalanta","A","1-3","L"],["Napoli","H","1-0","W"]],"Pts":3,"pos":20},"Lecce":{"P":7,"W":3,"D":0,"L":4,"GF":9,"GA":12,"HP":3,"HGF":4,"HGA":8,"AP":4,"AGF":5,"AGA":4,"last":[["Cagliari","A","0-1","L"],["Monza","H","3-2","W"],["AC Milan","A","0-3","L"],["Bologna","H","1-2","L"],["Udinese","A","3-0","W"]],"Pts":9,"pos":12},"Atalanta":{"P":7,"W":3,"D":0,"L":4,"GF":10,"GA":11,"HP":4,"HGF":7,"HGA":4,"AP":3,"AGF":3,"AGA":7,"last":[["Roma","A","1-2","L"],["Cagliari","H","1-2","L"],["Juventus","A","0-2","L"],["Venezia","H","3-1","W"],["AC Milan","A","2-3","L"]],"Pts":9,"pos":11},"Sassuolo":{"P":7,"W":2,"D":2,"L":3,"GF":12,"GA":14,"HP":3,"HGF":6,"HGA":4,"AP":4,"AGF":6,"AGA":10,"last":[["Bologna","A","2-2","D"],["Juventus","H","3-2","W"],["Monza","A","1-2","L"],["AC Milan","H","1-1","D"],["Frosinone","A","2-4","L"]],"Pts":8,"pos":13},"Torino":{"P":7,"W":3,"D":1,"L":3,"GF":10,"GA":9,"HP":3,"HGF":3,"HGA":5,"AP":4,"AGF":7,"AGA":4,"last":[["Fiorentina","A","2-1","W"],["Roma","H","0-2","L"],["Bologna","A","1-1","D"],["Udinese","H","2-1","W"],["Parma","A","3-0","W"]],"Pts":10,"pos":10},"AC Milan":{"P":7,"W":4,"D":3,"L":0,"GF":14,"GA":7,"HP":3,"HGF":8,"HGA":2,"AP":4,"AGF":6,"AGA":5,"last":[["Juventus","A","1-1","D"],["Lazio","A","2-2","D"],["Lecce","H","3-0","W"],["Sassuolo","A","1-1","D"],["Atalanta","H","3-2","W"]],"Pts":15,"pos":4},"Bologna":{"P":7,"W":1,"D":2,"L":4,"GF":6,"GA":10,"HP":4,"HGF":4,"HGA":7,"AP":3,"AGF":2,"AGA":3,"last":[["Sassuolo","H","2-2","D"],["Napoli","A","0-1","L"],["Torino","H","1-1","D"],["Lecce","A","2-1","W"],["Inter Milan","H","1-3","L"]],"Pts":5,"pos":15},"Lazio":{"P":7,"W":6,"D":1,"L":0,"GF":14,"GA":4,"HP":3,"HGF":6,"HGA":3,"AP":4,"AGF":8,"AGA":1,"last":[["Udinese","A","2-1","W"],["AC Milan","H","2-2","D"],["Venezia","A","2-0","W"],["Monza","H","3-1","W"],["Juventus","A","3-0","W"]],"Pts":19,"pos":2},"Roma":{"P":7,"W":5,"D":2,"L":0,"GF":16,"GA":3,"HP":4,"HGF":10,"HGA":3,"AP":3,"AGF":6,"AGA":0,"last":[["Atalanta","H","2-1","W"],["Torino","A","2-0","W"],["Inter Milan","H","2-2","D"],["Como","A","0-0","D"],["Genoa","H","2-0","W"]],"Pts":17,"pos":3},"Fiorentina":{"P":7,"W":1,"D":1,"L":5,"GF":8,"GA":17,"HP":4,"HGF":3,"HGA":9,"AP":3,"AGF":5,"AGA":8,"last":[["Torino","H","1-2","L"],["Venezia","A","4-2","W"],["Napoli","H","1-1","D"],["Genoa","A","1-2","L"],["Como","H","1-3","L"]],"Pts":4,"pos":18}}},"ligue1":{"thru":"Journée 7","date":"2026-10-18","src":"VAVEL results; cross-checked with Foot Mercato table","games":63,"homeGPG":1.635,"awayGPG":1.413,"teams":{"Marseille":{"P":7,"W":3,"D":0,"L":4,"GF":14,"GA":10,"HP":3,"HGF":7,"HGA":5,"AP":4,"AGF":7,"AGA":5,"last":[["Paris FC","H","2-3","L"],["Rennes","A","0-1","L"],["Paris SG","H","1-2","L"],["Troyes","A","2-0","W"],["Angers","A","5-2","W"]],"Pts":9,"pos":9},"Strasbourg":{"P":7,"W":2,"D":1,"L":4,"GF":12,"GA":15,"HP":3,"HGF":4,"HGA":5,"AP":4,"AGF":8,"AGA":10,"last":[["Troyes","A","6-2","W"],["Monaco","H","1-1","D"],["Paris FC","A","1-2","L"],["Nice","A","1-2","L"],["Paris SG","H","1-3","L"]],"Pts":7,"pos":14},"Toulouse":{"P":7,"W":2,"D":3,"L":2,"GF":12,"GA":11,"HP":3,"HGF":3,"HGA":5,"AP":4,"AGF":9,"AGA":6,"last":[["Lille","H","0-1","L"],["Lorient","A","2-2","D"],["Le Havre","H","3-2","W"],["Monaco","A","2-2","D"],["Le Mans","A","3-0","W"]],"Pts":9,"pos":11},"Lyon":{"P":7,"W":4,"D":2,"L":1,"GF":13,"GA":5,"HP":4,"HGF":10,"HGA":3,"AP":3,"AGF":3,"AGA":2,"last":[["Auxerre","H","3-1","W"],["Paris FC","A","0-0","D"],["Rennes","H","4-0","W"],["Lens","A","1-2","L"],["Nice","H","2-1","W"]],"Pts":14,"pos":1},"Le Mans":{"P":7,"W":1,"D":3,"L":3,"GF":10,"GA":15,"HP":4,"HGF":6,"HGA":8,"AP":3,"AGF":4,"AGA":7,"last":[["Nice","A","1-1","D"],["Lens","H","2-2","D"],["Lorient","H","2-1","W"],["Paris SG","A","1-3","L"],["Toulouse","H","0-3","L"]],"Pts":6,"pos":16},"Brest":{"P":7,"W":2,"D":3,"L":2,"GF":13,"GA":10,"HP":3,"HGF":7,"HGA":4,"AP":4,"AGF":6,"AGA":6,"last":[["Le Havre","A","2-1","W"],["Paris SG","H","0-1","L"],["Auxerre","A","1-2","L"],["Angers","H","5-1","W"],["Lille","A","1-1","D"]],"Pts":9,"pos":10},"Nice":{"P":7,"W":2,"D":2,"L":3,"GF":6,"GA":9,"HP":4,"HGF":5,"HGA":3,"AP":3,"AGF":1,"AGA":6,"last":[["Le Mans","H","1-1","D"],["Auxerre","A","0-1","L"],["Lille","H","2-1","W"],["Strasbourg","H","2-1","W"],["Lyon","A","1-2","L"]],"Pts":8,"pos":13},"Lorient":{"P":7,"W":3,"D":2,"L":2,"GF":7,"GA":6,"HP":4,"HGF":5,"HGA":4,"AP":3,"AGF":2,"AGA":2,"last":[["Lens","A","1-0","W"],["Toulouse","H","2-2","D"],["Le Mans","A","1-2","L"],["Paris FC","H","1-0","W"],["Monaco","H","1-0","W"]],"Pts":11,"pos":7},"Troyes":{"P":7,"W":1,"D":1,"L":5,"GF":5,"GA":16,"HP":4,"HGF":3,"HGA":11,"AP":3,"AGF":2,"AGA":5,"last":[["Strasbourg","H","2-6","L"],["Lille","A","0-2","L"],["Angers","A","0-2","L"],["Marseille","H","0-2","L"],["Lens","H","1-3","L"]],"Pts":4,"pos":17},"Paris FC":{"P":7,"W":4,"D":2,"L":1,"GF":12,"GA":7,"HP":4,"HGF":9,"HGA":4,"AP":3,"AGF":3,"AGA":3,"last":[["Marseille","A","3-2","W"],["Lyon","H","0-0","D"],["Strasbourg","H","2-1","W"],["Lorient","A","0-1","L"],["Rennes","H","4-3","W"]],"Pts":14,"pos":3},"Lens":{"P":7,"W":3,"D":1,"L":3,"GF":14,"GA":11,"HP":3,"HGF":7,"HGA":4,"AP":4,"AGF":7,"AGA":7,"last":[["Lorient","H","0-1","L"],["Le Mans","A","2-2","D"],["Monaco","A","1-2","L"],["Lyon","H","2-1","W"],["Troyes","A","3-1","W"]],"Pts":10,"pos":8},"Auxerre":{"P":7,"W":3,"D":0,"L":4,"GF":11,"GA":17,"HP":3,"HGF":4,"HGA":4,"AP":4,"AGF":7,"AGA":13,"last":[["Lyon","A","1-3","L"],["Nice","H","1-0","W"],["Brest","H","2-1","W"],["Rennes","A","1-4","L"],["Le Havre","A","3-1","W"]],"Pts":9,"pos":12},"Rennes":{"P":7,"W":4,"D":1,"L":2,"GF":15,"GA":14,"HP":4,"HGF":10,"HGA":5,"AP":3,"AGF":5,"AGA":9,"last":[["Angers","A","2-1","W"],["Marseille","H","1-0","W"],["Lyon","A","0-4","L"],["Auxerre","H","4-1","W"],["Paris FC","A","3-4","L"]],"Pts":13,"pos":6},"Paris SG":{"P":7,"W":4,"D":2,"L":1,"GF":14,"GA":9,"HP":2,"HGF":4,"HGA":3,"AP":5,"AGF":10,"AGA":6,"last":[["Monaco","H","1-2","L"],["Brest","A","1-0","W"],["Marseille","A","2-1","W"],["Le Mans","H","3-1","W"],["Strasbourg","A","3-1","W"]],"Pts":14,"pos":2},"Le Havre":{"P":7,"W":0,"D":2,"L":5,"GF":5,"GA":11,"HP":4,"HGF":2,"HGA":6,"AP":3,"AGF":3,"AGA":5,"last":[["Brest","H","1-2","L"],["Angers","H","0-0","D"],["Toulouse","A","2-3","L"],["Lille","A","0-1","L"],["Auxerre","H","1-3","L"]],"Pts":2,"pos":18},"Monaco":{"P":7,"W":4,"D":2,"L":1,"GF":10,"GA":6,"HP":3,"HGF":6,"HGA":3,"AP":4,"AGF":4,"AGA":3,"last":[["Paris SG","A","2-1","W"],["Strasbourg","A","1-1","D"],["Lens","H","2-1","W"],["Toulouse","H","2-2","D"],["Lorient","A","0-1","L"]],"Pts":14,"pos":5},"Angers":{"P":7,"W":2,"D":1,"L":4,"GF":9,"GA":15,"HP":4,"HGF":5,"HGA":9,"AP":3,"AGF":4,"AGA":6,"last":[["Rennes","H","1-2","L"],["Le Havre","A","0-0","D"],["Troyes","H","2-0","W"],["Brest","A","1-5","L"],["Marseille","H","2-5","L"]],"Pts":7,"pos":15},"Lille":{"P":7,"W":4,"D":2,"L":1,"GF":10,"GA":5,"HP":4,"HGF":6,"HGA":3,"AP":3,"AGF":4,"AGA":2,"last":[["Toulouse","A","1-0","W"],["Troyes","H","2-0","W"],["Nice","A","1-2","L"],["Le Havre","H","1-0","W"],["Brest","H","1-1","D"]],"Pts":14,"pos":4}}}};
+const PRED_DATA = {"epl":{"thru":"Matchweek 8","date":"2026-10-25","src":"VAVEL results; cross-checked with published table (nau.ch)","games":80,"homeGPG":1.512,"awayGPG":1.262,"teams":{"Arsenal":{"P":8,"W":7,"D":0,"L":1,"GF":13,"GA":5,"HP":4,"HGF":9,"HGA":2,"AP":4,"AGF":4,"AGA":3,"last":[["Sunderland","A","2-0","W"],["Brighton","A","0-3","L"],["Leeds","H","2-1","W"],["Nottingham F.","A","1-0","W"],["Everton","H","2-0","W"]],"Pts":21,"pos":2},"Coventry City":{"P":8,"W":2,"D":0,"L":6,"GF":6,"GA":15,"HP":4,"HGF":4,"HGA":8,"AP":4,"AGF":2,"AGA":7,"last":[["Brighton","H","0-5","L"],["Nottingham F.","A","1-0","W"],["Newcastle","H","4-1","W"],["Tottenham","A","1-3","L"],["Fulham","H","0-1","L"]],"Pts":6,"pos":19},"Hull City":{"P":8,"W":2,"D":4,"L":2,"GF":9,"GA":8,"HP":4,"HGF":5,"HGA":3,"AP":4,"AGF":4,"AGA":5,"last":[["Chelsea","A","2-2","D"],["Newcastle","A","1-2","L"],["Everton","H","2-2","D"],["Fulham","A","0-1","L"],["Brentford","H","1-1","D"]],"Pts":10,"pos":10},"Manchester Utd":{"P":8,"W":1,"D":4,"L":3,"GF":10,"GA":13,"HP":4,"HGF":6,"HGA":7,"AP":4,"AGF":4,"AGA":6,"last":[["Manchester City","H","0-1","L"],["Fulham","A","1-1","D"],["Tottenham","H","1-1","D"],["Leeds","A","1-1","D"],["Bournemouth","H","0-3","L"]],"Pts":7,"pos":16},"Nottingham F.":{"P":8,"W":1,"D":3,"L":4,"GF":6,"GA":10,"HP":4,"HGF":0,"HGA":3,"AP":4,"AGF":6,"AGA":7,"last":[["Aston Villa","A","2-1","W"],["Coventry City","H","0-1","L"],["Crystal Palace","A","1-3","L"],["Arsenal","H","0-1","L"],["Ipswich","A","1-1","D"]],"Pts":6,"pos":18},"Leeds":{"P":8,"W":2,"D":5,"L":1,"GF":9,"GA":6,"HP":4,"HGF":6,"HGA":3,"AP":4,"AGF":3,"AGA":3,"last":[["Newcastle","H","4-1","W"],["Crystal Palace","H","0-0","D"],["Arsenal","A","1-2","L"],["Manchester Utd","H","1-1","D"],["Sunderland","A","0-0","D"]],"Pts":11,"pos":7},"Ipswich":{"P":8,"W":3,"D":1,"L":4,"GF":12,"GA":16,"HP":4,"HGF":5,"HGA":5,"AP":4,"AGF":7,"AGA":11,"last":[["Crystal Palace","A","3-2","W"],["Everton","A","0-1","L"],["Fulham","H","2-1","W"],["Manchester City","A","2-3","L"],["Nottingham F.","H","1-1","D"]],"Pts":10,"pos":12},"Sunderland":{"P":8,"W":1,"D":2,"L":5,"GF":6,"GA":14,"HP":4,"HGF":1,"HGA":4,"AP":4,"AGF":5,"AGA":10,"last":[["Arsenal","H","0-2","L"],["Manchester City","A","3-5","L"],["Brighton","H","0-2","L"],["Bournemouth","A","0-2","L"],["Leeds","H","0-0","D"]],"Pts":5,"pos":20},"Everton":{"P":8,"W":2,"D":4,"L":2,"GF":8,"GA":9,"HP":4,"HGF":5,"HGA":4,"AP":4,"AGF":3,"AGA":5,"last":[["Tottenham","A","0-0","D"],["Ipswich","H","1-0","W"],["Hull City","A","2-2","D"],["Chelsea","H","0-2","L"],["Arsenal","A","0-2","L"]],"Pts":10,"pos":11},"Crystal Palace":{"P":8,"W":2,"D":1,"L":5,"GF":9,"GA":19,"HP":4,"HGF":6,"HGA":10,"AP":4,"AGF":3,"AGA":9,"last":[["Ipswich","H","2-3","L"],["Leeds","A","0-0","D"],["Nottingham F.","H","3-1","W"],["Brighton","A","0-5","L"],["Newcastle","H","0-2","L"]],"Pts":7,"pos":17},"Brentford":{"P":8,"W":2,"D":5,"L":1,"GF":14,"GA":9,"HP":4,"HGF":8,"HGA":3,"AP":4,"AGF":6,"AGA":6,"last":[["Bournemouth","A","2-2","D"],["Chelsea","H","3-0","W"],["Aston Villa","A","2-2","D"],["Liverpool","H","1-2","L"],["Hull City","A","1-1","D"]],"Pts":11,"pos":6},"Tottenham":{"P":8,"W":2,"D":3,"L":3,"GF":8,"GA":10,"HP":4,"HGF":5,"HGA":6,"AP":4,"AGF":3,"AGA":4,"last":[["Everton","H","0-0","D"],["Aston Villa","H","2-3","L"],["Manchester Utd","A","1-1","D"],["Coventry City","H","3-1","W"],["Chelsea","A","2-0","W"]],"Pts":9,"pos":14},"Manchester City":{"P":8,"W":7,"D":0,"L":1,"GF":20,"GA":9,"HP":4,"HGF":11,"HGA":6,"AP":4,"AGF":9,"AGA":3,"last":[["Manchester Utd","A","1-0","W"],["Sunderland","H","5-3","W"],["Liverpool","A","3-0","W"],["Ipswich","H","3-2","W"],["Aston Villa","A","1-2","L"]],"Pts":21,"pos":1},"Bournemouth":{"P":8,"W":2,"D":3,"L":3,"GF":12,"GA":13,"HP":4,"HGF":5,"HGA":4,"AP":4,"AGF":7,"AGA":9,"last":[["Brentford","H","2-2","D"],["Liverpool","H","0-1","L"],["Chelsea","A","1-5","L"],["Sunderland","H","2-0","W"],["Manchester Utd","A","3-0","W"]],"Pts":9,"pos":13},"Brighton":{"P":8,"W":5,"D":1,"L":2,"GF":23,"GA":7,"HP":4,"HGF":13,"HGA":1,"AP":4,"AGF":10,"AGA":6,"last":[["Coventry City","A","5-0","W"],["Arsenal","H","3-0","W"],["Sunderland","A","2-0","W"],["Crystal Palace","H","5-0","W"],["Liverpool","A","0-2","L"]],"Pts":16,"pos":3},"Aston Villa":{"P":8,"W":3,"D":2,"L":3,"GF":9,"GA":12,"HP":4,"HGF":5,"HGA":6,"AP":4,"AGF":4,"AGA":6,"last":[["Nottingham F.","H","1-2","L"],["Tottenham","A","3-2","W"],["Brentford","H","2-2","D"],["Newcastle","A","1-0","W"],["Manchester City","H","2-1","W"]],"Pts":11,"pos":9},"Newcastle":{"P":8,"W":3,"D":2,"L":3,"GF":12,"GA":14,"HP":4,"HGF":6,"HGA":6,"AP":4,"AGF":6,"AGA":8,"last":[["Leeds","A","1-4","L"],["Hull City","H","2-1","W"],["Coventry City","A","1-4","L"],["Aston Villa","H","0-1","L"],["Crystal Palace","A","2-0","W"]],"Pts":11,"pos":8},"Liverpool":{"P":8,"W":4,"D":3,"L":1,"GF":11,"GA":8,"HP":4,"HGF":4,"HGA":5,"AP":4,"AGF":7,"AGA":3,"last":[["Fulham","H","0-0","D"],["Bournemouth","A","1-0","W"],["Manchester City","H","0-3","L"],["Brentford","A","2-1","W"],["Brighton","H","2-0","W"]],"Pts":15,"pos":4},"Fulham":{"P":8,"W":2,"D":2,"L":4,"GF":8,"GA":10,"HP":4,"HGF":6,"HGA":7,"AP":4,"AGF":2,"AGA":3,"last":[["Liverpool","A","0-0","D"],["Manchester Utd","H","1-1","D"],["Ipswich","A","1-2","L"],["Hull City","H","1-0","W"],["Coventry City","A","1-0","W"]],"Pts":8,"pos":15},"Chelsea":{"P":8,"W":4,"D":1,"L":3,"GF":17,"GA":15,"HP":4,"HGF":11,"HGA":8,"AP":4,"AGF":6,"AGA":7,"last":[["Hull City","H","2-2","D"],["Brentford","A","0-3","L"],["Bournemouth","H","5-1","W"],["Everton","A","2-0","W"],["Tottenham","H","0-2","L"]],"Pts":13,"pos":5}}},"laliga":{"thru":"Jornada 10","date":"2026-10-26","src":"VAVEL results; Clásico confirmed by foot-africa","games":99,"homeGPG":1.697,"awayGPG":1.313,"teams":{"Sevilla":{"P":10,"W":5,"D":2,"L":3,"GF":16,"GA":16,"HP":5,"HGF":7,"HGA":7,"AP":5,"AGF":9,"AGA":9,"last":[["Deportivo","A","1-0","W"],["Barcelona","H","1-3","L"],["Levante","A","3-3","D"],["Real Madrid","A","1-4","L"],["Osasuna","H","2-0","W"]],"Pts":17,"pos":6},"Rayo Vallecano":{"P":9,"W":2,"D":3,"L":4,"GF":12,"GA":20,"HP":4,"HGF":6,"HGA":7,"AP":5,"AGF":6,"AGA":13,"last":[["Real Madrid","A","1-4","L"],["Espanyol","H","2-1","W"],["Osasuna","A","1-1","D"],["Getafe","A","1-1","D"],["Elche","H","0-3","L"]],"Pts":9,"pos":16},"Alaves":{"P":10,"W":3,"D":3,"L":4,"GF":14,"GA":11,"HP":6,"HGF":11,"HGA":6,"AP":4,"AGF":3,"AGA":5,"last":[["Valencia","H","0-1","L"],["Athletic Bilbao","A","0-0","D"],["Atletico Madrid","H","1-2","L"],["Celta Vigo","A","1-2","L"],["Malaga","H","1-1","D"]],"Pts":12,"pos":7},"Getafe":{"P":10,"W":2,"D":3,"L":5,"GF":5,"GA":15,"HP":5,"HGF":5,"HGA":3,"AP":5,"AGF":0,"AGA":12,"last":[["Real Betis","A","0-1","L"],["Malaga","H","1-0","W"],["Barcelona","A","0-3","L"],["Rayo Vallecano","H","1-1","D"],["Athletic Bilbao","A","0-4","L"]],"Pts":9,"pos":17},"Espanyol":{"P":10,"W":2,"D":2,"L":6,"GF":12,"GA":14,"HP":5,"HGF":6,"HGA":7,"AP":5,"AGF":6,"AGA":7,"last":[["Rayo Vallecano","A","1-2","L"],["Elche","H","1-3","L"],["Malaga","A","1-1","D"],["Atletico Madrid","H","0-1","L"],["Racing Santander","A","1-2","L"]],"Pts":8,"pos":18},"Levante":{"P":10,"W":2,"D":4,"L":4,"GF":16,"GA":19,"HP":4,"HGF":13,"HGA":10,"AP":6,"AGF":3,"AGA":9,"last":[["Athletic Bilbao","H","3-1","W"],["Villarreal","A","1-3","L"],["Sevilla","H","3-3","D"],["Deportivo","A","1-1","D"],["Real Sociedad","A","1-2","L"]],"Pts":10,"pos":14},"Racing Santander":{"P":10,"W":3,"D":2,"L":5,"GF":15,"GA":26,"HP":5,"HGF":11,"HGA":8,"AP":5,"AGF":4,"AGA":18,"last":[["Barcelona","A","2-7","L"],["Celta Vigo","A","0-5","L"],["Valencia","H","2-2","D"],["Osasuna","A","0-2","L"],["Espanyol","H","2-1","W"]],"Pts":11,"pos":13},"Villarreal":{"P":10,"W":3,"D":3,"L":4,"GF":15,"GA":14,"HP":4,"HGF":6,"HGA":6,"AP":6,"AGF":9,"AGA":8,"last":[["Malaga","A","3-1","W"],["Levante","H","3-1","W"],["Real Madrid","A","0-1","L"],["Elche","H","0-0","D"],["Valencia","A","2-1","W"]],"Pts":12,"pos":10},"Deportivo":{"P":10,"W":2,"D":5,"L":3,"GF":13,"GA":13,"HP":5,"HGF":6,"HGA":5,"AP":5,"AGF":7,"AGA":8,"last":[["Sevilla","H","0-1","L"],["Real Betis","H","1-1","D"],["Real Sociedad","A","2-3","L"],["Levante","H","1-1","D"],["Atletico Madrid","A","0-1","L"]],"Pts":11,"pos":11},"Elche":{"P":10,"W":2,"D":4,"L":4,"GF":14,"GA":17,"HP":4,"HGF":4,"HGA":11,"AP":6,"AGF":10,"AGA":6,"last":[["Real Madrid","H","2-3","L"],["Espanyol","A","3-1","W"],["Celta Vigo","H","0-0","D"],["Villarreal","A","0-0","D"],["Rayo Vallecano","A","3-0","W"]],"Pts":10,"pos":15},"Atletico Madrid":{"P":10,"W":8,"D":1,"L":1,"GF":20,"GA":8,"HP":5,"HGF":11,"HGA":3,"AP":5,"AGF":9,"AGA":5,"last":[["Osasuna","H","4-0","W"],["Real Madrid","H","2-1","W"],["Alaves","A","2-1","W"],["Espanyol","A","1-0","W"],["Deportivo","H","1-0","W"]],"Pts":25,"pos":2},"Malaga":{"P":10,"W":0,"D":5,"L":5,"GF":7,"GA":19,"HP":5,"HGF":5,"HGA":10,"AP":5,"AGF":2,"AGA":9,"last":[["Villarreal","H","1-3","L"],["Getafe","A","0-1","L"],["Espanyol","H","1-1","D"],["Real Sociedad","H","2-5","L"],["Alaves","A","1-1","D"]],"Pts":5,"pos":20},"Valencia":{"P":10,"W":1,"D":3,"L":6,"GF":7,"GA":17,"HP":6,"HGF":3,"HGA":11,"AP":4,"AGF":4,"AGA":6,"last":[["Alaves","A","1-0","W"],["Real Sociedad","H","2-3","L"],["Racing Santander","A","2-2","D"],["Athletic Bilbao","H","0-0","D"],["Villarreal","H","1-2","L"]],"Pts":6,"pos":19},"Real Betis":{"P":10,"W":6,"D":2,"L":2,"GF":16,"GA":14,"HP":5,"HGF":10,"HGA":7,"AP":5,"AGF":6,"AGA":7,"last":[["Getafe","H","1-0","W"],["Deportivo","A","1-1","D"],["Osasuna","H","5-2","W"],["Barcelona","H","2-5","L"],["Celta Vigo","A","0-0","D"]],"Pts":20,"pos":4},"Real Madrid":{"P":10,"W":8,"D":0,"L":2,"GF":25,"GA":10,"HP":5,"HGF":17,"HGA":3,"AP":5,"AGF":8,"AGA":7,"last":[["Elche","A","3-2","W"],["Atletico Madrid","A","1-2","L"],["Villarreal","H","1-0","W"],["Sevilla","H","4-1","W"],["Barcelona","A","2-1","W"]],"Pts":24,"pos":3},"Real Sociedad":{"P":10,"W":6,"D":1,"L":3,"GF":19,"GA":18,"HP":5,"HGF":7,"HGA":7,"AP":5,"AGF":12,"AGA":11,"last":[["Celta Vigo","H","0-0","D"],["Valencia","A","3-2","W"],["Deportivo","H","3-2","W"],["Malaga","A","5-2","W"],["Levante","H","2-1","W"]],"Pts":19,"pos":5},"Barcelona":{"P":10,"W":9,"D":0,"L":1,"GF":40,"GA":11,"HP":5,"HGF":18,"HGA":6,"AP":5,"AGF":22,"AGA":5,"last":[["Racing Santander","H","7-2","W"],["Sevilla","A","3-1","W"],["Getafe","H","3-0","W"],["Real Betis","A","5-2","W"],["Real Madrid","H","1-2","L"]],"Pts":27,"pos":1},"Athletic Bilbao":{"P":9,"W":3,"D":3,"L":3,"GF":12,"GA":9,"HP":5,"HGF":9,"HGA":4,"AP":4,"AGF":3,"AGA":5,"last":[["Elche","H","1-1","D"],["Levante","A","1-3","L"],["Alaves","H","0-0","D"],["Valencia","A","0-0","D"],["Getafe","H","4-0","W"]],"Pts":12,"pos":8},"Celta Vigo":{"P":10,"W":2,"D":6,"L":2,"GF":10,"GA":7,"HP":6,"HGF":9,"HGA":6,"AP":4,"AGF":1,"AGA":1,"last":[["Real Sociedad","A","0-0","D"],["Racing Santander","H","5-0","W"],["Elche","A","0-0","D"],["Alaves","H","2-1","W"],["Real Betis","H","0-0","D"]],"Pts":12,"pos":9},"Osasuna":{"P":10,"W":3,"D":2,"L":5,"GF":10,"GA":20,"HP":5,"HGF":4,"HGA":3,"AP":5,"AGF":6,"AGA":17,"last":[["Atletico Madrid","A","0-4","L"],["Rayo Vallecano","H","1-1","D"],["Real Betis","A","2-5","L"],["Racing Santander","H","2-0","W"],["Sevilla","A","0-2","L"]],"Pts":11,"pos":12}}},"bundes":{"thru":"Matchday 7","date":"2026-10-25","src":"hessenschau.de results and table","games":63,"homeGPG":2.19,"awayGPG":1.365,"teams":{"Bayern Munich":{"P":7,"W":5,"D":2,"L":0,"GF":25,"GA":6,"HP":3,"HGF":18,"HGA":2,"AP":4,"AGF":7,"AGA":4,"last":[["SV Elversberg","A","2-1","W"],["Union Berlin","H","7-0","W"],["Augsburg","A","2-2","D"],["RB Leipzig","H","6-1","W"],["Freiburg","A","3-1","W"]],"Pts":17,"pos":1},"Stuttgart":{"P":7,"W":2,"D":0,"L":5,"GF":10,"GA":13,"HP":3,"HGF":6,"HGA":5,"AP":4,"AGF":4,"AGA":8,"last":[["Hoffenheim","A","1-2","L"],["Borussia Dortmund","H","0-1","L"],["SC Paderborn","A","2-0","W"],["Hamburg","A","0-1","L"],["Borussia M.Gladbach","H","2-3","L"]],"Pts":6,"pos":15},"RB Leipzig":{"P":7,"W":4,"D":0,"L":3,"GF":20,"GA":11,"HP":4,"HGF":18,"HGA":0,"AP":3,"AGF":2,"AGA":11,"last":[["Hamburg","H","5-0","W"],["Bayer Leverkusen","A","0-2","L"],["Eintracht Frankfurt","H","6-0","W"],["Bayern Munich","A","1-6","L"],["SV Elversberg","H","4-0","W"]],"Pts":12,"pos":5},"Borussia M.Gladbach":{"P":7,"W":1,"D":0,"L":6,"GF":11,"GA":22,"HP":3,"HGF":7,"HGA":10,"AP":4,"AGF":4,"AGA":12,"last":[["Freiburg","A","0-5","L"],["Mainz","H","3-4","L"],["FC Köln","A","1-2","L"],["Hoffenheim","H","1-2","L"],["Stuttgart","A","3-2","W"]],"Pts":3,"pos":18},"Union Berlin":{"P":7,"W":1,"D":3,"L":3,"GF":6,"GA":18,"HP":4,"HGF":5,"HGA":6,"AP":3,"AGF":1,"AGA":12,"last":[["Schalke 04","H","1-3","L"],["Bayern Munich","A","0-7","L"],["SV Elversberg","H","1-0","W"],["Borussia Dortmund","H","0-0","D"],["Augsburg","A","1-1","D"]],"Pts":6,"pos":17},"Eintracht Frankfurt":{"P":7,"W":2,"D":2,"L":3,"GF":10,"GA":17,"HP":3,"HGF":4,"HGA":6,"AP":4,"AGF":6,"AGA":11,"last":[["Mainz","A","3-1","W"],["Freiburg","H","2-2","D"],["RB Leipzig","A","0-6","L"],["FC Köln","H","1-0","W"],["Borussia Dortmund","A","0-1","L"]],"Pts":8,"pos":14},"FC Köln":{"P":7,"W":2,"D":2,"L":3,"GF":8,"GA":11,"HP":4,"HGF":6,"HGA":4,"AP":3,"AGF":2,"AGA":7,"last":[["Werder Bremen","H","1-1","D"],["Hamburg","A","1-2","L"],["Borussia M.Gladbach","H","2-1","W"],["Eintracht Frankfurt","A","0-1","L"],["Schalke 04","H","0-0","D"]],"Pts":8,"pos":12},"Hoffenheim":{"P":7,"W":3,"D":0,"L":4,"GF":14,"GA":14,"HP":4,"HGF":9,"HGA":7,"AP":3,"AGF":5,"AGA":7,"last":[["Stuttgart","H","2-1","W"],["SC Paderborn","A","1-3","L"],["Hamburg","H","2-3","L"],["Borussia M.Gladbach","A","2-1","W"],["Bayer Leverkusen","H","3-0","W"]],"Pts":9,"pos":10},"SV Elversberg":{"P":7,"W":3,"D":1,"L":3,"GF":12,"GA":15,"HP":3,"HGF":8,"HGA":7,"AP":4,"AGF":4,"AGA":8,"last":[["Bayern Munich","H","1-2","L"],["Schalke 04","A","0-0","D"],["Union Berlin","A","0-1","L"],["Augsburg","H","4-3","W"],["RB Leipzig","A","0-4","L"]],"Pts":10,"pos":8},"Bayer Leverkusen":{"P":7,"W":4,"D":1,"L":2,"GF":16,"GA":12,"HP":3,"HGF":8,"HGA":1,"AP":4,"AGF":8,"AGA":11,"last":[["Augsburg","A","2-2","D"],["RB Leipzig","H","2-0","W"],["Mainz","A","4-3","W"],["Freiburg","H","2-1","W"],["Hoffenheim","A","0-3","L"]],"Pts":13,"pos":4},"Mainz":{"P":7,"W":3,"D":1,"L":3,"GF":16,"GA":13,"HP":4,"HGF":6,"HGA":10,"AP":3,"AGF":10,"AGA":3,"last":[["Eintracht Frankfurt","H","1-3","L"],["Borussia M.Gladbach","A","4-3","W"],["Bayer Leverkusen","H","3-4","L"],["Schalke 04","A","1-0","W"],["Werder Bremen","H","2-3","L"]],"Pts":10,"pos":7},"SC Paderborn":{"P":7,"W":2,"D":2,"L":3,"GF":6,"GA":9,"HP":4,"HGF":4,"HGA":4,"AP":3,"AGF":2,"AGA":5,"last":[["Borussia Dortmund","A","0-3","L"],["Hoffenheim","H","3-1","W"],["Stuttgart","H","0-2","L"],["Werder Bremen","A","2-2","D"],["Hamburg","H","1-0","W"]],"Pts":8,"pos":13},"Borussia Dortmund":{"P":7,"W":5,"D":2,"L":0,"GF":12,"GA":4,"HP":4,"HGF":8,"HGA":2,"AP":3,"AGF":4,"AGA":2,"last":[["SC Paderborn","H","3-0","W"],["Stuttgart","A","1-0","W"],["Werder Bremen","H","2-2","D"],["Union Berlin","A","0-0","D"],["Eintracht Frankfurt","H","1-0","W"]],"Pts":17,"pos":2},"Hamburg":{"P":7,"W":3,"D":0,"L":4,"GF":6,"GA":16,"HP":3,"HGF":3,"HGA":6,"AP":4,"AGF":3,"AGA":10,"last":[["RB Leipzig","A","0-5","L"],["FC Köln","H","2-1","W"],["Hoffenheim","A","3-2","W"],["Stuttgart","H","1-0","W"],["SC Paderborn","A","0-1","L"]],"Pts":9,"pos":11},"Freiburg":{"P":7,"W":4,"D":1,"L":2,"GF":16,"GA":9,"HP":4,"HGF":12,"HGA":5,"AP":3,"AGF":4,"AGA":4,"last":[["Borussia M.Gladbach","H","5-0","W"],["Eintracht Frankfurt","A","2-2","D"],["Schalke 04","H","2-1","W"],["Bayer Leverkusen","A","1-2","L"],["Bayern Munich","H","1-3","L"]],"Pts":13,"pos":3},"Werder Bremen":{"P":7,"W":3,"D":3,"L":1,"GF":15,"GA":14,"HP":3,"HGF":8,"HGA":5,"AP":4,"AGF":7,"AGA":9,"last":[["FC Köln","A","1-1","D"],["Augsburg","H","3-2","W"],["Borussia Dortmund","A","2-2","D"],["SC Paderborn","H","2-2","D"],["Mainz","A","3-2","W"]],"Pts":12,"pos":6},"Augsburg":{"P":7,"W":2,"D":3,"L":2,"GF":17,"GA":13,"HP":4,"HGF":8,"HGA":5,"AP":3,"AGF":9,"AGA":8,"last":[["Bayer Leverkusen","H","2-2","D"],["Werder Bremen","A","2-3","L"],["Bayern Munich","H","2-2","D"],["SV Elversberg","A","3-4","L"],["Union Berlin","H","1-1","D"]],"Pts":9,"pos":9},"Schalke 04":{"P":7,"W":1,"D":3,"L":3,"GF":4,"GA":7,"HP":3,"HGF":0,"HGA":1,"AP":4,"AGF":4,"AGA":6,"last":[["Union Berlin","A","3-1","W"],["SV Elversberg","H","0-0","D"],["Freiburg","A","1-2","L"],["Mainz","H","0-1","L"],["FC Köln","A","0-0","D"]],"Pts":6,"pos":16}}},"seriea":{"thru":"Giornata 9 (partial)","date":"2026-10-27","src":"Sky Italia / Fox Sports / FotMob results; VAVEL table","games":83,"homeGPG":1.602,"awayGPG":1.518,"teams":{"Inter Milan":{"P":8,"W":7,"D":1,"L":0,"GF":23,"GA":10,"HP":5,"HGF":17,"HGA":7,"AP":3,"AGF":6,"AGA":3,"last":[["Udinese","H","5-3","W"],["Roma","A","2-2","D"],["Parma","H","3-0","W"],["Bologna","A","3-1","W"],["Fiorentina","H","2-1","W"]],"Pts":22,"pos":2},"Monza":{"P":8,"W":2,"D":1,"L":5,"GF":15,"GA":18,"HP":3,"HGF":8,"HGA":4,"AP":5,"AGF":7,"AGA":14,"last":[["Lecce","A","2-3","L"],["Sassuolo","H","2-1","W"],["Lazio","A","1-3","L"],["Cagliari","H","4-0","W"],["Torino","A","2-3","L"]],"Pts":7,"pos":15},"Udinese":{"P":8,"W":1,"D":1,"L":6,"GF":9,"GA":18,"HP":5,"HGF":2,"HGA":9,"AP":3,"AGF":7,"AGA":9,"last":[["Inter Milan","A","3-5","L"],["Cagliari","H","0-1","L"],["Torino","A","1-2","L"],["Lecce","H","0-3","L"],["AC Milan","H","0-2","L"]],"Pts":4,"pos":17},"Como":{"P":9,"W":6,"D":2,"L":1,"GF":17,"GA":8,"HP":3,"HGF":4,"HGA":1,"AP":6,"AGF":13,"AGA":7,"last":[["Frosinone","A","0-2","L"],["Roma","H","0-0","D"],["Fiorentina","A","3-1","W"],["Sassuolo","H","2-0","W"],["Torino","A","3-1","W"]],"Pts":20,"pos":4},"Genoa":{"P":8,"W":2,"D":1,"L":5,"GF":6,"GA":13,"HP":5,"HGF":5,"HGA":8,"AP":3,"AGF":1,"AGA":5,"last":[["Frosinone","H","1-1","D"],["Parma","A","1-2","L"],["Fiorentina","H","2-1","W"],["Roma","A","0-2","L"],["Venezia","H","1-0","W"]],"Pts":7,"pos":16},"Napoli":{"P":8,"W":3,"D":2,"L":3,"GF":13,"GA":10,"HP":4,"HGF":8,"HGA":5,"AP":4,"AGF":5,"AGA":5,"last":[["Bologna","H","1-0","W"],["Fiorentina","A","1-1","D"],["Frosinone","H","3-0","W"],["Venezia","A","0-1","L"],["Roma","H","3-3","D"]],"Pts":11,"pos":10},"Parma":{"P":8,"W":1,"D":1,"L":6,"GF":5,"GA":15,"HP":4,"HGF":3,"HGA":6,"AP":4,"AGF":2,"AGA":9,"last":[["Como","A","1-2","L"],["Genoa","H","2-1","W"],["Inter Milan","A","0-3","L"],["Torino","H","0-3","L"],["Lazio","A","1-2","L"]],"Pts":4,"pos":19},"Cagliari":{"P":9,"W":4,"D":1,"L":4,"GF":8,"GA":13,"HP":4,"HGF":2,"HGA":4,"AP":5,"AGF":6,"AGA":9,"last":[["Udinese","A","1-0","W"],["Juventus","H","1-1","D"],["Monza","A","0-4","L"],["Bologna","H","0-2","L"],["Roma","A","2-4","L"]],"Pts":13,"pos":9},"Frosinone":{"P":8,"W":4,"D":2,"L":2,"GF":17,"GA":13,"HP":4,"HGF":9,"HGA":5,"AP":4,"AGF":8,"AGA":8,"last":[["Genoa","A","1-1","D"],["Como","H","2-0","W"],["Napoli","A","0-3","L"],["Sassuolo","H","4-2","W"],["Atalanta","A","4-4","D"]],"Pts":14,"pos":6},"Juventus":{"P":8,"W":4,"D":2,"L":2,"GF":11,"GA":8,"HP":4,"HGF":5,"HGA":4,"AP":4,"AGF":6,"AGA":4,"last":[["Sassuolo","A","2-3","L"],["Atalanta","H","2-0","W"],["Cagliari","A","1-1","D"],["Lazio","H","0-3","L"],["Lecce","A","2-0","W"]],"Pts":14,"pos":7},"Venezia":{"P":8,"W":1,"D":0,"L":7,"GF":6,"GA":17,"HP":4,"HGF":3,"HGA":8,"AP":4,"AGF":3,"AGA":9,"last":[["Fiorentina","H","2-4","L"],["Lazio","H","0-2","L"],["Atalanta","A","1-3","L"],["Napoli","H","1-0","W"],["Genoa","A","0-1","L"]],"Pts":3,"pos":20},"Lecce":{"P":8,"W":3,"D":0,"L":5,"GF":9,"GA":14,"HP":4,"HGF":4,"HGA":10,"AP":4,"AGF":5,"AGA":4,"last":[["Monza","H","3-2","W"],["AC Milan","A","0-3","L"],["Bologna","H","1-2","L"],["Udinese","A","3-0","W"],["Juventus","H","0-2","L"]],"Pts":9,"pos":12},"Atalanta":{"P":8,"W":3,"D":1,"L":4,"GF":14,"GA":15,"HP":5,"HGF":11,"HGA":8,"AP":3,"AGF":3,"AGA":7,"last":[["Cagliari","H","1-2","L"],["Juventus","A","0-2","L"],["Venezia","H","3-1","W"],["AC Milan","A","2-3","L"],["Frosinone","H","4-4","D"]],"Pts":10,"pos":11},"Sassuolo":{"P":9,"W":2,"D":2,"L":5,"GF":14,"GA":22,"HP":4,"HGF":8,"HGA":10,"AP":5,"AGF":6,"AGA":12,"last":[["Monza","A","1-2","L"],["AC Milan","H","1-1","D"],["Frosinone","A","2-4","L"],["Como","A","0-2","L"],["Lazio","H","2-6","L"]],"Pts":8,"pos":14},"Torino":{"P":9,"W":4,"D":1,"L":4,"GF":14,"GA":14,"HP":5,"HGF":7,"HGA":10,"AP":4,"AGF":7,"AGA":4,"last":[["Bologna","A","1-1","D"],["Udinese","H","2-1","W"],["Parma","A","3-0","W"],["Monza","H","3-2","W"],["Como","H","1-3","L"]],"Pts":13,"pos":8},"AC Milan":{"P":8,"W":5,"D":3,"L":0,"GF":16,"GA":7,"HP":3,"HGF":8,"HGA":2,"AP":5,"AGF":8,"AGA":5,"last":[["Lazio","A","2-2","D"],["Lecce","H","3-0","W"],["Sassuolo","A","1-1","D"],["Atalanta","H","3-2","W"],["Udinese","A","2-0","W"]],"Pts":18,"pos":5},"Bologna":{"P":8,"W":2,"D":2,"L":4,"GF":8,"GA":10,"HP":4,"HGF":4,"HGA":7,"AP":4,"AGF":4,"AGA":3,"last":[["Napoli","A","0-1","L"],["Torino","H","1-1","D"],["Lecce","A","2-1","W"],["Inter Milan","H","1-3","L"],["Cagliari","A","2-0","W"]],"Pts":8,"pos":13},"Lazio":{"P":9,"W":8,"D":1,"L":0,"GF":22,"GA":7,"HP":4,"HGF":8,"HGA":4,"AP":5,"AGF":14,"AGA":3,"last":[["Venezia","A","2-0","W"],["Monza","H","3-1","W"],["Juventus","A","3-0","W"],["Parma","H","2-1","W"],["Sassuolo","A","6-2","W"]],"Pts":25,"pos":1},"Roma":{"P":9,"W":6,"D":3,"L":0,"GF":23,"GA":8,"HP":5,"HGF":14,"HGA":5,"AP":4,"AGF":9,"AGA":3,"last":[["Inter Milan","H","2-2","D"],["Como","A","0-0","D"],["Genoa","H","2-0","W"],["Napoli","A","3-3","D"],["Cagliari","H","4-2","W"]],"Pts":21,"pos":3},"Fiorentina":{"P":8,"W":1,"D":1,"L":6,"GF":9,"GA":19,"HP":4,"HGF":3,"HGA":9,"AP":4,"AGF":6,"AGA":10,"last":[["Venezia","A","4-2","W"],["Napoli","H","1-1","D"],["Genoa","A","1-2","L"],["Como","H","1-3","L"],["Inter Milan","A","1-2","L"]],"Pts":4,"pos":18}}},"ligue1":{"thru":"Journée 8","date":"2026-10-26","src":"VAVEL results; cross-checked with maxifoot table","games":72,"homeGPG":1.625,"awayGPG":1.347,"teams":{"Marseille":{"P":8,"W":4,"D":0,"L":4,"GF":18,"GA":13,"HP":4,"HGF":11,"HGA":8,"AP":4,"AGF":7,"AGA":5,"last":[["Rennes","A","0-1","L"],["Paris SG","H","1-2","L"],["Troyes","A","2-0","W"],["Angers","A","5-2","W"],["Le Havre","H","4-3","W"]],"Pts":12,"pos":8},"Strasbourg":{"P":8,"W":2,"D":1,"L":5,"GF":12,"GA":18,"HP":3,"HGF":4,"HGA":5,"AP":5,"AGF":8,"AGA":13,"last":[["Monaco","H","1-1","D"],["Paris FC","A","1-2","L"],["Nice","A","1-2","L"],["Paris SG","H","1-3","L"],["Rennes","A","0-3","L"]],"Pts":7,"pos":16},"Toulouse":{"P":8,"W":2,"D":4,"L":2,"GF":12,"GA":11,"HP":4,"HGF":3,"HGA":5,"AP":4,"AGF":9,"AGA":6,"last":[["Lorient","A","2-2","D"],["Le Havre","H","3-2","W"],["Monaco","A","2-2","D"],["Le Mans","A","3-0","W"],["Troyes","H","0-0","D"]],"Pts":10,"pos":11},"Lyon":{"P":8,"W":4,"D":2,"L":2,"GF":13,"GA":7,"HP":4,"HGF":10,"HGA":3,"AP":4,"AGF":3,"AGA":4,"last":[["Paris FC","A","0-0","D"],["Rennes","H","4-0","W"],["Lens","A","1-2","L"],["Nice","H","2-1","W"],["Paris SG","A","0-2","L"]],"Pts":14,"pos":5},"Le Mans":{"P":8,"W":1,"D":4,"L":3,"GF":11,"GA":16,"HP":4,"HGF":6,"HGA":8,"AP":4,"AGF":5,"AGA":8,"last":[["Lens","H","2-2","D"],["Lorient","H","2-1","W"],["Paris SG","A","1-3","L"],["Toulouse","H","0-3","L"],["Auxerre","A","1-1","D"]],"Pts":7,"pos":15},"Brest":{"P":8,"W":2,"D":3,"L":3,"GF":14,"GA":12,"HP":4,"HGF":8,"HGA":6,"AP":4,"AGF":6,"AGA":6,"last":[["Paris SG","H","0-1","L"],["Auxerre","A","1-2","L"],["Angers","H","5-1","W"],["Lille","A","1-1","D"],["Nice","H","1-2","L"]],"Pts":9,"pos":13},"Nice":{"P":8,"W":3,"D":2,"L":3,"GF":8,"GA":10,"HP":4,"HGF":5,"HGA":3,"AP":4,"AGF":3,"AGA":7,"last":[["Auxerre","A","0-1","L"],["Lille","H","2-1","W"],["Strasbourg","H","2-1","W"],["Lyon","A","1-2","L"],["Brest","A","2-1","W"]],"Pts":11,"pos":10},"Lorient":{"P":8,"W":3,"D":3,"L":2,"GF":7,"GA":6,"HP":4,"HGF":5,"HGA":4,"AP":4,"AGF":2,"AGA":2,"last":[["Toulouse","H","2-2","D"],["Le Mans","A","1-2","L"],["Paris FC","H","1-0","W"],["Monaco","H","1-0","W"],["Angers","A","0-0","D"]],"Pts":12,"pos":9},"Troyes":{"P":8,"W":1,"D":2,"L":5,"GF":5,"GA":16,"HP":4,"HGF":3,"HGA":11,"AP":4,"AGF":2,"AGA":5,"last":[["Lille","A","0-2","L"],["Angers","A","0-2","L"],["Marseille","H","0-2","L"],["Lens","H","1-3","L"],["Toulouse","A","0-0","D"]],"Pts":5,"pos":17},"Paris FC":{"P":8,"W":4,"D":2,"L":2,"GF":13,"GA":9,"HP":4,"HGF":9,"HGA":4,"AP":4,"AGF":4,"AGA":5,"last":[["Lyon","H","0-0","D"],["Strasbourg","H","2-1","W"],["Lorient","A","0-1","L"],["Rennes","H","4-3","W"],["Lens","A","1-2","L"]],"Pts":14,"pos":6},"Lens":{"P":8,"W":4,"D":1,"L":3,"GF":16,"GA":12,"HP":4,"HGF":9,"HGA":5,"AP":4,"AGF":7,"AGA":7,"last":[["Le Mans","A","2-2","D"],["Monaco","A","1-2","L"],["Lyon","H","2-1","W"],["Troyes","A","3-1","W"],["Paris FC","H","2-1","W"]],"Pts":13,"pos":7},"Auxerre":{"P":8,"W":3,"D":1,"L":4,"GF":12,"GA":18,"HP":4,"HGF":5,"HGA":5,"AP":4,"AGF":7,"AGA":13,"last":[["Nice","H","1-0","W"],["Brest","H","2-1","W"],["Rennes","A","1-4","L"],["Le Havre","A","3-1","W"],["Le Mans","H","1-1","D"]],"Pts":10,"pos":12},"Rennes":{"P":8,"W":5,"D":1,"L":2,"GF":18,"GA":14,"HP":5,"HGF":13,"HGA":5,"AP":3,"AGF":5,"AGA":9,"last":[["Marseille","H","1-0","W"],["Lyon","A","0-4","L"],["Auxerre","H","4-1","W"],["Paris FC","A","3-4","L"],["Strasbourg","H","3-0","W"]],"Pts":16,"pos":2},"Paris SG":{"P":8,"W":5,"D":2,"L":1,"GF":16,"GA":9,"HP":3,"HGF":6,"HGA":3,"AP":5,"AGF":10,"AGA":6,"last":[["Brest","A","1-0","W"],["Marseille","A","2-1","W"],["Le Mans","H","3-1","W"],["Strasbourg","A","3-1","W"],["Lyon","H","2-0","W"]],"Pts":17,"pos":1},"Le Havre":{"P":8,"W":0,"D":2,"L":6,"GF":8,"GA":15,"HP":4,"HGF":2,"HGA":6,"AP":4,"AGF":6,"AGA":9,"last":[["Angers","H","0-0","D"],["Toulouse","A","2-3","L"],["Lille","A","0-1","L"],["Auxerre","H","1-3","L"],["Marseille","A","3-4","L"]],"Pts":2,"pos":18},"Monaco":{"P":8,"W":4,"D":3,"L":1,"GF":11,"GA":7,"HP":4,"HGF":7,"HGA":4,"AP":4,"AGF":4,"AGA":3,"last":[["Strasbourg","A","1-1","D"],["Lens","H","2-1","W"],["Toulouse","H","2-2","D"],["Lorient","A","0-1","L"],["Lille","H","1-1","D"]],"Pts":15,"pos":4},"Angers":{"P":8,"W":2,"D":2,"L":4,"GF":9,"GA":15,"HP":5,"HGF":5,"HGA":9,"AP":3,"AGF":4,"AGA":6,"last":[["Le Havre","A","0-0","D"],["Troyes","H","2-0","W"],["Brest","A","1-5","L"],["Marseille","H","2-5","L"],["Lorient","H","0-0","D"]],"Pts":8,"pos":14},"Lille":{"P":8,"W":4,"D":3,"L":1,"GF":11,"GA":6,"HP":4,"HGF":6,"HGA":3,"AP":4,"AGF":5,"AGA":3,"last":[["Troyes","H","2-0","W"],["Nice","A","1-2","L"],["Le Havre","H","1-0","W"],["Brest","H","1-1","D"],["Monaco","A","1-1","D"]],"Pts":15,"pos":3}}}};
 const PRED_RHO = -0.08;    // Dixon-Coles low-score correlation
 const PRED_SHRINK = 8;     // games of "average" prior blended into each rating (early-season caution)
 const PRED_MAXG = 10;
@@ -4783,17 +5303,83 @@ function predRatings(team, L) {
   const shrink = (goals) => (team.P * ((goals / team.P) / avg) + PRED_SHRINK) / (team.P + PRED_SHRINK);
   return { att: shrink(team.GF), def: shrink(team.GA) };
 }
+// ---- Cross-competition layer (cups + Europe) ----
+// Clubs from different leagues/tiers are put on one scale with a strength factor S:
+//   S = (UEFA association coefficient / England's)^0.5 × tier factor.
+// Attack is multiplied by S and defence divided by it, so a lower-division side's
+// in-league numbers are deflated before meeting a top-flight club.
+// Association coefficients: UEFA (five-season totals, 27 Aug 2026).
+const ASSOC_COEF = { England:102.019, Italy:87.874, Spain:82.493, Germany:80.402, France:68.153, Portugal:64.550,
+  Belgium:59.050, Netherlands:52.395, Turkey:49.675, Poland:45.125, Czechia:44.725, Greece:43.812, Norway:38.612,
+  Cyprus:34.193, Austria:27.650, Hungary:27.312, Scotland:26.250, Croatia:25.656, Ukraine:24.087, Israel:23.875,
+  Azerbaijan:23.687, Slovenia:22.843, Slovakia:22.375, Bulgaria:20.562, Armenia:15.812 };
+const LEAGUE_COUNTRY = { epl:'England', laliga:'Spain', bundes:'Germany', seriea:'Italy', ligue1:'France' };
+const TIER_FACTOR = { 1:1, 2:0.80, 3:0.68, 4:0.58, 5:0.50 };
+const XBASE = 1.30, XHOME = 1.12;
+const leagueStrength = c => Math.pow((ASSOC_COEF[c] || 15) / ASSOC_COEF.England, 0.5);
+// Clubs outside the five covered leagues. Profile: 'big' = UEFA top-25 club coefficient,
+// 'eu' = other European entrant (assumed top-four side at home), number = domestic tier.
+const XCLUBS = {
+  'Porto':['Portugal','big'], 'Galatasaray':['Turkey','eu'], 'Fenerbahçe':['Turkey','eu'], 'Feyenoord':['Netherlands','eu'],
+  'AZ Alkmaar':['Netherlands','eu'], 'Bodø/Glimt':['Norway','eu'], 'AEK Athens':['Greece','eu'], 'Slavia Praha':['Czechia','eu'],
+  'Sparta Praha':['Czechia','eu'], 'Ferencváros':['Hungary','eu'], 'Union SG':['Belgium','eu'], 'Dinamo Zagreb':['Croatia','eu'],
+  'Hertha BSC':['Germany',2], 'Dynamo Dresden':['Germany',2], 'VfL Wolfsburg':['Germany',2], 'Holstein Kiel':['Germany',2],
+  '1. FC Nürnberg':['Germany',2], 'Hannover 96':['Germany',2], '1. FC Kaiserslautern':['Germany',2], '1. FC Magdeburg':['Germany',2],
+  'Jeddeloh II':['Germany',4],
+  'Anaitasuna':['Spain',5], 'Tarancón':['Spain',5], 'Navalcarnero':['Spain',5], 'Salamanca CF UDS':['Spain',4], 'Tavernes':['Spain',5],
+  'Lebrijana':['Spain',5], 'Atlético Calatayud':['Spain',5], 'AE Prat':['Spain',4], 'Sporting Hortaleza':['Spain',5],
+  'Ribadesella':['Spain',5], 'Auriense':['Spain',4],
+};
+// 2. Bundesliga table after Matchday 7 (hessenschau.de) — real goals data for cup opponents.
+const BL2_DATA = { thru:'Matchday 7', src:'hessenschau.de', gpg:1.611, teams:{
+  'Hertha BSC':{P:7,GF:19,GA:8}, '1. FC Nürnberg':{P:7,GF:20,GA:10}, '1. FC Magdeburg':{P:7,GF:14,GA:9}, 'VfL Wolfsburg':{P:7,GF:19,GA:12},
+  '1. FC Kaiserslautern':{P:7,GF:6,GA:4}, 'Hannover 96':{P:7,GF:7,GA:12}, 'Dynamo Dresden':{P:7,GF:9,GA:15}, 'Holstein Kiel':{P:7,GF:7,GA:11} } };
+
+function findDomestic(name) {
+  for (const lid in PRED_DATA) if (PRED_DATA[lid].teams[name]) return lid;
+  return null;
+}
+function xRating(name) {
+  const lid = findDomestic(name);
+  if (lid) { const L = PRED_DATA[lid], T = L.teams[name], r = predRatings(T, L);
+    return { att:r.att, def:r.def, S:leagueStrength(LEAGUE_COUNTRY[lid]), src:'data', lid, T, L, tier:1,
+      label: (LEAGUES.find(x => x.id === lid) || {}).name + ' · #' + T.pos }; }
+  const x = XCLUBS[name]; if (!x) return null;
+  const [country, prof] = x;
+  if (prof === 'big') return { att:1.45, def:0.68, S:leagueStrength(country), src:'prior', tier:1, label: country + ' · UEFA top-25 club' };
+  if (prof === 'eu')  return { att:1.25, def:0.82, S:leagueStrength(country), src:'prior', tier:1, label: country };
+  const tier = prof, S = leagueStrength(country) * (TIER_FACTOR[tier] || 0.5);
+  const T = country === 'Germany' && tier === 2 && BL2_DATA.teams[name];
+  if (T) { const sh = g => (T.P * ((g / T.P) / BL2_DATA.gpg) + PRED_SHRINK) / (T.P + PRED_SHRINK);
+    return { att:sh(T.GF), def:sh(T.GA), S, src:'data2', tier, label:'2. Bundesliga · ' + T.GF + '–' + T.GA + ' in ' + T.P }; }
+  return { att:1, def:1, S, src:'prior', tier, label: country + ' · tier ' + tier };
+}
+
 function predictMatch(m) {
   if (!m) return null;
   const key = m.league + '|' + m.home + '|' + m.away;
   if (key in _predCache) return _predCache[key];
-  const L = PRED_DATA[m.league];
-  const H = L && L.teams[m.home], A = L && L.teams[m.away];
-  if (!H || !A) return (_predCache[key] = null);
-  const rh = predRatings(H, L), ra = predRatings(A, L);
   const clamp = x => Math.min(4.5, Math.max(0.15, x));
-  const lh = clamp(L.homeGPG * rh.att * ra.def);
-  const la = clamp(L.awayGPG * ra.att * rh.def);
+  let lh, la, H = null, A = null, rh, ra, L = null, mode = 'league', conf;
+  const domL = PRED_DATA[m.league];
+  const lidH = findDomestic(m.home), lidA = findDomestic(m.away);
+  if (domL || (lidH && lidH === lidA && !m.neutral && !m.swapHome)) {
+    // same-league fixture (league match or an all-league cup tie): domestic model
+    L = domL || PRED_DATA[lidH];
+    H = L.teams[m.home]; A = L.teams[m.away];
+    if (!H || !A) return (_predCache[key] = null);
+    rh = predRatings(H, L); ra = predRatings(A, L);
+    lh = clamp(L.homeGPG * rh.att * ra.def); la = clamp(L.awayGPG * ra.att * rh.def);
+    if (!domL) mode = 'cup';
+  } else {
+    const xh = xRating(m.home), xa = xRating(m.away);
+    if (!xh || !xa) return (_predCache[key] = null);
+    const ha = m.neutral ? 1 : m.swapHome ? 1 / XHOME : XHOME;
+    lh = clamp(XBASE * xh.att * xh.S * (xa.def / xa.S) * ha);
+    la = clamp(XBASE * xa.att * xa.S * (xh.def / xh.S) / ha);
+    rh = xh; ra = xa; mode = 'cross';
+    H = xh.T || null; A = xa.T || null; L = xh.L || xa.L || null;
+  }
   const grid = []; let total = 0;
   for (let i = 0; i <= PRED_MAXG; i++) for (let j = 0; j <= PRED_MAXG; j++) {
     let q = poissonPmf(i, lh) * poissonPmf(j, la);
@@ -4813,8 +5399,16 @@ function predictMatch(m) {
   });
   grid.sort((a, b) => b[2] - a[2]);
   const top = Math.max(r.pH, r.pD, r.pA);
-  const conf = Math.min(H.P, A.P) < 5 ? 'low' : top >= 0.6 ? 'high' : top >= 0.45 ? 'med' : 'low';
-  return (_predCache[key] = Object.assign(r, { lh, la, scores: grid.slice(0, 6), H, A, rh, ra, L, conf }));
+  if (mode === 'cross') {
+    const prior = rh.src === 'prior' || ra.src === 'prior';
+    conf = prior ? 'low' : top >= 0.6 ? 'med' : 'low';
+  } else {
+    conf = Math.min(H.P, A.P) < 5 ? 'low' : top >= 0.6 ? 'high' : top >= 0.45 ? 'med' : 'low';
+  }
+  // knockout ties: share of draws resolved by extra time/penalties in proportion to strength
+  const lg = LEAGUES.find(x => x.id === m.league);
+  const adv = lg && lg.cup ? r.pH + r.pD * (r.pH / Math.max(1e-9, r.pH + r.pA)) : null;
+  return (_predCache[key] = Object.assign(r, { lh, la, scores: grid.slice(0, 6), H, A, rh, ra, L, conf, mode, adv }));
 }
 
 // ============= MARKETS / ODDS =============
@@ -4949,6 +5543,8 @@ function genOdds(match, seed) {
   ];
   // Player Props (anytime scorer) — pull real top scorers from each team's roster.
   // Show one home-team scorer and one away-team scorer for each match.
+  // Player props only where both squads have verified 2026-27 scorers (skips lower-division cup sides).
+  const hasPlayers = !!(TEAM_SCORERS[match.home] && TEAM_SCORERS[match.away]);
   const homeScorers = TEAM_SCORERS[match.home] || [match.home + ' forward'];
   const awayScorers = TEAM_SCORERS[match.away] || [match.away + ' forward'];
   // Pick a primary from each side; if rng triggers, swap to the secondary scorer for variety.
@@ -5009,6 +5605,7 @@ function genOdds(match, seed) {
     { key: 'FHO15', tpl: { kind:'i18n', i18n: 'opt.fh1over'  }, odds: bookSplit(0.34 + rng() * 0.16) },
     { key: 'FHU05', tpl: { kind:'i18n', i18n: 'opt.fh1under' }, odds: bookSplit(0.22 + rng() * 0.14) },
   ];
+  if (!hasPlayers) ['scorer','shots','tackles','pcards','assists'].forEach(k => delete o[k]);
 
   return o;
 }
@@ -5041,7 +5638,7 @@ const state = {
   slip: [], // {matchId, marketKey, marketName, key, name, odds, odds_fd, odds_dk}
   stake: 25,
   savedSlips: [],
-  tab: 'builder',
+  tab: 'predict', predGroup: 'all', predComp: null,
   oddsLastRefresh: Date.now(),
   favoriteTeams: new Set(),         // team names the user has starred
   fixtureFilter: 'all',             // all | today | weekend | next7
@@ -5579,7 +6176,7 @@ function renderSparkline(history, dir) {
   const points = history.map((v, i) => `${PAD + i * stepX},${yFor(v).toFixed(1)}`);
   const path = 'M ' + points.join(' L ');
   const startY = yFor(history[0]).toFixed(1);
-  const stroke = dir === 'up' ? '#d4ff3c' : '#ff6b6b';
+  const stroke = dir === 'up' ? 'var(--accent)' : '#ff6b6b';
   // Final marker dot draws attention to the current price
   const lastX = PAD + (history.length - 1) * stepX;
   const lastY = yFor(history[history.length - 1]).toFixed(1);
@@ -5594,21 +6191,25 @@ function renderSparkline(history, dir) {
 function renderLeagues() {
   const el = document.getElementById('leagues');
   el.innerHTML = '';
-  LEAGUES.forEach(lg => {
-    const b = document.createElement('button');
-    b.className = 'league-pill' + (state.selectedLeagues.has(lg.id) ? ' active' : '');
-    b.innerHTML = `<span class="flag">${lg.flag}</span> ${lg.short}`;
-    b.onclick = () => {
-      if (state.selectedLeagues.has(lg.id)) {
-        if (state.selectedLeagues.size === 1) {
-          // re-enable all if last one would be deselected
-          state.selectedLeagues = new Set(LEAGUES.map(l => l.id));
-        } else state.selectedLeagues.delete(lg.id);
-      } else state.selectedLeagues.add(lg.id);
-      renderLeagues();
-      renderMatches();
-    };
-    el.appendChild(b);
+  const active = new Set((state.matches || []).map(m => m.league));
+  LEAGUE_GROUPS.forEach(g => {
+    const lgs = LEAGUES.filter(l => g.ids.includes(l.id) && active.has(l.id));
+    if (!lgs.length) return;
+    const h = document.createElement('div'); h.className = 'lg-group'; h.textContent = t('pv.g.' + g.key); el.appendChild(h);
+    lgs.forEach(lg => {
+      const b = document.createElement('button');
+      b.className = 'league-pill' + (state.selectedLeagues.has(lg.id) ? ' active' : '');
+      b.innerHTML = `<span class="flag">${lg.flag}</span> ${lg.name}`;
+      b.onclick = () => {
+        if (state.selectedLeagues.has(lg.id)) {
+          if (state.selectedLeagues.size === 1) state.selectedLeagues = new Set(LEAGUES.map(l => l.id));
+          else state.selectedLeagues.delete(lg.id);
+        } else state.selectedLeagues.add(lg.id);
+        renderLeagues();
+        renderMatches();
+      };
+      el.appendChild(b);
+    });
   });
 }
 
@@ -5665,7 +6266,7 @@ function renderMatches() {
     el.innerHTML = `
       <div style="padding:60px 20px; text-align:center; border:1px dashed var(--line); background:var(--bg-2);">
         <div style="font-family:var(--display); font-size:32px; color:var(--ink); margin-bottom:8px;">${t('empty.noFixtures')}</div>
-        <div style="font-family:var(--mono); font-size:11px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.12em; max-width:480px; margin:0 auto;">${t('empty.noFixturesDesc')}</div>
+        <div style="font-family:var(--mono); font-size:12px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.12em; max-width:480px; margin:0 auto;">${t('empty.noFixturesDesc')}</div>
       </div>
     `;
     return;
@@ -5721,7 +6322,7 @@ function renderMatches() {
     el.innerHTML = `
       <div style="padding:50px 20px; text-align:center; border:1px dashed var(--line); background:var(--bg-2);">
         <div style="font-family:var(--display); font-size:24px; color:var(--ink); margin-bottom:6px;">${t('empty.noLeagues')}</div>
-        <div style="font-family:var(--mono); font-size:11px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.12em;">${t('empty.noLeaguesDesc')}</div>
+        <div style="font-family:var(--mono); font-size:12px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.12em;">${t('empty.noLeaguesDesc')}</div>
       </div>
     `;
     return;
@@ -5958,16 +6559,16 @@ function renderSlip() {
         </div>
       </div>
       <div class="calc-row"><span>${t('slip.combined')}</span><span>${combined.toFixed(2)} <span class="odd-american ${americanFromDecimal(combined).startsWith('+') ? 'underdog' : 'favorite'}" style="margin-left:8px;">${americanFromDecimal(combined)}</span></span></div>
-      ${discount < 1.0 ? `<div class="calc-row" style="color:var(--accent); font-size:11px;"><span>${t('slip.sgpDiscount')}</span><span>−${((1 - discount) * 100).toFixed(1)}% <span style="color:var(--ink-3); margin-left:6px;">(${t('slip.sgpRaw')} ${raw.toFixed(2)})</span></span></div>` : ''}
+      ${discount < 1.0 ? `<div class="calc-row" style="color:var(--accent); font-size:12px;"><span>${t('slip.sgpDiscount')}</span><span>−${((1 - discount) * 100).toFixed(1)}% <span style="color:var(--ink-3); margin-left:6px;">(${t('slip.sgpRaw')} ${raw.toFixed(2)})</span></span></div>` : ''}
       <div class="calc-row"><span>${t('slip.profit')}</span><span style="color:var(--win)">+${fmtMoney(profit)}</span></div>
       <div class="calc-row"><span>${t('slip.hold')}</span><span>${Math.max(0, hold).toFixed(1)}%</span></div>
       <div class="calc-row"><span>${t('slip.legs')}</span><span>${state.slip.length}</span></div>
       <div class="calc-row" style="padding-top:10px; border-top:1px dashed var(--line); margin-top:4px;">
         <span>${t('slip.bankroll')}</span>
-        <span><input type="number" min="1" step="50" value="${Math.round(state.bankrollUsd * fx().rate)}" id="bankroll-in" style="width:90px; background:var(--bg-3); border:1px solid var(--line); color:var(--ink); padding:4px 8px; font-family:var(--mono); font-size:11px; text-align:right; border-radius:3px;" /> <span style="color:var(--ink-3); font-size:10px; margin-left:4px;">${fx().code}</span></span>
+        <span><input type="number" min="1" step="50" value="${Math.round(state.bankrollUsd * fx().rate)}" id="bankroll-in" style="width:90px; background:var(--bg-3); border:1px solid var(--line); color:var(--ink); padding:4px 8px; font-family:var(--mono); font-size:12px; text-align:right; border-radius:3px;" /> <span style="color:var(--ink-3); font-size:12px; margin-left:4px;">${fx().code}</span></span>
       </div>
       <div class="calc-row" style="${kellyStakeUsd > 0 ? '' : 'color:var(--ink-3);'}"><span>${t('slip.kelly')}</span><span>${kellyStakeDisplay}</span></div>
-      ${overKelly ? `<div class="calc-row" style="color:var(--warn); font-size:11px; padding:6px 0;"><span style="display:inline-flex; align-items:center; gap:6px;">⚠ ${t('stake.warn')}</span><span></span></div>` : ''}
+      ${overKelly ? `<div class="calc-row" style="color:var(--warn); font-size:12px; padding:6px 0;"><span style="display:inline-flex; align-items:center; gap:6px;">⚠ ${t('stake.warn')}</span><span></span></div>` : ''}
 
       <div class="prob-block">
         <div class="prob-head">
@@ -6377,7 +6978,7 @@ function renderMySlips() {
   const roiColor    = rec.roi > 0 ? 'var(--win)' : rec.roi < 0 ? 'var(--loss)' : 'var(--ink-3)';
   const recordHtml = `
     <div style="border:1px solid var(--line); background:var(--bg-2); padding:18px 22px; margin-bottom:18px;">
-      <div style="font-family:var(--mono); font-size:9px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.12em; margin-bottom:10px;">${t('my.record')}</div>
+      <div style="font-family:var(--mono); font-size:12px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.12em; margin-bottom:10px;">${t('my.record')}</div>
       <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:18px;">
         <div>
           <div style="font-family:var(--display); font-size:26px; line-height:1;">
@@ -6386,19 +6987,19 @@ function renderMySlips() {
             <span style="color:var(--loss)">${rec.lost}</span>
             ${rec.pending ? `<span style="color:var(--ink-3); font-size:14px; margin-left:6px;">(${rec.pending})</span>` : ''}
           </div>
-          <div style="font-family:var(--mono); font-size:9px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.1em; margin-top:4px;">W − L${rec.pending ? ` · ${t('my.status.pending').toLowerCase()}` : ''}</div>
+          <div style="font-family:var(--mono); font-size:12px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.1em; margin-top:4px;">W − L${rec.pending ? ` · ${t('my.status.pending').toLowerCase()}` : ''}</div>
         </div>
         <div>
           <div style="font-family:var(--display); font-size:26px; color:${profitColor}; line-height:1;">${rec.profit >= 0 ? '+' : ''}${fmtMoney(rec.profit)}</div>
-          <div style="font-family:var(--mono); font-size:9px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.1em; margin-top:4px;">${t('my.profit')}</div>
+          <div style="font-family:var(--mono); font-size:12px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.1em; margin-top:4px;">${t('my.profit')}</div>
         </div>
         <div>
           <div style="font-family:var(--display); font-size:26px; color:${roiColor}; line-height:1;">${rec.settled > 0 ? (rec.roi >= 0 ? '+' : '') + rec.roi.toFixed(1) + '%' : '—'}</div>
-          <div style="font-family:var(--mono); font-size:9px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.1em; margin-top:4px;">${t('my.roi')}</div>
+          <div style="font-family:var(--mono); font-size:12px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.1em; margin-top:4px;">${t('my.roi')}</div>
         </div>
         <div>
           <div style="font-family:var(--display); font-size:26px; line-height:1;">${rec.settled > 0 ? rec.winRate.toFixed(1) + '%' : '—'}</div>
-          <div style="font-family:var(--mono); font-size:9px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.1em; margin-top:4px;">${t('my.winRate')}</div>
+          <div style="font-family:var(--mono); font-size:12px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.1em; margin-top:4px;">${t('my.winRate')}</div>
         </div>
       </div>
     </div>
@@ -6479,13 +7080,13 @@ function renderMySlips() {
           const guaranteedProfit = guaranteedReturn - s.stake;
           hedgeHtml = `
             <div style="margin-top:14px; padding:14px; background:var(--bg-3); border:1px solid var(--line); border-radius:4px;">
-              <div style="font-family:var(--mono); font-size:10px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.12em; margin-bottom:8px;">${t('hedge.title')}</div>
+              <div style="font-family:var(--mono); font-size:12px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.12em; margin-bottom:8px;">${t('hedge.title')}</div>
               <div style="font-size:12px; color:var(--ink-2); line-height:1.5;">
                 ${t('hedge.lockProfit')} <span style="color:var(--accent); font-family:var(--mono); font-weight:700;">${fmtMoney(hedgeStake)}</span> ${t('hedge.onOpposite')}
                 <br/>
                 <span style="font-family:var(--serif); font-style:italic;">${optName(otherOpt.tpl)}</span> @ ${oppositeOdds.toFixed(2)}
                 <br/>
-                <span style="color:var(--ink-3); font-size:11px;">${t('hedge.guaranteed')}: ${fmtMoney(guaranteedReturn)} (${guaranteedProfit >= 0 ? '+' : ''}${fmtMoney(guaranteedProfit)})</span>
+                <span style="color:var(--ink-3); font-size:12px;">${t('hedge.guaranteed')}: ${fmtMoney(guaranteedReturn)} (${guaranteedProfit >= 0 ? '+' : ''}${fmtMoney(guaranteedProfit)})</span>
               </div>
             </div>
           `;
@@ -6510,14 +7111,14 @@ function renderMySlips() {
             const currentOdds = getDisplayedOdds(opt.odds);
             if (Math.abs(currentOdds - snap.savedOdds) > 0.01) {
               const beat = snap.savedOdds > currentOdds; // saved odds > current = saved was higher = good
-              legClvHtml = ` <span style="font-family:var(--mono); font-size:9px; color:${beat ? 'var(--win)' : 'var(--loss)'}; margin-left:4px;">vs ${currentOdds.toFixed(2)}</span>`;
+              legClvHtml = ` <span style="font-family:var(--mono); font-size:12px; color:${beat ? 'var(--win)' : 'var(--loss)'}; margin-left:4px;">vs ${currentOdds.toFixed(2)}</span>`;
             }
           }
         }
       }
       return `
-      <div style="font-size:11px; color:var(--ink-2); padding:4px 0; border-bottom:1px dashed var(--line);">
-        <span style="font-family:var(--mono); color:var(--ink-3); font-size:9px; text-transform:uppercase; letter-spacing:.1em;">${l.matchLabel}</span><br/>
+      <div style="font-size:12px; color:var(--ink-2); padding:4px 0; border-bottom:1px dashed var(--line);">
+        <span style="font-family:var(--mono); color:var(--ink-3); font-size:12px; text-transform:uppercase; letter-spacing:.1em;">${l.matchLabel}</span><br/>
         <span style="font-family:var(--serif); font-weight:600; color:var(--ink); font-size:13px;">${legName}</span>
         <span style="font-family:var(--mono); float:right;"><span style="color:var(--accent);">${legDec.toFixed(2)}</span> <span class="odd-american ${legCls}" style="margin-left:6px;">${legAm}</span>${legClvHtml}</span>
       </div>
@@ -6532,13 +7133,13 @@ function renderMySlips() {
       lost:    { bg:'rgba(255,107,107,.15)', fg:'var(--loss)' },
     };
     const sc = statusColors[status];
-    const statusBadge = `<span style="background:${sc.bg}; color:${sc.fg}; padding:3px 9px; border-radius:10px; font-family:var(--mono); font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:.1em;">${t('my.status.' + status)}</span>`;
+    const statusBadge = `<span style="background:${sc.bg}; color:${sc.fg}; padding:3px 9px; border-radius:10px; font-family:var(--mono); font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.1em;">${t('my.status.' + status)}</span>`;
 
     // Settlement buttons — only show "mark won/lost" when pending; show "reset" when settled
     const settleButtons = status === 'pending'
-      ? `<button onclick="settleSlip('${s.id}', 'won')" style="background:transparent; border:1px solid var(--win); color:var(--win); padding:6px 10px; cursor:pointer; font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:.1em; border-radius:3px; margin-right:6px;">✓ ${t('my.markWon')}</button>
-         <button onclick="settleSlip('${s.id}', 'lost')" style="background:transparent; border:1px solid var(--loss); color:var(--loss); padding:6px 10px; cursor:pointer; font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:.1em; border-radius:3px; margin-right:6px;">✕ ${t('my.markLost')}</button>`
-      : `<button onclick="settleSlip('${s.id}', 'pending')" style="background:transparent; border:1px solid var(--line); color:var(--ink-3); padding:6px 10px; cursor:pointer; font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:.1em; border-radius:3px; margin-right:6px;">↺ ${t('my.markVoid')}</button>`;
+      ? `<button onclick="settleSlip('${s.id}', 'won')" style="background:transparent; border:1px solid var(--win); color:var(--win); padding:6px 10px; cursor:pointer; font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:.1em; border-radius:3px; margin-right:6px;">✓ ${t('my.markWon')}</button>
+         <button onclick="settleSlip('${s.id}', 'lost')" style="background:transparent; border:1px solid var(--loss); color:var(--loss); padding:6px 10px; cursor:pointer; font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:.1em; border-radius:3px; margin-right:6px;">✕ ${t('my.markLost')}</button>`
+      : `<button onclick="settleSlip('${s.id}', 'pending')" style="background:transparent; border:1px solid var(--line); color:var(--ink-3); padding:6px 10px; cursor:pointer; font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:.1em; border-radius:3px; margin-right:6px;">↺ ${t('my.markVoid')}</button>`;
 
     return `
       <div style="border:1px solid var(--line); background:var(--bg-2); padding:22px; margin-bottom:14px;">
@@ -6548,26 +7149,26 @@ function renderMySlips() {
               <div style="font-family:var(--display); font-size:24px;">${t('my.scenario')}${state.savedSlips.length - i}</div>
               ${statusBadge}
             </div>
-            <div style="font-family:var(--mono); font-size:10px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.12em; margin-top:2px;">${s.saved.toLocaleString(currentLang)}</div>
+            <div style="font-family:var(--mono); font-size:12px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.12em; margin-top:2px;">${s.saved.toLocaleString(currentLang)}</div>
           </div>
           <div style="display:flex; align-items:center; flex-wrap:wrap; gap:0;">
             ${settleButtons}
-            <button onclick="deleteSlip('${s.id}')" style="background:transparent; border:1px solid var(--line); color:var(--ink-3); padding:6px 12px; cursor:pointer; font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:.12em; border-radius:3px;">${t('my.delete')}</button>
+            <button onclick="deleteSlip('${s.id}')" style="background:transparent; border:1px solid var(--line); color:var(--ink-3); padding:6px 12px; cursor:pointer; font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:.12em; border-radius:3px;">${t('my.delete')}</button>
           </div>
         </div>
         <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:14px; margin-bottom:14px;">
-          <div><div style="font-family:var(--mono); font-size:9px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.12em;">${t('my.legs')}</div><div style="font-family:var(--display); font-size:28px;">${s.legs.length}</div></div>
-          <div><div style="font-family:var(--mono); font-size:9px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.12em;">${t('my.stake')}</div><div style="font-family:var(--display); font-size:28px;">${fmtMoney(s.stake)}</div></div>
-          <div><div style="font-family:var(--mono); font-size:9px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.12em;">${t('my.return')}</div><div style="font-family:var(--display); font-size:28px; color:var(--accent);">${fmtMoney(s.payout)}</div></div>
-          <div><div style="font-family:var(--mono); font-size:9px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.12em;">${t('my.prob')}</div><div style="font-family:var(--display); font-size:28px;">${s.hitPct.toFixed(1)}%</div></div>
+          <div><div style="font-family:var(--mono); font-size:12px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.12em;">${t('my.legs')}</div><div style="font-family:var(--display); font-size:28px;">${s.legs.length}</div></div>
+          <div><div style="font-family:var(--mono); font-size:12px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.12em;">${t('my.stake')}</div><div style="font-family:var(--display); font-size:28px;">${fmtMoney(s.stake)}</div></div>
+          <div><div style="font-family:var(--mono); font-size:12px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.12em;">${t('my.return')}</div><div style="font-family:var(--display); font-size:28px; color:var(--accent);">${fmtMoney(s.payout)}</div></div>
+          <div><div style="font-family:var(--mono); font-size:12px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.12em;">${t('my.prob')}</div><div style="font-family:var(--display); font-size:28px;">${s.hitPct.toFixed(1)}%</div></div>
         </div>
-        <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:14px; margin-bottom:14px; font-family:var(--mono); font-size:11px;">
+        <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:14px; margin-bottom:14px; font-family:var(--mono); font-size:12px;">
           <div><span style="color:var(--ink-3);">${t('my.decimal')}</span> <span style="font-weight:700; color:var(--accent); margin-left:8px;">${s.combined.toFixed(2)}</span></div>
           <div><span style="color:var(--ink-3);">${t('my.american')}</span> <span class="odd-american ${us.startsWith('+') ? 'underdog' : 'favorite'}" style="font-weight:700; margin-left:8px; font-size:13px;">${us}</span></div>
         </div>
         ${clvAvailable ? `
           <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); margin-bottom:14px;">
-            <span style="font-family:var(--mono); font-size:10px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.12em;">${t('clv.title')}</span>
+            <span style="font-family:var(--mono); font-size:12px; color:var(--ink-3); text-transform:uppercase; letter-spacing:.12em;">${t('clv.title')}</span>
             <span style="font-family:var(--mono); color:${clvColor}; font-weight:700; font-size:12px;">
               ${clvDelta > 0 ? '+' : ''}${clvDelta.toFixed(1)}% &middot; ${clvLabel}
             </span>
@@ -6575,7 +7176,7 @@ function renderMySlips() {
         ` : ''}
         ${hedgeHtml}
         <details>
-          <summary style="cursor:pointer; font-family:var(--mono); font-size:10px; color:var(--ink-2); text-transform:uppercase; letter-spacing:.12em; padding:6px 0;">${t('my.showLegs').replace('{n}', s.legs.length)}</summary>
+          <summary style="cursor:pointer; font-family:var(--mono); font-size:12px; color:var(--ink-2); text-transform:uppercase; letter-spacing:.12em; padding:6px 0;">${t('my.showLegs').replace('{n}', s.legs.length)}</summary>
           <div style="margin-top:8px;">${legsHtml}</div>
         </details>
       </div>
@@ -6638,100 +7239,88 @@ function computeRecord() {
 // timestamps shift naturally as the page sits open and reads as a true feed.
 // On refresh, news items are slightly reordered/jittered to mimic a live wire.
 const NEWS_SEED = [
-  { league:'laliga', tag:'form', team:'Barcelona',
-    title:'Perfect Barcelona host Real Madrid in Sunday\'s Clásico',
-    body:'Hansi Flick\'s side are nine from nine in LaLiga (27 points, 39 goals scored) after winning 5-2 at Betis, though they lost 4-2 at PSG in the Champions League on Tuesday. Real Madrid are third on 21. The first Clásico of the season kicks off at Spotify Camp Nou on Sunday at 21:00 CET.',
-    impact:'up', moveText:'Model: Barcelona 64% to win at home',
-    minutesAgo: 60 },
-  { league:'ucl', tag:'form', team:'Arsenal',
-    title:'Arsenal hold Bayern 2-2 in Munich',
-    body:'Arsenal drew 2-2 at the Allianz Arena on Champions League Matchday 3, after beating Lille 3-0 last time out. Mikel Arteta\'s side are second in the Premier League on 18 points, three behind unbeaten Manchester City, and host Everton on Saturday.',
-    impact:'neutral', moveText:'Arsenal v Everton: home win favored',
-    minutesAgo: 2350 },
-  { league:'ucl', tag:'form', team:'Paris SG',
-    title:'Holders PSG beat Barcelona 4-2 after hitting four at the Etihad',
-    body:'The two-time defending champions beat Manchester City 4-2 in Manchester on Matchday 2, then beat Barcelona 4-2 at the Parc des Princes on Tuesday. City bounced back with a 5-1 win over AEK Athens and Liverpool edged Villarreal 4-3. PSG return to Ligue 1 on Sunday with a home match against Lyon.',
-    impact:'up', moveText:'PSG to win Champions League remain favorites',
-    minutesAgo: 180 },
-  { league:'ucl', tag:'form', team:'Aston Villa',
-    title:'Villa beat Viking 3-1 before Manchester City visit',
-    body:'Aston Villa followed their 6-0 win over Fenerbahçe with a 3-1 home win over Viking. League leaders Manchester City visit Villa Park in Saturday\'s early kickoff; Villa are 12th on 8 points.',
-    impact:'neutral', moveText:'Model: Man City 53% to win at Villa Park',
-    minutesAgo: 2380 },
-  { league:'ucl', tag:'form', team:'Real Madrid',
-    title:'Real Madrid beat Leipzig 4-1 before the Clásico',
-    body:'José Mourinho\'s side won 4-1 against RB Leipzig at the Bernabéu on Wednesday. Madrid are third in LaLiga, six points behind Barcelona, ahead of Sunday\'s trip to Spotify Camp Nou. Kylian Mbappé has 9 league goals, second to Raphinha (12).',
-    impact:'up', moveText:'Real Madrid +0.5 handicap at Barcelona priced short',
-    minutesAgo: 2300 },
-  { league:'ucl', tag:'form', team:'Inter Milan',
-    title:'Inter edge Shakhtar 1-0 and top Serie A on goal difference',
-    body:'Inter bounced back from the 4-3 home defeat to Club Brugge with a 1-0 win over Shakhtar Donetsk. Cristian Chivu\'s side lead Serie A on goal difference from Lazio (both 19 points) and host Fiorentina, 18th, on Sunday lunchtime.',
-    impact:'up', moveText:'Inter -1 handicap vs Fiorentina shortened',
-    minutesAgo: 2320 },
-  { league:'ucl', tag:'form', team:'Manchester Utd',
-    title:'Como beat Manchester United 4-1',
-    body:'Cesc Fàbregas\'s Como beat Manchester United 4-1 on Champions League Matchday 3, after United lost 2-0 at Atlético Madrid on Matchday 2. Michael Carrick\'s side are 13th in the Premier League and host Bournemouth on Sunday.',
-    impact:'down', moveText:'Manchester Utd to win vs Bournemouth eased',
-    minutesAgo: 2290 },
-  { league:'uel', tag:'form', team:'Bournemouth',
-    title:'Bournemouth beat Milan 3-0',
-    body:'Justin Kluivert and Marcus Tavernier scored penalties and Amine Adli added a free-kick as Bournemouth beat Rúben Amorim\'s Milan 3-0 on Europa League Matchday 3. Bournemouth visit Manchester United on Sunday; Milan go to Udinese.',
-    impact:'up', moveText:'Bournemouth double chance at Old Trafford shortened',
-    minutesAgo: 900 },
-  { league:'uel', tag:'form', team:'Sunderland',
-    title:'Sunderland draw 1-1 at Lech Poznań',
-    body:'Timur Tutierov scored for Sunderland in a 1-1 draw in Poznań. Sunderland are bottom of the Premier League on 4 points and host Leeds on Sunday.',
-    impact:'neutral', moveText:'Sunderland v Leeds draw priced short',
-    minutesAgo: 960 },
-  { league:'uel', tag:'form', team:'Crystal Palace',
-    title:'Crystal Palace draw 2-2 in Istanbul',
-    body:'Yeremy Pino and Jean-Philippe Mateta scored as Crystal Palace drew 2-2 at Beşiktaş, with Wilfred Ndidi and Junior Olaitan replying. Palace host Newcastle on Sunday.',
-    impact:'neutral', moveText:'Palace v Newcastle BTTS priced short',
-    minutesAgo: 930 },
-  { league:'uel', tag:'form', team:'Real Sociedad',
-    title:'Real Sociedad hit six in Norway; Benfica win 4-1 in Cyprus',
-    body:'Sergio Gómez and Luka Sučić scored twice each as Real Sociedad won 6-0 at Lillestrøm on Europa League Matchday 3. Benfica won 4-1 at Omonia, Union SG beat Hapoel Beer-Sheva 4-0, and Juventus drew 2-2 with Rennes.',
-    impact:'up', moveText:'Real Sociedad v Levante: home win favored',
-    minutesAgo: 880 },
-  { league:'epl', tag:'tactics', team:'Chelsea',
-    title:'London derby headlines Saturday: Chelsea v Tottenham',
-    body:'Matchweek 8 features Aston Villa v Manchester City in the early kickoff, Arsenal v Everton at 3pm and Chelsea v Tottenham at Stamford Bridge in the evening slot. Liverpool host Brighton on Sunday.',
-    impact:'neutral', moveText:'Chelsea v Tottenham over 2.5 goals firmed',
-    minutesAgo: 820 },
-  { league:'seriea', tag:'tactics', team:'Napoli',
-    title:'Napoli and Roma meet at the Maradona on Saturday',
-    body:'Both won in the Champions League on Tuesday — Napoli 4-3 against Bodø/Glimt, Roma 4-0 against Slovan Bratislava — before Saturday\'s giornata 8 meeting in Naples at 18:00 CEST. It pits Massimiliano Allegri, appointed at Napoli in July, against Gian Piero Gasperini. Roma\'s Donyell Malen has 6 league goals. Elsewhere, Udinese host Milan on Sunday night and Lecce face Juventus.',
-    impact:'neutral', moveText:'Napoli v Roma under 2.5 favored',
-    minutesAgo: 900 },
-  { league:'bundes', tag:'tactics', team:'Borussia Dortmund',
-    title:'Dortmund host Frankfurt; Bayern visit Freiburg on Sunday',
-    body:'Matchday 7 headliners: Borussia Dortmund v Eintracht Frankfurt on Saturday evening, and Freiburg v Bayern on Sunday. Newly promoted Elversberg visit RB Leipzig.',
-    impact:'neutral', moveText:'Bayern -1 handicap at Freiburg priced near even',
-    minutesAgo: 1010 },
-  { league:'ligue1', tag:'tactics', team:'Paris SG',
-    title:'Leaders Lyon visit PSG after defeat at Hoffenheim',
-    body:'Lyon top Ligue 1 on goal difference, level on 14 points with PSG, Paris FC, Lille and Monaco, but lost 3-0 at Hoffenheim in the Europa League on Thursday. They visit the Parc des Princes on Sunday night.',
-    impact:'neutral', moveText:'Model: over 2.5 goals 54% in PSG v Lyon',
-    minutesAgo: 820 },
+  { league:'eflcup', tag:'form', team:'Arsenal', published:'2026-10-27T22:40:00Z',
+    title:'League Two Fleetwood knock Arsenal out of the Carabao Cup',
+    body:'Fleetwood Town, 18th in League Two, beat the Premier League champions 5-3 on penalties after a 1-1 draw at Highbury Stadium. Aaron Loupalo-Bi scored after 21 minutes and Viktor Gyökeres equalised early in the second half. Jay Lynch saved from Bruno Guimarães and Conor Haughey scored the winning kick. Max Dowman was sent off late on, and play was held up for around eight minutes after kick-off when a drone was spotted over the ground.',
+    pred:['epl','Liverpool','Arsenal'] },
+  { league:'copadelrey', tag:'form', team:'Espanyol', published:'2026-10-28T03:00:00Z',
+    title:'Sestao River beat Espanyol 4-3 in the 121st minute',
+    body:'The biggest Copa del Rey first-round shock on Tuesday came in the Basque Country, where Sestao River knocked out Espanyol after extra time. Villarreal won 5-0 at Manacor, Málaga 3-0 at Sporting de Alcázar and Elche 3-1 at Pinatar, while Rayo Vallecano needed extra time to win 3-2 at Recreativo. Six more LaLiga clubs play on Wednesday and six on Thursday.',
+    pred:['laliga','Villarreal','Espanyol'] },
+  { league:'dfbpokal', tag:'form', team:'FC Köln', published:'2026-10-27T22:15:00Z',
+    title:'Köln thrash Union 5-0 as Bochum and Darmstadt cause Pokal upsets',
+    body:'Second-division Bochum beat Mainz 2-0 and Darmstadt won 2-0 at Elversberg on the first night of the DFB-Pokal second round. Köln hammered Union Berlin 5-0, Dortmund edged Werder Bremen 3-2, Frankfurt won 3-1 in Hamburg and Leipzig won 2-1 at Rot-Weiss Essen. Bayern host Magdeburg and Leverkusen face Nürnberg on Wednesday night.',
+    pred:['dfbpokal','Bayern Munich','1. FC Magdeburg'] },
+  { league:'eflcup', tag:'tactics', team:'Liverpool', published:'2026-10-28T09:30:00Z',
+    title:'Liverpool v Chelsea headlines Wednesday\'s Carabao Cup ties',
+    body:'Five fourth-round ties are played on Wednesday night: Manchester City v Brighton, Sunderland v Brentford, Fulham v Crystal Palace, Bournemouth v Aston Villa and Liverpool v Chelsea at Anfield. Everton host Newcastle on Thursday. City and Brighton meet again in the league on Saturday.',
+    pred:['eflcup','Liverpool','Chelsea'] },
+  { league:'epl', tag:'injury', team:'Liverpool', published:'2026-10-28T08:00:00Z',
+    title:'Frimpong out and Saka a doubt for Liverpool v Arsenal',
+    body:'Andoni Iraola said Jeremie Frimpong\'s new muscle injury will keep him out until the November international break, ruling him out of Sunday\'s visit of Arsenal. Dominik Szoboszlai\'s hamstring problem has not worsened. Arsenal\'s Bukayo Saka is listed with a thigh injury and no return date. Arsenal are level with Manchester City on 21 points after eight games; Liverpool are fourth on 15.',
+    pred:['epl','Liverpool','Arsenal'] },
+  { league:'laliga', tag:'form', team:'Real Madrid', published:'2026-10-25T22:10:00Z',
+    title:'Real Madrid win the Clásico 2-1 at Camp Nou',
+    body:'Barcelona lost for the first time in LaLiga this season but still lead on 27 points after ten games. Atlético Madrid are second on 25 after beating Deportivo 1-0, and Real Madrid third on 24. In Jornada 11 Barcelona host Alavés on Saturday and Madrid visit Racing Santander on Sunday.',
+    pred:['laliga','Racing Santander','Real Madrid'] },
+  { league:'epl', tag:'form', team:'Aston Villa', published:'2026-10-25T18:30:00Z',
+    title:'Villa beat City as Arsenal draw level at the top',
+    body:'Aston Villa beat Manchester City 2-1 at Villa Park and Arsenal\'s 2-0 win over Everton took them level with City on 21 points. Brighton are third on 16 after losing 2-0 at Anfield. Tottenham won 2-0 at Chelsea and Bournemouth won 3-0 at Old Trafford. Chelsea host Manchester United in Saturday\'s early game.',
+    pred:['epl','Chelsea','Manchester Utd'] },
+  { league:'bundes', tag:'tactics', team:'Bayern Munich', published:'2026-10-26T09:00:00Z',
+    title:'Der Klassiker with Bayern and Dortmund level on 17 points',
+    body:'Bayern won 3-1 at Freiburg and Dortmund beat Eintracht Frankfurt 1-0, so the top two meet at the Allianz Arena on Saturday separated only by goal difference (Bayern +19, Dortmund +8). Leverkusen lost 3-0 at Hoffenheim and Gladbach won 3-2 in Stuttgart.',
+    pred:['bundes','Bayern Munich','Borussia Dortmund'] },
+  { league:'seriea', tag:'form', team:'Lazio', published:'2026-10-27T21:30:00Z',
+    title:'Lazio go top with a 6-2 win at Sassuolo',
+    body:'Lazio lead Serie A on 25 points after nine games. Roma beat Cagliari 4-2 to move to 21 and Como won 3-1 in Turin. Inter (22) visit Venezia and Milan host Bologna on Wednesday, before the Milan derby on Saturday at 20:45 CET. Juventus host Napoli on Sunday night.',
+    pred:['seriea','AC Milan','Inter Milan'] },
+  { league:'ligue1', tag:'form', team:'Paris SG', published:'2026-10-26T08:30:00Z',
+    title:'PSG beat Lyon 2-0 to stay top of Ligue 1',
+    body:'Paris Saint-Germain lead on 17 points after eight games, one ahead of Rennes, who beat Strasbourg 3-0. Lille and Monaco drew 1-1 and Marseille beat Le Havre 4-3. PSG open Journée 9 at Le Havre on Friday; Lille host Lens in the Derby du Nord the same night.',
+    pred:['ligue1','Lille','Lens'] },
+  { league:'ucl', tag:'tactics', team:'Bayern Munich', published:'2026-10-28T07:00:00Z',
+    title:'Atlético v Bayern and Leipzig v City lead Champions League Matchday 4',
+    body:'Matchday 4 is played next Tuesday and Wednesday. Barcelona host Aston Villa, Atlético Madrid host Bayern, Manchester United host Roma and Villarreal host holders Paris Saint-Germain on Tuesday. On Wednesday Liverpool go to Fenerbahçe, Arsenal to Slavia Prague, Real Madrid to AEK Athens and Manchester City to RB Leipzig.',
+    pred:['ucl','Atletico Madrid','Bayern Munich'] },
 ];
 
-// Each mover carries a 12-point price history (one reading every 30 minutes for the
-// last 6 hours) so we can render a sparkline showing the line's trajectory.
-// The history ends with the current price (last entry == `to`).
-const MOVERS_SEED = [
-  { match:'Barcelona v Real Madrid',  market:'Barcelona to win',      from:1.62, to:1.49, dir:'up',
-    history:[1.62,1.61,1.60,1.58,1.57,1.55,1.54,1.53,1.52,1.51,1.50,1.49] },
-  { match:'Aston Villa v Man City',   market:'Manchester City to win', from:1.95, to:1.80, dir:'up',
-    history:[1.95,1.94,1.92,1.91,1.89,1.88,1.86,1.85,1.83,1.82,1.81,1.80] },
-  { match:'Napoli v Roma',            market:'Roma to win',            from:2.10, to:2.03, dir:'up',
-    history:[2.10,2.10,2.09,2.08,2.08,2.07,2.06,2.05,2.05,2.04,2.04,2.03] },
-  { match:'Freiburg v Bayern Munich', market:'Both teams to score',    from:1.42, to:1.36, dir:'up',
-    history:[1.42,1.42,1.41,1.40,1.40,1.39,1.39,1.38,1.38,1.37,1.37,1.36] },
-  { match:'Chelsea v Tottenham',      market:'Chelsea to win',         from:1.70, to:1.65, dir:'up',
-    history:[1.70,1.70,1.69,1.69,1.68,1.68,1.67,1.67,1.66,1.66,1.65,1.65] },
-  { match:'Paris SG v Lyon',          market:'Over 2.5 goals',         from:1.70, to:1.76, dir:'down',
-    history:[1.70,1.70,1.71,1.71,1.72,1.72,1.73,1.74,1.74,1.75,1.75,1.76] },
-];
+// Season background — still-true context, shown below the dated stories.
+const NEWS_BACKGROUND = [
+  { league:'epl', tag:'transfer', team:'Aston Villa',
+    title:'Villa rebuilt the attack after selling Watkins to Al Hilal',
+    body:'Aston Villa sold Ollie Watkins to Saudi club Al Hilal at the end of August for a reported £50m, and Morgan Rogers left for Chelsea. Nicolas Jackson, signed from Chelsea, leads the line, with Tammy Abraham and Ross Barkley also scoring in Europe. Unai Emery remains in charge and John McGinn is captain.' },
+  { league:'epl', tag:'tactics', team:'Manchester City',
+    title:'Maresca\'s City in the post-Guardiola era',
+    body:'Enzo Maresca succeeded Pep Guardiola, who stepped down in the summer after a decade in charge. City are level with Arsenal on 21 points after eight games, with Erling Haaland and Rayan Cherki their leading league scorers.' },
+  { league:'laliga', tag:'transfer', team:'Barcelona',
+    title:'Barcelona signed Rodri from Manchester City',
+    body:'Barcelona signed Spain captain Rodri from Manchester City in August. Hansi Flick\'s side lead LaLiga on 27 points after ten games, with Raphinha and Lamine Yamal their top scorers.' },
+  { league:'epl', tag:'tactics', team:'Liverpool',
+    title:'Iraola\'s Liverpool lean on Isak and Barcola',
+    body:'Andoni Iraola replaced Arne Slot in the summer. Alexander Isak has been their main league scorer, and Bradley Barcola and Alexis Mac Allister have scored in the Champions League.' },
+  { league:'epl', tag:'tactics', team:'Chelsea',
+    title:'Xabi Alonso\'s Chelsea rely on João Pedro and Morgan Rogers',
+    body:'Chelsea are managed by Xabi Alonso. João Pedro and summer signing Morgan Rogers are their leading league scorers. Tottenham are now coached by Roberto De Zerbi.' },
+  { league:'seriea', tag:'tactics', team:'AC Milan',
+    title:'Amorim\'s Milan and Allegri\'s Napoli after the summer coaching swap',
+    body:'Rúben Amorim took over at Milan in June after Massimiliano Allegri was sacked, and Allegri moved to Napoli in July to replace Antonio Conte.' },
+  { league:'bundes', tag:'tactics', team:'Bayer Leverkusen',
+    title:'Leverkusen under Carles Martínez Novell',
+    body:'Carles Martínez Novell is Leverkusen\'s new coach. Patrik Schick and Werder Bremen\'s Niclas Füllkrug were joint top Bundesliga scorers with six goals each in mid-October.' },
+  { league:'ligue1', tag:'form', team:'Rennes',
+    title:'Lepaul leads the Ligue 1 scoring chart',
+    body:'Rennes\' Esteban Lepaul topped the Ligue 1 scorers with 7 goals in mid-October, ahead of Paris FC\'s Lassine Sinayoko. Ferran Torres is scoring regularly for Paris Saint-Germain.' },
+  { league:'real', tag:'tactics', team:'Real Madrid',
+    title:'Mourinho back in charge at the Bernabéu',
+    body:'José Mourinho succeeded Álvaro Arbeloa as Real Madrid coach and won his first Clásico of the season, 2-1 at Camp Nou.' },
+  { league:'uel', tag:'form', team:'Benfica',
+    title:'Jhon Durán scoring for Benfica in the Europa League',
+    body:'Former Aston Villa striker Jhon Durán scored twice, including a Panenka penalty, as Benfica beat Celtic 4-1 on Matchday 2. Benfica then won 4-1 at Omonia.' },
+].map(n => Object.assign(n, { league: n.league === 'real' ? 'laliga' : n.league, background: true }));
+
+// Retired: price-movement history needs a real odds feed. The side panel now shows model calls.
+const MOVERS_SEED = [];
 // Left empty until verified team news is published for this round — better an
 // honest empty state than invented absences.
 const SUSPENSIONS_SEED = [];
@@ -6739,7 +7328,7 @@ const SUSPENSIONS_SEED = [];
 const WEATHER_SEED = [];
 
 // Working state — gets replaced on each refresh so we can simulate live updates
-let NEWS = JSON.parse(JSON.stringify(NEWS_SEED));
+let NEWS = JSON.parse(JSON.stringify(NEWS_SEED.concat(NEWS_BACKGROUND)));
 let MOVERS = JSON.parse(JSON.stringify(MOVERS_SEED));
 let SUSPENSIONS = JSON.parse(JSON.stringify(SUSPENSIONS_SEED));
 let WEATHER = JSON.parse(JSON.stringify(WEATHER_SEED));
@@ -6782,8 +7371,26 @@ function timeAgo(mins) {
 let newsLastSyncMins = 0;
 let newsRefreshing = false;
 
+// Under each story: what the model now expects for the fixture it relates to.
+function newsModelLine(n) {
+  if (!n.pred || !state.matches) return '';
+  const [lid, home, away] = n.pred;
+  const m = state.matches.find(x => x.home === home && x.away === away && (x.league === lid || !lid));
+  const pm = m && predictMatch(m);
+  if (!pm) return '';
+  return `<div class="news-model"><span>${t('news.model')}: ${home} v ${away}</span>
+    <span class="pv-minibar" aria-hidden="true"><i class="h" style="flex:${pm.pH}"></i><i class="d" style="flex:${pm.pD}"></i><i class="a" style="flex:${pm.pA}"></i></span>
+    <span><b style="color:var(--home)">${predPct0(pm.pH)}</b> / ${predPct0(pm.pD)} / <b style="color:var(--away)">${predPct0(pm.pA)}</b></span>
+    <button onclick="openPredictor('${m.id}')">${t('news.openPred')}</button></div>`;
+}
+
 function renderNews() {
   // sort by recency (newest first)
+  // Ages come from each story's real publish time, so "2 h ago" is always true.
+  NEWS.forEach(n => {
+    if (n.published && !isNaN(Date.parse(n.published))) n.minutesAgo = Math.max(0, Math.round((Date.now() - Date.parse(n.published)) / 60000));
+    else if (n.background) n.minutesAgo = 1e9;
+  });
   const sorted = [...NEWS].sort((a, b) => a.minutesAgo - b.minutesAgo);
 
   // === Category tabs ===
@@ -6822,10 +7429,10 @@ function renderNews() {
     `;
   } else {
     document.getElementById('news-feed').innerHTML = filtered.map(n => {
-      const lg = LEAGUES.find(l => l.id === n.league);
+      const lg = LEAGUES.find(l => l.id === n.league) || LEAGUES[0];
       const fresh = n._justAdded ? ' fresh' : '';
       const liveBadge = n._live
-        ? `<span style="background:#d4ff3c22; color:#d4ff3c; font-family:var(--mono); font-size:8px; padding:2px 6px; border-radius:2px; letter-spacing:.1em; font-weight:600; display:inline-flex; align-items:center; gap:4px;"><span style="display:inline-block; width:5px; height:5px; border-radius:50%; background:#d4ff3c;"></span>LIVE</span>`
+        ? `<span style="background:rgba(29,190,138,.15); color:var(--accent); font-family:var(--mono); font-size:12px; padding:2px 6px; border-radius:2px; letter-spacing:.1em; font-weight:600; display:inline-flex; align-items:center; gap:4px;"><span style="display:inline-block; width:5px; height:5px; border-radius:50%; background:var(--accent);"></span>LIVE</span>`
         : '';
       // Show a small flag chip beside the team name, but only when we can resolve
       // the team to a league/country. Avoids generic empty circles for placeholder
@@ -6841,14 +7448,11 @@ function renderNews() {
             ${liveBadge}
             <span style="display:inline-flex; align-items:center; gap:6px;"><span class="flag" style="width:16px; height:12px;">${lg.flag}</span> ${lg.short}</span>
             <span style="display:inline-flex; align-items:center; gap:6px;">${teamCrestHtml}</span>
-            <span class="news-time">${timeAgo(n.minutesAgo)}</span>
+            <span class="news-time">${n.background ? `<span class="news-background">${t('news.background')}</span>` : timeAgo(n.minutesAgo)}</span>
           </div>
           <div class="news-title">${n.title}</div>
           <div class="news-body">${n.body}</div>
-          <div class="news-impact">
-            <span>${t('news.impact')}</span>
-            <span class="impact-arrow ${n.impact === 'down' ? 'down' : ''}">${n.impact === 'up' ? '▲' : '▼'} ${n.moveText}</span>
-          </div>
+          ${newsModelLine(n)}
         </article>
       `;
     }).join('');
@@ -6856,29 +7460,15 @@ function renderNews() {
   // clear fresh markers — they're a one-shot flash
   NEWS.forEach(n => delete n._justAdded);
 
-  document.getElementById('movers').innerHTML = MOVERS.map(m => {
-    const fromAm = americanFromDecimal(m.from);
-    const toAm   = americanFromDecimal(m.to);
-    const toClass = toAm.startsWith('+') ? 'underdog' : 'favorite';
-    return `
-    <div class="ticker-row">
-      <div class="lbl">
-        <div style="font-weight:600; color:var(--ink); font-size:12px;">${m.match}</div>
-        <div style="font-size:10px; color:var(--ink-3); font-family:var(--mono); text-transform:uppercase; letter-spacing:.1em;">${m.market}</div>
-        <div style="margin-top:4px;">${renderSparkline(m.history, m.dir)}</div>
-        <div style="font-size:8px; color:var(--ink-3); font-family:var(--mono); text-transform:uppercase; letter-spacing:.1em; margin-top:2px;">${t('mover.history')}</div>
-      </div>
-      <div class="val">
-        <span style="color:var(--ink-3); text-decoration:line-through; font-size:10px;">${m.from.toFixed(2)} (${fromAm})</span>
-        <span style="color:${m.dir === 'up' ? 'var(--win)' : 'var(--loss)'}">${m.to.toFixed(2)} <span class="odd-american ${toClass}" style="margin-left:4px;">${toAm}</span></span>
-        <span class="delta ${m.dir}">${m.dir === 'up' ? '▼' : '▲'}</span>
-      </div>
-    </div>
-  `;
-  }).join('');
+  const callsEl = document.getElementById('movers');
+  if (callsEl) {
+    const calls = (typeof pvCalls === 'function' && state.matches) ? pvCalls(predUpcoming()).slice(0, 6) : [];
+    callsEl.innerHTML = calls.length ? calls.map(cl => `<button class="pv-callrow" onclick="openPredictor('${cl.m.id}')"><span>${cl.label}</span><small>${cl.m.home} v ${cl.m.away}, ${pvWhen(cl.m.kickoffUtc)}</small><b>${predPct0(cl.p)}</b></button>`).join('')
+      : `<div class="ticker-row"><div class="lbl" style="font-size:12px;color:var(--ink-3)">${t('pred.none')}</div></div>`;
+  }
 
   document.getElementById('suspensions').innerHTML = !SUSPENSIONS.length
-    ? '<div class="ticker-row"><div class="lbl" style="font-size:11px; color:var(--ink-3);">Team news for this round is published at pre-match press conferences.</div></div>'
+    ? '<div class="ticker-row"><div class="lbl" style="font-size:12px; color:var(--ink-3);">Team news for this round is published at pre-match press conferences.</div></div>'
     : SUSPENSIONS.map(s => {
     const label = s.games === 99 ? t('susp.out') : (s.games === 0 ? t('susp.risk') : (s.games + ' ' + t(s.games === 1 ? 'susp.match' : 'susp.matches')));
     const color = s.games === 99 ? 'var(--loss)' : (s.games === 0 ? 'var(--warn)' : 'var(--accent-2)');
@@ -6886,19 +7476,19 @@ function renderNews() {
     <div class="ticker-row">
       <div class="lbl">
         <div style="font-weight:600; color:var(--ink); font-size:12px;">${s.player}</div>
-        <div style="font-size:10px; color:var(--ink-3); font-family:var(--mono); letter-spacing:.1em;">${s.team}${s.reason ? ' · ' + s.reason : ''}</div>
+        <div style="font-size:12px; color:var(--ink-3); font-family:var(--mono); letter-spacing:.1em;">${s.team}${s.reason ? ' · ' + s.reason : ''}</div>
       </div>
       <div class="val" style="color:${color};">${label}</div>
     </div>`;
   }).join('');
 
   document.getElementById('weather').innerHTML = !WEATHER.length
-    ? '<div class="ticker-row"><div class="lbl" style="font-size:11px; color:var(--ink-3);">Match-day forecasts are added closer to kickoff.</div></div>'
+    ? '<div class="ticker-row"><div class="lbl" style="font-size:12px; color:var(--ink-3);">Match-day forecasts are added closer to kickoff.</div></div>'
     : WEATHER.map(w => `
     <div class="ticker-row" style="flex-direction:column; align-items:flex-start; gap:3px;">
       <div style="font-weight:600; color:var(--ink); font-size:12px;">${w.match}</div>
-      <div style="font-size:10px; color:var(--ink-2); font-family:var(--mono);">${w.cond}</div>
-      <div style="font-size:10px; color:var(--accent); font-family:var(--mono); letter-spacing:.1em; text-transform:uppercase;">${w.impact}</div>
+      <div style="font-size:12px; color:var(--ink-2); font-family:var(--mono);">${w.cond}</div>
+      <div style="font-size:12px; color:var(--accent); font-family:var(--mono); letter-spacing:.1em; text-transform:uppercase;">${w.impact}</div>
     </div>
   `).join('');
 
@@ -6910,56 +7500,7 @@ function renderNews() {
 // Rotation pool — additional season-accurate news that can be surfaced on refresh.
 // All facts verified against October 2026 reporting (league sites, UEFA, Wikipedia,
 // beIN Sports, Sky Italia, Foot Mercato).
-const NEWS_ROTATION = [
-  { league:'epl', tag:'transfer', team:'Aston Villa',
-    title:'Villa rebuilt the attack after selling Watkins to Al Hilal',
-    body:'Aston Villa sold Ollie Watkins to Saudi club Al Hilal at the end of August for a reported £50m, and Morgan Rogers left for Chelsea. Nicolas Jackson, signed from Chelsea, has 3 Champions League goals, with Tammy Abraham and Ross Barkley also on the scoresheet. Unai Emery remains in charge and John McGinn is captain.',
-    impact:'neutral', moveText:'Nicolas Jackson anytime vs Man City priced long' },
-  { league:'epl', tag:'tactics', team:'Manchester City',
-    title:'Maresca\'s City top the table in the post-Guardiola era',
-    body:'Enzo Maresca succeeded Pep Guardiola, who stepped down in the summer after a decade in charge. City led the Premier League with 21 points from 7 games as of October 18, with Erling Haaland on 8 league goals and Rayan Cherki on 4.',
-    impact:'up', moveText:'Manchester City to win the league favored' },
-  { league:'laliga', tag:'transfer', team:'Barcelona',
-    title:'Perfect Barcelona added Rodri from Manchester City this summer',
-    body:'Barcelona signed Spain captain Rodri from Manchester City in August. Hansi Flick\'s side have won all nine LaLiga games, with Raphinha leading the Pichichi race on 12 goals and Lamine Yamal on 8.',
-    impact:'up', moveText:'Raphinha anytime scorer in the Clásico shortened' },
-  { league:'epl', tag:'tactics', team:'Liverpool',
-    title:'Iraola\'s Liverpool lean on Isak and Barcola',
-    body:'Andoni Iraola replaced Arne Slot in the summer. Alexander Isak has 5 Premier League goals, and Bradley Barcola and Alexis Mac Allister have 3 each in the Champions League. Liverpool host Brighton, third in the table, on Sunday.',
-    impact:'neutral', moveText:'Isak anytime vs Brighton priced near even' },
-  { league:'epl', tag:'form', team:'Chelsea',
-    title:'Xabi Alonso\'s Chelsea: João Pedro and Morgan Rogers on 9 between them',
-    body:'Chelsea, managed by Xabi Alonso, sat fourth as of October 18. João Pedro has 5 league goals and summer signing Morgan Rogers has 4. They host Tottenham, now under Roberto De Zerbi, on Saturday evening.',
-    impact:'up', moveText:'João Pedro anytime vs Tottenham shortened' },
-  { league:'seriea', tag:'tactics', team:'AC Milan',
-    title:'Amorim\'s Milan and Allegri\'s Napoli after summer coaching swap',
-    body:'Rúben Amorim took over at Milan in June after Massimiliano Allegri was sacked, and Allegri moved to Napoli in July to replace Antonio Conte. Adrien Rabiot leads Milan with 4 Serie A goals, and Alphadjo Cisse scored a Europa League hat-trick in Salzburg.',
-    impact:'neutral', moveText:'Milan double chance at Udinese priced short' },
-  { league:'seriea', tag:'form', team:'Frosinone',
-    title:'Promoted Frosinone\'s Raimondo leads the Serie A scoring chart',
-    body:'Antonio Raimondo leads Serie A with 7 goals (Sky Italia, October 20), ahead of Roma\'s Donyell Malen and Monza\'s Gustavo Varela on 6. Frosinone visit Atalanta on Sunday.',
-    impact:'up', moveText:'Raimondo anytime at Atalanta priced long' },
-  { league:'bundes', tag:'form', team:'Werder Bremen',
-    title:'Füllkrug and Schick share the Bundesliga scoring lead',
-    body:'Niclas Füllkrug (Werder Bremen) and Patrik Schick (Bayer Leverkusen) both have 6 Bundesliga goals. Bayern\'s Michael Olise has 5 and Harry Kane 4. Leverkusen visit Hoffenheim on Sunday under new coach Carles Martínez Novell.',
-    impact:'neutral', moveText:'Schick anytime at Hoffenheim priced near even' },
-  { league:'ligue1', tag:'form', team:'Rennes',
-    title:'Lepaul leads Ligue 1 scorers; Ferran Torres scoring for PSG',
-    body:'Rennes\' Esteban Lepaul tops the Ligue 1 scoring chart with 7 goals, ahead of Paris FC\'s Lassine Sinayoko on 6. Ferran Torres has 4 league goals and 3 in the Champions League for Paris Saint-Germain.',
-    impact:'up', moveText:'Lepaul anytime vs Strasbourg shortened' },
-  { league:'laliga', tag:'tactics', team:'Real Madrid',
-    title:'Mourinho back at the Bernabéu for his first Clásico of the season',
-    body:'José Mourinho succeeded Álvaro Arbeloa as Real Madrid coach. Madrid face Barcelona at Spotify Camp Nou on Sunday at 21:00 CET, four days after hosting RB Leipzig in the Champions League.',
-    impact:'neutral', moveText:'Clásico draw priced around 3.20' },
-  { league:'ucl', tag:'form', team:'Stuttgart',
-    title:'Four players share the Champions League scoring lead',
-    body:'Per UEFA on October 20, Stuttgart\'s Ermedin Demirović, Dortmund\'s Serhou Guirassy, Manchester City\'s Erling Haaland and Club Brugge\'s Nicolò Tresoldi each have 4 Champions League goals. Brugge then beat Lens 3-0 on Wednesday.',
-    impact:'neutral', moveText:'Tresoldi scored-in-next-UCL-game market open' },
-  { league:'uel', tag:'form', team:'Benfica',
-    title:'Jhon Durán on target for Benfica in Europa League rout of Celtic',
-    body:'Former Aston Villa striker Jhon Durán scored twice, including a Panenka penalty, as Benfica beat Celtic 4-1 on Matchday 2. Benfica then won 4-1 at Omonia on Matchday 3.',
-    impact:'up', moveText:'Benfica -1 handicap at Omonia shortened' },
-];
+const NEWS_ROTATION = []; // retired — background stories now live in NEWS_BACKGROUND with no fake timestamps
 
 let _newsRotationIdx = 0;
 function pickFreshNewsItem() {
@@ -7079,8 +7620,9 @@ function rssToNewsItem(rssItem) {
     team:    inferTeam(combined) || 'Latest',
     title:   rssItem.title,
     body:    rssItem.body || rssItem.title,
-    impact:  Math.random() < 0.5 ? 'up' : 'down',
-    moveText:'Live update — markets reacting',
+    impact:  'neutral',
+    moveText:'',
+    published: (rssItem.pubDate && !isNaN(Date.parse(rssItem.pubDate))) ? new Date(rssItem.pubDate).toISOString() : null,
     minutesAgo: minutesAgoFromDate(rssItem.pubDate),
     _live: true, // flag so we know this came from the wire
   };
@@ -7151,7 +7693,8 @@ function refreshNewsFeed(opts = {}) {
       if (liveItems && liveItems.length >= 3) {
         // Replace feed with live items, mark fresh ones for the highlight flash.
         liveItems.forEach(n => { n._justAdded = true; });
-        NEWS = liveItems;
+        const seen = new Set(liveItems.map(n => n.title));
+        NEWS = liveItems.concat(NEWS.filter(n => !n._live && !seen.has(n.title)));
       } else {
         // Fallback: behave like the curated rotation.
         applyCuratedRefresh();
@@ -7175,31 +7718,9 @@ function refreshNewsFeed(opts = {}) {
   }, 250);
 }
 
-function applyCuratedRefresh() {
-  NEWS.forEach(n => { n.minutesAgo += 1 + Math.floor(Math.random() * 3); });
-  if (Math.random() < 0.55) {
-    const fresh = pickFreshNewsItem();
-    if (fresh) {
-      NEWS.unshift({ ...fresh, minutesAgo: 0, _justAdded: true });
-      if (NEWS.length > 18) NEWS.pop();
-    }
-  }
-}
+function applyCuratedRefresh() { /* no simulated stories: ages are recomputed from publish times on render */ }
 
-function driftMovers() {
-  MOVERS.forEach(m => {
-    const drift = (Math.random() - 0.5) * 0.08;
-    const newTo = Math.max(1.05, +(m.to + drift).toFixed(2));
-    m.from = m.to;
-    m.to = newTo;
-    m.dir = newTo > m.from ? 'down' : 'up';
-    // Append the new price to the rolling history. Keep the last 12 readings so
-    // the sparkline always represents roughly the same window of time.
-    if (!m.history) m.history = [];
-    m.history.push(newTo);
-    if (m.history.length > 12) m.history.shift();
-  });
-}
+function driftMovers() { /* retired with the simulated movers */ }
 
 window.manualRefreshNews = function () { refreshNewsFeed({ manual: true }); };
 
@@ -7427,7 +7948,7 @@ window.addWcOutright = function (team, american) {
       if (evt && evt.currentTarget) {
         const card = evt.currentTarget;
         const orig = card.style.background;
-        card.style.background = 'rgba(212,255,60,.25)';
+        card.style.background = 'rgba(29,190,138,.25)';
         setTimeout(() => { card.style.background = orig; }, 250);
       }
     } catch (err) {}
@@ -7476,7 +7997,7 @@ window.addWcMatchLeg = function (groupId, homeIdx, awayIdx, side) {
       if (evt && evt.currentTarget) {
         const btn = evt.currentTarget;
         const orig = btn.style.background;
-        btn.style.background = 'rgba(212,255,60,.35)';
+        btn.style.background = 'rgba(29,190,138,.35)';
         setTimeout(() => { btn.style.background = orig; }, 250);
       }
     } catch (err) {}
@@ -7514,7 +8035,10 @@ function wcValuePicks() {
 
 
 // ============= PREDICTOR UI =============
+// Predictions are the home screen: a featured match, a day-by-day fixture list with
+// the model's 1X2 split for every game, and a detail sheet per fixture.
 function predPct(p) { return (p * 100).toFixed(p >= 0.995 || p < 0.1 ? 1 : 0) + '%'; }
+function predPct0(p) { return Math.round(p * 100) + '%'; }
 function predFair(p) { const d = 1 / Math.max(p, 0.001); return { dec: d.toFixed(2), am: americanFromDecimal(d) }; }
 function predParseOdds(s) {
   s = String(s || '').trim().replace(/\s/g, '');
@@ -7542,19 +8066,87 @@ function predMarkets(m, pm) {
     const def = MARKETS_DEF.find(d => d.key === mk);
     const best = opt ? Math.max(...Object.values(opt.odds)) : null;
     const pick = opt ? optName(opt.tpl) : key, mkt = def ? t(def.labelKey) : '';
-    return { mk, key, p, opt, def, best, pick, mkt, label: (mkt ? mkt + ' · ' : '') + pick };
+    return { mk, key, p, opt, def, best, pick, mkt, label: (mkt ? mkt + ': ' : '') + pick };
   });
 }
 function predUpcoming() { return state.matches.filter(m => predictMatch(m)); }
+function predGroupOf(lid) { const g = LEAGUE_GROUPS.find(g => g.ids.includes(lid)); return g ? g.key : 'leagues'; }
+// Kickoffs show in the viewer's own time zone.
+const PV_TZ = (() => { try { return Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC'; } catch (e) { return 'UTC'; } })();
+function pvDayKey(iso) { return new Date(iso).toLocaleDateString('en-CA', { timeZone: PV_TZ }); }
+function pvDayLabel(iso) {
+  const k = pvDayKey(iso), now = Date.now();
+  const today = pvDayKey(new Date(now).toISOString()), tom = pvDayKey(new Date(now + 864e5).toISOString());
+  const loc = currentLang === 'en' ? 'en-GB' : currentLang;
+  const full = new Date(iso).toLocaleDateString(loc, { weekday: 'long', day: 'numeric', month: 'long', timeZone: PV_TZ });
+  const rel = k === today ? t('pv.today') : k === tom ? t('pv.tomorrow') : '';
+  return { full: full.charAt(0).toUpperCase() + full.slice(1), rel };
+}
+function pvTime(iso) { return new Date(iso).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: PV_TZ }); }
+function pvWhen(iso) {
+  const loc = currentLang === 'en' ? 'en-GB' : currentLang;
+  return new Date(iso).toLocaleDateString(loc, { weekday: 'short', day: 'numeric', month: 'short', timeZone: PV_TZ }) + ', ' + pvTime(iso);
+}
+function pvConf(c) { return `<span class="pv-conf ${c}" role="img" aria-label="${t('pred.conf')}: ${t('pred.conf.' + c)}" title="${t('pred.conf')}: ${t('pred.conf.' + c)}"><i></i><i></i><i></i></span>`; }
+function pvTeamNote(m, pm, side) {
+  const T = side === 'h' ? pm.H : pm.A, r = side === 'h' ? pm.rh : pm.ra;
+  if (T && (pm.mode !== 'cross')) return `${ordinal(T.pos)}, ${T.Pts} ${t('pv.pts')}`;
+  if (r && r.label) return r.label;
+  return '';
+}
+function ordinal(n) {
+  if (currentLang !== 'en') return n + (currentLang === 'fr' ? (n === 1 ? 'er' : 'e') : '.');
+  const s = ['th','st','nd','rd'], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]);
+}
+// The main call for a fixture: the most likely of home / away, or the draw if it leads.
+function pvCall(m, pm) {
+  const opts = [[pm.pH, m.home], [pm.pD, t('opt.draw')], [pm.pA, m.away]].sort((a, b) => b[0] - a[0]);
+  return { p: opts[0][0], who: opts[0][1] };
+}
+function pvBar(m, pm, small) {
+  const seg = (cls, p) => `<div class="${cls}" style="flex:${Math.max(p, 0.07).toFixed(3)}"><b>${predPct0(p)}</b></div>`;
+  return `<div class="pv-bar${small ? ' sm' : ''}" role="img" aria-label="${m.home} ${predPct0(pm.pH)}, ${t('opt.draw')} ${predPct0(pm.pD)}, ${m.away} ${predPct0(pm.pA)}">${seg('h', pm.pH)}${seg('d', pm.pD)}${seg('a', pm.pA)}</div>
+    <div class="pv-bar-key"><span><i style="background:var(--home)"></i>${m.home}</span><span><i style="background:var(--draw)"></i>${t('opt.draw')}</span><span><i style="background:var(--away)"></i>${m.away}</span></div>`;
+}
+// Featured fixture: the meeting of the two best-placed sides in the next week,
+// preferring league games between top-four teams.
+function pvFeatured(up) {
+  let best = null, bestScore = -1e9;
+  up.forEach(m => {
+    const pm = predictMatch(m);
+    if (Date.parse(m.kickoffUtc) - Date.now() > 7 * 864e5) return;
+    let s;
+    if (pm.mode === 'league' || pm.mode === 'cup') s = 40 - (pm.H.pos + pm.A.pos) - Math.abs(pm.pH - pm.pA) * 2 + (pm.mode === 'league' ? 0.5 : 0);
+    else s = 10 - Math.abs(pm.pH - pm.pA) * 10;
+    if (s > bestScore) { bestScore = s; best = m; }
+  });
+  return best || up[0];
+}
 
-window.openPredictor = function (matchId) { state.predMatchId = matchId; setTab('predict'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
-window.predSelect = function (id) { state.predMatchId = id; state.predValueKey = null; renderPredictor(); };
+window.openPredictor = function (matchId) { setTab('predict'); predOpen(matchId); };
+window.predSelect = function (id) { predOpen(id); };
+window.predFilter = function (g) { state.predGroup = g; state.predComp = null; renderPredictor(); };
+window.predComp = function (lid) { state.predComp = state.predComp === lid ? null : lid; if (lid) state.predGroup = predGroupOf(lid); renderPredictor(); };
+window.predCupJump = function (lid) { state.predGroup = 'cups'; state.predComp = lid; renderPredictor(); const el = document.getElementById('pv-list-top'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+window.predOpen = function (id) {
+  state.predMatchId = id; state.predValueKey = null; state.predValueOdds = '';
+  const sh = document.getElementById('pred-sheet'); if (!sh) return;
+  renderPredDetail();
+  sh.hidden = false; document.body.style.overflow = 'hidden';
+  const c = sh.querySelector('.pv-close'); if (c) c.focus();
+};
+window.predClose = function () {
+  const sh = document.getElementById('pred-sheet'); if (!sh) return;
+  sh.hidden = true; document.body.style.overflow = '';
+  state.predMatchId = null;
+};
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { const sh = document.getElementById('pred-sheet'); if (sh && !sh.hidden) predClose(); } });
 window.predAdd = function (mk, key) {
   const m = state.matches.find(x => x.id === state.predMatchId); if (!m) return;
   const opt = (state.oddsByMatch[m.id][mk] || []).find(x => x.key === key);
   const def = MARKETS_DEF.find(d => d.key === mk);
   if (opt && def) toggleSlipLeg(m, def, opt);
-  renderPredictor();
+  renderPredDetail();
 };
 window.predValue = function () {
   const sel = document.getElementById('pred-v-mkt'), inp = document.getElementById('pred-v-odds'), out = document.getElementById('pred-v-out');
@@ -7563,7 +8155,7 @@ window.predValue = function () {
   const m = state.matches.find(x => x.id === state.predMatchId); const pm = predictMatch(m);
   const row = predMarkets(m, pm).find(r => r.mk + ':' + r.key === sel.value);
   const dec = predParseOdds(inp.value);
-  if (!row || !dec) { out.innerHTML = `<div class="pred-verdict none">${t('pred.v.enter')}</div>`; return; }
+  if (!row || !dec) { out.innerHTML = `<div class="pv-note">${t('pred.v.enter')}</div>`; return; }
   const implied = 1 / dec, ev = row.p * dec - 1, edge = row.p - implied;
   const b = dec - 1, kelly = Math.max(0, (b * row.p - (1 - row.p)) / b) / 4;
   const v = ev > 0.02 ? 'value' : ev > -0.02 ? 'fair' : 'none';
@@ -7571,131 +8163,173 @@ window.predValue = function () {
     <div class="pred-verdict ${v}">${t('pred.v.' + v)}</div>
     <div class="pred-kv"><span>${t('pred.col.prob')}</span><b>${predPct(row.p)}</b></div>
     <div class="pred-kv"><span>${t('pred.implied')}</span><b>${predPct(implied)}</b></div>
-    <div class="pred-kv"><span>${t('pred.edge')}</span><b class="${edge >= 0 ? 'pos' : 'neg'}">${edge >= 0 ? '+' : ''}${(edge * 100).toFixed(1)} pts</b></div>
+    <div class="pred-kv"><span>${t('pred.edge')}</span><b class="${edge >= 0 ? 'pos' : 'neg'}">${edge >= 0 ? '+' : '−'}${Math.abs(edge * 100).toFixed(1)} pts</b></div>
     <div class="pred-kv"><span>${t('pred.ev')}</span><b class="${ev >= 0 ? 'pos' : 'neg'}">${ev >= 0 ? '+' : '−'}${fmtMoney(Math.abs(ev) * 100 / fx().rate)}</b></div>
     <div class="pred-kv"><span>${t('pred.kelly')}</span><b>${kelly > 0 ? fmtMoney(state.bankrollUsd * kelly) : '—'}</b></div>`;
 };
+
+// Highest-probability outcome per fixture, strongest first.
+function pvCalls(up) {
+  const calls = [];
+  up.forEach(x => { const q = predictMatch(x); if (!q) return;
+    const opts = [[q.pH, x.home + ' ' + t('pred.toWin')], [q.pA, x.away + ' ' + t('pred.toWin')],
+      [q.o25, t('pred.over25')], [1 - q.o25, t('pred.under25')], [q.btts, t('pred.bttsYes')], [1 - q.btts, t('pred.bttsNo')]];
+    opts.sort((a, b) => b[0] - a[0]); calls.push({ m: x, p: opts[0][0], label: opts[0][1] }); });
+  return calls.sort((a, b) => b.p - a.p);
+}
 
 function renderPredictor() {
   const el = document.getElementById('pred-body'); if (!el) return;
   const games = Object.values(PRED_DATA).reduce((s, L) => s + L.games, 0);
   const latest = Object.values(PRED_DATA).map(L => L.date).sort().pop();
+  const loc = currentLang === 'en' ? 'en-GB' : currentLang;
   const up = predUpcoming();
-  const setTxt = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
-  setTxt('pred-stat-results', games); setTxt('pred-stat-fixtures', up.length);
-  setTxt('pred-stat-thru', new Date(latest + 'T12:00:00Z').toLocaleDateString(currentLang === 'en' ? 'en-CA' : currentLang, { month:'short', day:'numeric' }));
-  if (!up.length) { el.innerHTML = `<section class="wc-section"><div class="wc-sub">${t('pred.none')}</div></section>`; return; }
-  if (!up.find(m => m.id === state.predMatchId)) state.predMatchId = up[0].id;
-  const m = up.find(x => x.id === state.predMatchId), pm = predictMatch(m);
-  const lg = LEAGUES.find(l => l.id === m.league);
+  if (!up.length) { el.innerHTML = `<div class="pv-empty">${t('pred.none')}</div>`; return; }
+  state.predGroup = state.predGroup || 'all';
 
-  // fixture picker grouped by league
-  const groups = LEAGUES.map(L => ({ L, ms: up.filter(x => x.league === L.id) })).filter(g => g.ms.length);
-  const picker = `<div class="pred-picker"><label for="pred-select">${t('pred.pick')}</label>
-    <select id="pred-select" onchange="predSelect(this.value)">${groups.map(g => `<optgroup label="${g.L.name}">${g.ms.map(x =>
-      `<option value="${x.id}"${x.id === m.id ? ' selected' : ''}>${x.ko} · ${x.home} v ${x.away}</option>`).join('')}</optgroup>`).join('')}</select></div>`;
+  const intro = `<div class="pv-intro"><div><h1>${t('pv.h1')}</h1><p>${t('pv.lede')}</p></div>
+    <div class="pv-stamp">${t('pv.stamp').replace('{n}', `<b>${games}</b>`).replace('{d}', `<b>${new Date(latest + 'T12:00:00Z').toLocaleDateString(loc, { day: 'numeric', month: 'long' })}</b>`)}</div></div>`;
 
-  const f1 = predFair(pm.pH), fX = predFair(pm.pD), f2 = predFair(pm.pA);
-  const head = `
-    <section class="wc-section pred-card">
-      <div class="pred-meta"><span class="flag" style="width:18px;height:13px;">${lg.flag}</span> ${lg.name} · ${m.ko}
-        <span class="pred-conf ${pm.conf}">${t('pred.conf')}: ${t('pred.conf.' + pm.conf)}</span></div>
-      <div class="pred-teams">
-        <div class="pred-team">${crest(m.home, 44)}<b>${m.home}</b><span>#${pm.H.pos} · ${pm.H.Pts} pts</span></div>
-        <div class="pred-xg"><div class="pred-xg-num">${pm.lh.toFixed(2)} <i>–</i> ${pm.la.toFixed(2)}</div><div class="pred-xg-lbl">${t('pred.xg')}</div></div>
-        <div class="pred-team">${crest(m.away, 44)}<b>${m.away}</b><span>#${pm.A.pos} · ${pm.A.Pts} pts</span></div>
+  // featured match
+  const fm = pvFeatured(up), fp = predictMatch(fm), flg = LEAGUES.find(l => l.id === fm.league);
+  const fScore = fp.scores[0];
+  const feature = `<section class="pv-feature" aria-label="${t('pv.featTitle')}">
+      <div class="pv-kicker"><span class="pv-label">${t('pv.featTitle')}</span><span class="flag">${flg.flag}</span><span>${flg.name}</span><span>${pvWhen(fm.kickoffUtc)}</span>${pvConf(fp.conf)}</div>
+      <div class="pv-teams">
+        <div class="pv-team">${crest(fm.home, 48)}<div><b>${fm.home}</b><small>${pvTeamNote(fm, fp, 'h')}</small></div></div>
+        <div class="pv-vs">v</div>
+        <div class="pv-team away">${crest(fm.away, 48)}<div><b>${fm.away}</b><small>${pvTeamNote(fm, fp, 'a')}</small></div></div>
       </div>
-      <div class="pred-bar">
-        <div style="flex:${pm.pH}" class="h"><b>${predPct(pm.pH)}</b></div>
-        <div style="flex:${pm.pD}" class="d"><b>${predPct(pm.pD)}</b></div>
-        <div style="flex:${pm.pA}" class="a"><b>${predPct(pm.pA)}</b></div>
+      ${pvBar(fm, fp)}
+      <div class="pv-facts">
+        <div class="pv-fact"><b>${fp.lh.toFixed(2)}–${fp.la.toFixed(2)}</b>${t('pred.xg')}</div>
+        <div class="pv-fact"><b>${fScore[0]}–${fScore[1]}</b>${t('pv.likely')} (${predPct0(fScore[2])})</div>
+        <div class="pv-fact"><b>${predPct0(fp.o25)}</b>${t('pred.over25')}</div>
+        <div class="pv-fact"><b>${predPct0(fp.btts)}</b>${t('pred.bttsYes')}</div>
+        <button class="pv-open" onclick="predOpen('${fm.id}')">${t('pv.full')}</button>
       </div>
-      <div class="pred-bar-lbl"><span>${m.home} ${f1.am}</span><span>${t('opt.draw')} ${fX.am}</span><span>${m.away} ${f2.am}</span></div>
-      <h4 class="wca-round">${t('pred.scores')}</h4>
-      <div class="pred-scores">${pm.scores.map(s => `<div><b>${s[0]}–${s[1]}</b><span>${predPct(s[2])}</span></div>`).join('')}</div>
     </section>`;
+
+  // filters
+  const cnt = g => up.filter(m => g === 'all' || predGroupOf(m.league) === g).length;
+  const segs = ['all', 'leagues', 'cups', 'europe'].filter(g => g === 'all' || cnt(g));
+  const seg = `<div class="pv-seg" role="tablist">${segs.map(g => `<button role="tab" aria-selected="${state.predGroup === g}" class="${state.predGroup === g ? 'on' : ''}" onclick="predFilter('${g}')">${t('pv.g.' + g)}<span>${cnt(g)}</span></button>`).join('')}</div>`;
+  const inGroup = up.filter(m => state.predGroup === 'all' || predGroupOf(m.league) === state.predGroup);
+  const comps = LEAGUES.filter(L => inGroup.some(m => m.league === L.id));
+  const chips = comps.length > 1 ? `<div class="pv-chips">${comps.map(L => `<button class="pv-chip${state.predComp === L.id ? ' on' : ''}" aria-pressed="${state.predComp === L.id}" onclick="predComp('${L.id}')"><span class="flag">${L.flag}</span>${L.name}</button>`).join('')}</div>` : '';
+  const shown = inGroup.filter(m => !state.predComp || m.league === state.predComp);
+
+  // day-grouped rows
+  let list = '', lastDay = null;
+  shown.forEach(m => {
+    const pm = predictMatch(m), L = LEAGUES.find(l => l.id === m.league);
+    const dk = pvDayKey(m.kickoffUtc);
+    if (dk !== lastDay) { const d = pvDayLabel(m.kickoffUtc); list += `<h2 class="pv-day">${d.rel || d.full}${d.rel ? `<span>${d.full}</span>` : ''}</h2>`; lastDay = dk; }
+    const c = pvCall(m, pm);
+    const favH = pm.pH > pm.pA + 0.08, favA = pm.pA > pm.pH + 0.08;
+    list += `<button class="pv-row" onclick="predOpen('${m.id}')" aria-label="${m.home} v ${m.away}: ${c.who} ${predPct0(c.p)}">
+      <span class="pv-time">${pvTime(m.kickoffUtc)}</span>
+      <span class="pv-match">
+        <span class="pv-t${favH ? ' fav' : ''}">${crest(m.home, 22)}${m.home}</span>
+        <span class="pv-t${favA ? ' fav' : ''}">${crest(m.away, 22)}${m.away}</span>
+        <span class="pv-comp-line"><span class="flag">${L.flag}</span>${L.name}${pvConf(pm.conf)}</span>
+      </span>
+      <span class="pv-mini"><span class="pv-minibar"><i class="h" style="flex:${pm.pH}"></i><i class="d" style="flex:${pm.pD}"></i><i class="a" style="flex:${pm.pA}"></i></span>
+        <span class="pv-mininums"><b style="color:var(--home)">${predPct0(pm.pH)}</b><span>${predPct0(pm.pD)}</span><b style="color:var(--away)">${predPct0(pm.pA)}</b></span></span>
+      <span class="pv-call"><b>${predPct0(c.p)}</b><small>${c.who}</small></span>
+    </button>`;
+  });
+  if (!shown.length) list = `<div class="pv-empty">${t('pv.empty')}</div>`;
+
+  // side: strongest calls
+  const calls = pvCalls(up);
+  const top = `<section class="pv-card"><h3>${t('pred.top')}</h3><div class="pv-sub">${t('pred.topSub')}</div>
+    ${calls.slice(0, 6).map(cl => `<button class="pv-callrow" onclick="predOpen('${cl.m.id}')"><span>${cl.label}</span><small>${cl.m.home} v ${cl.m.away}, ${pvWhen(cl.m.kickoffUtc)}</small><b>${predPct0(cl.p)}</b></button>`).join('')}</section>`;
+
+  // side: cup calendar
+  const cups = `<section class="pv-card"><h3>${t('pv.cupsTitle')}</h3><div class="pv-sub">${t('pv.cupsSub')}</div>
+    ${LEAGUES.filter(L => L.cup).map(L => { const C = CUP_CALENDAR[L.id] || {}; const n = up.filter(m => m.league === L.id).length;
+      const nxt = C.next ? new Date(C.next + 'T12:00:00Z').toLocaleDateString(loc, { day: 'numeric', month: 'short' }) : '';
+      return `<button class="pv-cup${n ? ' has' : ''}" ${n ? `onclick="predCupJump('${L.id}')"` : 'tabindex="-1"'}><span class="flag">${L.flag}</span><span>${L.name}</span><small>${t('cup.stage.' + L.id)}, ${nxt}</small><em>${n ? n + ' ' + t('pv.ties') : t('pv.later')}</em></button>`; }).join('')}
+  </section>`;
+
+  const method = `<section class="pv-card"><details><summary>${t('pred.method')}</summary>
+    <p>${t('pred.methodBody')}</p><p>${t('pv.crossNote')}</p>
+    <div class="pred-note">${Object.entries(PRED_DATA).map(([id, L]) => `${(LEAGUES.find(x => x.id === id) || {}).name}: ${L.games} ${t('pred.matches')} (${L.thru})`).join('<br>')}</div>
+    <p>${t('pred.disclaimer')}</p></details></section>`;
+
+  el.innerHTML = intro + feature + `<div class="pv-layout"><div><div id="pv-list-top" class="pv-filters">${seg}${chips}</div><div class="pv-list">${list}</div></div>
+    <aside class="pv-side">${top}${cups}${method}</aside></div>`;
+  if (state.predMatchId) renderPredDetail();
+}
+
+function renderPredDetail() {
+  const box = document.getElementById('pred-detail'); if (!box) return;
+  const m = state.matches.find(x => x.id === state.predMatchId); const pm = m && predictMatch(m);
+  if (!pm) { box.innerHTML = `<div class="pv-empty">${t('pred.none')}</div>`; return; }
+  const lg = LEAGUES.find(l => l.id === m.league);
+  const head = `<div class="pv-kicker"><span class="flag">${lg.flag}</span><span>${lg.name}</span><span>${pvWhen(m.kickoffUtc)}</span>${m.venue ? `<span>${t('pv.at')} ${m.venue}</span>` : ''}${m.neutral ? `<span>${t('pv.neutral')}</span>` : ''}${pvConf(pm.conf)}<span>${t('pred.conf')}: ${t('pred.conf.' + pm.conf)}</span></div>
+    <div class="pv-teams">
+      <div class="pv-team">${crest(m.home, 44)}<div><b>${m.home}</b><small>${pvTeamNote(m, pm, 'h')}</small></div></div>
+      <div class="pv-vs">v</div>
+      <div class="pv-team away">${crest(m.away, 44)}<div><b>${m.away}</b><small>${pvTeamNote(m, pm, 'a')}</small></div></div>
+    </div>
+    ${pvBar(m, pm)}
+    ${pm.adv != null ? `<div class="pv-adv"><div><b>${predPct0(pm.adv)}</b><small>${m.home} ${t('pv.toAdvance')}</small></div><div><b>${predPct0(1 - pm.adv)}</b><small>${m.away} ${t('pv.toAdvance')}</small></div></div><div class="pv-note">${t('pv.advNote')}</div>` : ''}
+    <div class="pv-facts">
+      <div class="pv-fact"><b>${pm.lh.toFixed(2)}–${pm.la.toFixed(2)}</b>${t('pred.xg')}</div>
+      <div class="pv-fact"><b>${predPct0(pm.o25)}</b>${t('pred.over25')}</div>
+      <div class="pv-fact"><b>${predPct0(pm.btts)}</b>${t('pred.bttsYes')}</div>
+      <div class="pv-fact"><b>${predPct0(pm.csH)} / ${predPct0(pm.csA)}</b>${t('pv.cleanSheets')}</div>
+    </div>`;
+  const scores = `<div class="pv-block"><h3>${t('pred.scores')}</h3><div class="pv-scores">${pm.scores.map(s => `<div><b>${s[0]}–${s[1]}</b><span>${predPct(s[2])}</span></div>`).join('')}</div></div>`;
 
   const rows = predMarkets(m, pm);
-  const inSlip = (r) => state.slip.some(l => l.matchId === m.id && l.marketKey === r.mk && l.key === r.key);
-  const markets = `
-    <section class="wc-section">
-      <h2>${t('pred.markets')}</h2>
-      <div class="pred-table">
-        <div class="pred-tr pred-th"><span>${t('pred.col.market')}</span><span>${t('pred.col.prob')}</span><span>${t('pred.col.fair')}</span><span>${t('pred.col.app')}</span><span></span></div>
-        ${rows.map(r => { const f = predFair(r.p); const s = inSlip(r); return `
-        <div class="pred-tr">
-          <span class="pred-lbl">${r.pick}<small>${r.mkt}</small></span>
-          <span class="pred-p"><i style="width:${(r.p * 100).toFixed(0)}%"></i><b>${predPct(r.p)}</b></span>
-          <span class="mono">${f.dec} <small>${f.am}</small></span>
-          <span class="mono${r.best && r.best > 1 / r.p ? ' pos' : ''}">${r.best ? r.best.toFixed(2) : '—'}</span>
-          <span>${r.opt ? `<button class="pred-add${s ? ' on' : ''}" onclick="predAdd('${r.mk}','${r.key}')">${s ? t('pred.inslip') : t('pred.add')}</button>` : ''}</span>
-        </div>`; }).join('')}
-      </div>
-      <div class="pred-note">${t('pred.appNote')}</div>
-    </section>`;
+  const inSlip = r => state.slip.some(l => l.matchId === m.id && l.marketKey === r.mk && l.key === r.key);
+  const markets = `<div class="pv-block"><h3>${t('pred.markets')}</h3><div class="pv-sub">${t('pred.appNote')}</div>
+    <table class="pv-mkt"><thead><tr><th>${t('pred.col.market')}</th><th>${t('pred.col.prob')}</th><th class="hide-sm">${t('pred.col.fair')}</th><th>${t('pred.col.app')}</th><th></th></tr></thead><tbody>
+    ${rows.map(r => { const f = predFair(r.p), s = inSlip(r); return `<tr>
+      <td>${r.pick}<small>${r.mkt}</small></td>
+      <td class="num">${predPct(r.p)}</td>
+      <td class="num hide-sm">${f.dec}<small>${f.am}</small></td>
+      <td class="num${r.best && r.best > 1 / r.p ? ' pos' : ''}">${r.best ? r.best.toFixed(2) : '—'}</td>
+      <td>${r.opt ? `<button class="pv-add${s ? ' on' : ''}" aria-pressed="${s}" onclick="predAdd('${r.mk}','${r.key}')">${s ? t('pred.inslip') : t('pred.add')}</button>` : ''}</td></tr>`; }).join('')}
+    </tbody></table></div>`;
 
-  const valueBox = `
-    <section class="wc-section">
-      <h2>${t('pred.value')}</h2>
-      <div class="wc-sub">${t('pred.valueSub')}</div>
-      <div class="pred-value-in">
-        <select id="pred-v-mkt" onchange="predValue()">${rows.map(r => `<option value="${r.mk}:${r.key}"${state.predValueKey === r.mk + ':' + r.key ? ' selected' : ''}>${r.label}</option>`).join('')}</select>
-        <input id="pred-v-odds" type="text" inputmode="decimal" placeholder="+150 / 2.50" value="${state.predValueOdds || ''}" oninput="predValue()" />
-      </div>
-      <div id="pred-v-out"></div>
-    </section>`;
+  const valueBox = `<div class="pv-block"><h3>${t('pred.value')}</h3><div class="pv-sub">${t('pred.valueSub')}</div>
+    <div class="pv-value"><select id="pred-v-mkt" aria-label="${t('pred.col.market')}" onchange="predValue()">${rows.map(r => `<option value="${r.mk}:${r.key}"${state.predValueKey === r.mk + ':' + r.key ? ' selected' : ''}>${r.label}</option>`).join('')}</select>
+    <input id="pred-v-odds" type="text" inputmode="decimal" aria-label="Odds" placeholder="+150 / 2.50" value="${state.predValueOdds || ''}" oninput="predValue()" /></div>
+    <div id="pred-v-out"></div></div>`;
 
-  const venue = (tm, home) => { const P = home ? tm.HP : tm.AP; const GF = home ? tm.HGF : tm.AGF, GA = home ? tm.HGA : tm.AGA;
-    return P ? `${home ? 'H' : 'A'} ${P} · ${GF}–${GA}` : '—'; };
-  const cmpRow = (lbl, a, b, better) => `<div class="pred-cmp-row"><span class="${better === 1 ? 'best' : ''}">${a}</span><em>${lbl}</em><span class="${better === 2 ? 'best' : ''}">${b}</span></div>`;
-  const H = pm.H, A = pm.A;
-  const ppg = x => (x.Pts / x.P).toFixed(2), gpg = (g, x) => (g / x.P).toFixed(2);
-  const better = (a, b, lowGood) => a === b ? 0 : ((lowGood ? a < b : a > b) ? 1 : 2);
-  const formChips = tm => tm.last.map(g => `<span class="pred-form ${g[3]}" title="${g[1] === 'H' ? 'vs' : '@'} ${g[0]} ${g[2]}">${g[3]}</span>`).join('');
-  const lastList = tm => tm.last.slice().reverse().map(g => `<div class="pred-last"><span class="pred-form ${g[3]}">${g[3]}</span><span>${g[1] === 'H' ? 'vs' : '@'} ${g[0]}</span><b>${g[2]}</b></div>`).join('');
-  const compare = `
-    <section class="wc-section">
-      <h2>${t('pred.compare')}</h2>
-      <div class="wc-sub">${t('pred.stat.thru')} ${pm.L.thru} · ${pm.L.src}</div>
-      <div class="pred-cmp-head"><b>${m.home}</b><b>${m.away}</b></div>
-      ${cmpRow(t('pred.row.pos'), '#' + H.pos, '#' + A.pos, better(H.pos, A.pos, true))}
-      ${cmpRow(t('pred.row.rec'), `${H.W}-${H.D}-${H.L}`, `${A.W}-${A.D}-${A.L}`, 0)}
-      ${cmpRow(t('pred.row.ppg'), ppg(H), ppg(A), better(+ppg(H), +ppg(A)))}
-      ${cmpRow(t('pred.row.gf'), gpg(H.GF, H), gpg(A.GF, A), better(H.GF / H.P, A.GF / A.P))}
-      ${cmpRow(t('pred.row.ga'), gpg(H.GA, H), gpg(A.GA, A), better(H.GA / H.P, A.GA / A.P, true))}
-      ${cmpRow(t('pred.row.venue'), venue(H, true), venue(A, false), 0)}
-      ${cmpRow(t('pred.row.att'), pm.rh.att.toFixed(2), pm.ra.att.toFixed(2), better(pm.rh.att, pm.ra.att))}
-      ${cmpRow(t('pred.row.def'), pm.rh.def.toFixed(2), pm.ra.def.toFixed(2), better(pm.rh.def, pm.ra.def, true))}
-      <div class="pred-cmp-row"><span>${formChips(H)}</span><em>${t('pred.row.form')}</em><span>${formChips(A)}</span></div>
-      <h4 class="wca-round">${t('pred.last5')}</h4>
-      <div class="pred-last-grid"><div>${lastList(H)}</div><div>${lastList(A)}</div></div>
-    </section>`;
-
-  // strongest calls across all covered fixtures
-  const calls = [];
-  up.forEach(x => { const q = predictMatch(x);
-    const opts = [[q.pH, x.home + ' ' + t('pred.toWin')], [q.pA, x.away + ' ' + t('pred.toWin')],
-      [q.o25, t('pred.over25')], [1 - q.o25, t('pred.under25')], [q.btts, t('pred.bttsYes')], [1 - q.btts, t('pred.bttsNo')]];
-    opts.sort((a, b) => b[0] - a[0]); calls.push({ m: x, p: opts[0][0], label: opts[0][1] }); });
-  calls.sort((a, b) => b.p - a.p);
-  const top = `
-    <section class="wc-section">
-      <h2>${t('pred.top')}</h2>
-      <div class="wc-sub">${t('pred.topSub')}</div>
-      ${calls.slice(0, 10).map(cl => `<button class="pred-call${cl.m.id === m.id ? ' on' : ''}" onclick="predSelect('${cl.m.id}')">
-        <span class="pred-call-m">${cl.m.home} v ${cl.m.away}<small>${cl.m.ko}</small></span>
-        <span class="pred-call-pick">${cl.label}</span><b>${predPct(cl.p)}</b></button>`).join('')}
-    </section>`;
-
-  const method = `
-    <section class="wc-section">
-      <h2>${t('pred.method')}</h2>
-      <p class="pred-method">${t('pred.methodBody')}</p>
-      <div class="pred-note">${Object.entries(PRED_DATA).map(([id, L]) => `${(LEAGUES.find(x => x.id === id) || {}).name}: ${L.games} ${t('pred.matches')} (${L.thru}) — ${L.src}`).join('<br>')}</div>
-      <div class="pred-note" style="margin-top:8px;">${t('pred.disclaimer')}</div>
-    </section>`;
-
-  el.innerHTML = picker + `<div class="pred-grid"><div>${head}${valueBox}</div><div>${markets}</div></div>` + compare + top + method;
+  let compare = '';
+  if (pm.H && pm.A && pm.mode !== 'cross') {
+    const H = pm.H, A = pm.A;
+    const ppg = x => (x.Pts / x.P).toFixed(2), gpg = (g, x) => (g / x.P).toFixed(2);
+    const better = (a, b, lowGood) => a === b ? 0 : ((lowGood ? a < b : a > b) ? 1 : 2);
+    const row = (lbl, a, b, bt) => `<tr><td class="${bt === 1 ? 'best' : ''}">${a}</td><td>${lbl}</td><td class="${bt === 2 ? 'best' : ''}">${b}</td></tr>`;
+    const chips = tm => tm.last.map(g => `<span class="pred-form ${g[3]}" title="${g[1] === 'H' ? 'v' : '@'} ${g[0]} ${g[2]}">${g[3]}</span>`).join('');
+    const lastList = tm => tm.last.slice().reverse().map(g => `<div><span class="pred-form ${g[3]}">${g[3]}</span><span>${g[1] === 'H' ? 'v' : '@'} ${g[0]}</span><b>${g[2]}</b></div>`).join('');
+    compare = `<div class="pv-block"><h3>${t('pred.compare')}</h3><div class="pv-sub">${t('pred.stat.thru')} ${pm.L.thru}, ${pm.L.src}</div>
+      <table class="pv-cmp"><thead><tr><th>${m.home}</th><th></th><th>${m.away}</th></tr></thead><tbody>
+      ${row(t('pred.row.pos'), ordinal(H.pos), ordinal(A.pos), better(H.pos, A.pos, true))}
+      ${row(t('pred.row.rec'), `${H.W}-${H.D}-${H.L}`, `${A.W}-${A.D}-${A.L}`, 0)}
+      ${row(t('pred.row.ppg'), ppg(H), ppg(A), better(+ppg(H), +ppg(A)))}
+      ${row(t('pred.row.gf'), gpg(H.GF, H), gpg(A.GF, A), better(H.GF / H.P, A.GF / A.P))}
+      ${row(t('pred.row.ga'), gpg(H.GA, H), gpg(A.GA, A), better(H.GA / H.P, A.GA / A.P, true))}
+      ${row(t('pred.row.att'), pm.rh.att.toFixed(2), pm.ra.att.toFixed(2), better(pm.rh.att, pm.ra.att))}
+      ${row(t('pred.row.def'), pm.rh.def.toFixed(2), pm.ra.def.toFixed(2), better(pm.rh.def, pm.ra.def, true))}
+      <tr><td>${chips(H)}</td><td>${t('pred.row.form')}</td><td>${chips(A)}</td></tr>
+      </tbody></table>
+      <h3 style="font-size:15px;margin-top:18px">${t('pred.last5')}</h3>
+      <div class="pv-last"><div style="display:block">${lastList(H)}</div><div style="display:block">${lastList(A)}</div></div></div>`;
+  } else {
+    const srcTxt = r => t('pv.src.' + r.src);
+    const rrow = (name, r) => `<tr><td><b>${name}</b><br><small style="color:var(--ink-3)">${r.label}. ${srcTxt(r)}</small></td><td>${r.att.toFixed(2)}</td><td>${r.def.toFixed(2)}</td><td>${r.S.toFixed(2)}</td></tr>`;
+    compare = `<div class="pv-block"><h3>${t('pv.rating')}</h3><div class="pv-sub">${t('pv.crossNote')}</div>
+      <table class="pv-rate"><thead><tr><td></td><td>${t('pv.att')}</td><td>${t('pv.def')}</td><td>${t('pv.strength')}</td></tr></thead><tbody>
+      ${rrow(m.home, pm.rh)}${rrow(m.away, pm.ra)}</tbody></table></div>`;
+  }
+  box.innerHTML = head + scores + markets + valueBox + compare + `<div class="pv-note" style="margin-top:24px">${t('pred.disclaimer')}</div>`;
   if (state.predValueOdds) predValue();
 }
 
@@ -7868,11 +8502,12 @@ function renderAnalytics() {
 // ============= TABS =============
 function setTab(t) {
   state.tab = t;
+  const sh = document.getElementById('pred-sheet');
+  if (sh && !sh.hidden) predClose();
   document.querySelectorAll('#tabs button').forEach(b => b.classList.toggle('active', b.dataset.tab === t));
-  ['builder','wc','predict','news','analytics','my'].forEach(name => {
+  ['builder','predict','news','analytics','my'].forEach(name => {
     document.getElementById('tab-' + name).classList.toggle('hidden', name !== t);
   });
-  if (t === 'wc') renderWorldCup();
   if (t === 'predict') renderPredictor();
   if (t === 'analytics') renderAnalytics();
   if (t === 'my') renderMySlips();
@@ -7922,6 +8557,8 @@ document.getElementById('lang').addEventListener('change', e => {
   if (state.tab === 'wc') renderWorldCup();
   if (state.tab === 'analytics') renderAnalytics();
   if (state.tab === 'my') renderMySlips();
+  renderLeagues();
+  renderPredictor();
 });
 document.getElementById('currency').addEventListener('change', e => {
   currentCurrency = e.target.value;
@@ -7961,7 +8598,7 @@ function refreshOddsTick() {
     renderSlip();
   }
 }
-setInterval(refreshOddsTick, 18000);
+// Simulated price drift retired: prices now stay anchored to the model.
 setInterval(() => {
   const sec = Math.floor((Date.now() - state.oddsLastRefresh) / 1000);
   const elem = document.getElementById('stat-updated');
@@ -7977,7 +8614,6 @@ setInterval(tickClock, 1000);
 // tab sits open.
 setInterval(() => {
   newsLastSyncMins += 1;
-  NEWS.forEach(n => { n.minutesAgo += 1; });
   if (state.tab === 'news') renderNews();
 }, 60000);
 setInterval(() => {
@@ -8014,6 +8650,7 @@ if (sharedSlip && sharedSlip.legs.length) {
 
 renderSlip();
 renderNews();
+renderPredictor();
 tickClock();
 document.getElementById('stat-markets').textContent = MARKETS_DEF.length;
 document.querySelector('.hero-meta').children[2].querySelector('b').textContent = BOOKS.length;
